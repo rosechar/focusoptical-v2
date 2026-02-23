@@ -230,7 +230,7 @@ export default function ServiceAreasPage() {
                   />
                 </div>
                 <p
-                  className={`text-sm leading-relaxed ${
+                  className={`text-base leading-relaxed ${
                     primary ? "text-blue-100" : "text-slate-500"
                   }`}
                 >

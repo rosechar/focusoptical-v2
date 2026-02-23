@@ -62,7 +62,7 @@ export default function InsurancePage() {
               <h2 className="text-xl font-bold text-slate-900 mb-3">
                 Insurance Accepted
               </h2>
-              <p className="text-slate-600 leading-relaxed mb-5 text-sm sm:text-base">
+              <p className="text-slate-600 leading-relaxed mb-5 text-base">
                 We accept a variety of vision insurance plans. Please contact
                 the shop directly to confirm your specific plan and coverage
                 details before your appointment.
@@ -81,7 +81,7 @@ export default function InsurancePage() {
               <h2 className="text-xl font-bold text-slate-900 mb-3">
                 Pricing Questions
               </h2>
-              <p className="text-slate-600 leading-relaxed mb-5 text-sm sm:text-base">
+              <p className="text-slate-600 leading-relaxed mb-5 text-base">
                 Pricing varies depending on the type of exam, frames, and
                 lenses selected. We offer competitive pricing without
                 compromising on quality or service.
@@ -107,7 +107,7 @@ export default function InsurancePage() {
                 className="rounded-xl border border-slate-100 p-5 sm:p-6 bg-white shadow-sm"
               >
                 <h3 className="font-semibold text-slate-900 mb-2 text-sm sm:text-base">{q}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">{a}</p>
+                <p className="text-slate-600 text-base leading-relaxed">{a}</p>
               </div>
             ))}
           </div>

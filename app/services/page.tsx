@@ -134,12 +134,12 @@ export default function ServicesPage() {
                 <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight mb-3">
                   {title}
                 </h2>
-                <p className="text-slate-600 leading-relaxed mb-5">
+                <p className="text-base text-slate-600 leading-relaxed mb-5">
                   {description}
                 </p>
                 <ul className="space-y-2 mb-6">
                   {highlights.map((h) => (
-                    <li key={h} className="flex items-start gap-2.5 text-sm text-slate-600">
+                    <li key={h} className="flex items-start gap-2.5 text-base text-slate-600">
                       <Check size={16} className="text-blue-600 mt-0.5 shrink-0" />
                       {h}
                     </li>

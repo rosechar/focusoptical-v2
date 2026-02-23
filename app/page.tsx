@@ -196,7 +196,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="font-semibold text-slate-900">{title}</h3>
                 </div>
-                <p className="text-sm text-slate-500 leading-relaxed">
+                <p className="text-base text-slate-500 leading-relaxed">
                   {description}
                 </p>
                 <span className="inline-flex items-center gap-1 mt-4 text-sm font-medium text-blue-600 group-hover:gap-2 transition-all">
@@ -294,7 +294,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="font-semibold text-slate-900">{title}</h3>
                 </div>
-                <p className="text-sm text-slate-500 leading-relaxed">
+                <p className="text-base text-slate-500 leading-relaxed">
                   {description}
                 </p>
               </div>

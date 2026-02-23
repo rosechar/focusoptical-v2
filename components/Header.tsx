@@ -37,21 +37,21 @@ export default function Header() {
     >
       {/* Top info bar */}
       <div className="bg-blue-900 text-white">
-        <div className="max-w-6xl mx-auto px-4 py-1.5 flex items-center justify-between text-xs sm:text-sm">
+        <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between text-base">
           <a
             href="https://maps.google.com/?q=2046+W+Auburn+Rd,+Rochester+Hills,+MI+48309"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-blue-200 hover:text-white transition-colors"
           >
-            <MapPin size={12} />
+            <MapPin size={14} />
             <span>Rochester Hills, MI</span>
           </a>
           <a
             href="tel:+12488528830"
             className="flex items-center gap-1.5 hover:text-blue-200 transition-colors"
           >
-            <Phone size={12} />
+            <Phone size={14} />
             <span>(248) 852-8830</span>
           </a>
         </div>
