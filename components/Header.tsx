@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, startTransition } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Phone, MapPin } from "lucide-react";
@@ -24,9 +24,12 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on route change
+  // Close mobile menu and scroll to top on route change
   useEffect(() => {
-    setIsOpen(false);
+    window.scrollTo(0, 0);
+    startTransition(() => {
+      setIsOpen(false);
+    });
   }, [pathname]);
 
   return (
@@ -42,7 +45,7 @@ export default function Header() {
             href="https://maps.google.com/?q=2046+W+Auburn+Rd,+Rochester+Hills,+MI+48309"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-blue-200 hover:text-white transition-colors"
+            className="flex items-center gap-1.5 hover:text-blue-200 transition-colors"
           >
             <MapPin size={14} />
             <span>Rochester Hills, MI</span>
@@ -61,16 +64,65 @@ export default function Header() {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 leading-none py-1">
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 leading-none py-1"
+          >
             <span className="text-lg font-bold text-blue-900 tracking-tight">
               Focus Optical
             </span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="w-8 h-8 shrink-0">
-              <rect x="2" y="10" width="12" height="10" rx="5" fill="none" stroke="#1e3a8a" strokeWidth="2.2"/>
-              <rect x="18" y="10" width="12" height="10" rx="5" fill="none" stroke="#1e3a8a" strokeWidth="2.2"/>
-              <line x1="14" y1="15" x2="18" y2="15" stroke="#1e3a8a" strokeWidth="2.2" strokeLinecap="round"/>
-              <line x1="2" y1="13" x2="0" y2="10" stroke="#1e3a8a" strokeWidth="2" strokeLinecap="round"/>
-              <line x1="30" y1="13" x2="32" y2="10" stroke="#1e3a8a" strokeWidth="2" strokeLinecap="round"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 32 32"
+              className="w-8 h-8 shrink-0"
+            >
+              <rect
+                x="2"
+                y="10"
+                width="12"
+                height="10"
+                rx="5"
+                fill="none"
+                stroke="#1e3a8a"
+                strokeWidth="2.2"
+              />
+              <rect
+                x="18"
+                y="10"
+                width="12"
+                height="10"
+                rx="5"
+                fill="none"
+                stroke="#1e3a8a"
+                strokeWidth="2.2"
+              />
+              <line
+                x1="14"
+                y1="15"
+                x2="18"
+                y2="15"
+                stroke="#1e3a8a"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+              />
+              <line
+                x1="2"
+                y1="13"
+                x2="0"
+                y2="10"
+                stroke="#1e3a8a"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              <line
+                x1="30"
+                y1="13"
+                x2="32"
+                y2="10"
+                stroke="#1e3a8a"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
             </svg>
           </Link>
 
@@ -97,7 +149,7 @@ export default function Header() {
                 >
                   {label}
                 </Link>
-              )
+              ),
             )}
           </nav>
 
@@ -125,8 +177,8 @@ export default function Header() {
                   cta
                     ? "bg-blue-600 text-white hover:bg-blue-700 text-center mt-1"
                     : pathname === href
-                    ? "text-blue-700 bg-blue-50"
-                    : "text-slate-700 hover:text-blue-700 hover:bg-slate-50"
+                      ? "text-blue-700 bg-blue-50"
+                      : "text-slate-700 hover:text-blue-700 hover:bg-slate-50"
                 }`}
               >
                 {label}

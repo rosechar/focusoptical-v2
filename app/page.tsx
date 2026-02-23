@@ -37,28 +37,28 @@ const services = [
     icon: Eye,
     title: "Eye Exams",
     description:
-      "Annual eye exams performed by Dr. Diane Galper, Optometrist. Assess your vision and detect changes as your eyes age.",
+      "Annual exams with Dr. Diane Galper, Optometrist. Assess your vision and catch changes early.",
     href: "/services#eye-exams",
   },
   {
     icon: Crosshair,
     title: "Contact Lens Exams",
     description:
-      "A specialized exam to ensure a comfortable fit. Includes a full eye exam — everything you need in one visit.",
+      "Specialized fitting exam with a full eye exam included — everything you need in one visit.",
     href: "/services#contact-exams",
   },
   {
     icon: ShoppingBag,
     title: "Glasses & Contacts Retail",
     description:
-      "A wide selection of frames and contact lenses with no sales pressure. We can also add new lenses to your existing frames.",
+      "Wide selection of frames and contacts, no sales pressure. New lenses can be added to your existing frames.",
     href: "/services#retail",
   },
   {
     icon: Wrench,
     title: "Free Adjustments",
     description:
-      "We adjust and clean any pair of glasses for anyone — no charge, no appointment needed. It's just what we do.",
+      "We adjust and clean any glasses for anyone — no charge, no appointment needed.",
     href: "/services#adjustments",
   },
 ];
@@ -68,25 +68,25 @@ const differentiators = [
     icon: Award,
     title: "Attention to Detail",
     description:
-      "Tom treats every pair of eyeglasses as if he were making them for himself — because he wants to give you the best pair you've ever owned.",
+      "Tom makes every pair as if they were his own — so you get the best-fitting glasses you've ever owned.",
   },
   {
     icon: Scissors,
     title: "Cut & Edge On Premise",
     description:
-      "We cut and edge all lenses right here in our shop, giving us full quality control. No sending your glasses to an outside lab.",
+      "All lenses are cut and edged in-house for full quality control. No outside labs.",
   },
   {
     icon: Shield,
     title: "No Sales Pressure",
     description:
-      "No pressure to buy a new frame. Want to use your existing frame? Come in and we'll cut and edge new lenses while you wait.",
+      "No pressure to buy new frames. Bring your existing pair and we'll cut new lenses while you wait.",
   },
   {
     icon: Gift,
     title: "Free Adjustments",
     description:
-      "Free eyeglass adjustments and cleaning for anyone who walks in — no charge, no questions asked.",
+      "Free adjustments and cleaning for any glasses, any walk-in — no charge, no questions.",
   },
 ];
 
@@ -145,23 +145,24 @@ export default function HomePage() {
               Expert Eye Care &<br />
               Eyeglass Craftsmanship
             </h1>
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed mb-7 max-w-xl">
+            <p className="text-base sm:text-lg text-slate-200 leading-relaxed mb-7 max-w-xl">
               Full-service optical care in Rochester Hills — eye exams, glasses,
               contacts, and free adjustments. Over 45 years of crafting the
               perfect pair.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
+              <a
+                href="tel:+12488528830"
+                className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-7 py-3.5 rounded-full transition-colors"
+              >
+                <Phone size={18} />
+                Call Now
+              </a>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-7 py-3.5 rounded-full transition-colors"
-              >
-                Schedule an Appointment
-              </Link>
-              <Link
-                href="/services"
                 className="inline-flex items-center justify-center border-2 border-white text-white hover:bg-white/15 font-semibold px-7 py-3.5 rounded-full transition-colors"
               >
-                Our Services
+                Schedule Appointment
               </Link>
             </div>
           </div>
@@ -169,9 +170,9 @@ export default function HomePage() {
       </section>
 
       {/* Services Overview */}
-      <section className="py-12 sm:py-20 bg-white">
+      <section className="py-10 sm:py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-8 sm:mb-12">
+          <div className="text-center mb-6 sm:mb-10">
             <p className="text-blue-600 font-semibold text-sm tracking-widest uppercase mb-2">
               What We Offer
             </p>
@@ -179,22 +180,24 @@ export default function HomePage() {
               Full-Service Optical Care
             </h2>
             <p className="text-slate-500 mt-3 max-w-xl mx-auto text-sm sm:text-base">
-              Everything you need for healthy vision — all under one roof at our
-              Rochester Hills location.
+              Everything you need for healthy vision, all under one roof in
+              Rochester Hills.
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="flex gap-4 overflow-x-auto pb-3 snap-x snap-mandatory mx-2 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0">
             {services.map(({ icon: Icon, title, description, href }) => (
               <Link
                 key={title}
                 href={href}
-                className="group p-5 sm:p-6 rounded-2xl border border-slate-100 hover:border-blue-100 hover:shadow-lg hover:shadow-blue-50 transition-all duration-200 bg-white"
+                className="group shrink-0 w-[260px] sm:w-[280px] snap-start p-5 sm:p-6 rounded-2xl border border-slate-100 hover:border-blue-100 hover:shadow-lg hover:shadow-blue-50 transition-all duration-200 bg-white"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0 group-hover:bg-blue-100 transition-colors">
                     <Icon className="text-blue-600" size={18} />
                   </div>
-                  <h3 className="font-semibold text-slate-900">{title}</h3>
+                  <h3 className="text-lg font-semibold text-slate-900 leading-tight">
+                    {title}
+                  </h3>
                 </div>
                 <p className="text-base text-slate-500 leading-relaxed">
                   {description}
@@ -272,9 +275,9 @@ export default function HomePage() {
       </section>
 
       {/* What Makes Us Different */}
-      <section className="py-12 sm:py-20 bg-white">
+      <section className="py-10 sm:py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-8 sm:mb-12">
+          <div className="text-center mb-6 sm:mb-10">
             <p className="text-blue-600 font-semibold text-sm tracking-widest uppercase mb-2">
               Why Choose Us
             </p>
@@ -292,7 +295,9 @@ export default function HomePage() {
                   <div className="w-10 h-10 rounded-xl bg-blue-900 flex items-center justify-center shrink-0">
                     <Icon className="text-white" size={18} />
                   </div>
-                  <h3 className="font-semibold text-slate-900">{title}</h3>
+                  <h3 className="text-xl font-semibold text-slate-900">
+                    {title}
+                  </h3>
                 </div>
                 <p className="text-base text-slate-500 leading-relaxed">
                   {description}
@@ -338,9 +343,9 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-12 sm:py-20 bg-blue-900">
+      <section className="py-10 sm:py-16 bg-blue-900">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-8 sm:mb-12">
+          <div className="text-center mb-6 sm:mb-10">
             <p className="text-blue-300 font-semibold text-sm tracking-widest uppercase mb-2">
               Customer Reviews
             </p>
@@ -367,7 +372,7 @@ export default function HomePage() {
                     />
                   ))}
                 </div>
-                <p className="text-slate-200 leading-relaxed mb-4 text-sm">
+                <p className="text-slate-200 leading-relaxed mb-4 text-base">
                   &ldquo;{quote}&rdquo;
                 </p>
                 <div className="flex items-center justify-between">
@@ -383,12 +388,12 @@ export default function HomePage() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-12 sm:py-20 bg-slate-50">
+      <section className="py-10 sm:py-16 bg-slate-50">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-4">
             Ready to See Clearly?
           </h2>
-          <p className="text-slate-500 text-base sm:text-lg mb-7 leading-relaxed">
+          <p className="text-slate-500 text-base sm:text-lg mb-5 leading-relaxed">
             Schedule your eye exam or visit us at our Rochester Hills location.
             We&apos;re here Monday through Saturday.
           </p>
