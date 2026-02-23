@@ -159,28 +159,11 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* SEO keyword strip */}
-      <div className="border-t border-slate-800 py-5">
-        <div className="max-w-6xl mx-auto px-4">
-          <p className="text-xs text-slate-700 text-center leading-relaxed">
-            Focus Optical · Optician · Eye Exams · Prescription Glasses ·
-            Contact Lenses · Sunglasses · Frame Adjustments · Rochester Hills MI
-            · Rochester MI · Troy MI · Lake Orion MI · Royal Oak MI · Bloomfield
-            Hills MI · Auburn Hills MI · Oakland County MI · 48309 · 48307 ·
-            48083
-          </p>
-        </div>
-      </div>
-
       {/* Copyright bar */}
       <div className="border-t border-slate-800 py-4">
         <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-600">
-          <span>
-            © {new Date().getFullYear()} Focus Optical. All rights reserved.
-          </span>
-          <span>
-            2046 W Auburn Rd, Rochester Hills, MI 48309 · (248) 852-8830
-          </span>
+          <span>© {new Date().getFullYear()} Focus Optical. All rights reserved.</span>
+          <span>2046 W Auburn Rd, Rochester Hills, MI 48309 · (248) 852-8830</span>
         </div>
       </div>
     </footer>
