@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: #ffffff;
+    color: #0f172a;
+  }
+  a {
+    text-decoration: none;
+  }
+}
+
+/*
+  Unlayered overrides — these sit above all @layer rules in the CSS cascade.
+  This ensures text color utilities work regardless of inherited body color.
+*/
+.text-white  { color: #ffffff; }
+.text-blue-600 { color: #2563eb; }
+.text-blue-700 { color: #1d4ed8; }
+.text-blue-400 { color: #60a5fa; }
+.text-blue-300 { color: #93c5fd; }
+.text-blue-200 { color: #bfdbfe; }
+.text-slate-900 { color: #0f172a; }
+.text-slate-200 { color: #e2e8f0; }
