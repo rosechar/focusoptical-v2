@@ -41,6 +41,9 @@ export const metadata: Metadata = {
     description:
       "Full-service optical store in Rochester Hills, MI. Eye exams, glasses, contacts, and free adjustments. Over 45 years of experience.",
   },
+  verification: {
+    google: "v35JKAVDznB95Qku6g8b3ceWYkQFHhhnunO81U35wo8",
+  },
   robots: {
     index: true,
     follow: true,
