@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Phone, MapPin, Calendar, Award } from "lucide-react";
-// Calendar still used in location section below
+import { BUSINESS } from "@/lib/business";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -108,11 +108,11 @@ export default function AboutPage() {
                   Schedule an Appointment
                 </Link>
                 <a
-                  href="tel:+12488528830"
+                  href={BUSINESS.phoneHref}
                   className="inline-flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold px-6 py-3 rounded-full transition-colors"
                 >
                   <Phone size={16} />
-                  (248) 852-8830
+                  {BUSINESS.phoneDisplay}
                 </a>
               </div>
             </div>
@@ -197,8 +197,10 @@ export default function AboutPage() {
               </div>
               <h3 className="font-semibold mb-1">Our Location</h3>
               <p className="text-blue-200 text-sm">
-                2046 W Auburn Rd<br />
-                Rochester Hills, MI 48309
+                {BUSINESS.address.street}
+                <br />
+                {BUSINESS.address.city}, {BUSINESS.address.state}{" "}
+                {BUSINESS.address.zip}
               </p>
             </div>
             <div>
@@ -207,10 +209,10 @@ export default function AboutPage() {
               </div>
               <h3 className="font-semibold mb-1">Phone</h3>
               <a
-                href="tel:+12488528830"
+                href={BUSINESS.phoneHref}
                 className="text-blue-200 text-sm hover:text-white transition-colors"
               >
-                (248) 852-8830
+                {BUSINESS.phoneDisplay}
               </a>
             </div>
             <div>

@@ -1,15 +1,6 @@
 import Link from "next/link";
 import { Phone, MapPin, Clock, ExternalLink, Star } from "lucide-react";
-
-const hours = [
-  { day: "Monday", time: "9:00 AM – 6:00 PM" },
-  { day: "Tuesday", time: "9:00 AM – 7:00 PM" },
-  { day: "Wednesday", time: "9:00 AM – 5:30 PM" },
-  { day: "Thursday", time: "9:00 AM – 6:00 PM" },
-  { day: "Friday", time: "9:00 AM – 5:00 PM" },
-  { day: "Saturday", time: "9:00 AM – 12:00 PM" },
-  { day: "Sunday", time: "Closed" },
-];
+import { BUSINESS, HOURS } from "@/lib/business";
 
 const serviceAreas = [
   "Rochester Hills",
@@ -54,27 +45,29 @@ export default function Footer() {
               We specialize in making eyeglasses with over 45 years of
               experience — and we treat every pair as if it were our own.
             </p>
-            <a
-              href="tel:+12488528830"
-              className="inline-flex items-center gap-2 text-white font-semibold hover:text-blue-300 transition-colors mb-3"
-            >
-              <Phone size={15} />
-              (248) 852-8830
-            </a>
-            <br />
-            <a
-              href="https://maps.google.com/?q=2046+W+Auburn+Rd,+Rochester+Hills,+MI+48309"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-start gap-2 text-sm text-slate-400 hover:text-white transition-colors"
-            >
-              <MapPin size={14} className="mt-0.5 shrink-0" />
-              <span>
-                2046 W Auburn Rd
-                <br />
-                Rochester Hills, MI 48309
-              </span>
-            </a>
+            <div className="flex flex-col items-start gap-3">
+              <a
+                href={BUSINESS.phoneHref}
+                className="inline-flex items-center gap-2 text-white font-semibold hover:text-blue-300 transition-colors"
+              >
+                <Phone size={15} />
+                {BUSINESS.phoneDisplay}
+              </a>
+              <a
+                href={BUSINESS.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-start gap-2 text-sm text-slate-400 hover:text-white transition-colors"
+              >
+                <MapPin size={14} className="mt-0.5 shrink-0" />
+                <span>
+                  {BUSINESS.address.street}
+                  <br />
+                  {BUSINESS.address.city}, {BUSINESS.address.state}{" "}
+                  {BUSINESS.address.zip}
+                </span>
+              </a>
+            </div>
             <div className="mt-5">
               <a
                 href="https://g.co/kgs/yiVrZD"
@@ -82,11 +75,9 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-sm text-yellow-400 hover:text-yellow-300 transition-colors"
               >
-                <Star size={13} fill="currentColor" />
-                <Star size={13} fill="currentColor" />
-                <Star size={13} fill="currentColor" />
-                <Star size={13} fill="currentColor" />
-                <Star size={13} fill="currentColor" />
+                {Array.from({ length: 5 }, (_, i) => (
+                  <Star key={i} size={13} fill="currentColor" />
+                ))}
                 <span className="ml-1">Read our Google Reviews</span>
                 <ExternalLink size={11} />
               </a>
@@ -100,18 +91,14 @@ export default function Footer() {
               Store Hours
             </h3>
             <ul className="space-y-2 text-sm">
-              {hours.map(({ day, time }) => (
+              {HOURS.map(({ day, display, opens }) => (
                 <li
                   key={day}
                   className="flex justify-between gap-3 text-slate-400"
                 >
                   <span className="text-slate-300">{day}</span>
-                  <span
-                    className={
-                      time === "Closed" ? "text-slate-500 italic" : ""
-                    }
-                  >
-                    {time}
+                  <span className={opens ? "" : "text-slate-500 italic"}>
+                    {display}
                   </span>
                 </li>
               ))}
@@ -162,8 +149,14 @@ export default function Footer() {
       {/* Copyright bar */}
       <div className="border-t border-slate-800 py-4">
         <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-600">
-          <span>© {new Date().getFullYear()} Focus Optical. All rights reserved.</span>
-          <span>2046 W Auburn Rd, Rochester Hills, MI 48309 · (248) 852-8830</span>
+          <span>
+            © {new Date().getFullYear()} {BUSINESS.name}. All rights reserved.
+          </span>
+          <span>
+            {BUSINESS.address.street}, {BUSINESS.address.city},{" "}
+            {BUSINESS.address.state} {BUSINESS.address.zip} ·{" "}
+            {BUSINESS.phoneDisplay}
+          </span>
         </div>
       </div>
     </footer>

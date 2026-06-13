@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { MapPin, Phone, Clock } from "lucide-react";
 import AppointmentForm from "@/components/AppointmentForm";
+import { BUSINESS, HOURS } from "@/lib/business";
 
 export const metadata: Metadata = {
   title: "Schedule an Appointment",
@@ -20,16 +20,6 @@ export const metadata: Metadata = {
     "request eye exam appointment",
   ],
 };
-
-const hours = [
-  { day: "Monday", time: "9:00 AM – 6:00 PM" },
-  { day: "Tuesday", time: "9:00 AM – 7:00 PM" },
-  { day: "Wednesday", time: "9:00 AM – 5:30 PM" },
-  { day: "Thursday", time: "9:00 AM – 6:00 PM" },
-  { day: "Friday", time: "9:00 AM – 5:00 PM" },
-  { day: "Saturday", time: "9:00 AM – 12:00 PM" },
-  { day: "Sunday", time: "Closed" },
-];
 
 export default function ContactPage() {
   return (
@@ -70,11 +60,11 @@ export default function ContactPage() {
                   We&apos;re happy to schedule your appointment over the phone.
                 </p>
                 <a
-                  href="tel:+12488528830"
+                  href={BUSINESS.phoneHref}
                   className="flex items-center gap-2.5 text-white font-bold text-lg sm:text-xl hover:text-blue-200 transition-colors"
                 >
                   <Phone size={20} />
-                  (248) 852-8830
+                  {BUSINESS.phoneDisplay}
                 </a>
               </div>
 
@@ -85,11 +75,13 @@ export default function ContactPage() {
                   <h3 className="font-bold text-slate-900">Our Location</h3>
                 </div>
                 <p className="text-sm text-slate-600 mb-3">
-                  2046 W Auburn Rd<br />
-                  Rochester Hills, MI 48309
+                  {BUSINESS.address.street}
+                  <br />
+                  {BUSINESS.address.city}, {BUSINESS.address.state}{" "}
+                  {BUSINESS.address.zip}
                 </p>
                 <a
-                  href="https://maps.google.com/?q=2046+W+Auburn+Rd,+Rochester+Hills,+MI+48309"
+                  href={BUSINESS.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-blue-600 hover:text-blue-700 font-semibold transition-colors"
@@ -105,15 +97,15 @@ export default function ContactPage() {
                   <h3 className="font-bold text-slate-900">Store Hours</h3>
                 </div>
                 <ul className="space-y-1.5">
-                  {hours.map(({ day, time }) => (
+                  {HOURS.map(({ day, display, opens }) => (
                     <li key={day} className="flex justify-between items-center text-sm">
                       <span className="text-slate-500">{day}</span>
                       <span
                         className={`font-medium ${
-                          time === "Closed" ? "text-slate-400" : "text-slate-800"
+                          opens ? "text-slate-800" : "text-slate-400"
                         }`}
                       >
-                        {time}
+                        {display}
                       </span>
                     </li>
                   ))}
@@ -135,7 +127,7 @@ export default function ContactPage() {
       {/* Map */}
       <section className="h-64 sm:h-96">
         <iframe
-          src="https://maps.google.com/maps?q=2046+W+Auburn+Rd,+Rochester+Hills,+MI+48309&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          src={BUSINESS.mapsEmbedUrl}
           width="100%"
           height="100%"
           style={{ border: 0 }}

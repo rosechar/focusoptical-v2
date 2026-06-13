@@ -14,6 +14,7 @@ import {
   Shield,
   Gift,
 } from "lucide-react";
+import { BUSINESS } from "@/lib/business";
 
 export const metadata: Metadata = {
   title: "Focus Optical | Optician & Eye Exams — Rochester Hills, MI",
@@ -118,10 +119,10 @@ export default function HomePage() {
         <span className="mr-1">🎉</span>
         <strong>Limited Time: Free Frames with Purchase of Lenses!</strong>
         <a
-          href="tel:+12488528830"
+          href={BUSINESS.phoneHref}
           className="ml-2 underline underline-offset-2 hover:text-blue-100 transition-colors whitespace-nowrap"
         >
-          Call (248) 852-8830
+          Call {BUSINESS.phoneDisplay}
         </a>
       </div>
 
@@ -152,7 +153,7 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <a
-                href="tel:+12488528830"
+                href={BUSINESS.phoneHref}
                 className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-7 py-3.5 rounded-full transition-colors"
               >
                 <Phone size={18} />
@@ -405,11 +406,11 @@ export default function HomePage() {
               Schedule an Appointment
             </Link>
             <a
-              href="tel:+12488528830"
+              href={BUSINESS.phoneHref}
               className="inline-flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold px-8 py-4 rounded-full transition-colors"
             >
               <Phone size={18} />
-              (248) 852-8830
+              {BUSINESS.phoneDisplay}
             </a>
           </div>
         </div>

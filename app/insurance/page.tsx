@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Phone, ShieldCheck, HelpCircle } from "lucide-react";
+import { BUSINESS } from "@/lib/business";
 
 export const metadata: Metadata = {
   title: "Insurance & Pricing",
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: "Do you accept vision insurance?",
-    a: "We work with a variety of vision insurance plans. Please call us at (248) 852-8830 to confirm your coverage before your appointment.",
+    a: `We work with a variety of vision insurance plans. Please call us at ${BUSINESS.phoneDisplay} to confirm your coverage before your appointment.`,
   },
   {
     q: "How do I know what my insurance covers?",
@@ -30,7 +31,7 @@ const faqs = [
   },
   {
     q: "Do you offer payment options?",
-    a: "Contact us at (248) 852-8830 to discuss pricing and any available payment arrangements.",
+    a: `Contact us at ${BUSINESS.phoneDisplay} to discuss pricing and any available payment arrangements.`,
   },
 ];
 
@@ -68,11 +69,11 @@ export default function InsurancePage() {
                 details before your appointment.
               </p>
               <a
-                href="tel:+12488528830"
+                href={BUSINESS.phoneHref}
                 className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-full text-sm transition-colors"
               >
                 <Phone size={15} />
-                Call (248) 852-8830
+                Call {BUSINESS.phoneDisplay}
               </a>
             </div>
 
@@ -87,7 +88,7 @@ export default function InsurancePage() {
                 compromising on quality or service.
               </p>
               <a
-                href="tel:+12488528830"
+                href={BUSINESS.phoneHref}
                 className="inline-flex items-center gap-2 border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold px-5 py-2.5 rounded-full text-sm transition-colors"
               >
                 <Phone size={15} />
@@ -121,11 +122,11 @@ export default function InsurancePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
-                href="tel:+12488528830"
+                href={BUSINESS.phoneHref}
                 className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-7 py-3.5 rounded-full transition-colors"
               >
                 <Phone size={17} />
-                (248) 852-8830
+                {BUSINESS.phoneDisplay}
               </a>
               <Link
                 href="/contact"

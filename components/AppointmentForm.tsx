@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useRef, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import emailjs from "@emailjs/browser";
 import { Send, Loader2, CheckCircle, AlertCircle, Phone } from "lucide-react";
+import { BUSINESS } from "@/lib/business";
 
 interface FormState {
   name: string;
@@ -29,8 +30,15 @@ const appointmentTypes = [
   { value: "retail", label: "Glasses & Contact Retail" },
 ];
 
-const emailRegex = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
-const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/i;
+const emailRegex = /^[\w.%+-]+@([\w-]+\.)+\w{2,}$/;
+
+// Accepts any formatting of a 10-digit US number, with or without country code.
+const isValidPhone = (phone: string) => {
+  const digits = phone.replace(/\D/g, "");
+  return (
+    digits.length === 10 || (digits.length === 11 && digits.startsWith("1"))
+  );
+};
 
 export default function AppointmentForm() {
   const [form, setForm] = useState<FormState>({
@@ -42,17 +50,16 @@ export default function AppointmentForm() {
   });
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const formRef = useRef<HTMLFormElement>(null);
 
   const validate = (): boolean => {
     const newErrors: FieldErrors = {};
-    if (!form.name || form.name.trim().length < 6) {
-      newErrors.name = "Please enter your full name (at least 6 characters)";
+    if (form.name.trim().length < 2) {
+      newErrors.name = "Please enter your full name";
     }
-    if (!form.email || !emailRegex.test(form.email)) {
+    if (!emailRegex.test(form.email)) {
       newErrors.email = "Please enter a valid email address";
     }
-    if (!form.phone || !phoneRegex.test(form.phone)) {
+    if (!isValidPhone(form.phone)) {
       newErrors.phone = "Please enter a valid phone number";
     }
     setErrors(newErrors);
@@ -64,7 +71,6 @@ export default function AppointmentForm() {
   ) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-    // Clear error on change
     if (errors[name as keyof FieldErrors]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
@@ -110,7 +116,7 @@ export default function AppointmentForm() {
           business day to confirm your appointment.
         </p>
         <a
-          href="tel:+12488528830"
+          href={BUSINESS.phoneHref}
           className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-full text-sm transition-colors"
         >
           <Phone size={14} />
@@ -121,7 +127,7 @@ export default function AppointmentForm() {
   }
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} noValidate className="space-y-5">
+    <form onSubmit={handleSubmit} noValidate className="space-y-5">
       <div className="mb-1">
         <h2 className="text-xl font-bold text-slate-900">Request an Appointment</h2>
         <p className="text-sm text-slate-500 mt-1">
@@ -267,8 +273,8 @@ export default function AppointmentForm() {
           <AlertCircle size={16} className="shrink-0" />
           <span>
             Something went wrong. Please try again or call us at{" "}
-            <a href="tel:+12488528830" className="underline font-medium">
-              (248) 852-8830
+            <a href={BUSINESS.phoneHref} className="underline font-medium">
+              {BUSINESS.phoneDisplay}
             </a>
             .
           </span>

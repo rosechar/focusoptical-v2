@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { BUSINESS, HOURS, SITE_URL } from "@/lib/business";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -11,6 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     template: "%s | Focus Optical — Rochester Hills, MI",
     default:
@@ -53,14 +55,14 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Optician",
-  name: "Focus Optical",
-  image: "https://focusoptical.vercel.app/images/shop.jpeg",
+  name: BUSINESS.name,
+  image: `${SITE_URL}/images/shop.jpeg`,
   address: {
     "@type": "PostalAddress",
-    streetAddress: "2046 W Auburn Rd",
-    addressLocality: "Rochester Hills",
-    addressRegion: "MI",
-    postalCode: "48309",
+    streetAddress: BUSINESS.address.street,
+    addressLocality: BUSINESS.address.city,
+    addressRegion: BUSINESS.address.state,
+    postalCode: BUSINESS.address.zip,
     addressCountry: "US",
   },
   geo: {
@@ -68,46 +70,16 @@ const jsonLd = {
     latitude: 42.6625,
     longitude: -83.1332,
   },
-  telephone: "+12488528830",
-  openingHoursSpecification: [
-    {
+  telephone: BUSINESS.phoneE164,
+  openingHoursSpecification: HOURS.filter((h) => h.opens).map(
+    ({ day, opens, closes }) => ({
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Monday",
-      opens: "09:00",
-      closes: "18:00",
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Tuesday",
-      opens: "09:00",
-      closes: "19:00",
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Wednesday",
-      opens: "09:00",
-      closes: "17:30",
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Thursday",
-      opens: "09:00",
-      closes: "18:00",
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Friday",
-      opens: "09:00",
-      closes: "17:00",
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Saturday",
-      opens: "09:00",
-      closes: "12:00",
-    },
-  ],
-  url: "https://focusoptical.vercel.app",
+      dayOfWeek: day,
+      opens,
+      closes,
+    }),
+  ),
+  url: SITE_URL,
   priceRange: "$$",
   description:
     "Focus Optical is a full-service, independently owned optical store in Rochester Hills, MI. We offer eye exams by Dr. Diane Galper, a wide selection of frames and contact lenses, and free eyeglass adjustments. Serving Oakland County since 1984.",
@@ -129,7 +101,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    // data-scroll-behavior lets Next.js reset scroll instantly on navigation
+    // despite the CSS scroll-behavior: smooth used for in-page anchors.
+    <html lang="en" className={inter.variable} data-scroll-behavior="smooth">
       <head>
         <script
           type="application/ld+json"

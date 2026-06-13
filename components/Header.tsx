@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect, startTransition } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Phone, MapPin } from "lucide-react";
+import { BUSINESS } from "@/lib/business";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -24,13 +25,7 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu and scroll to top on route change
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    startTransition(() => {
-      setIsOpen(false);
-    });
-  }, [pathname]);
+  const closeMenu = useCallback(() => setIsOpen(false), []);
 
   return (
     <header
@@ -42,20 +37,22 @@ export default function Header() {
       <div className="bg-blue-900 text-white">
         <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between text-base">
           <a
-            href="https://maps.google.com/?q=2046+W+Auburn+Rd,+Rochester+Hills,+MI+48309"
+            href={BUSINESS.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 hover:text-blue-200 transition-colors"
           >
             <MapPin size={14} />
-            <span>Rochester Hills, MI</span>
+            <span>
+              {BUSINESS.address.city}, {BUSINESS.address.state}
+            </span>
           </a>
           <a
-            href="tel:+12488528830"
+            href={BUSINESS.phoneHref}
             className="flex items-center gap-1.5 hover:text-blue-200 transition-colors"
           >
             <Phone size={14} />
-            <span>(248) 852-8830</span>
+            <span>{BUSINESS.phoneDisplay}</span>
           </a>
         </div>
       </div>
@@ -156,7 +153,7 @@ export default function Header() {
           {/* Mobile menu toggle */}
           <button
             className="md:hidden p-2 rounded-md text-slate-600 hover:bg-slate-100 transition-colors"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => setIsOpen((open) => !open)}
             aria-label={isOpen ? "Close menu" : "Open menu"}
             aria-expanded={isOpen}
           >
@@ -173,6 +170,7 @@ export default function Header() {
               <Link
                 key={href}
                 href={href}
+                onClick={closeMenu}
                 className={`px-3 py-3 rounded-md text-sm font-medium transition-colors ${
                   cta
                     ? "bg-blue-600 text-white hover:bg-blue-700 text-center mt-1"
@@ -185,11 +183,11 @@ export default function Header() {
               </Link>
             ))}
             <a
-              href="tel:+12488528830"
+              href={BUSINESS.phoneHref}
               className="flex items-center gap-2 px-3 py-3 text-sm text-slate-500 border-t border-slate-100 mt-1 pt-3"
             >
               <Phone size={14} />
-              <span>(248) 852-8830</span>
+              <span>{BUSINESS.phoneDisplay}</span>
             </a>
           </nav>
         </div>

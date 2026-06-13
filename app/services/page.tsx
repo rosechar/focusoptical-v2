@@ -107,7 +107,7 @@ export default function ServicesPage() {
             <section
               key={id}
               id={id}
-              className={`grid lg:grid-cols-2 gap-8 sm:gap-12 items-center ${
+              className={`scroll-mt-32 grid lg:grid-cols-2 gap-8 sm:gap-12 items-center ${
                 i % 2 === 1 ? "lg:grid-flow-dense" : ""
               }`}
             >

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { MapPin, Phone, Navigation } from "lucide-react";
+import { BUSINESS } from "@/lib/business";
 
 export const metadata: Metadata = {
   title: "Service Areas — Optician Near Rochester Hills, Troy & Oakland County",
@@ -151,11 +152,11 @@ export default function ServiceAreasPage() {
               Schedule an Appointment
             </Link>
             <a
-              href="tel:+12488528830"
+              href={BUSINESS.phoneHref}
               className="inline-flex items-center justify-center gap-2 border-2 border-white text-white hover:bg-white/15 font-semibold px-6 py-3 rounded-full transition-colors"
             >
               <Phone size={16} />
-              (248) 852-8830
+              {BUSINESS.phoneDisplay}
             </a>
           </div>
         </div>
@@ -263,7 +264,8 @@ export default function ServiceAreasPage() {
                   <div>
                     <p className="font-semibold text-slate-900">Address</p>
                     <p className="text-slate-600 text-sm">
-                      2046 W Auburn Rd, Rochester Hills, MI 48309
+                      {BUSINESS.address.street}, {BUSINESS.address.city},{" "}
+                      {BUSINESS.address.state} {BUSINESS.address.zip}
                     </p>
                   </div>
                 </div>
@@ -272,17 +274,17 @@ export default function ServiceAreasPage() {
                   <div>
                     <p className="font-semibold text-slate-900">Phone</p>
                     <a
-                      href="tel:+12488528830"
+                      href={BUSINESS.phoneHref}
                       className="text-slate-600 hover:text-blue-600 transition-colors text-sm"
                     >
-                      (248) 852-8830
+                      {BUSINESS.phoneDisplay}
                     </a>
                   </div>
                 </div>
               </div>
 
               <a
-                href="https://maps.google.com/?q=2046+W+Auburn+Rd,+Rochester+Hills,+MI+48309"
+                href={BUSINESS.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full transition-colors"
@@ -295,7 +297,7 @@ export default function ServiceAreasPage() {
             {/* Map embed */}
             <div className="rounded-2xl overflow-hidden border border-slate-100 shadow-sm h-80">
               <iframe
-                src="https://maps.google.com/maps?q=2046+W+Auburn+Rd,+Rochester+Hills,+MI+48309&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                src={BUSINESS.mapsEmbedUrl}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
