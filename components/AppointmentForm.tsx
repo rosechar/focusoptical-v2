@@ -12,6 +12,7 @@ interface FormState {
   phone: string;
   appointment: string;
   details: string;
+  optIn: boolean;
 }
 
 interface FieldErrors {
@@ -27,6 +28,7 @@ export default function AppointmentForm() {
     phone: "",
     appointment: "eye",
     details: "",
+    optIn: true,
   });
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -69,7 +71,7 @@ export default function AppointmentForm() {
       });
       if (!res.ok) throw new Error(`Request failed: ${res.status}`);
       setStatus("success");
-      setForm({ name: "", email: "", phone: "", appointment: "eye", details: "" });
+      setForm({ name: "", email: "", phone: "", appointment: "eye", details: "", optIn: true });
     } catch (err) {
       console.error("Appointment request error:", err);
       setStatus("error");
@@ -246,6 +248,21 @@ export default function AppointmentForm() {
           className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-slate-300 resize-none"
         />
       </div>
+
+      {/* Promo opt-in */}
+      <label htmlFor="optIn" className="flex items-start gap-3 cursor-pointer">
+        <input
+          id="optIn"
+          name="optIn"
+          type="checkbox"
+          checked={form.optIn}
+          onChange={(e) => setForm((prev) => ({ ...prev, optIn: e.target.checked }))}
+          className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 accent-blue-600 cursor-pointer"
+        />
+        <span className="text-sm text-slate-600 leading-relaxed">
+          Keep me posted on promotions, new eyewear, and eye care tips.
+        </span>
+      </label>
 
       {/* Error banner */}
       {status === "error" && (

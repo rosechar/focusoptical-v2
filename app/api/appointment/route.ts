@@ -12,8 +12,9 @@ export async function POST(request: Request) {
   const apiKey = process.env.RESEND_API_KEY;
   const ownerEmail = process.env.OWNER_EMAIL;
   const fromEmail = process.env.RESEND_FROM_EMAIL;
+  const segmentId = process.env.RESEND_SEGMENT_ID;
 
-  if (!apiKey || !ownerEmail || !fromEmail) {
+  if (!apiKey || !ownerEmail || !fromEmail || !segmentId) {
     console.error("Resend environment variables are not configured.");
     return NextResponse.json(
       { error: "Email service is not configured." },
@@ -35,6 +36,7 @@ export async function POST(request: Request) {
     typeof payload.appointment === "string" ? payload.appointment : "";
   const details =
     typeof payload.details === "string" ? payload.details.trim() : "";
+  const optIn = payload.optIn !== false;
 
   const appointmentLabel = getAppointmentLabel(appointment);
 
@@ -89,6 +91,27 @@ export async function POST(request: Request) {
     if (customerResult.error) {
       // The business has been notified; a failed customer copy shouldn't fail the request.
       console.error("Customer confirmation failed:", customerResult.error);
+    }
+
+    if (optIn) {
+      // A failed segment add shouldn't fail the appointment request.
+      try {
+        const [firstName, ...rest] = name.split(/\s+/);
+        const contactResult = await resend.contacts.create({
+          email,
+          firstName,
+          lastName: rest.join(" ") || undefined,
+          phone,
+          unsubscribed: false,
+          segments: [{ id: segmentId }],
+        });
+
+        if (contactResult.error) {
+          console.error("Segment contact add failed:", contactResult.error);
+        }
+      } catch (contactErr) {
+        console.error("Segment contact add error:", contactErr);
+      }
     }
 
     return NextResponse.json({ ok: true });
