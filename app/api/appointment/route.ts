@@ -101,8 +101,8 @@ export async function POST(request: Request) {
           email,
           firstName,
           lastName: rest.join(" ") || undefined,
-          phone,
           unsubscribed: false,
+          properties: { phone },
           segments: [{ id: segmentId }],
         });
 
