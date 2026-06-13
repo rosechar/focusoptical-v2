@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     "optician appointment near me",
     "request eye exam appointment",
   ],
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 export default function ContactPage() {

@@ -31,6 +31,9 @@ export const metadata: Metadata = {
     "contact lenses Rochester Hills",
     "Focus Optical Rochester Hills",
   ],
+  alternates: {
+    canonical: "/",
+  },
 };
 
 const services = [

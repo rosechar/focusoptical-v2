@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     "contact lenses Michigan",
     "eyeglass fitting Rochester Hills",
   ],
+  alternates: {
+    canonical: "/services",
+  },
 };
 
 const services = [

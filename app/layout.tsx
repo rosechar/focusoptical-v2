@@ -42,6 +42,12 @@ export const metadata: Metadata = {
     title: "Focus Optical | Rochester Hills, MI Optician Since 1984",
     description:
       "Full-service optical store in Rochester Hills, MI. Eye exams, glasses, contacts, and free adjustments. Over 45 years of experience.",
+    images: [
+      {
+        url: "/images/shop.jpeg",
+        alt: "Focus Optical storefront in Rochester Hills, MI",
+      },
+    ],
   },
   verification: {
     google: "v35JKAVDznB95Qku6g8b3ceWYkQFHhhnunO81U35wo8",
@@ -55,7 +61,10 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Optician",
+  "@id": `${SITE_URL}/#business`,
   name: BUSINESS.name,
+  foundingDate: "1984",
+  hasMap: BUSINESS.mapsUrl,
   image: `${SITE_URL}/images/shop.jpeg`,
   address: {
     "@type": "PostalAddress",

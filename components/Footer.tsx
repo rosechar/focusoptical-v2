@@ -1,20 +1,17 @@
 import Link from "next/link";
 import { Phone, MapPin, Clock, ExternalLink, Star } from "lucide-react";
 import { BUSINESS, HOURS } from "@/lib/business";
+import { CITIES } from "@/lib/cities";
 
-const serviceAreas = [
-  "Rochester Hills",
-  "Rochester",
-  "Troy",
-  "Lake Orion",
-  "Royal Oak",
-  "Bloomfield Hills",
-  "Auburn Hills",
-  "Sterling Heights",
-  "Shelby Twp.",
-  "Pontiac",
-  "Clarkston",
-  "Waterford",
+const serviceAreas: { label: string; href?: string }[] = [
+  ...CITIES.map(({ city, slug }) => ({
+    label: city,
+    href: `/service-areas/${slug}`,
+  })),
+  { label: "Shelby Twp." },
+  { label: "Pontiac" },
+  { label: "Clarkston" },
+  { label: "Waterford" },
 ];
 
 const quickLinks = [
@@ -130,9 +127,18 @@ export default function Footer() {
               communities:
             </p>
             <ul className="grid grid-cols-2 gap-x-2 gap-y-1.5">
-              {serviceAreas.map((area) => (
-                <li key={area} className="text-xs text-slate-400">
-                  {area}
+              {serviceAreas.map(({ label, href }) => (
+                <li key={label} className="text-xs text-slate-400">
+                  {href ? (
+                    <Link
+                      href={href}
+                      className="hover:text-blue-300 transition-colors"
+                    >
+                      {label}
+                    </Link>
+                  ) : (
+                    label
+                  )}
                 </li>
               ))}
             </ul>

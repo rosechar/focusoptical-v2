@@ -14,6 +14,9 @@ export const metadata: Metadata = {
     "vision insurance Rochester Hills",
     "Focus Optical insurance",
   ],
+  alternates: {
+    canonical: "/insurance",
+  },
 };
 
 const faqs = [
@@ -35,9 +38,23 @@ const faqs = [
   },
 ];
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(({ q, a }) => ({
+    "@type": "Question",
+    name: q,
+    acceptedAnswer: { "@type": "Answer", text: a },
+  })),
+};
+
 export default function InsurancePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       {/* Page header */}
       <section className="bg-blue-900 text-white py-12 sm:py-16">
         <div className="max-w-6xl mx-auto px-4">

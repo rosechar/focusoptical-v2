@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     "Dr Diane Galper optometrist",
     "eye exam Rochester Hills",
   ],
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 const milestones = [

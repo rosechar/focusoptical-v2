@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { MapPin, Phone, Navigation } from "lucide-react";
+import { MapPin, Phone, Navigation, ArrowRight } from "lucide-react";
 import { BUSINESS } from "@/lib/business";
+import { CITIES } from "@/lib/cities";
 
 export const metadata: Metadata = {
   title: "Service Areas — Optician Near Rochester Hills, Troy & Oakland County",
@@ -24,93 +25,16 @@ export const metadata: Metadata = {
     "eye doctor near Rochester Hills",
     "local optician Michigan",
   ],
+  alternates: {
+    canonical: "/service-areas",
+  },
 };
 
-const serviceAreas = [
-  {
-    city: "Rochester Hills",
-    zip: "48309, 48307",
-    description:
-      "Focus Optical is located right here in Rochester Hills at 2046 W Auburn Rd. We're your neighborhood optician for eye exams, prescription glasses, contact lenses, and free eyeglass adjustments. Rochester Hills residents have trusted us for over 40 years.",
-    primary: true,
-  },
-  {
-    city: "Rochester",
-    zip: "48306, 48307",
-    description:
-      "Just minutes from downtown Rochester, Focus Optical offers Rochester residents comprehensive optical services — from annual eye exams with Dr. Diane Galper to a wide selection of frames and contact lenses.",
-    primary: false,
-  },
-  {
-    city: "Troy",
-    zip: "48083, 48084, 48085, 48098",
-    description:
-      "Troy residents looking for a quality optician choose Focus Optical for our craftsmanship, personalized service, and no-pressure environment. We cut and edge all lenses on-site for superior quality.",
-    primary: false,
-  },
-  {
-    city: "Lake Orion",
-    zip: "48360, 48362",
-    description:
-      "Lake Orion patients make the short drive to Focus Optical for our reputation as one of Oakland County's most experienced independent opticians. Worth the trip for glasses you'll love.",
-    primary: false,
-  },
-  {
-    city: "Royal Oak",
-    zip: "48067, 48068, 48073",
-    description:
-      "Royal Oak residents appreciate our independent, no-franchise approach to optical care. No sales pressure, just expert craftsmanship and honest service from Tom Hamilton.",
-    primary: false,
-  },
-  {
-    city: "Bloomfield Hills",
-    zip: "48301, 48302, 48304",
-    description:
-      "We serve Bloomfield Hills patients seeking a trusted, experienced optician. Our attention to detail and on-site lens cutting sets us apart from chain optical stores.",
-    primary: false,
-  },
-  {
-    city: "Auburn Hills",
-    zip: "48326",
-    description:
-      "Auburn Hills residents trust Focus Optical for eye exams, new glasses, and free adjustments on existing eyewear. Conveniently located on W Auburn Rd.",
-    primary: false,
-  },
-  {
-    city: "Sterling Heights",
-    zip: "48310, 48312, 48313, 48314",
-    description:
-      "Sterling Heights patients come to Focus Optical for the expert, personalized service you can only get at an independently owned optical store with over 45 years of experience.",
-    primary: false,
-  },
-  {
-    city: "Shelby Township",
-    zip: "48315, 48316, 48317",
-    description:
-      "Focus Optical serves Shelby Township residents with comprehensive optical services including eye exams, contact lens fittings, and a curated selection of eyeglass frames.",
-    primary: false,
-  },
-  {
-    city: "Pontiac",
-    zip: "48340, 48341, 48342",
-    description:
-      "Pontiac area residents find quality optical care at Focus Optical in Rochester Hills — close enough for the personalized service and craftsmanship you deserve.",
-    primary: false,
-  },
-  {
-    city: "Clarkston",
-    zip: "48346, 48348",
-    description:
-      "Clarkston patients choose Focus Optical for our unmatched experience and dedication to quality. We've been crafting eyeglasses for Oakland County since 1984.",
-    primary: false,
-  },
-  {
-    city: "Waterford",
-    zip: "48327, 48328, 48329",
-    description:
-      "Waterford Township residents rely on Focus Optical for honest, experienced optical care. From eye exams to custom-fitted glasses — all under one roof.",
-    primary: false,
-  },
+const otherCommunities = [
+  { city: "Shelby Township", zip: "48315, 48316, 48317" },
+  { city: "Pontiac", zip: "48340, 48341, 48342" },
+  { city: "Clarkston", zip: "48346, 48348" },
+  { city: "Waterford", zip: "48327, 48328, 48329" },
 ];
 
 const services = [
@@ -194,10 +118,11 @@ export default function ServiceAreasPage() {
             communities we serve most frequently:
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {serviceAreas.map(({ city, zip, description, primary }) => (
-              <div
-                key={city}
-                className={`rounded-2xl p-6 border ${
+            {CITIES.map(({ slug, city, zips, summary, primary }) => (
+              <Link
+                key={slug}
+                href={`/service-areas/${slug}`}
+                className={`group rounded-2xl p-6 border transition-shadow hover:shadow-md ${
                   primary
                     ? "bg-blue-900 border-blue-800 text-white"
                     : "bg-white border-slate-100 shadow-sm"
@@ -222,7 +147,7 @@ export default function ServiceAreasPage() {
                         primary ? "text-blue-300" : "text-slate-400"
                       }`}
                     >
-                      ZIP: {zip}
+                      ZIP: {zips.join(", ")}
                     </p>
                   </div>
                   <MapPin
@@ -231,14 +156,41 @@ export default function ServiceAreasPage() {
                   />
                 </div>
                 <p
-                  className={`text-base leading-relaxed ${
+                  className={`text-base leading-relaxed mb-4 ${
                     primary ? "text-blue-100" : "text-slate-500"
                   }`}
                 >
-                  {description}
+                  {summary}
                 </p>
-              </div>
+                <span
+                  className={`inline-flex items-center gap-1.5 text-sm font-semibold ${
+                    primary
+                      ? "text-blue-200 group-hover:text-white"
+                      : "text-blue-600 group-hover:text-blue-700"
+                  } transition-colors`}
+                >
+                  {city} eye care
+                  <ArrowRight size={14} />
+                </span>
+              </Link>
             ))}
+          </div>
+
+          <div className="mt-10">
+            <h3 className="font-bold text-slate-900 text-lg mb-3">
+              Also Serving
+            </h3>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              {otherCommunities.map(({ city, zip }) => (
+                <div
+                  key={city}
+                  className="bg-white rounded-xl px-4 py-3 border border-slate-100 shadow-sm"
+                >
+                  <p className="font-semibold text-slate-900 text-sm">{city}</p>
+                  <p className="text-xs text-slate-400 mt-0.5">ZIP: {zip}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
