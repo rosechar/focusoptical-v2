@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import emailjs from "@emailjs/browser";
 import { Send, Loader2, CheckCircle, AlertCircle, Phone } from "lucide-react";
 import { BUSINESS } from "@/lib/business";
+import { appointmentTypes } from "@/lib/appointments";
+import { emailRegex, isValidPhone } from "@/lib/validation";
 
 interface FormState {
   name: string;
@@ -18,27 +19,6 @@ interface FieldErrors {
   email?: string;
   phone?: string;
 }
-
-const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
-const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
-const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
-
-const appointmentTypes = [
-  { value: "eye", label: "Eye Exam" },
-  { value: "contact", label: "Contact Lens Exam" },
-  { value: "adjustment", label: "Glasses Adjustment" },
-  { value: "retail", label: "Glasses & Contact Retail" },
-];
-
-const emailRegex = /^[\w.%+-]+@([\w-]+\.)+\w{2,}$/;
-
-// Accepts any formatting of a 10-digit US number, with or without country code.
-const isValidPhone = (phone: string) => {
-  const digits = phone.replace(/\D/g, "");
-  return (
-    digits.length === 10 || (digits.length === 11 && digits.startsWith("1"))
-  );
-};
 
 export default function AppointmentForm() {
   const [form, setForm] = useState<FormState>({
@@ -82,22 +62,16 @@ export default function AppointmentForm() {
 
     setStatus("loading");
     try {
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        {
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-          appointment: appointmentTypes.find((t) => t.value === form.appointment)?.label,
-          details: form.details || "No additional details provided.",
-        },
-        EMAILJS_PUBLIC_KEY
-      );
+      const res = await fetch("/api/appointment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error(`Request failed: ${res.status}`);
       setStatus("success");
       setForm({ name: "", email: "", phone: "", appointment: "eye", details: "" });
     } catch (err) {
-      console.error("EmailJS error:", err);
+      console.error("Appointment request error:", err);
       setStatus("error");
     }
   };

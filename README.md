@@ -6,7 +6,7 @@ Marketing site for Focus Optical, an independent optical store in Rochester Hill
 
 ```bash
 npm install
-cp .env.example .env.local   # fill in EmailJS credentials
+cp .env.example .env.local   # fill in Resend credentials
 npm run dev
 ```
 
@@ -14,13 +14,15 @@ The site runs at [http://localhost:3000](http://localhost:3000).
 
 ## Environment variables
 
-The appointment form (`components/AppointmentForm.tsx`) sends requests via [EmailJS](https://www.emailjs.com). Without these variables the form renders but submissions fail with an error banner.
+The appointment form posts to the `/api/appointment` route (`app/api/appointment/route.ts`), which uses [Resend](https://resend.com) to send a confirmation email to the customer and a notification email to the owner. Without these variables submissions fail with an error banner.
 
 | Variable | Description |
 | --- | --- |
-| `NEXT_PUBLIC_EMAILJS_SERVICE_ID` | EmailJS service ID |
-| `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID` | EmailJS template ID |
-| `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY` | EmailJS public key |
+| `RESEND_API_KEY` | Resend API key |
+| `OWNER_EMAIL` | Address that receives appointment notifications |
+| `RESEND_FROM_EMAIL` | "From" address, e.g. `Focus Optical <appointments@focusopticalrochesterhills.com>` |
+
+Customer confirmations require a [verified sending domain](https://resend.com/domains) in Resend. Until `focusopticalrochesterhills.com` is verified, use `Focus Optical <onboarding@resend.dev>`, which only delivers to the Resend account owner.
 
 ## Scripts
 
