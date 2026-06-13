@@ -1,4 +1,4 @@
-export const SITE_URL = "https://focusoptical.vercel.app";
+export const SITE_URL = "https://focusopticalrochesterhills.com";
 
 export const BUSINESS = {
   name: "Focus Optical",
