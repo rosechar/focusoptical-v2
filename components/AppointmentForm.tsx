@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { Send, Loader2, CheckCircle, AlertCircle, Phone } from "lucide-react";
+import { Send, Loader2, CheckCircle, AlertCircle, Phone, ChevronDown } from "lucide-react";
 import { BUSINESS } from "@/lib/business";
 import { appointmentTypes } from "@/lib/appointments";
 import { emailRegex, isValidPhone } from "@/lib/validation";
@@ -206,19 +206,25 @@ export default function AppointmentForm() {
         >
           Appointment Type
         </label>
-        <select
-          id="appointment"
-          name="appointment"
-          value={form.appointment}
-          onChange={handleChange}
-          className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-slate-300 cursor-pointer"
-        >
-          {appointmentTypes.map(({ value, label }) => (
-            <option key={value} value={value}>
-              {label}
-            </option>
-          ))}
-        </select>
+        <div className="relative">
+          <select
+            id="appointment"
+            name="appointment"
+            value={form.appointment}
+            onChange={handleChange}
+            className="w-full appearance-none px-4 py-3 pr-10 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-slate-300 cursor-pointer"
+          >
+            {appointmentTypes.map(({ value, label }) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
+          </select>
+          <ChevronDown
+            size={16}
+            className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"
+          />
+        </div>
       </div>
 
       {/* Details */}
