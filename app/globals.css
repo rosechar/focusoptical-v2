@@ -8,4 +8,13 @@
   html {
     scroll-behavior: smooth;
   }
+
+  /* iOS Safari zooms in on focus when a control's font-size is below 16px */
+  @media (max-width: 640px) {
+    input,
+    select,
+    textarea {
+      font-size: 16px;
+    }
+  }
 }
