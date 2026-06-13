@@ -133,7 +133,7 @@ export default function AppointmentForm() {
           onChange={handleChange}
           placeholder="Jane Smith"
           autoComplete="name"
-          className={`w-full px-4 py-3 rounded-xl border text-slate-900 placeholder-slate-400 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+          className={`w-full px-4 py-3 rounded-xl border text-slate-900 placeholder-slate-400 text-base transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
             errors.name
               ? "border-red-300 bg-red-50"
               : "border-slate-200 bg-white hover:border-slate-300"
@@ -163,7 +163,7 @@ export default function AppointmentForm() {
           onChange={handleChange}
           placeholder="jane@example.com"
           autoComplete="email"
-          className={`w-full px-4 py-3 rounded-xl border text-slate-900 placeholder-slate-400 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+          className={`w-full px-4 py-3 rounded-xl border text-slate-900 placeholder-slate-400 text-base transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
             errors.email
               ? "border-red-300 bg-red-50"
               : "border-slate-200 bg-white hover:border-slate-300"
@@ -193,7 +193,7 @@ export default function AppointmentForm() {
           onChange={handleChange}
           placeholder="(248) 555-0100"
           autoComplete="tel"
-          className={`w-full px-4 py-3 rounded-xl border text-slate-900 placeholder-slate-400 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+          className={`w-full px-4 py-3 rounded-xl border text-slate-900 placeholder-slate-400 text-base transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
             errors.phone
               ? "border-red-300 bg-red-50"
               : "border-slate-200 bg-white hover:border-slate-300"
@@ -221,7 +221,7 @@ export default function AppointmentForm() {
             name="appointment"
             value={form.appointment}
             onChange={handleChange}
-            className="w-full appearance-none px-4 py-3 pr-10 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-slate-300 cursor-pointer"
+            className="w-full appearance-none px-4 py-3 pr-10 rounded-xl border border-slate-200 bg-white text-slate-900 text-base transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-slate-300 cursor-pointer"
           >
             {appointmentTypes.map(({ value, label }) => (
               <option key={value} value={value}>
@@ -252,7 +252,7 @@ export default function AppointmentForm() {
           onChange={handleChange}
           rows={4}
           placeholder="Anything else we should know — preferred days/times, insurance questions, etc."
-          className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-slate-300 resize-none"
+          className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 text-base transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-slate-300 resize-none"
         />
       </div>
 
