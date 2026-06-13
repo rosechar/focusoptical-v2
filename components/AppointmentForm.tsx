@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, useEffect, useRef, FormEvent } from "react";
 import { Send, Loader2, CheckCircle, AlertCircle, Phone, ChevronDown } from "lucide-react";
 import { BUSINESS } from "@/lib/business";
 import { appointmentTypes } from "@/lib/appointments";
@@ -32,6 +32,13 @@ export default function AppointmentForm() {
   });
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const successRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (status === "success") {
+      successRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [status]);
 
   const validate = (): boolean => {
     const newErrors: FieldErrors = {};
@@ -80,7 +87,7 @@ export default function AppointmentForm() {
 
   if (status === "success") {
     return (
-      <div className="flex flex-col items-center justify-center text-center py-16 px-6">
+      <div ref={successRef} className="flex flex-col items-center justify-center text-center py-16 px-6">
         <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-5">
           <CheckCircle className="text-green-600" size={32} />
         </div>
