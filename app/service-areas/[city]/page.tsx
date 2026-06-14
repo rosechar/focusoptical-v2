@@ -122,6 +122,7 @@ export default async function CityPage({ params }: Props) {
             </Link>
             <a
               href={BUSINESS.phoneHref}
+              data-umami-event="call-phone"
               className="inline-flex items-center justify-center gap-2 border-2 border-white text-white hover:bg-white/15 font-semibold px-6 py-3 rounded-full transition-colors"
             >
               <Phone size={16} />
@@ -168,6 +169,7 @@ export default async function CityPage({ params }: Props) {
               href={BUSINESS.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-umami-event="get-directions"
               className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold transition-colors"
             >
               <Navigation size={16} />
@@ -243,6 +245,7 @@ export default async function CityPage({ params }: Props) {
               </Link>
               <a
                 href={BUSINESS.phoneHref}
+                data-umami-event="call-phone"
                 className="inline-flex items-center justify-center gap-2 border-2 border-white text-white hover:bg-white/15 font-semibold px-7 py-3.5 rounded-full transition-colors"
               >
                 <Phone size={16} />

@@ -87,6 +87,7 @@ export default function InsurancePage() {
               </p>
               <a
                 href={BUSINESS.phoneHref}
+                data-umami-event="call-phone"
                 className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-full text-sm transition-colors"
               >
                 <Phone size={15} />
@@ -106,6 +107,7 @@ export default function InsurancePage() {
               </p>
               <a
                 href={BUSINESS.phoneHref}
+                data-umami-event="call-phone"
                 className="inline-flex items-center gap-2 border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold px-5 py-2.5 rounded-full text-sm transition-colors"
               >
                 <Phone size={15} />
@@ -140,6 +142,7 @@ export default function InsurancePage() {
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
                 href={BUSINESS.phoneHref}
+                data-umami-event="call-phone"
                 className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-7 py-3.5 rounded-full transition-colors"
               >
                 <Phone size={17} />

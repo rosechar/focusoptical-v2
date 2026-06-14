@@ -5,6 +5,7 @@ import { Send, Loader2, CheckCircle, AlertCircle, Phone, ChevronDown } from "luc
 import { BUSINESS } from "@/lib/business";
 import { appointmentTypes } from "@/lib/appointments";
 import { emailRegex, isValidPhone } from "@/lib/validation";
+import { trackEvent } from "@/lib/analytics";
 
 interface FormState {
   name: string;
@@ -33,6 +34,7 @@ export default function AppointmentForm() {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const successRef = useRef<HTMLDivElement>(null);
+  const hasStartedRef = useRef(false);
 
   useEffect(() => {
     if (status === "success") {
@@ -59,6 +61,10 @@ export default function AppointmentForm() {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
+    if (!hasStartedRef.current) {
+      hasStartedRef.current = true;
+      trackEvent("appointment-form-started");
+    }
     setForm((prev) => ({ ...prev, [name]: value }));
     if (errors[name as keyof FieldErrors]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
@@ -78,6 +84,7 @@ export default function AppointmentForm() {
       });
       if (!res.ok) throw new Error(`Request failed: ${res.status}`);
       setStatus("success");
+      trackEvent("appointment-form-submitted", { type: form.appointment });
       setForm({ name: "", email: "", phone: "", appointment: "eye", details: "", optIn: true });
     } catch (err) {
       console.error("Appointment request error:", err);
@@ -100,6 +107,7 @@ export default function AppointmentForm() {
         </p>
         <a
           href={BUSINESS.phoneHref}
+          data-umami-event="call-phone"
           className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-full text-sm transition-colors"
         >
           <Phone size={14} />
@@ -277,7 +285,7 @@ export default function AppointmentForm() {
           <AlertCircle size={16} className="shrink-0" />
           <span>
             Something went wrong. Please try again or call us at{" "}
-            <a href={BUSINESS.phoneHref} className="underline font-medium">
+            <a href={BUSINESS.phoneHref} data-umami-event="call-phone" className="underline font-medium">
               {BUSINESS.phoneDisplay}
             </a>
             .
