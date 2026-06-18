@@ -123,7 +123,6 @@ export default function HomePage() {
         <strong>Limited Time: Free Frames with Purchase of Lenses!</strong>
         <a
           href={BUSINESS.phoneHref}
-          data-umami-event="call-phone"
           className="ml-2 underline underline-offset-2 hover:text-blue-100 transition-colors whitespace-nowrap"
         >
           Call {BUSINESS.phoneDisplay}
@@ -159,7 +158,6 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row gap-3">
               <a
                 href={BUSINESS.phoneHref}
-                data-umami-event="call-phone"
                 className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-7 py-3.5 rounded-full transition-colors"
               >
                 <Phone size={18} />
@@ -413,7 +411,6 @@ export default function HomePage() {
             </Link>
             <a
               href={BUSINESS.phoneHref}
-              data-umami-event="call-phone"
               className="inline-flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold px-8 py-4 rounded-full transition-colors"
             >
               <Phone size={18} />

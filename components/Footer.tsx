@@ -45,7 +45,6 @@ export default function Footer() {
             <div className="flex flex-col items-start gap-3">
               <a
                 href={BUSINESS.phoneHref}
-                data-umami-event="call-phone"
                 className="inline-flex items-center gap-2 text-white font-semibold hover:text-blue-300 transition-colors"
               >
                 <Phone size={15} />
@@ -55,7 +54,6 @@ export default function Footer() {
                 href={BUSINESS.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                data-umami-event="get-directions"
                 className="inline-flex items-start gap-2 text-sm text-slate-400 hover:text-white transition-colors"
               >
                 <MapPin size={14} className="mt-0.5 shrink-0" />

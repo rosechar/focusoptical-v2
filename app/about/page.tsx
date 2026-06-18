@@ -112,7 +112,6 @@ export default function AboutPage() {
                 </Link>
                 <a
                   href={BUSINESS.phoneHref}
-                  data-umami-event="call-phone"
                   className="inline-flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold px-6 py-3 rounded-full transition-colors"
                 >
                   <Phone size={16} />
@@ -214,7 +213,6 @@ export default function AboutPage() {
               <h3 className="font-semibold mb-1">Phone</h3>
               <a
                 href={BUSINESS.phoneHref}
-                data-umami-event="call-phone"
                 className="text-blue-200 text-sm hover:text-white transition-colors"
               >
                 {BUSINESS.phoneDisplay}

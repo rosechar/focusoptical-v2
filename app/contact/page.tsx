@@ -64,7 +64,6 @@ export default function ContactPage() {
                 </p>
                 <a
                   href={BUSINESS.phoneHref}
-                  data-umami-event="call-phone"
                   className="flex items-center gap-2.5 text-white font-bold text-lg sm:text-xl hover:text-blue-200 transition-colors"
                 >
                   <Phone size={20} />
@@ -88,7 +87,6 @@ export default function ContactPage() {
                   href={BUSINESS.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-umami-event="get-directions"
                   className="text-sm text-blue-600 hover:text-blue-700 font-semibold transition-colors"
                 >
                   Get Directions →

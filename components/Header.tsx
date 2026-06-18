@@ -40,7 +40,6 @@ export default function Header() {
             href={BUSINESS.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            data-umami-event="get-directions"
             className="flex items-center gap-1.5 hover:text-blue-200 transition-colors"
           >
             <MapPin size={14} />
@@ -50,7 +49,6 @@ export default function Header() {
           </a>
           <a
             href={BUSINESS.phoneHref}
-            data-umami-event="call-phone"
             className="flex items-center gap-1.5 hover:text-blue-200 transition-colors"
           >
             <Phone size={14} />
@@ -186,7 +184,6 @@ export default function Header() {
             ))}
             <a
               href={BUSINESS.phoneHref}
-              data-umami-event="call-phone"
               className="flex items-center gap-2 px-3 py-3 text-sm text-slate-500 border-t border-slate-100 mt-1 pt-3"
             >
               <Phone size={14} />

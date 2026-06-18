@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -122,11 +121,6 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased bg-white text-slate-900">
-        <Script
-          defer
-          src="https://cloud.umami.is/script.js"
-          data-website-id="4f4b9e54-8f84-4f68-bb9b-dd559fff8730"
-        />
         <Header />
         <main>{children}</main>
         <Footer />

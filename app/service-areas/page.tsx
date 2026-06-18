@@ -77,7 +77,6 @@ export default function ServiceAreasPage() {
             </Link>
             <a
               href={BUSINESS.phoneHref}
-              data-umami-event="call-phone"
               className="inline-flex items-center justify-center gap-2 border-2 border-white text-white hover:bg-white/15 font-semibold px-6 py-3 rounded-full transition-colors"
             >
               <Phone size={16} />
@@ -228,7 +227,6 @@ export default function ServiceAreasPage() {
                     <p className="font-semibold text-slate-900">Phone</p>
                     <a
                       href={BUSINESS.phoneHref}
-                      data-umami-event="call-phone"
                       className="text-slate-600 hover:text-blue-600 transition-colors text-sm"
                     >
                       {BUSINESS.phoneDisplay}
@@ -241,7 +239,6 @@ export default function ServiceAreasPage() {
                 href={BUSINESS.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                data-umami-event="get-directions"
                 className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full transition-colors"
               >
                 <Navigation size={16} />
