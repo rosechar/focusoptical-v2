@@ -96,7 +96,7 @@ export default function Footer() {
                   className="flex justify-between gap-3 text-slate-400"
                 >
                   <span className="text-slate-300">{day}</span>
-                  <span className={opens ? "" : "text-slate-500 italic"}>
+                  <span className={opens ? "" : "text-slate-400 italic"}>
                     {display}
                   </span>
                 </li>
@@ -124,7 +124,7 @@ export default function Footer() {
           {/* Service areas column — SEO value */}
           <div>
             <h3 className="text-white font-semibold mb-4">Areas We Serve</h3>
-            <p className="text-xs text-slate-500 mb-3 leading-relaxed">
+            <p className="text-xs text-slate-400 mb-3 leading-relaxed">
               Proudly serving patients across Oakland County and nearby
               communities:
             </p>
@@ -156,7 +156,7 @@ export default function Footer() {
 
       {/* Copyright bar */}
       <div className="border-t border-slate-800 py-4">
-        <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-600">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
           <span>
             © {new Date().getFullYear()} {BUSINESS.name}. All rights reserved.
           </span>

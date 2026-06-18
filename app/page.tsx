@@ -384,7 +384,7 @@ export default function HomePage() {
                 </p>
                 <div className="flex items-center justify-between">
                   <p className="font-semibold text-white">{name}</p>
-                  <span className="text-xs text-blue-300 group-hover:text-blue-200 transition-colors">
+                  <span className="text-xs text-blue-200 group-hover:text-blue-100 transition-colors">
                     Google Review ↗
                   </span>
                 </div>
