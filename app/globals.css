@@ -1,11 +1,113 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-inter);
+  /* Type */
+  --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand accent — Slate Blue */
+  --color-accent: #2f5286;
+  --color-accent-hover: #21406c;
+  --color-accent-soft: #ecf0f7;
+  --color-accent-ondark: #cdd9ec;
+
+  /* Neutrals */
+  --color-ink: #1a1f20;
+  --color-body: #5c6566;
+  --color-secondary: #34403f;
+  --color-faint: #9aa3a4;
+  --color-hairline: #ebedec;
+  --color-hairline-soft: #f0f1f0;
+  --color-card-border: #e7ebeb;
+  --color-surface: #f6f7f7;
+  --color-surface-alt: #f4f6f6;
+
+  /* Form fields */
+  --color-field: #fafbfb;
+  --color-field-border: #d8dddd;
+
+  /* Dark UI (utility bar, footer, toast) */
+  --color-dark: #14181a;
+  --color-dark-sub: #1d2224;
+
+  /* Accents */
+  --color-closed: #a8383a;
+  --color-gold: #d99a13;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+  }
+  body {
+    color: var(--color-ink);
+  }
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+/* Soft duotone photo treatment. Applied to every photo; the map iframe stays unfiltered. */
+.duotone {
+  filter: sepia(0.32) saturate(1.15) contrast(0.98) hue-rotate(-8deg);
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-page-in {
+  animation: pageIn 0.35s ease;
+}
+.animate-fade-up {
+  animation: fadeUp 0.5s ease;
+}
+.animate-toast-in {
+  animation: toastIn 0.5s cubic-bezier(0.2, 0.85, 0.25, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-page-in,
+  .animate-fade-up,
+  .animate-toast-in {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
   }
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MapPin, Phone, Clock, Navigation, Check } from "lucide-react";
+import CtaBand from "@/components/CtaBand";
 import { BUSINESS, SITE_URL } from "@/lib/business";
 import { CITIES, getCity } from "@/lib/cities";
 
@@ -97,32 +98,39 @@ export default async function CityPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Page header */}
-      <section className="bg-blue-900 text-white py-12 sm:py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <p className="text-blue-300 font-semibold text-sm tracking-widest uppercase mb-2">
+      {/* Breadcrumb + header */}
+      <section className="pt-10 sm:pt-14 pb-10">
+        <div className="max-w-[1180px] mx-auto px-5 sm:px-10">
+          <nav aria-label="Breadcrumb" className="text-sm text-body mb-5">
+            <Link href="/service-areas" className="hover:text-accent transition-colors">
+              Service areas
+            </Link>
+            <span className="mx-2 text-hairline">/</span>
+            <span className="text-ink">{area.city}</span>
+          </nav>
+          <p className="text-accent font-semibold text-xs tracking-[0.16em] uppercase mb-3">
             Serving {area.city}, Michigan
           </p>
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight leading-tight">
+          <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-ink tracking-[-0.03em] leading-tight">
             {area.primary
-              ? `Your Optician in ${area.city}`
-              : `Optician & Eye Exams Near ${area.city}`}
+              ? `Your optician in ${area.city}`
+              : `Optician & eye exams near ${area.city}`}
           </h1>
-          <p className="text-blue-200 mt-4 text-lg max-w-2xl leading-relaxed">
-            Focus Optical has served {area.city} and {area.county} since 1984 —
-            eye exams, prescription glasses, contact lenses, and free
-            adjustments from an independently owned optical store.
+          <p className="text-body mt-4 text-lg max-w-2xl leading-relaxed">
+            We&apos;ve taken care of {area.city} and {area.county} since 1984. Eye
+            exams, glasses, contacts, and free adjustments, from a shop that&apos;s
+            family owned.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 mt-6">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-full transition-colors"
+              className="inline-flex items-center justify-center bg-accent hover:bg-accent-hover text-white font-semibold px-6 py-3 rounded-xl transition-colors"
             >
-              Schedule an Appointment
+              Book a visit
             </Link>
             <a
               href={BUSINESS.phoneHref}
-              className="inline-flex items-center justify-center gap-2 border-2 border-white text-white hover:bg-white/15 font-semibold px-6 py-3 rounded-full transition-colors"
+              className="inline-flex items-center justify-center gap-2 border border-[#dcdfdf] text-ink hover:border-accent hover:text-accent font-semibold px-6 py-3 rounded-xl transition-colors"
             >
               <Phone size={16} />
               {BUSINESS.phoneDisplay}
@@ -132,35 +140,35 @@ export default async function CityPage({ params }: Props) {
       </section>
 
       {/* Quick facts */}
-      <section className="bg-white border-b border-slate-100 py-6">
-        <div className="max-w-6xl mx-auto px-4 grid sm:grid-cols-3 gap-4 text-sm">
-          <div className="flex items-center gap-2.5 text-slate-600">
-            <Clock size={18} className="text-blue-600 shrink-0" />
+      <section className="bg-surface py-5">
+        <div className="max-w-[1180px] mx-auto px-5 sm:px-10 grid sm:grid-cols-3 gap-4 text-sm">
+          <div className="flex items-center gap-2.5 text-body">
+            <Clock size={18} className="text-accent shrink-0" />
             {area.driveTime}
             {!area.primary && ` from ${area.city}`}
           </div>
-          <div className="flex items-center gap-2.5 text-slate-600">
-            <MapPin size={18} className="text-blue-600 shrink-0" />
+          <div className="flex items-center gap-2.5 text-body">
+            <MapPin size={18} className="text-accent shrink-0" />
             {BUSINESS.address.street}, {BUSINESS.address.city}, MI
           </div>
-          <div className="flex items-center gap-2.5 text-slate-600">
-            <Navigation size={18} className="text-blue-600 shrink-0" />
+          <div className="flex items-center gap-2.5 text-body">
+            <Navigation size={18} className="text-accent shrink-0" />
             Serving ZIP codes {area.zips.join(", ")}
           </div>
         </div>
       </section>
 
       {/* Main content */}
-      <section className="py-10 sm:py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4 grid lg:grid-cols-3 gap-10">
+      <section className="py-12 sm:py-16">
+        <div className="max-w-[1180px] mx-auto px-5 sm:px-10 grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-5">
-            <h2 className="text-3xl font-bold text-slate-900 tracking-tight">
+            <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-ink tracking-[-0.02em]">
               {area.primary
-                ? `Quality Optical Care in ${area.city}`
-                : `Why ${area.city} Chooses Focus Optical`}
+                ? `Quality optical care in ${area.city}`
+                : `Why ${area.city} chooses Focus Optical`}
             </h2>
-            {area.paragraphs.map((p) => (
-              <p key={p.slice(0, 40)} className="text-slate-600 leading-relaxed">
+            {area.paragraphs.map((p, i) => (
+              <p key={i} className="text-body leading-relaxed">
                 {p}
               </p>
             ))}
@@ -168,31 +176,28 @@ export default async function CityPage({ params }: Props) {
               href={BUSINESS.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold transition-colors"
+              className="inline-flex items-center gap-2 text-accent hover:text-accent-hover font-semibold transition-colors"
             >
               <Navigation size={16} />
               Get directions from {area.city}
             </a>
           </div>
 
-          <aside className="bg-slate-50 rounded-2xl p-6 border border-slate-100 h-fit">
-            <h3 className="font-bold text-slate-900 text-lg mb-4">
-              Services for {area.city} Patients
+          <aside className="bg-surface rounded-2xl p-6 h-fit">
+            <h3 className="font-display font-bold text-ink text-lg mb-4">
+              Services for {area.city} patients
             </h3>
             <ul className="space-y-2.5 mb-6">
               {SERVICES.map((s) => (
-                <li
-                  key={s}
-                  className="flex items-start gap-2.5 text-sm text-slate-600"
-                >
-                  <Check size={16} className="text-blue-600 mt-0.5 shrink-0" />
+                <li key={s} className="flex items-start gap-2.5 text-sm text-body">
+                  <Check size={16} className="text-accent mt-0.5 shrink-0" />
                   {s}
                 </li>
               ))}
             </ul>
             <Link
               href="/services"
-              className="text-blue-600 hover:text-blue-700 font-semibold text-sm transition-colors"
+              className="text-accent hover:text-accent-hover font-semibold text-sm transition-colors"
             >
               View all services →
             </Link>
@@ -201,19 +206,16 @@ export default async function CityPage({ params }: Props) {
       </section>
 
       {/* FAQs */}
-      <section className="py-10 sm:py-16 bg-slate-50">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-slate-900 tracking-tight mb-8">
-            Common Questions from {area.city} Patients
+      <section className="py-12 sm:py-16 bg-surface">
+        <div className="max-w-[920px] mx-auto px-5 sm:px-10">
+          <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-ink tracking-[-0.02em] mb-8">
+            Common questions from {area.city} patients
           </h2>
           <div className="space-y-4">
             {area.faqs.map(({ q, a }) => (
-              <div
-                key={q}
-                className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm"
-              >
-                <h3 className="font-bold text-slate-900 mb-2">{q}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">{a}</p>
+              <div key={q} className="bg-white rounded-2xl p-6 border border-hairline">
+                <h3 className="font-semibold text-ink mb-2">{q}</h3>
+                <p className="text-body text-sm leading-relaxed">{a}</p>
               </div>
             ))}
           </div>
@@ -221,52 +223,32 @@ export default async function CityPage({ params }: Props) {
       </section>
 
       {/* CTA + other areas */}
-      <section className="py-10 sm:py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="bg-blue-900 rounded-2xl p-8 sm:p-10 text-center text-white mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">
-              Ready for Better Vision Care?
-            </h2>
-            <p className="text-blue-200 mb-6 max-w-xl mx-auto">
-              Book an eye exam or stop in for a free adjustment — we&apos;re{" "}
-              {area.primary
-                ? "right here in Rochester Hills"
-                : `${area.driveTime.toLowerCase()} from ${area.city}`}
-              .
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold px-7 py-3.5 rounded-full transition-colors"
-              >
-                Schedule an Appointment
-              </Link>
-              <a
-                href={BUSINESS.phoneHref}
-                className="inline-flex items-center justify-center gap-2 border-2 border-white text-white hover:bg-white/15 font-semibold px-7 py-3.5 rounded-full transition-colors"
-              >
-                <Phone size={16} />
-                Call {BUSINESS.phoneDisplay}
-              </a>
-            </div>
-          </div>
+      <CtaBand
+        subtext={
+          area.primary
+            ? "Right here in Rochester Hills. Open Monday to Saturday, walk in anytime."
+            : `${area.driveTime} from ${area.city}. Open Monday to Saturday, walk in anytime.`
+        }
+      />
 
-          <h2 className="text-xl font-bold text-slate-900 tracking-tight mb-4">
-            Other Communities We Serve
+      <section className="pb-14">
+        <div className="max-w-[1180px] mx-auto px-5 sm:px-10">
+          <h2 className="font-display text-lg font-bold text-ink tracking-[-0.01em] mb-4">
+            Other communities we serve
           </h2>
           <div className="flex flex-wrap gap-2">
             {CITIES.filter((c) => c.slug !== area.slug).map((c) => (
               <Link
                 key={c.slug}
                 href={`/service-areas/${c.slug}`}
-                className="text-sm bg-slate-50 hover:bg-blue-50 hover:text-blue-700 text-slate-600 border border-slate-100 px-4 py-2 rounded-full transition-colors"
+                className="text-sm bg-surface hover:bg-accent-soft hover:text-accent text-body border border-hairline px-4 py-2 rounded-full transition-colors"
               >
                 {c.city}, MI
               </Link>
             ))}
             <Link
               href="/service-areas"
-              className="text-sm bg-slate-50 hover:bg-blue-50 hover:text-blue-700 text-slate-600 border border-slate-100 px-4 py-2 rounded-full transition-colors"
+              className="text-sm bg-surface hover:bg-accent-soft hover:text-accent text-body border border-hairline px-4 py-2 rounded-full transition-colors"
             >
               All service areas →
             </Link>

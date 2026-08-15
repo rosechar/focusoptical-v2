@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { getAppointmentLabel } from "@/lib/appointments";
+import { getAppointmentLabel, isBestTime } from "@/lib/appointments";
 import { emailRegex, isValidPhone } from "@/lib/validation";
 import {
   ownerNotificationEmail,
@@ -34,15 +34,20 @@ export async function POST(request: Request) {
   const phone = typeof payload.phone === "string" ? payload.phone.trim() : "";
   const appointment =
     typeof payload.appointment === "string" ? payload.appointment : "";
+  const bestTime = isBestTime(payload.bestTime) ? payload.bestTime : "";
   const details =
     typeof payload.details === "string" ? payload.details.trim() : "";
   const optIn = payload.optIn !== false;
 
   const appointmentLabel = getAppointmentLabel(appointment);
 
+  // Email is optional — a visitor can request a call with just a phone number.
+  // Only validate it when one is supplied.
+  const hasEmail = email.length > 0;
+
   if (
     name.length < 2 ||
-    !emailRegex.test(email) ||
+    (hasEmail && !emailRegex.test(email)) ||
     !isValidPhone(phone) ||
     !appointmentLabel
   ) {
@@ -54,18 +59,18 @@ export async function POST(request: Request) {
     email,
     phone,
     appointmentLabel,
+    bestTime,
     details,
   };
 
   const resend = new Resend(apiKey);
   const owner = ownerNotificationEmail(req);
-  const customer = customerConfirmationEmail(req);
 
   try {
     const ownerResult = await resend.emails.send({
       from: fromEmail,
       to: ownerEmail,
-      replyTo: email,
+      ...(hasEmail ? { replyTo: email } : {}),
       subject: owner.subject,
       html: owner.html,
       text: owner.text,
@@ -79,21 +84,25 @@ export async function POST(request: Request) {
       );
     }
 
-    const customerResult = await resend.emails.send({
-      from: fromEmail,
-      to: email,
-      replyTo: ownerEmail,
-      subject: customer.subject,
-      html: customer.html,
-      text: customer.text,
-    });
+    // Only send a customer confirmation (and add to the list) when we have an email.
+    if (hasEmail) {
+      const customer = customerConfirmationEmail(req);
+      const customerResult = await resend.emails.send({
+        from: fromEmail,
+        to: email,
+        replyTo: ownerEmail,
+        subject: customer.subject,
+        html: customer.html,
+        text: customer.text,
+      });
 
-    if (customerResult.error) {
-      // The business has been notified; a failed customer copy shouldn't fail the request.
-      console.error("Customer confirmation failed:", customerResult.error);
+      if (customerResult.error) {
+        // The business has been notified; a failed customer copy shouldn't fail the request.
+        console.error("Customer confirmation failed:", customerResult.error);
+      }
     }
 
-    if (optIn) {
+    if (optIn && hasEmail) {
       // A failed segment add shouldn't fail the appointment request.
       try {
         const [firstName, ...rest] = name.split(/\s+/);

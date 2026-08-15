@@ -1,37 +1,56 @@
 "use client";
 
 import { useState, useEffect, useRef, FormEvent } from "react";
-import { Send, Loader2, CheckCircle, AlertCircle, Phone, ChevronDown } from "lucide-react";
+import { Loader2, AlertCircle } from "lucide-react";
 import { BUSINESS } from "@/lib/business";
-import { appointmentTypes } from "@/lib/appointments";
+import { appointmentTypes, bestTimes, type BestTime } from "@/lib/appointments";
 import { emailRegex, isValidPhone } from "@/lib/validation";
 
 interface FormState {
   name: string;
-  email: string;
   phone: string;
+  email: string;
   appointment: string;
-  details: string;
+  bestTime: BestTime;
   optIn: boolean;
 }
 
 interface FieldErrors {
   name?: string;
-  email?: string;
   phone?: string;
+  email?: string;
 }
+
+const inputClass = (hasError?: string) =>
+  `w-full px-3.5 py-3.5 rounded-[11px] border text-[15px] text-ink placeholder:text-black/35 bg-field transition-colors focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent ${
+    hasError ? "border-closed bg-[#fdf3f3]" : "border-field-border hover:border-[#c4caca]"
+  }`;
+
+const labelClass = "block text-[12.5px] lg:text-[13px] font-bold text-secondary";
+
+const chipClass = (selected: boolean) =>
+  `cursor-pointer select-none rounded-full px-3.5 py-[9px] lg:px-4 lg:py-2.5 text-[13px] lg:text-sm font-semibold border-[1.5px] transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-accent/40 has-[:focus-visible]:ring-offset-2 ${
+    selected
+      ? "bg-accent text-white border-accent"
+      : "bg-white text-secondary border-[#dde1e1] hover:border-accent"
+  }`;
+
+const cardClass =
+  "bg-white border border-hairline rounded-[18px] lg:rounded-[20px] shadow-[0_2px_10px_rgba(20,24,26,0.05)]";
 
 export default function AppointmentForm() {
   const [form, setForm] = useState<FormState>({
     name: "",
-    email: "",
     phone: "",
+    email: "",
     appointment: "eye",
-    details: "",
+    bestTime: "Mornings",
     optIn: true,
   });
   const [errors, setErrors] = useState<FieldErrors>({});
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
+    "idle",
+  );
   const successRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -41,23 +60,16 @@ export default function AppointmentForm() {
   }, [status]);
 
   const validate = (): boolean => {
-    const newErrors: FieldErrors = {};
-    if (form.name.trim().length < 2) {
-      newErrors.name = "Please enter your full name";
-    }
-    if (!emailRegex.test(form.email)) {
-      newErrors.email = "Please enter a valid email address";
-    }
-    if (!isValidPhone(form.phone)) {
-      newErrors.phone = "Please enter a valid phone number";
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    const next: FieldErrors = {};
+    if (form.name.trim().length < 2) next.name = "Please enter your name";
+    if (!isValidPhone(form.phone)) next.phone = "Please enter a valid phone number";
+    if (form.email.trim() && !emailRegex.test(form.email.trim()))
+      next.email = "Please enter a valid email address";
+    setErrors(next);
+    return Object.keys(next).length === 0;
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
     if (errors[name as keyof FieldErrors]) {
@@ -74,86 +86,102 @@ export default function AppointmentForm() {
       const res = await fetch("/api/appointment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, details: "" }),
       });
       if (!res.ok) throw new Error(`Request failed: ${res.status}`);
       setStatus("success");
-      setForm({ name: "", email: "", phone: "", appointment: "eye", details: "", optIn: true });
     } catch (err) {
       console.error("Appointment request error:", err);
       setStatus("error");
     }
   };
 
+  const fieldError = (message?: string) =>
+    message ? (
+      <p className="mt-1.5 text-xs text-closed flex items-center gap-1">
+        <AlertCircle size={12} />
+        {message}
+      </p>
+    ) : null;
+
   if (status === "success") {
     return (
-      <div ref={successRef} className="flex flex-col items-center justify-center text-center py-16 px-6">
-        <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-5">
-          <CheckCircle className="text-green-600" size={32} />
+      <div
+        ref={successRef}
+        className={`${cardClass} text-center px-[18px] py-[38px] lg:px-6 lg:py-12`}
+      >
+        <div
+          aria-hidden
+          className="mx-auto mb-3.5 lg:mb-4 flex h-14 w-14 lg:h-[60px] lg:w-[60px] items-center justify-center rounded-full bg-accent-soft text-accent text-[28px] lg:text-[30px]"
+        >
+          ✓
         </div>
-        <h2 className="text-2xl font-bold text-slate-900 mb-3">
-          Appointment Request Sent!
+        <h2 className="font-display text-[22px] lg:text-2xl font-extrabold text-ink mb-1.5 lg:mb-2">
+          Thanks, we&apos;ve got it.
         </h2>
-        <p className="text-slate-600 max-w-sm leading-relaxed mb-6">
-          Thank you for your appointment request. We will contact you within one
-          business day to confirm your appointment.
+        <p className="text-[14.5px] lg:text-[15px] text-body leading-normal mb-[18px] lg:mb-5">
+          We&apos;ll call shortly to confirm your time. Need us sooner, give us a
+          ring.
         </p>
         <a
           href={BUSINESS.phoneHref}
-          className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-full text-sm transition-colors"
+          className="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-white font-bold text-[15px] lg:text-base px-[22px] py-3 lg:px-6 lg:py-[13px] rounded-[11px] lg:rounded-xl transition-colors"
         >
-          <Phone size={14} />
-          Call Us Instead
+          {BUSINESS.phoneDisplay}
         </a>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-5">
-      <div className="mb-1">
-        <h2 className="text-xl font-bold text-slate-900">Request an Appointment</h2>
-        <p className="text-sm text-slate-500 mt-1">
-          All fields marked with <span className="text-red-500">*</span> are required.
-        </p>
-      </div>
-      {/* Name */}
-      <div>
-        <label
-          htmlFor="name"
-          className="block text-sm font-medium text-slate-700 mb-1.5"
-        >
-          Full Name <span className="text-red-500">*</span>
-        </label>
-        <input
-          id="name"
-          name="name"
-          type="text"
-          value={form.name}
-          onChange={handleChange}
-          placeholder="Jane Smith"
-          autoComplete="name"
-          className={`w-full px-4 py-3 rounded-xl border text-slate-900 placeholder-slate-400 text-base transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-            errors.name
-              ? "border-red-300 bg-red-50"
-              : "border-slate-200 bg-white hover:border-slate-300"
-          }`}
-        />
-        {errors.name && (
-          <p className="mt-1.5 text-xs text-red-600 flex items-center gap-1">
-            <AlertCircle size={12} />
-            {errors.name}
-          </p>
-        )}
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      className={`${cardClass} px-5 py-[22px] lg:p-7 flex flex-col gap-[18px] lg:gap-5`}
+    >
+      <div className="grid gap-[18px] lg:grid-cols-2 lg:gap-4">
+        <div>
+          <label htmlFor="name" className={`${labelClass} mb-[7px] lg:mb-2`}>
+            Your name
+          </label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            value={form.name}
+            onChange={handleChange}
+            placeholder="Jane Smith"
+            autoComplete="name"
+            aria-invalid={!!errors.name}
+            className={inputClass(errors.name)}
+          />
+          {fieldError(errors.name)}
+        </div>
+        <div>
+          <label htmlFor="phone" className={`${labelClass} mb-[7px] lg:mb-2`}>
+            Phone number
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            inputMode="tel"
+            required
+            value={form.phone}
+            onChange={handleChange}
+            placeholder="(248) 555-0100"
+            autoComplete="tel"
+            aria-invalid={!!errors.phone}
+            className={inputClass(errors.phone)}
+          />
+          {fieldError(errors.phone)}
+        </div>
       </div>
 
-      {/* Email */}
       <div>
-        <label
-          htmlFor="email"
-          className="block text-sm font-medium text-slate-700 mb-1.5"
-        >
-          Email Address <span className="text-red-500">*</span>
+        <label htmlFor="email" className={`${labelClass} mb-[7px] lg:mb-2`}>
+          Email <span className="text-faint font-normal">(optional)</span>
         </label>
         <input
           id="email"
@@ -163,100 +191,56 @@ export default function AppointmentForm() {
           onChange={handleChange}
           placeholder="jane@example.com"
           autoComplete="email"
-          className={`w-full px-4 py-3 rounded-xl border text-slate-900 placeholder-slate-400 text-base transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-            errors.email
-              ? "border-red-300 bg-red-50"
-              : "border-slate-200 bg-white hover:border-slate-300"
-          }`}
+          aria-invalid={!!errors.email}
+          className={inputClass(errors.email)}
         />
-        {errors.email && (
-          <p className="mt-1.5 text-xs text-red-600 flex items-center gap-1">
-            <AlertCircle size={12} />
-            {errors.email}
-          </p>
-        )}
+        {fieldError(errors.email)}
       </div>
 
-      {/* Phone */}
-      <div>
-        <label
-          htmlFor="phone"
-          className="block text-sm font-medium text-slate-700 mb-1.5"
-        >
-          Phone Number <span className="text-red-500">*</span>
-        </label>
-        <input
-          id="phone"
-          name="phone"
-          type="tel"
-          value={form.phone}
-          onChange={handleChange}
-          placeholder="(248) 555-0100"
-          autoComplete="tel"
-          className={`w-full px-4 py-3 rounded-xl border text-slate-900 placeholder-slate-400 text-base transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-            errors.phone
-              ? "border-red-300 bg-red-50"
-              : "border-slate-200 bg-white hover:border-slate-300"
-          }`}
-        />
-        {errors.phone && (
-          <p className="mt-1.5 text-xs text-red-600 flex items-center gap-1">
-            <AlertCircle size={12} />
-            {errors.phone}
-          </p>
-        )}
-      </div>
-
-      {/* Appointment type */}
-      <div>
-        <label
-          htmlFor="appointment"
-          className="block text-sm font-medium text-slate-700 mb-1.5"
-        >
-          Appointment Type
-        </label>
-        <div className="relative">
-          <select
-            id="appointment"
-            name="appointment"
-            value={form.appointment}
-            onChange={handleChange}
-            className="w-full appearance-none px-4 py-3 pr-10 rounded-xl border border-slate-200 bg-white text-slate-900 text-base transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-slate-300 cursor-pointer"
-          >
-            {appointmentTypes.map(({ value, label }) => (
-              <option key={value} value={value}>
-                {label}
-              </option>
-            ))}
-          </select>
-          <ChevronDown
-            size={16}
-            className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"
-          />
+      <fieldset>
+        <legend className={`${labelClass} mb-[9px] lg:mb-2.5`}>What do you need?</legend>
+        <div className="flex flex-wrap gap-2 lg:gap-[9px]">
+          {appointmentTypes.map(({ value, short }) => {
+            const selected = form.appointment === value;
+            return (
+              <label key={value} className={chipClass(selected)}>
+                <input
+                  type="radio"
+                  name="appointment"
+                  value={value}
+                  checked={selected}
+                  onChange={handleChange}
+                  className="sr-only"
+                />
+                {short}
+              </label>
+            );
+          })}
         </div>
-      </div>
+      </fieldset>
 
-      {/* Details */}
-      <div>
-        <label
-          htmlFor="details"
-          className="block text-sm font-medium text-slate-700 mb-1.5"
-        >
-          Additional Details{" "}
-          <span className="text-slate-400 font-normal">(optional)</span>
-        </label>
-        <textarea
-          id="details"
-          name="details"
-          value={form.details}
-          onChange={handleChange}
-          rows={4}
-          placeholder="Anything else we should know — preferred days/times, insurance questions, etc."
-          className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 text-base transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-slate-300 resize-none"
-        />
-      </div>
+      <fieldset>
+        <legend className={`${labelClass} mb-[9px] lg:mb-2.5`}>Best time for our call</legend>
+        <div className="flex flex-wrap gap-2 lg:gap-[9px]">
+          {bestTimes.map((time) => {
+            const selected = form.bestTime === time;
+            return (
+              <label key={time} className={chipClass(selected)}>
+                <input
+                  type="radio"
+                  name="bestTime"
+                  value={time}
+                  checked={selected}
+                  onChange={handleChange}
+                  className="sr-only"
+                />
+                {time}
+              </label>
+            );
+          })}
+        </div>
+      </fieldset>
 
-      {/* Promo opt-in */}
       <label htmlFor="optIn" className="flex items-start gap-3 cursor-pointer">
         <input
           id="optIn"
@@ -264,16 +248,15 @@ export default function AppointmentForm() {
           type="checkbox"
           checked={form.optIn}
           onChange={(e) => setForm((prev) => ({ ...prev, optIn: e.target.checked }))}
-          className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 accent-blue-600 cursor-pointer"
+          className="mt-0.5 h-4 w-4 shrink-0 rounded border-field-border accent-accent cursor-pointer"
         />
-        <span className="text-sm text-slate-600 leading-relaxed">
-          Keep me posted on promotions, new eyewear, and eye care tips.
+        <span className="text-sm text-body leading-relaxed">
+          Email me about deals and new frames now and then.
         </span>
       </label>
 
-      {/* Error banner */}
       {status === "error" && (
-        <div className="flex items-center gap-2.5 p-4 rounded-xl bg-red-50 border border-red-100 text-red-700 text-sm">
+        <div className="flex items-center gap-2.5 p-4 rounded-xl bg-[#fdf3f3] border border-closed/20 text-closed text-sm">
           <AlertCircle size={16} className="shrink-0" />
           <span>
             Something went wrong. Please try again or call us at{" "}
@@ -288,23 +271,20 @@ export default function AppointmentForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full flex items-center justify-center gap-2.5 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-3.5 rounded-xl transition-colors text-sm"
+        className="w-full flex items-center justify-center gap-2.5 bg-accent hover:bg-accent-hover disabled:opacity-60 text-white font-bold text-[15.5px] lg:text-base py-4 rounded-xl transition-colors"
       >
         {status === "loading" ? (
           <>
             <Loader2 size={16} className="animate-spin" />
-            Sending Request...
+            Sending…
           </>
         ) : (
-          <>
-            <Send size={16} />
-            Submit Appointment Request
-          </>
+          "Request my appointment"
         )}
       </button>
 
-      <p className="text-xs text-slate-400 text-center">
-        We will contact you within one business day to confirm your appointment.
+      <p className="hidden lg:block text-[13px] text-[#8a9293] text-center">
+        We&apos;ll only use your number to confirm this visit.
       </p>
     </form>
   );

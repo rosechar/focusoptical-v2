@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Phone, ShieldCheck, HelpCircle } from "lucide-react";
+import CtaBand from "@/components/CtaBand";
 import { BUSINESS } from "@/lib/business";
 
 export const metadata: Metadata = {
@@ -21,20 +21,20 @@ export const metadata: Metadata = {
 
 const faqs = [
   {
-    q: "Do you accept vision insurance?",
-    a: `We work with a variety of vision insurance plans. Please call us at ${BUSINESS.phoneDisplay} to confirm your coverage before your appointment.`,
+    q: "Do you take vision insurance?",
+    a: `We take a lot of the common plans. Call us at ${BUSINESS.phoneDisplay} and we'll check yours before you come in.`,
   },
   {
     q: "How do I know what my insurance covers?",
-    a: "The best way is to call your insurance provider directly, or give us a call and we can help you understand your benefits.",
+    a: "Call your insurance company, or call us and we'll help you figure out what you've got.",
   },
   {
     q: "What if I don't have insurance?",
-    a: "No problem — we offer competitive pricing and work with patients of all budgets. Call us for current pricing on exams, frames, and lenses.",
+    a: "That's fine, plenty of our customers pay out of pocket. Call and we'll go over what exams, frames, and lenses run.",
   },
   {
     q: "Do you offer payment options?",
-    a: `Contact us at ${BUSINESS.phoneDisplay} to discuss pricing and any available payment arrangements.`,
+    a: `Give us a call at ${BUSINESS.phoneDisplay} and we'll talk through pricing and what works for you.`,
   },
 ];
 
@@ -55,106 +55,83 @@ export default function InsurancePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
+
       {/* Page header */}
-      <section className="bg-blue-900 text-white py-12 sm:py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <p className="text-blue-300 font-semibold text-sm tracking-widest uppercase mb-2">
-            Coverage &amp; Costs
+      <section className="pt-12 sm:pt-16 pb-8">
+        <div className="max-w-[1180px] mx-auto px-5 sm:px-10">
+          <p className="text-accent font-semibold text-xs tracking-[0.16em] uppercase mb-3">
+            Coverage &amp; costs
           </p>
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
-            Insurance &amp; Pricing
+          <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-ink tracking-[-0.03em]">
+            Insurance &amp; pricing
           </h1>
-          <p className="text-blue-200 mt-3 text-base sm:text-lg max-w-xl">
-            We work with most major vision insurance plans. Call us to verify
-            your coverage.
+          <p className="text-body mt-3 text-lg max-w-xl leading-relaxed">
+            We take most of the common vision plans. Give us a call and we&apos;ll
+            check yours.
           </p>
         </div>
       </section>
 
-      {/* Main content */}
-      <section className="py-10 sm:py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="grid sm:grid-cols-2 gap-5 sm:gap-8 mb-10 sm:mb-14">
-            <div className="rounded-2xl bg-blue-50 p-6 sm:p-8 border border-blue-100">
-              <ShieldCheck className="text-blue-600 mb-4" size={28} />
-              <h2 className="text-xl font-bold text-slate-900 mb-3">
-                Insurance Accepted
+      <section className="pb-12 sm:pb-16">
+        <div className="max-w-[1180px] mx-auto px-5 sm:px-10">
+          <div className="grid sm:grid-cols-2 gap-5 sm:gap-6 mb-12">
+            <div className="rounded-2xl bg-accent-soft p-6 sm:p-8">
+              <ShieldCheck className="text-accent mb-4" size={28} />
+              <h2 className="font-display text-xl font-bold text-ink mb-3">
+                Insurance accepted
               </h2>
-              <p className="text-slate-600 leading-relaxed mb-5 text-base">
-                We accept a variety of vision insurance plans. Please contact
-                the shop directly to confirm your specific plan and coverage
-                details before your appointment.
+              <p className="text-body leading-relaxed mb-5">
+                We take a lot of the common vision plans. Give us a call before
+                your visit and we&apos;ll make sure yours is covered.
               </p>
               <a
                 href={BUSINESS.phoneHref}
-                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-full text-sm transition-colors"
+                className="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors"
               >
                 <Phone size={15} />
                 Call {BUSINESS.phoneDisplay}
               </a>
             </div>
 
-            <div className="rounded-2xl bg-slate-50 p-6 sm:p-8 border border-slate-100">
-              <HelpCircle className="text-slate-500 mb-4" size={28} />
-              <h2 className="text-xl font-bold text-slate-900 mb-3">
-                Pricing Questions
+            <div className="rounded-2xl bg-surface p-6 sm:p-8">
+              <HelpCircle className="text-body mb-4" size={28} />
+              <h2 className="font-display text-xl font-bold text-ink mb-3">
+                Pricing questions
               </h2>
-              <p className="text-slate-600 leading-relaxed mb-5 text-base">
-                Pricing varies depending on the type of exam, frames, and
-                lenses selected. We offer competitive pricing without
-                compromising on quality or service.
+              <p className="text-body leading-relaxed mb-5">
+                What you pay depends on the exam, the frames, and the lenses you
+                pick. We keep it fair and won&apos;t push you toward anything you
+                don&apos;t need.
               </p>
               <a
                 href={BUSINESS.phoneHref}
-                className="inline-flex items-center gap-2 border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold px-5 py-2.5 rounded-full text-sm transition-colors"
+                className="inline-flex items-center gap-2 border border-[#dcdfdf] text-ink hover:border-accent hover:text-accent font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors"
               >
                 <Phone size={15} />
-                Call for Details
+                Call for details
               </a>
             </div>
           </div>
 
           {/* FAQ */}
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight mb-5">
-            Frequently Asked Questions
+          <h2 className="font-display text-2xl font-extrabold text-ink tracking-[-0.02em] mb-5">
+            Frequently asked questions
           </h2>
-          <div className="space-y-3 sm:space-y-4">
+          <div className="space-y-3">
             {faqs.map(({ q, a }) => (
-              <div
-                key={q}
-                className="rounded-xl border border-slate-100 p-5 sm:p-6 bg-white shadow-sm"
-              >
-                <h3 className="font-semibold text-slate-900 mb-2 text-sm sm:text-base">{q}</h3>
-                <p className="text-slate-600 text-base leading-relaxed">{a}</p>
+              <div key={q} className="rounded-2xl border border-hairline p-5 sm:p-6">
+                <h3 className="font-semibold text-ink mb-2">{q}</h3>
+                <p className="text-body leading-relaxed">{a}</p>
               </div>
             ))}
           </div>
-
-          {/* CTA */}
-          <div className="mt-10 sm:mt-12 bg-blue-900 rounded-2xl py-8 sm:py-10 px-6 text-white text-center">
-            <h2 className="text-2xl font-bold text-white mb-3">Still Have Questions?</h2>
-            <p className="text-blue-200 mb-6 text-sm sm:text-base">
-              The best way to get pricing and insurance details is to give us a
-              call. We&apos;re happy to walk you through your options.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a
-                href={BUSINESS.phoneHref}
-                className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-7 py-3.5 rounded-full transition-colors"
-              >
-                <Phone size={17} />
-                {BUSINESS.phoneDisplay}
-              </a>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center border-2 border-white text-white hover:bg-white/15 font-semibold px-7 py-3.5 rounded-full transition-colors"
-              >
-                Schedule an Appointment
-              </Link>
-            </div>
-          </div>
         </div>
       </section>
+
+      <CtaBand
+        heading="Still have questions?"
+        subtext="Give us a call and we'll sort it out."
+      />
     </>
   );
 }

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { MapPin, Phone, Navigation, ArrowRight } from "lucide-react";
-import { BUSINESS } from "@/lib/business";
+import { MapPin, Phone, Navigation, ArrowRight, Check } from "lucide-react";
+import MapEmbed from "@/components/MapEmbed";
+import CtaBand from "@/components/CtaBand";
+import { BUSINESS, FULL_ADDRESS } from "@/lib/business";
 import { CITIES } from "@/lib/cities";
 
 export const metadata: Metadata = {
-  title: "Service Areas — Optician Near Rochester Hills, Troy & Oakland County",
+  title: "Service Areas | Optician Near Rochester Hills, Troy & Oakland County",
   description:
     "Focus Optical serves Rochester Hills, Rochester, Troy, Lake Orion, Royal Oak, Bloomfield Hills, Auburn Hills, and all of Oakland County, MI. Find your trusted local optician for eye exams, glasses, and contact lenses.",
   keywords: [
@@ -53,31 +55,29 @@ export default function ServiceAreasPage() {
   return (
     <>
       {/* Page header */}
-      <section className="bg-blue-900 text-white py-12 sm:py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <p className="text-blue-300 font-semibold text-sm tracking-widest uppercase mb-2">
-            Oakland County & Surrounding Communities
+      <section className="pt-12 sm:pt-16 pb-10">
+        <div className="max-w-[1180px] mx-auto px-5 sm:px-10">
+          <p className="text-accent font-semibold text-xs tracking-[0.16em] uppercase mb-3">
+            Oakland County &amp; surrounding communities
           </p>
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight leading-tight">
-            Serving Rochester Hills &<br />
-            All of Oakland County
+          <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-ink tracking-[-0.03em] leading-tight">
+            Serving Rochester Hills &amp; all of Oakland County
           </h1>
-          <p className="text-blue-200 mt-4 text-lg max-w-2xl leading-relaxed">
-            Focus Optical has been the trusted local optician for Rochester
-            Hills and surrounding Michigan communities since 1984. If you&apos;re
-            searching for an eye exam, new glasses, or contact lenses near
-            Oakland County — we&apos;re here for you.
+          <p className="text-body mt-4 text-lg max-w-2xl leading-relaxed">
+            We&apos;ve been the local optician in Rochester Hills since 1984, and
+            folks drive in from all over Oakland County. Need an eye exam, new
+            glasses, or contacts? Come see us.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 mt-6">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-full transition-colors"
+              className="inline-flex items-center justify-center bg-accent hover:bg-accent-hover text-white font-semibold px-6 py-3 rounded-xl transition-colors"
             >
-              Schedule an Appointment
+              Book a visit
             </Link>
             <a
               href={BUSINESS.phoneHref}
-              className="inline-flex items-center justify-center gap-2 border-2 border-white text-white hover:bg-white/15 font-semibold px-6 py-3 rounded-full transition-colors"
+              className="inline-flex items-center justify-center gap-2 border border-[#dcdfdf] text-ink hover:border-accent hover:text-accent font-semibold px-6 py-3 rounded-xl transition-colors"
             >
               <Phone size={16} />
               {BUSINESS.phoneDisplay}
@@ -86,19 +86,16 @@ export default function ServiceAreasPage() {
         </div>
       </section>
 
-      {/* Services we offer */}
-      <section className="py-10 sm:py-14 bg-white border-b border-slate-100">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight mb-6">
-            Services Available to All Oakland County Patients
+      {/* Services available */}
+      <section className="py-10 sm:py-12 bg-surface">
+        <div className="max-w-[1180px] mx-auto px-5 sm:px-10">
+          <h2 className="font-display text-2xl font-extrabold text-ink tracking-[-0.02em] mb-6">
+            Available to all Oakland County patients
           </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2.5">
             {services.map((s) => (
-              <div
-                key={s}
-                className="flex items-center gap-2.5 text-sm text-slate-600 py-1"
-              >
-                <div className="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0" />
+              <div key={s} className="flex items-center gap-2.5 text-body">
+                <Check size={16} className="text-accent shrink-0" />
                 {s}
               </div>
             ))}
@@ -106,45 +103,44 @@ export default function ServiceAreasPage() {
         </div>
       </section>
 
-      {/* Service areas grid */}
-      <section className="py-10 sm:py-16 bg-slate-50">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-slate-900 tracking-tight mb-3">
-            Cities & Communities We Serve
+      {/* Cities grid */}
+      <section className="py-12 sm:py-16">
+        <div className="max-w-[1180px] mx-auto px-5 sm:px-10">
+          <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-ink tracking-[-0.02em] mb-3">
+            Cities &amp; communities we serve
           </h2>
-          <p className="text-slate-500 mb-10 max-w-2xl">
-            Our Rochester Hills location is easily accessible to patients
-            throughout Oakland County and Macomb County. Here&apos;s a look at the
-            communities we serve most frequently:
+          <p className="text-body mb-9 max-w-2xl">
+            We&apos;re an easy drive from most of Oakland and Macomb County. Here
+            are the towns we see folks from most:
           </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {CITIES.map(({ slug, city, zips, summary, primary }) => (
               <Link
                 key={slug}
                 href={`/service-areas/${slug}`}
-                className={`group rounded-2xl p-6 border transition-shadow hover:shadow-md ${
+                className={`group rounded-2xl p-6 border transition-all hover:shadow-[0_2px_10px_rgba(20,24,26,0.06)] ${
                   primary
-                    ? "bg-blue-900 border-blue-800 text-white"
-                    : "bg-white border-slate-100 shadow-sm"
+                    ? "bg-accent border-accent text-white"
+                    : "bg-white border-hairline hover:border-accent"
                 }`}
               >
                 <div className="flex items-start justify-between mb-3">
                   <div>
                     <h3
-                      className={`font-bold text-lg ${
-                        primary ? "text-white" : "text-slate-900"
+                      className={`font-display font-bold text-lg ${
+                        primary ? "text-white" : "text-ink"
                       }`}
                     >
                       {city}
                       {primary && (
-                        <span className="ml-2 text-xs font-medium bg-white/20 text-blue-200 px-2 py-0.5 rounded-full">
-                          Our Location
+                        <span className="ml-2 align-middle text-xs font-medium bg-white/20 text-white px-2 py-0.5 rounded-full">
+                          Our location
                         </span>
                       )}
                     </h3>
                     <p
                       className={`text-xs mt-0.5 ${
-                        primary ? "text-blue-300" : "text-slate-400"
+                        primary ? "text-white/70" : "text-body"
                       }`}
                     >
                       ZIP: {zips.join(", ")}
@@ -152,22 +148,20 @@ export default function ServiceAreasPage() {
                   </div>
                   <MapPin
                     size={18}
-                    className={primary ? "text-blue-300" : "text-blue-400"}
+                    className={primary ? "text-white/80" : "text-accent"}
                   />
                 </div>
                 <p
-                  className={`text-base leading-relaxed mb-4 ${
-                    primary ? "text-blue-100" : "text-slate-500"
+                  className={`leading-relaxed mb-4 ${
+                    primary ? "text-white/85" : "text-body"
                   }`}
                 >
                   {summary}
                 </p>
                 <span
                   className={`inline-flex items-center gap-1.5 text-sm font-semibold ${
-                    primary
-                      ? "text-blue-200 group-hover:text-white"
-                      : "text-blue-600 group-hover:text-blue-700"
-                  } transition-colors`}
+                    primary ? "text-white" : "text-accent"
+                  }`}
                 >
                   {city} eye care
                   <ArrowRight size={14} />
@@ -177,17 +171,12 @@ export default function ServiceAreasPage() {
           </div>
 
           <div className="mt-10">
-            <h3 className="font-bold text-slate-900 text-lg mb-3">
-              Also Serving
-            </h3>
+            <h3 className="font-semibold text-ink text-lg mb-3">Also serving</h3>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {otherCommunities.map(({ city, zip }) => (
-                <div
-                  key={city}
-                  className="bg-white rounded-xl px-4 py-3 border border-slate-100 shadow-sm"
-                >
-                  <p className="font-semibold text-slate-900 text-sm">{city}</p>
-                  <p className="text-xs text-slate-400 mt-0.5">ZIP: {zip}</p>
+                <div key={city} className="rounded-xl px-4 py-3 border border-hairline">
+                  <p className="font-semibold text-ink text-sm">{city}</p>
+                  <p className="text-xs text-body mt-0.5">ZIP: {zip}</p>
                 </div>
               ))}
             </div>
@@ -195,123 +184,92 @@ export default function ServiceAreasPage() {
         </div>
       </section>
 
-      {/* Directions & map */}
-      <section className="py-10 sm:py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
+      {/* Find us + map */}
+      <section className="py-12 sm:py-16 bg-surface">
+        <div className="max-w-[1180px] mx-auto px-5 sm:px-10">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-start">
             <div>
-              <h2 className="text-3xl font-bold text-slate-900 tracking-tight mb-4">
-                Find Us in Rochester Hills
+              <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-ink tracking-[-0.02em] mb-4">
+                Find us in Rochester Hills
               </h2>
-              <p className="text-slate-600 leading-relaxed mb-6">
-                Focus Optical is conveniently located on W Auburn Rd in
-                Rochester Hills, MI — easily accessible from Rochester, Troy,
-                Auburn Hills, and across Oakland County. Ample free parking
-                available.
+              <p className="text-body leading-relaxed mb-6">
+                We&apos;re on W Auburn Rd in Rochester Hills, an easy drive from
+                Rochester, Troy, Auburn Hills, and the rest of Oakland County.
+                Plenty of free parking right out front.
               </p>
-
               <div className="space-y-4 mb-8">
                 <div className="flex items-start gap-3">
-                  <MapPin className="text-blue-600 mt-0.5 shrink-0" size={18} />
+                  <MapPin className="text-accent mt-0.5 shrink-0" size={18} />
                   <div>
-                    <p className="font-semibold text-slate-900">Address</p>
-                    <p className="text-slate-600 text-sm">
-                      {BUSINESS.address.street}, {BUSINESS.address.city},{" "}
-                      {BUSINESS.address.state} {BUSINESS.address.zip}
-                    </p>
+                    <p className="font-semibold text-ink">Address</p>
+                    <p className="text-body text-sm">{FULL_ADDRESS}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Phone className="text-blue-600 mt-0.5 shrink-0" size={18} />
+                  <Phone className="text-accent mt-0.5 shrink-0" size={18} />
                   <div>
-                    <p className="font-semibold text-slate-900">Phone</p>
+                    <p className="font-semibold text-ink">Phone</p>
                     <a
                       href={BUSINESS.phoneHref}
-                      className="text-slate-600 hover:text-blue-600 transition-colors text-sm"
+                      className="text-body hover:text-accent transition-colors text-sm"
                     >
                       {BUSINESS.phoneDisplay}
                     </a>
                   </div>
                 </div>
               </div>
-
               <a
                 href={BUSINESS.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full transition-colors"
+                className="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-white font-semibold px-6 py-3 rounded-xl transition-colors"
               >
                 <Navigation size={16} />
-                Get Directions
+                Get directions
               </a>
             </div>
 
-            {/* Map embed */}
-            <div className="rounded-2xl overflow-hidden border border-slate-100 shadow-sm h-80">
-              <iframe
-                src={BUSINESS.mapsEmbedUrl}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Focus Optical location map — 2046 W Auburn Rd, Rochester Hills MI"
-              />
-            </div>
+            <MapEmbed
+              showInfo={false}
+              className="h-80 rounded-2xl border border-hairline"
+            />
           </div>
         </div>
       </section>
 
       {/* SEO content block */}
-      <section className="py-10 sm:py-14 bg-slate-50 border-t border-slate-100">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight mb-4">
-            Your Local Oakland County Optician
+      <section className="py-12 sm:py-14">
+        <div className="max-w-[1180px] mx-auto px-5 sm:px-10">
+          <h2 className="font-display text-2xl font-extrabold text-ink tracking-[-0.02em] mb-4">
+            Your local Oakland County optician
           </h2>
-          <div className="prose prose-slate max-w-none text-slate-600 text-sm leading-relaxed space-y-4">
+          <div className="text-body leading-relaxed space-y-4 max-w-3xl">
             <p>
-              Searching for an <strong>optician in Rochester Hills, MI</strong>?
-              Focus Optical has been serving Oakland County residents since 1984.
-              Whether you need an <strong>eye exam in Rochester Hills</strong>,{" "}
-              <strong>prescription glasses near Troy</strong>, or{" "}
-              <strong>contact lenses in Lake Orion</strong>, we provide expert
-              optical care for patients across the region.
+              Looking for an <strong>optician in Rochester Hills</strong>?
+              We&apos;ve been at it since 1984. People come to us for an{" "}
+              <strong>eye exam in Rochester Hills</strong>,{" "}
+              <strong>new glasses near Troy</strong>, or{" "}
+              <strong>contacts in Lake Orion</strong>, and plenty of towns in
+              between.
             </p>
             <p>
-              As an independently owned optical store, we offer something the
-              chain stores can&apos;t:{" "}
-              <strong>personalized service, on-site lens cutting</strong>, and
-              over four decades of expertise. Tom Hamilton has been making
-              eyeglasses since 1977 and takes pride in crafting every pair with
-              care and precision.
+              We&apos;re family owned, not a chain. That means you deal with Tom,
+              who&apos;s been making glasses since 1977, and your{" "}
+              <strong>lenses get cut right here</strong> instead of shipped off
+              somewhere. He takes his time and gets it right.
             </p>
             <p>
-              Whether you&apos;re in <strong>Royal Oak</strong>,{" "}
-              <strong>Bloomfield Hills</strong>, <strong>Auburn Hills</strong>,{" "}
-              <strong>Sterling Heights</strong>, or anywhere in{" "}
-              <strong>Oakland County</strong> — we welcome you to Focus Optical.
-              We offer <strong>free eyeglass adjustments</strong> to anyone,
-              even if you didn&apos;t buy your glasses from us.
+              <strong>Royal Oak</strong>, <strong>Bloomfield Hills</strong>,{" "}
+              <strong>Auburn Hills</strong>, <strong>Sterling Heights</strong>,
+              wherever you are around here, come on in. And{" "}
+              <strong>adjustments are free</strong> for anybody, even if you
+              didn&apos;t buy the glasses from us.
             </p>
-          </div>
-
-          <div className="mt-7 flex flex-col sm:flex-row gap-3">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full transition-colors"
-            >
-              Schedule an Appointment
-            </Link>
-            <Link
-              href="/services"
-              className="inline-flex items-center justify-center border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold px-6 py-3 rounded-full transition-colors"
-            >
-              View All Services
-            </Link>
           </div>
         </div>
       </section>
+
+      <CtaBand />
     </>
   );
 }

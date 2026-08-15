@@ -1,10 +1,12 @@
-import { BUSINESS, SITE_URL } from "@/lib/business";
+import { BUSINESS, SITE_URL, FULL_ADDRESS } from "@/lib/business";
 
 export interface AppointmentRequest {
   name: string;
+  /** Optional — visitors can request a call without leaving an email. */
   email: string;
   phone: string;
   appointmentLabel: string;
+  bestTime: string;
   details: string;
 }
 
@@ -22,12 +24,10 @@ const escapeHtml = (value: string) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 
-const fullAddress = `${BUSINESS.address.street}, ${BUSINESS.address.city}, ${BUSINESS.address.state} ${BUSINESS.address.zip}`;
-
 const layout = (heading: string, body: string) => `
   <div style="background:#f1f5f9;padding:32px 16px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0f172a;">
     <div style="max-width:560px;margin:0 auto;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
-      <div style="background:#2563eb;padding:24px 28px;">
+      <div style="background:#2f5286;padding:24px 28px;">
         <table role="presentation" cellpadding="0" cellspacing="0" border="0">
           <tr>
             <td style="padding-right:10px;vertical-align:middle;">
@@ -44,8 +44,8 @@ const layout = (heading: string, body: string) => `
         ${body}
       </div>
       <div style="padding:20px 28px;border-top:1px solid #e2e8f0;font-size:13px;color:#64748b;line-height:1.6;">
-        ${BUSINESS.name} &middot; ${fullAddress}<br />
-        <a href="${BUSINESS.phoneHref}" style="color:#2563eb;text-decoration:none;">${BUSINESS.phoneDisplay}</a>
+        ${BUSINESS.name} &middot; ${FULL_ADDRESS}<br />
+        <a href="${BUSINESS.phoneHref}" style="color:#2f5286;text-decoration:none;">${BUSINESS.phoneDisplay}</a>
       </div>
     </div>
   </div>
@@ -63,7 +63,12 @@ export function ownerNotificationEmail(req: AppointmentRequest): EmailContent {
   const email = escapeHtml(req.email);
   const phone = escapeHtml(req.phone);
   const appointment = escapeHtml(req.appointmentLabel);
+  const bestTime = escapeHtml(req.bestTime || "No preference");
   const details = escapeHtml(req.details || "No additional details provided.");
+
+  const emailValue = email
+    ? `<a href="mailto:${email}" style="color:#2f5286;text-decoration:none;">${email}</a>`
+    : `<span style="color:#64748b;">Not provided</span>`;
 
   const body = `
     <p style="margin:0 0 20px;font-size:15px;line-height:1.6;color:#334155;">
@@ -71,9 +76,10 @@ export function ownerNotificationEmail(req: AppointmentRequest): EmailContent {
     </p>
     <table style="width:100%;border-collapse:collapse;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;">
       ${detailRow("Name", name)}
-      ${detailRow("Email", `<a href="mailto:${email}" style="color:#2563eb;text-decoration:none;">${email}</a>`)}
-      ${detailRow("Phone", `<a href="tel:${phone}" style="color:#2563eb;text-decoration:none;">${phone}</a>`)}
+      ${detailRow("Phone", `<a href="tel:${phone}" style="color:#2f5286;text-decoration:none;">${phone}</a>`)}
+      ${detailRow("Email", emailValue)}
       ${detailRow("Appointment", appointment)}
+      ${detailRow("Best time to call", bestTime)}
       ${detailRow("Details", details)}
     </table>
   `;
@@ -82,14 +88,15 @@ export function ownerNotificationEmail(req: AppointmentRequest): EmailContent {
     "New appointment request",
     "",
     `Name: ${req.name}`,
-    `Email: ${req.email}`,
     `Phone: ${req.phone}`,
+    `Email: ${req.email || "Not provided"}`,
     `Appointment: ${req.appointmentLabel}`,
+    `Best time to call: ${req.bestTime || "No preference"}`,
     `Details: ${req.details || "No additional details provided."}`,
   ].join("\n");
 
   return {
-    subject: `New appointment request — ${req.name}`,
+    subject: `New appointment request from ${req.name}`,
     html: layout("New appointment request", body),
     text,
   };
@@ -106,8 +113,8 @@ export function customerConfirmationEmail(req: AppointmentRequest): EmailContent
       Hi ${name},
     </p>
     <p style="margin:0 0 20px;font-size:15px;line-height:1.6;color:#334155;">
-      Thank you for requesting an appointment with ${BUSINESS.name}. We've received
-      your request and will contact you within one business day to confirm a time.
+      Thanks for reaching out to ${BUSINESS.name}. We got your request, and we'll
+      give you a call within one business day to set up a time.
     </p>
     <table style="width:100%;border-collapse:collapse;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;">
       ${detailRow("Appointment", appointment)}
@@ -115,25 +122,25 @@ export function customerConfirmationEmail(req: AppointmentRequest): EmailContent
     </table>
     <p style="margin:20px 0 0;font-size:15px;line-height:1.6;color:#334155;">
       Need to reach us sooner? Call
-      <a href="${BUSINESS.phoneHref}" style="color:#2563eb;text-decoration:none;font-weight:500;">${BUSINESS.phoneDisplay}</a>.
+      <a href="${BUSINESS.phoneHref}" style="color:#2f5286;text-decoration:none;font-weight:500;">${BUSINESS.phoneDisplay}</a>.
     </p>
   `;
 
   const text = [
     `Hi ${req.name},`,
     "",
-    `Thank you for requesting an appointment with ${BUSINESS.name}. We've received your request and will contact you within one business day to confirm a time.`,
+    `Thanks for reaching out to ${BUSINESS.name}. We got your request, and we'll give you a call within one business day to set up a time.`,
     "",
     `Appointment: ${req.appointmentLabel}`,
     ...(hasDetails ? [`Your details: ${req.details}`] : []),
     "",
     `Need to reach us sooner? Call ${BUSINESS.phoneDisplay}.`,
     "",
-    `${BUSINESS.name} — ${fullAddress}`,
+    `${BUSINESS.name}, ${FULL_ADDRESS}`,
   ].join("\n");
 
   return {
-    subject: `We received your appointment request — ${BUSINESS.name}`,
+    subject: `We got your request at ${BUSINESS.name}`,
     html: layout("Request received", body),
     text,
   };

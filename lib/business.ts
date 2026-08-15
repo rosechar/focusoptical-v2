@@ -14,8 +14,11 @@ export const BUSINESS = {
   mapsUrl:
     "https://maps.google.com/?q=2046+W+Auburn+Rd,+Rochester+Hills,+MI+48309",
   mapsEmbedUrl:
-    "https://maps.google.com/maps?q=2046+W+Auburn+Rd,+Rochester+Hills,+MI+48309&t=&z=15&ie=UTF8&iwloc=&output=embed",
+    "https://maps.google.com/maps?q=2046%20W%20Auburn%20Rd%2C%20Rochester%20Hills%2C%20MI%2048309&z=14&output=embed",
 } as const;
+
+/** Single-line street address, e.g. "2046 W Auburn Rd, Rochester Hills, MI 48309". */
+export const FULL_ADDRESS = `${BUSINESS.address.street}, ${BUSINESS.address.city}, ${BUSINESS.address.state} ${BUSINESS.address.zip}`;
 
 export interface StoreHours {
   day: string;

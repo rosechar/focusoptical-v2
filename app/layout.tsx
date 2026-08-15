@@ -1,21 +1,32 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Schibsted_Grotesk, Hanken_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PromoToast from "@/components/PromoToast";
 import { BUSINESS, HOURS, SITE_URL } from "@/lib/business";
 
-const inter = Inter({
+// Display face: logo, all h1/h2, stat numbers, review quotes.
+const display = Schibsted_Grotesk({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-schibsted",
+  display: "swap",
+});
+
+// Body / UI face: paragraphs, labels, nav, buttons.
+const sans = Hanken_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-hanken",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    template: "%s | Focus Optical — Rochester Hills, MI",
+    template: "%s | Focus Optical, Rochester Hills MI",
     default:
       "Focus Optical | Optician & Eye Exams in Rochester Hills, MI",
   },
@@ -113,17 +124,22 @@ export default function RootLayout({
   return (
     // data-scroll-behavior lets Next.js reset scroll instantly on navigation
     // despite the CSS scroll-behavior: smooth used for in-page anchors.
-    <html lang="en" className={inter.variable} data-scroll-behavior="smooth">
+    <html
+      lang="en"
+      className={`${display.variable} ${sans.variable}`}
+      data-scroll-behavior="smooth"
+    >
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="font-sans antialiased bg-white text-slate-900">
+      <body className="font-sans antialiased bg-white text-ink">
         <Header />
         <main>{children}</main>
         <Footer />
+        <PromoToast />
         <Analytics />
       </body>
     </html>

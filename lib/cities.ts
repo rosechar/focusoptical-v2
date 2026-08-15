@@ -20,24 +20,24 @@ export const CITIES: CityArea[] = [
     zips: ["48309", "48307", "48306"],
     driveTime: "We're located here",
     summary:
-      "Focus Optical is located right here in Rochester Hills at 2046 W Auburn Rd. We're your neighborhood optician for eye exams, prescription glasses, contact lenses, and free eyeglass adjustments.",
+      "We're right here in Rochester Hills at 2046 W Auburn Rd. We're the neighborhood optician for eye exams, glasses, contacts, and free adjustments.",
     paragraphs: [
-      "Focus Optical has been Rochester Hills' independent optical store since 1984. Our shop at 2046 W Auburn Rd sits just west of Crooks Road, minutes from Rochester Hills City Hall, Bloomer Park, and the Rochester Hills Public Library — with ample free parking right outside the door.",
-      "Eye exams are performed on-site by Dr. Diane Galper, Optometrist, and every pair of lenses is cut and edged in our own lab by owner Tom Hamilton, who has been making eyeglasses since 1977. That means faster turnaround — next day service on most prescriptions — and quality control you won't find at chain optical stores in the mall.",
-      "Whether you live near Adams Road, downtown along Rochester Road, or in the neighborhoods off Auburn Road, we're the closest independent optician for an annual eye exam, new prescription glasses, contact lens fittings, or a quick free adjustment of glasses you bought anywhere.",
+      "Focus Optical has been Rochester Hills' independent optician since 1984. The shop sits on W Auburn Rd just west of Crooks Road, a few minutes from City Hall, Bloomer Park, and the public library, with free parking right out front.",
+      "Dr. Diane Galper does the eye exams here, and Tom cuts and edges every lens in the shop. He's been making glasses since 1977. Because the lab is on site, most prescriptions are ready the next day, and you get someone who actually checks the work instead of a mall chain.",
+      "Whether you live near Adams Road, downtown off Rochester Road, or in the neighborhoods around Auburn Road, we're the closest independent shop for a yearly eye exam, new glasses, a contact lens fitting, or a quick free adjustment on glasses you bought anywhere.",
     ],
     faqs: [
       {
-        q: "Where is Focus Optical located in Rochester Hills?",
-        a: "We're at 2046 W Auburn Rd, Rochester Hills, MI 48309, just west of Crooks Road with free parking on-site.",
+        q: "Where are you in Rochester Hills?",
+        a: "We're at 2046 W Auburn Rd, Rochester Hills, MI 48309, just west of Crooks Road, with free parking out front.",
       },
       {
         q: "Do you do eye exams in Rochester Hills?",
-        a: "Yes — comprehensive eye exams and contact lens exams are performed in our Rochester Hills office by Dr. Diane Galper, Optometrist.",
+        a: "Yes. Dr. Diane Galper does eye exams and contact lens exams right here in the office.",
       },
       {
         q: "Can I get glasses adjusted without buying them from you?",
-        a: "Absolutely. We offer free adjustments and cleaning to anyone, no appointment and no purchase required.",
+        a: "Of course. Adjustments and cleaning are free for anyone, no appointment and no purchase needed.",
       },
     ],
     primary: true,
@@ -49,20 +49,20 @@ export const CITIES: CityArea[] = [
     zips: ["48306", "48307"],
     driveTime: "About 10 minutes",
     summary:
-      "Just minutes from downtown Rochester, Focus Optical offers Rochester residents comprehensive optical services — from annual eye exams to a wide selection of frames and contact lenses.",
+      "A few minutes from downtown Rochester, we handle eye exams, a big selection of frames, and contact lenses.",
     paragraphs: [
-      "Focus Optical is about a 10-minute drive from downtown Rochester — head south on Rochester Road and west on Auburn Road and you're here. For over 40 years, Rochester families have skipped the mall chains and come to us for eye exams, glasses, and contacts.",
-      "We're an easy stop after a morning at the Rochester Farmers' Market or a walk on the Paint Creek Trail. Eye exams are performed by Dr. Diane Galper, Optometrist, and contact lens exams include a full eye exam in a single visit.",
-      "Because we cut and edge lenses in our own on-site lab, most Rochester patients get their new glasses the next day. We can also put new lenses in your existing frames, and adjustments are always free — even on glasses you didn't buy from us.",
+      "We're about a 10 minute drive from downtown Rochester. Head south on Rochester Road, then west on Auburn Road and you're here. Rochester families have skipped the mall chains and come to us for years.",
+      "It's an easy stop after the farmers' market or a walk on the Paint Creek Trail. Dr. Diane Galper does the eye exams, and a contact lens exam includes a full eye exam in the same visit.",
+      "We cut and edge lenses in our own lab, so most folks from Rochester pick up new glasses the next day. We'll also put new lenses in frames you already like, and adjustments are always free, even on glasses you didn't buy here.",
     ],
     faqs: [
       {
-        q: "How far is Focus Optical from downtown Rochester?",
-        a: "About 10 minutes — south on Rochester Road, then west on Auburn Road to 2046 W Auburn Rd in Rochester Hills.",
+        q: "How far is the shop from downtown Rochester?",
+        a: "About 10 minutes. South on Rochester Road, then west on Auburn Road to 2046 W Auburn Rd in Rochester Hills.",
       },
       {
-        q: "Do you take patients from Rochester?",
-        a: "Yes, many of our longtime patients come from Rochester. Call (248) 852-8830 or book online to schedule an exam.",
+        q: "Do you see patients from Rochester?",
+        a: "Plenty of our regulars come from Rochester. Call (248) 852-8830 or book online to set up an exam.",
       },
     ],
   },
@@ -73,20 +73,20 @@ export const CITIES: CityArea[] = [
     zips: ["48083", "48084", "48085", "48098"],
     driveTime: "About 10 minutes",
     summary:
-      "Troy residents looking for a quality optician choose Focus Optical for our craftsmanship, personalized service, and no-pressure environment. We cut and edge all lenses on-site.",
+      "Troy folks come to us for careful work and a shop with no sales quotas. We cut every lens on site.",
     paragraphs: [
-      "Focus Optical is roughly 10 minutes north of Troy — straight up Crooks Road or Livernois to Auburn Road. Troy patients tell us the short drive beats the big-box optical experience: no sales quotas, no upselling, just an experienced optician who makes your glasses himself.",
-      "Owner Tom Hamilton has been crafting eyeglasses since 1977, and every lens is cut and edged in our on-site lab rather than shipped to an out-of-state facility. That's why we can offer next day service on most prescriptions — handy if you work along the Big Beaver corridor and need glasses before your next meeting.",
-      "We offer comprehensive eye exams with Dr. Diane Galper, Optometrist, contact lens exams and fittings, a wide frame selection for every budget, and free adjustments for anyone who walks in — even with glasses bought elsewhere.",
+      "We're about 10 minutes north of Troy, straight up Crooks Road or Livernois to Auburn Road. Troy customers tell us the short drive beats the big-box experience: no quotas, no upselling, just someone who makes your glasses himself.",
+      "Tom's been making glasses since 1977, and every lens gets cut and edged in our own lab instead of shipped out of state. That's why most prescriptions are ready the next day, handy if you work along Big Beaver and need glasses before a meeting.",
+      "We do eye exams with Dr. Diane Galper, contact lens fittings, a wide range of frames for any budget, and free adjustments for anyone who walks in, even with glasses bought somewhere else.",
     ],
     faqs: [
       {
-        q: "How do I get to Focus Optical from Troy?",
+        q: "How do I get there from Troy?",
         a: "Take Crooks Road or Livernois north to Auburn Road. We're at 2046 W Auburn Rd in Rochester Hills, about 10 minutes from most of Troy.",
       },
       {
-        q: "Why choose Focus Optical over an optical chain in Troy?",
-        a: "We're independently owned, cut all lenses on-site, offer next day service on most prescriptions, and never use sales pressure.",
+        q: "Why come here instead of a chain in Troy?",
+        a: "We're family owned, cut every lens on site, have most prescriptions ready the next day, and we won't push a sale on you.",
       },
     ],
   },
@@ -97,20 +97,20 @@ export const CITIES: CityArea[] = [
     zips: ["48360", "48362"],
     driveTime: "About 15 minutes",
     summary:
-      "Lake Orion patients make the short drive to Focus Optical for our reputation as one of Oakland County's most experienced independent opticians.",
+      "Lake Orion folks make the short drive for one of the area's most experienced independent opticians.",
     paragraphs: [
-      "From downtown Lake Orion, Focus Optical is about 15 minutes south — down M-24 (Lapeer Road) through Auburn Hills to Auburn Road. Lake Orion families have been making the trip since 1984 for one reason: glasses made right, by hand, by people who know them.",
-      "Eye exams and contact lens exams are performed by Dr. Diane Galper, Optometrist. Active on the lake? We carry sunglasses and can fit specialty lenses, and our on-site lab means new lenses or repairs don't leave the building.",
-      "Most prescriptions are ready the next day, and adjustments are always free — bent your frames at the beach or on the trail, just stop in and we'll straighten them out at no charge, no appointment needed.",
+      "From downtown Lake Orion, we're about 15 minutes south, down M-24 (Lapeer Road) through Auburn Hills to Auburn Road. Lake Orion families have been making the trip since 1984 for one reason: glasses made right, by hand, by people who know them.",
+      "Dr. Diane Galper does eye exams and contact lens exams. Spend time on the lake? We carry sunglasses and can fit specialty lenses, and with our own lab, new lenses and repairs don't leave the building.",
+      "Most prescriptions are ready the next day, and adjustments are always free. Bent your frames at the beach or on the trail? Stop in and we'll straighten them out, no charge and no appointment.",
     ],
     faqs: [
       {
-        q: "How far is Focus Optical from Lake Orion?",
-        a: "About 15 minutes — take M-24 south to Auburn Road. We're at 2046 W Auburn Rd in Rochester Hills.",
+        q: "How far is it from Lake Orion?",
+        a: "About 15 minutes. Take M-24 south to Auburn Road. We're at 2046 W Auburn Rd in Rochester Hills.",
       },
       {
-        q: "Do you carry sunglasses for Lake Orion's outdoor lifestyle?",
-        a: "Yes — prescription and non-prescription sunglasses plus specialty lenses, all fitted and adjusted in-house.",
+        q: "Do you carry sunglasses?",
+        a: "Yes, prescription and regular sunglasses plus specialty lenses, all fitted and adjusted in the shop.",
       },
     ],
   },
@@ -121,20 +121,20 @@ export const CITIES: CityArea[] = [
     zips: ["48067", "48068", "48073"],
     driveTime: "About 20 minutes",
     summary:
-      "Royal Oak residents appreciate our independent, no-franchise approach to optical care. No sales pressure, just expert craftsmanship and honest service.",
+      "Royal Oak folks like our independent, no-franchise way of doing things. No sales pressure, just careful work and a straight answer.",
     paragraphs: [
-      "Focus Optical is about 20 minutes north of Royal Oak — a quick run up I-75 or Crooks Road to Auburn Road. Royal Oak patients who value independent local businesses find a kindred spirit here: family-owned since 1984, no franchise, no corporate sales targets.",
-      "Every pair of glasses is cut and edged in our on-site lab by owner Tom Hamilton, an optician since 1977. Comprehensive eye exams and contact lens fittings are performed by Dr. Diane Galper, Optometrist, with next day service available on most prescriptions.",
-      "We keep a wide selection of frames at every price point and will happily put new lenses in frames you already love. Adjustments and cleanings are free for everyone — no purchase necessary.",
+      "We're about 20 minutes north of Royal Oak, a quick run up I-75 or Crooks Road to Auburn Road. If you like supporting local shops, you'll feel at home here: family owned since 1984, no franchise, no corporate sales targets.",
+      "Tom cuts and edges every pair in our own lab, and he's been an optician since 1977. Dr. Diane Galper handles eye exams and contact lens fittings, with most prescriptions ready the next day.",
+      "We keep a wide range of frames at every price, and we're happy to put new lenses in frames you already love. Adjustments and cleanings are free for everyone, no purchase needed.",
     ],
     faqs: [
       {
-        q: "Is Focus Optical worth the drive from Royal Oak?",
-        a: "Our patients think so — independent service, on-site lens crafting, next day turnaround on most prescriptions, and free adjustments for life.",
+        q: "Is it worth the drive from Royal Oak?",
+        a: "Our customers think so: independent service, lenses cut on site, most prescriptions ready the next day, and free adjustments for life.",
       },
       {
         q: "How do I get there from Royal Oak?",
-        a: "Take I-75 north to Exit 67 (Rochester Rd/Auburn Rd area) or drive Crooks Road north — about 20 minutes to 2046 W Auburn Rd, Rochester Hills.",
+        a: "Take I-75 north toward the Rochester Road and Auburn Road area, or drive Crooks Road north. About 20 minutes to 2046 W Auburn Rd in Rochester Hills.",
       },
     ],
   },
@@ -145,20 +145,20 @@ export const CITIES: CityArea[] = [
     zips: ["48301", "48302", "48304"],
     driveTime: "About 15 minutes",
     summary:
-      "We serve Bloomfield Hills patients seeking a trusted, experienced optician. Our attention to detail and on-site lens cutting sets us apart from chain optical stores.",
+      "Bloomfield Hills folks come to us for a trusted optician who cuts lenses on site and takes the time to fit them right.",
     paragraphs: [
-      "Bloomfield Hills patients reach Focus Optical in about 15 minutes — east on Square Lake Road or South Boulevard to Adams, then up to Auburn Road. For discerning patients who expect precision, our on-site lab and four decades of craftsmanship deliver.",
-      "Owner Tom Hamilton personally cuts and edges every lens, and eye exams are performed by Dr. Diane Galper, Optometrist. We take the time to fit frames properly to your face — the difference between glasses that work and glasses you fight with all day.",
-      "We carry quality frames across a range of styles and budgets, fit specialty and progressive lenses, and offer next day service on most prescriptions. Adjustments are always complimentary, even on eyewear purchased elsewhere.",
+      "Bloomfield Hills is about 15 minutes away, east on Square Lake Road or South Boulevard to Adams, then up to Auburn Road. If you expect things done right, our own lab and four decades of practice deliver.",
+      "Tom cuts and edges every lens himself, and Dr. Diane Galper does the eye exams. We take the time to fit frames to your face, which is the difference between glasses that work and glasses you fight with all day.",
+      "We carry quality frames in a range of styles and budgets, fit progressive and specialty lenses, and have most prescriptions ready the next day. Adjustments are always free, even on eyewear from somewhere else.",
     ],
     faqs: [
       {
-        q: "Do you fit progressive lenses for Bloomfield Hills patients?",
-        a: "Yes — progressives, specialty lenses, and precise fittings are core to what we do, with all lens work done in our on-site lab.",
+        q: "Do you fit progressive lenses?",
+        a: "Yes, progressives, specialty lenses, and careful fittings are a big part of what we do, with all lens work done in our own lab.",
       },
       {
-        q: "How far is Focus Optical from Bloomfield Hills?",
-        a: "About 15 minutes east via Square Lake Road or South Boulevard to 2046 W Auburn Rd in Rochester Hills.",
+        q: "How far is it from Bloomfield Hills?",
+        a: "About 15 minutes east on Square Lake Road or South Boulevard to 2046 W Auburn Rd in Rochester Hills.",
       },
     ],
   },
@@ -169,20 +169,20 @@ export const CITIES: CityArea[] = [
     zips: ["48310", "48312", "48313", "48314"],
     driveTime: "About 15 minutes",
     summary:
-      "Sterling Heights patients come to Focus Optical for the expert, personalized service you can only get at an independently owned optical store with over 45 years of experience.",
+      "Sterling Heights folks come to us for the kind of personal service you only get at an independent shop with over 45 years behind it.",
     paragraphs: [
-      "Focus Optical is about 15 minutes from Sterling Heights — west on Auburn Road from Dequindre, or up M-59 to Crooks. Plenty of Macomb County patients cross the county line for an optician who still does things the old way: in person, by hand, with no sales pressure.",
-      "Comprehensive eye exams and contact lens exams are performed by Dr. Diane Galper, Optometrist. Because we cut and edge all lenses in our own lab, most Sterling Heights patients pick up their new glasses the next day.",
-      "We offer a wide selection of frames and contact lens brands, can re-lens your existing frames, and provide free adjustments and cleanings to anyone who stops in — no appointment, no purchase required.",
+      "We're about 15 minutes from Sterling Heights, west on Auburn Road from Dequindre, or up M-59 to Crooks. Plenty of Macomb County folks cross the county line for an optician who still does things in person, by hand, with no pressure.",
+      "Dr. Diane Galper does eye exams and contact lens exams. Because we cut and edge every lens in our own lab, most folks from Sterling Heights pick up new glasses the next day.",
+      "We carry a wide range of frames and contact brands, we'll re-lens frames you already have, and we give free adjustments and cleanings to anyone who stops in, no appointment or purchase needed.",
     ],
     faqs: [
       {
-        q: "Do you serve patients from Macomb County?",
-        a: "Yes — Sterling Heights, Shelby Township, and Utica patients visit regularly. We're about 15 minutes west via Auburn Road or M-59.",
+        q: "Do you see patients from Macomb County?",
+        a: "Yes, folks from Sterling Heights, Shelby Township, and Utica come in all the time. We're about 15 minutes west on Auburn Road or M-59.",
       },
       {
-        q: "How fast can I get glasses near Sterling Heights?",
-        a: "We offer next day service on most prescriptions thanks to our on-site lens cutting and edging lab.",
+        q: "How fast can I get glasses?",
+        a: "Most prescriptions are ready the next day, since we cut and edge lenses right here.",
       },
     ],
   },
@@ -193,20 +193,20 @@ export const CITIES: CityArea[] = [
     zips: ["48326"],
     driveTime: "About 10 minutes",
     summary:
-      "Auburn Hills residents trust Focus Optical for eye exams, new glasses, and free adjustments on existing eyewear. Conveniently located on W Auburn Rd.",
+      "Auburn Hills folks come to us for eye exams, new glasses, and free adjustments on the glasses they already own. We're right on W Auburn Rd.",
     paragraphs: [
-      "Focus Optical sits on Auburn Road itself — about 10 minutes east of most of Auburn Hills, with easy access from I-75 and M-59. If you work near the Oakland University campus or the corporate corridor, we're a quick trip for an exam or a fitting.",
-      "Eye exams are performed by Dr. Diane Galper, Optometrist, and contact lens exams include a full eye exam in one visit. Owner Tom Hamilton has crafted eyeglasses since 1977 and cuts every lens in our on-site lab.",
-      "Most prescriptions are ready the next day. We also add new lenses to existing frames and provide free adjustments and cleaning to anyone — students, commuters, and neighbors alike.",
+      "We sit on Auburn Road itself, about 10 minutes east of most of Auburn Hills, with easy access from I-75 and M-59. If you work near the Oakland University campus or the corporate area, we're a quick trip for an exam or a fitting.",
+      "Dr. Diane Galper does eye exams, and a contact lens exam includes a full eye exam in one visit. Tom's been making glasses since 1977 and cuts every lens in our own lab.",
+      "Most prescriptions are ready the next day. We'll also put new lenses in frames you already have, and adjustments and cleaning are free for anyone, students, commuters, and neighbors alike.",
     ],
     faqs: [
       {
-        q: "How close is Focus Optical to Auburn Hills?",
-        a: "About 10 minutes — straight east on Auburn Road to 2046 W Auburn Rd in Rochester Hills, near Crooks Road.",
+        q: "How close are you to Auburn Hills?",
+        a: "About 10 minutes, straight east on Auburn Road to 2046 W Auburn Rd in Rochester Hills, near Crooks Road.",
       },
       {
         q: "Do you see Oakland University students?",
-        a: "Yes — exams, glasses, and contacts for students and staff, with next day service on most prescriptions.",
+        a: "Yes, exams, glasses, and contacts for students and staff, with most prescriptions ready the next day.",
       },
     ],
   },

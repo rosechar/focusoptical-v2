@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { Clock, Check } from "lucide-react";
+import CtaBand from "@/components/CtaBand";
+import { BUSINESS } from "@/lib/business";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -21,177 +21,182 @@ export const metadata: Metadata = {
   },
 };
 
-const services = [
+const stats = [
+  { value: "45+", label: "years", labelWide: "years of experience" },
+  { value: "Next-day", label: "most Rx", labelWide: "on most prescriptions" },
+  { value: "Walk-in", label: "welcome", labelWide: "always welcome" },
+];
+
+interface Service {
+  id: string;
+  title: string;
+  badge: string;
+  description: string;
+  image?: string;
+  alt?: string;
+  chips: string[];
+  inverted?: boolean;
+}
+
+const services: Service[] = [
   {
     id: "eye-exams",
-    title: "Eye Exams",
-    subtitle: "Annual Vision Assessment",
+    title: "Eye exams",
+    badge: "Annual vision assessment",
     description:
-      "It is recommended to get an eye exam annually to assess your eyesight, especially as your eyes change as you age. Eye exams at Focus Optical are performed by Dr. Diane Galper, Optometrist.",
+      "Comprehensive exams with Dr. Diane Galper, OD. We recommend one every year, at any age.",
     image: "/images/tool.jpeg",
-    alt: "Eye exam equipment at Focus Optical Rochester Hills",
-    highlights: [
-      "Performed by Dr. Diane Galper, Optometrist",
-      "Comprehensive vision assessment",
-      "Detect changes in vision early",
-      "Recommended annually for all ages",
-    ],
+    alt: "Eye exam equipment at Focus Optical",
+    chips: ["Licensed optometrist", "Full vision check", "All ages"],
   },
   {
     id: "contact-exams",
-    title: "Contact Lens Exams",
-    subtitle: "Specialized Fitting Exam",
+    title: "Contact lens exams",
+    badge: "Specialized fitting",
     description:
-      "It is essential to have a separate contact exam if you are interested in contact lenses to ensure a comfortable fit. An eye exam is included with your contact lens exam, so you get everything you need in a single visit.",
+      "A contact exam checks the fit and the health of your eyes. A full eye exam is included, so it's one visit.",
     image: "/images/contact.jpg",
-    alt: "Contact lens exam at Focus Optical Rochester Hills MI",
-    highlights: [
-      "Separate exam required for contact lens wearers",
-      "Ensures proper fit and comfort",
-      "Full eye exam included",
-      "Trial lenses available",
-    ],
-  },
-  {
-    id: "adjustments",
-    title: "Free Eyeglass Adjustments",
-    subtitle: "Complimentary Service for Everyone",
-    description:
-      "As a courtesy to anyone, we offer free adjustments and cleaning for your glasses. No appointment necessary — just come in. Whether you bought your glasses from us or somewhere else, we're happy to help.",
-    image: "/images/glasses3.jpg",
-    alt: "Eyeglass adjustments at Focus Optical Rochester Hills",
-    highlights: [
-      "Free for anyone — no purchase required",
-      "Cleaning included at no charge",
-      "No appointment needed",
-      "Open to all, even non-customers",
-    ],
+    alt: "Contact lens fitting at Focus Optical",
+    chips: ["Proper fit & comfort", "Full exam included", "Trial lenses"],
   },
   {
     id: "retail",
-    title: "Eyeglasses & Contact Lenses",
-    subtitle: "Wide Selection, No Pressure",
+    title: "Glasses & contacts",
+    badge: "Wide selection",
     description:
-      "We offer a wide selection of frames and contact lenses, giving you options without sales pressure. We can also add new lenses to existing frames if you prefer. And we offer next day service on most prescriptions.",
+      "Frames for every budget and the contact brands you need. Keep your favorite frames if you like and we'll cut new lenses for them.",
     image: "/images/contact1.jpg",
-    alt: "Eyeglass frame selection at Focus Optical Rochester Hills",
-    highlights: [
-      "Wide selection of frames for every budget",
-      "Contact lens brands available",
-      "New lenses added to existing frames",
-      "Next day service on most prescriptions",
-    ],
+    alt: "Eyeglass frame selection at Focus Optical",
+    chips: ["Every budget", "Re-lens your frames", "Next-day service"],
+  },
+  {
+    id: "adjustments",
+    title: "Free adjustments",
+    badge: "Free for everyone",
+    description:
+      "Bring in any pair, bought anywhere. We'll fix the fit and clean them, no charge and no appointment.",
+    chips: ["No purchase needed", "Cleaning included", "Just walk in"],
+    inverted: true,
   },
 ];
 
 export default function ServicesPage() {
   return (
     <>
-      {/* Page header */}
-      <section className="bg-blue-900 text-white py-12 sm:py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <p className="text-blue-300 font-semibold text-sm tracking-widest uppercase mb-2">
-            What We Offer
-          </p>
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
-            Our Services
-          </h1>
-          <p className="text-blue-200 mt-3 text-base sm:text-lg max-w-xl">
-            Full-service optical care at our Rochester Hills, MI location —
-            eye exams, glasses, contacts, and more.
-          </p>
+      <section className="max-w-[1180px] mx-auto px-5 pt-7 lg:px-10 lg:pt-14">
+        <h1 className="font-display text-[30px] lg:text-5xl font-extrabold text-ink tracking-[-0.02em] lg:tracking-[-0.03em] mb-2 lg:mb-2.5">
+          Services
+        </h1>
+        <p className="text-[15.5px] lg:text-lg leading-[1.55] text-body mb-[18px] lg:mb-7 lg:max-w-[620px]">
+          Exams, glasses, contacts and repairs, all at one shop in Rochester
+          Hills.
+        </p>
+
+        <div className="flex gap-2 lg:gap-3.5 mb-6 lg:mb-9">
+          {stats.map(({ value, label, labelWide }) => (
+            <div
+              key={value}
+              className="flex-1 rounded-xl lg:rounded-[14px] bg-surface px-2.5 py-[13px] lg:p-5 text-center"
+            >
+              <div className="font-display text-[19px] lg:text-[26px] font-extrabold text-accent">
+                {value}
+              </div>
+              <div className="text-[11.5px] lg:text-[13.5px] text-body mt-0.5 lg:mt-[3px]">
+                <span className="lg:hidden">{label}</span>
+                <span className="hidden lg:inline">{labelWide}</span>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Services list */}
-      <div className="max-w-6xl mx-auto px-4 py-10 sm:py-16 space-y-12 sm:space-y-20">
-        {services.map(
-          ({ id, title, subtitle, description, image, alt, highlights }, i) => (
-            <section
-              key={id}
-              id={id}
-              className={`scroll-mt-32 grid lg:grid-cols-2 gap-8 sm:gap-12 items-center ${
-                i % 2 === 1 ? "lg:grid-flow-dense" : ""
-              }`}
-            >
-              {/* Image — always on top on mobile */}
-              <div
-                className={`relative rounded-2xl overflow-hidden aspect-[4/3] ${
-                  i % 2 === 1 ? "lg:col-start-2" : ""
+      <section className="max-w-[1180px] mx-auto lg:px-10">
+        <div className="flex gap-3.5 overflow-x-auto snap-x snap-mandatory px-5 pt-1 pb-2.5 lg:grid lg:grid-cols-2 lg:gap-5 lg:p-0 lg:overflow-visible">
+          {services.map(
+            ({ id, title, badge, description, image, alt, chips, inverted }) => (
+              <article
+                key={id}
+                id={id}
+                className={`scroll-mt-24 flex flex-col shrink-0 w-[290px] lg:w-auto snap-start rounded-[18px] lg:rounded-[20px] overflow-hidden ${
+                  inverted
+                    ? "bg-accent text-white shadow-[0_2px_10px_rgba(20,24,26,0.06)] lg:justify-center"
+                    : "bg-white border border-hairline shadow-[0_2px_10px_rgba(20,24,26,0.04)]"
                 }`}
               >
-                <Image
-                  src={image}
-                  alt={alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
+                {!inverted && image && (
+                  <div className="relative h-[152px] lg:h-[200px]">
+                    <Image
+                      src={image}
+                      alt={alt ?? ""}
+                      fill
+                      className="object-cover duotone"
+                      sizes="(max-width: 1024px) 290px, 50vw"
+                    />
+                    <span className="absolute left-3.5 top-3.5 lg:left-4 lg:top-4 rounded-full bg-white/[0.94] backdrop-blur-sm px-[11px] py-1.5 lg:px-3 text-[11px] font-bold uppercase tracking-[0.1em] text-accent-hover">
+                      {badge}
+                    </span>
+                  </div>
+                )}
+                <div className={inverted ? "px-5 py-[22px] lg:px-6 lg:py-7" : "p-5 lg:p-6"}>
+                  {inverted && (
+                    <div className="text-[11px] font-bold uppercase tracking-[0.1em] text-accent-ondark mb-2 lg:mb-2.5">
+                      {badge}
+                    </div>
+                  )}
+                  <h2 className="font-display text-xl lg:text-[22px] font-extrabold mb-[7px] lg:mb-2">
+                    {title}
+                  </h2>
+                  <p
+                    className={`text-[14.5px] lg:text-[15px] leading-relaxed mb-3.5 lg:mb-4 ${
+                      inverted ? "text-white/90" : "text-body"
+                    }`}
+                  >
+                    {description}
+                  </p>
+                  <ul className="flex flex-wrap gap-[7px] lg:gap-2">
+                    {chips.map((chip) => (
+                      <li
+                        key={chip}
+                        className={`inline-flex items-center gap-[5px] rounded-full px-[11px] py-1.5 lg:px-3 lg:py-[7px] text-[12.5px] lg:text-[13px] font-semibold ${
+                          inverted ? "bg-white/[0.16]" : "bg-surface-alt text-secondary"
+                        }`}
+                      >
+                        <span aria-hidden className={inverted ? "" : "text-accent"}>
+                          ✓
+                        </span>
+                        {chip}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ),
+          )}
+        </div>
 
-              {/* Content */}
-              <div className={i % 2 === 1 ? "lg:col-start-1 lg:row-start-1" : ""}>
-                <p className="text-blue-600 font-semibold text-sm tracking-widest uppercase mb-1">
-                  {subtitle}
-                </p>
-                <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight mb-3">
-                  {title}
-                </h2>
-                <p className="text-base text-slate-600 leading-relaxed mb-5">
-                  {description}
-                </p>
-                <ul className="space-y-2 mb-6">
-                  {highlights.map((h) => (
-                    <li key={h} className="flex items-start gap-2.5 text-base text-slate-600">
-                      <Check size={16} className="text-blue-600 mt-0.5 shrink-0" />
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full transition-colors"
-                >
-                  Schedule an Appointment
-                </Link>
-              </div>
-            </section>
-          )
-        )}
-      </div>
-
-      {/* Next day service callout */}
-      <section className="bg-slate-50 py-10 sm:py-14">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <Clock className="text-blue-600" size={22} />
-            <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
-              Next Day Service Available
-            </h2>
-          </div>
-          <p className="text-slate-600 mb-4 text-base sm:text-lg">
-            We offer next day service on most prescriptions — because we know
-            your time matters and you need your glasses fast.
-          </p>
-          <p className="text-slate-500 text-sm mb-7">
-            Questions about pricing or insurance? Give us a call.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-7 py-3.5 rounded-full transition-colors"
-            >
-              Request an Appointment
-            </Link>
-            <Link
-              href="/insurance"
-              className="inline-flex items-center justify-center border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold px-7 py-3.5 rounded-full transition-colors"
-            >
-              Insurance &amp; Pricing Info
-            </Link>
+        <div className="mx-5 lg:mx-0 mt-[22px] lg:mt-5 flex items-start lg:items-center gap-[13px] lg:gap-3.5 rounded-[14px] lg:rounded-2xl bg-surface px-5 py-[18px] lg:px-6 lg:py-[22px]">
+          <span
+            aria-hidden
+            className="flex h-9 w-9 lg:h-[42px] lg:w-[42px] shrink-0 items-center justify-center rounded-[10px] lg:rounded-xl bg-white border border-card-border text-accent text-lg lg:text-xl"
+          >
+            ☑
+          </span>
+          <div>
+            <p className="font-bold text-ink text-[15px] lg:text-base mb-[3px]">Insurance</p>
+            <p className="text-[13.5px] lg:text-[14.5px] text-body leading-normal">
+              Have a vision plan? Bring it in and we&apos;ll help you use it.{" "}
+              <a
+                href={BUSINESS.phoneHref}
+                className="font-semibold text-accent hover:text-accent-hover transition-colors"
+              >
+                Call to confirm coverage.
+              </a>
+            </p>
           </div>
         </div>
       </section>
+
+      <CtaBand className="pt-6 pb-10 lg:pt-10 lg:pb-20" />
     </>
   );
 }

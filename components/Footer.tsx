@@ -1,168 +1,86 @@
 import Link from "next/link";
-import { Phone, MapPin, Clock, ExternalLink, Star } from "lucide-react";
-import { BUSINESS, HOURS } from "@/lib/business";
-import { CITIES } from "@/lib/cities";
+import { BUSINESS } from "@/lib/business";
+import { NAV_TABS } from "@/lib/nav";
+import Logo from "@/components/Logo";
 
-const serviceAreas: { label: string; href?: string }[] = [
-  ...CITIES.map(({ city, slug }) => ({
-    label: city,
-    href: `/service-areas/${slug}`,
-  })),
-  { label: "Shelby Twp." },
-  { label: "Pontiac" },
-  { label: "Clarkston" },
-  { label: "Waterford" },
-];
-
-const quickLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About Us" },
-  { href: "/services", label: "Our Services" },
-  { href: "/contact", label: "Schedule Appointment" },
-  { href: "/insurance", label: "Insurance & Pricing" },
-  { href: "/service-areas", label: "Service Areas" },
+const exploreLinks = [
+  ...NAV_TABS,
+  { href: "/insurance", label: "Insurance" },
+  { href: "/service-areas", label: "Service areas" },
 ];
 
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="bg-slate-900 text-slate-300">
-      {/* Main footer grid */}
-      <div className="max-w-6xl mx-auto px-4 py-14">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Brand column */}
-          <div className="sm:col-span-2 lg:col-span-1">
-            <h2 className="text-xl font-bold text-white mb-0.5">
-              Focus Optical
-            </h2>
-            <p className="text-blue-400 text-sm mb-4 font-medium">
-              Since 1984 · Rochester Hills, MI
+    <footer>
+      {/* Mobile: tiny centered line */}
+      <div className="md:hidden border-t border-hairline-soft px-5 py-[18px] text-center text-xs leading-[1.6] text-faint">
+        Focus Optical ·{" "}
+        <a href={BUSINESS.phoneHref} className="hover:text-body transition-colors">
+          {BUSINESS.phoneDisplay}
+        </a>
+        <br />© {year} · {BUSINESS.address.city}, {BUSINESS.address.state}
+      </div>
+
+      {/* Desktop: dark footer */}
+      <div className="hidden md:block bg-dark text-[#9aa6a8]">
+        <div className="max-w-[1180px] mx-auto px-10 py-12 flex flex-wrap justify-between items-start gap-10">
+          <div className="max-w-[320px]">
+            <div className="flex items-center gap-2.5 mb-3.5">
+              <Logo />
+              <span className="font-display text-lg font-extrabold text-white">
+                Focus Optical
+              </span>
+            </div>
+            <p className="text-sm leading-[1.6]">
+              Independent, family-run optician in Rochester Hills since 1984.
             </p>
-            <p className="text-sm text-slate-400 leading-relaxed mb-5">
-              Your local, independently owned optical store in Rochester Hills.
-              We specialize in making eyeglasses with over 45 years of
-              experience — and we treat every pair as if it were our own.
-            </p>
-            <div className="flex flex-col items-start gap-3">
+          </div>
+          <div className="flex flex-wrap gap-14">
+            <div>
+              <h2 className="text-xs font-extrabold uppercase tracking-[0.1em] text-white mb-3.5">
+                Explore
+              </h2>
+              <ul className="flex flex-col gap-[9px] text-[14.5px]">
+                {exploreLinks.map(({ href, label }) => (
+                  <li key={href}>
+                    <Link href={href} className="hover:text-white transition-colors">
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h2 className="text-xs font-extrabold uppercase tracking-[0.1em] text-white mb-3.5">
+                Visit &amp; call
+              </h2>
               <a
                 href={BUSINESS.phoneHref}
-                className="inline-flex items-center gap-2 text-white font-semibold hover:text-blue-300 transition-colors"
+                className="block text-white text-lg font-bold mb-2 hover:text-accent-ondark transition-colors"
               >
-                <Phone size={15} />
                 {BUSINESS.phoneDisplay}
               </a>
               <a
                 href={BUSINESS.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-start gap-2 text-sm text-slate-400 hover:text-white transition-colors"
+                className="block text-sm leading-normal hover:text-white transition-colors"
               >
-                <MapPin size={14} className="mt-0.5 shrink-0" />
-                <span>
-                  {BUSINESS.address.street}
-                  <br />
-                  {BUSINESS.address.city}, {BUSINESS.address.state}{" "}
-                  {BUSINESS.address.zip}
-                </span>
+                {BUSINESS.address.street}
+                <br />
+                {BUSINESS.address.city}, {BUSINESS.address.state}{" "}
+                {BUSINESS.address.zip}
               </a>
             </div>
-            <div className="mt-5">
-              <a
-                href="https://g.co/kgs/yiVrZD"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm text-yellow-400 hover:text-yellow-300 transition-colors"
-              >
-                {Array.from({ length: 5 }, (_, i) => (
-                  <Star key={i} size={13} fill="currentColor" />
-                ))}
-                <span className="ml-1">Read our Google Reviews</span>
-                <ExternalLink size={11} />
-              </a>
-            </div>
-          </div>
-
-          {/* Hours column */}
-          <div>
-            <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-              <Clock size={15} />
-              Store Hours
-            </h3>
-            <ul className="space-y-2 text-sm">
-              {HOURS.map(({ day, display, opens }) => (
-                <li
-                  key={day}
-                  className="flex justify-between gap-3 text-slate-400"
-                >
-                  <span className="text-slate-300">{day}</span>
-                  <span className={opens ? "" : "text-slate-400 italic"}>
-                    {display}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Quick links column */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-sm">
-              {quickLinks.map(({ href, label }) => (
-                <li key={href}>
-                  <Link
-                    href={href}
-                    className="text-slate-400 hover:text-white transition-colors"
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Service areas column — SEO value */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">Areas We Serve</h3>
-            <p className="text-xs text-slate-400 mb-3 leading-relaxed">
-              Proudly serving patients across Oakland County and nearby
-              communities:
-            </p>
-            <ul className="grid grid-cols-2 gap-x-2 gap-y-1.5">
-              {serviceAreas.map(({ label, href }) => (
-                <li key={label} className="text-xs text-slate-400">
-                  {href ? (
-                    <Link
-                      href={href}
-                      className="hover:text-blue-300 transition-colors"
-                    >
-                      {label}
-                    </Link>
-                  ) : (
-                    label
-                  )}
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/service-areas"
-              className="inline-block mt-4 text-sm text-blue-400 hover:text-blue-300 transition-colors"
-            >
-              View all service areas →
-            </Link>
           </div>
         </div>
-      </div>
-
-      {/* Copyright bar */}
-      <div className="border-t border-slate-800 py-4">
-        <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
-          <span>
-            © {new Date().getFullYear()} {BUSINESS.name}. All rights reserved.
-          </span>
-          <span>
-            {BUSINESS.address.street}, {BUSINESS.address.city},{" "}
-            {BUSINESS.address.state} {BUSINESS.address.zip} ·{" "}
-            {BUSINESS.phoneDisplay}
-          </span>
+        <div className="border-t border-[#232a2c]">
+          <div className="max-w-[1180px] mx-auto px-10 py-[18px] flex flex-wrap justify-between gap-2 text-[12.5px] text-[#6f7c7e]">
+            <span>© {year} Focus Optical. All rights reserved.</span>
+            <span>Rochester Hills, MI · Optician since 1984</span>
+          </div>
         </div>
       </div>
     </footer>
