@@ -58,11 +58,11 @@ export default function InsurancePage() {
 
       {/* Page header */}
       <section className="pt-12 sm:pt-16 pb-8">
-        <div className="max-w-[1180px] mx-auto px-5 sm:px-10">
-          <p className="text-accent font-semibold text-xs tracking-[0.16em] uppercase mb-3">
+        <div className="max-w-295 mx-auto px-5 sm:px-10">
+          <p className="text-accent font-semibold text-xs tracking-eyebrow uppercase mb-3">
             Coverage &amp; costs
           </p>
-          <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-ink tracking-[-0.03em]">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-ink tracking-tight">
             Insurance &amp; pricing
           </h1>
           <p className="text-body mt-3 text-lg max-w-xl leading-relaxed">
@@ -73,11 +73,11 @@ export default function InsurancePage() {
       </section>
 
       <section className="pb-12 sm:pb-16">
-        <div className="max-w-[1180px] mx-auto px-5 sm:px-10">
+        <div className="max-w-295 mx-auto px-5 sm:px-10">
           <div className="grid sm:grid-cols-2 gap-5 sm:gap-6 mb-12">
             <div className="rounded-2xl bg-accent-soft p-6 sm:p-8">
               <ShieldCheck className="text-accent mb-4" size={28} />
-              <h2 className="font-display text-xl font-bold text-ink mb-3">
+              <h2 className="text-xl font-bold text-ink mb-3">
                 Insurance accepted
               </h2>
               <p className="text-body leading-relaxed mb-5">
@@ -95,7 +95,7 @@ export default function InsurancePage() {
 
             <div className="rounded-2xl bg-surface p-6 sm:p-8">
               <HelpCircle className="text-body mb-4" size={28} />
-              <h2 className="font-display text-xl font-bold text-ink mb-3">
+              <h2 className="text-xl font-bold text-ink mb-3">
                 Pricing questions
               </h2>
               <p className="text-body leading-relaxed mb-5">
@@ -105,7 +105,7 @@ export default function InsurancePage() {
               </p>
               <a
                 href={BUSINESS.phoneHref}
-                className="inline-flex items-center gap-2 border border-[#dcdfdf] text-ink hover:border-accent hover:text-accent font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors"
+                className="inline-flex items-center gap-2 border border-field-border text-ink hover:border-accent hover:text-accent font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors"
               >
                 <Phone size={15} />
                 Call for details
@@ -114,7 +114,7 @@ export default function InsurancePage() {
           </div>
 
           {/* FAQ */}
-          <h2 className="font-display text-2xl font-extrabold text-ink tracking-[-0.02em] mb-5">
+          <h2 className="text-2xl font-extrabold text-ink tracking-tight mb-5">
             Frequently asked questions
           </h2>
           <div className="space-y-3">

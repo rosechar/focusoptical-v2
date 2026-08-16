@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, FormEvent } from "react";
 import { Loader2, AlertCircle } from "lucide-react";
 import { BUSINESS } from "@/lib/business";
-import { appointmentTypes, bestTimes, type BestTime } from "@/lib/appointments";
+import { appointmentTypes } from "@/lib/appointments";
 import { emailRegex, isValidPhone } from "@/lib/validation";
 
 interface FormState {
@@ -11,8 +11,9 @@ interface FormState {
   phone: string;
   email: string;
   appointment: string;
-  bestTime: BestTime;
   optIn: boolean;
+  /** Honeypot: hidden from people, filled by bots. Must stay empty. */
+  website: string;
 }
 
 interface FieldErrors {
@@ -22,21 +23,21 @@ interface FieldErrors {
 }
 
 const inputClass = (hasError?: string) =>
-  `w-full px-3.5 py-3.5 rounded-[11px] border text-[15px] text-ink placeholder:text-black/35 bg-field transition-colors focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent ${
-    hasError ? "border-closed bg-[#fdf3f3]" : "border-field-border hover:border-[#c4caca]"
+  `w-full px-3.5 py-3.5 rounded-xl border text-md text-ink placeholder:text-black/35 bg-field transition-colors focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent ${
+    hasError ? "border-closed bg-closed-soft" : "border-field-border"
   }`;
 
-const labelClass = "block text-[12.5px] lg:text-[13px] font-bold text-secondary";
+const labelClass = "block text-xs lg:text-sm font-bold text-secondary";
 
 const chipClass = (selected: boolean) =>
-  `cursor-pointer select-none rounded-full px-3.5 py-[9px] lg:px-4 lg:py-2.5 text-[13px] lg:text-sm font-semibold border-[1.5px] transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-accent/40 has-[:focus-visible]:ring-offset-2 ${
+  `cursor-pointer select-none rounded-full px-3.5 py-2.25 lg:px-4 lg:py-2.5 text-sm font-semibold border-1.5 transition-colors has-focus-visible:ring-2 has-focus-visible:ring-accent/40 has-focus-visible:ring-offset-2 ${
     selected
       ? "bg-accent text-white border-accent"
-      : "bg-white text-secondary border-[#dde1e1] hover:border-accent"
+      : "bg-white text-secondary border-field-border hover:border-accent"
   }`;
 
 const cardClass =
-  "bg-white border border-hairline rounded-[18px] lg:rounded-[20px] shadow-[0_2px_10px_rgba(20,24,26,0.05)]";
+  "bg-white border border-hairline rounded-2.5xl shadow-card";
 
 export default function AppointmentForm() {
   const [form, setForm] = useState<FormState>({
@@ -44,8 +45,8 @@ export default function AppointmentForm() {
     phone: "",
     email: "",
     appointment: "eye",
-    bestTime: "Mornings",
     optIn: true,
+    website: "",
   });
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
@@ -86,7 +87,7 @@ export default function AppointmentForm() {
       const res = await fetch("/api/appointment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, details: "" }),
+        body: JSON.stringify(form),
       });
       if (!res.ok) throw new Error(`Request failed: ${res.status}`);
       setStatus("success");
@@ -108,24 +109,24 @@ export default function AppointmentForm() {
     return (
       <div
         ref={successRef}
-        className={`${cardClass} text-center px-[18px] py-[38px] lg:px-6 lg:py-12`}
+        className={`${cardClass} text-center px-4.5 py-9.5 lg:px-6 lg:py-12`}
       >
         <div
           aria-hidden
-          className="mx-auto mb-3.5 lg:mb-4 flex h-14 w-14 lg:h-[60px] lg:w-[60px] items-center justify-center rounded-full bg-accent-soft text-accent text-[28px] lg:text-[30px]"
+          className="mx-auto mb-3.5 lg:mb-4 flex h-14 w-14 lg:h-15 lg:w-15 items-center justify-center rounded-full bg-accent-soft text-accent text-3xl"
         >
           ✓
         </div>
-        <h2 className="font-display text-[22px] lg:text-2xl font-extrabold text-ink mb-1.5 lg:mb-2">
+        <h2 className="text-xl lg:text-2xl font-extrabold text-ink mb-1.5 lg:mb-2">
           Thanks, we&apos;ve got it.
         </h2>
-        <p className="text-[14.5px] lg:text-[15px] text-body leading-normal mb-[18px] lg:mb-5">
+        <p className="text-sm lg:text-md text-body leading-normal mb-4.5 lg:mb-5">
           We&apos;ll call shortly to confirm your time. Need us sooner, give us a
           ring.
         </p>
         <a
           href={BUSINESS.phoneHref}
-          className="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-white font-bold text-[15px] lg:text-base px-[22px] py-3 lg:px-6 lg:py-[13px] rounded-[11px] lg:rounded-xl transition-colors"
+          className="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-white font-bold text-md lg:text-base px-5.5 py-3 lg:px-6 lg:py-3.25 rounded-xl transition-colors"
         >
           {BUSINESS.phoneDisplay}
         </a>
@@ -137,11 +138,11 @@ export default function AppointmentForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className={`${cardClass} px-5 py-[22px] lg:p-7 flex flex-col gap-[18px] lg:gap-5`}
+      className={`${cardClass} px-5 py-5.5 lg:p-7 flex flex-col gap-4.5 lg:gap-5`}
     >
-      <div className="grid gap-[18px] lg:grid-cols-2 lg:gap-4">
+      <div className="grid gap-4.5 lg:grid-cols-2 lg:gap-4">
         <div>
-          <label htmlFor="name" className={`${labelClass} mb-[7px] lg:mb-2`}>
+          <label htmlFor="name" className={`${labelClass} mb-1.75 lg:mb-2`}>
             Your name
           </label>
           <input
@@ -159,7 +160,7 @@ export default function AppointmentForm() {
           {fieldError(errors.name)}
         </div>
         <div>
-          <label htmlFor="phone" className={`${labelClass} mb-[7px] lg:mb-2`}>
+          <label htmlFor="phone" className={`${labelClass} mb-1.75 lg:mb-2`}>
             Phone number
           </label>
           <input
@@ -180,7 +181,7 @@ export default function AppointmentForm() {
       </div>
 
       <div>
-        <label htmlFor="email" className={`${labelClass} mb-[7px] lg:mb-2`}>
+        <label htmlFor="email" className={`${labelClass} mb-1.75 lg:mb-2`}>
           Email <span className="text-faint font-normal">(optional)</span>
         </label>
         <input
@@ -197,9 +198,22 @@ export default function AppointmentForm() {
         {fieldError(errors.email)}
       </div>
 
+      <div className="hidden" aria-hidden>
+        <label htmlFor="website">Website</label>
+        <input
+          id="website"
+          name="website"
+          type="text"
+          value={form.website}
+          onChange={handleChange}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <fieldset>
-        <legend className={`${labelClass} mb-[9px] lg:mb-2.5`}>What do you need?</legend>
-        <div className="flex flex-wrap gap-2 lg:gap-[9px]">
+        <legend className={`${labelClass} mb-2.25 lg:mb-2.5`}>What do you need?</legend>
+        <div className="flex flex-wrap gap-2 lg:gap-2.25">
           {appointmentTypes.map(({ value, short }) => {
             const selected = form.appointment === value;
             return (
@@ -213,28 +227,6 @@ export default function AppointmentForm() {
                   className="sr-only"
                 />
                 {short}
-              </label>
-            );
-          })}
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend className={`${labelClass} mb-[9px] lg:mb-2.5`}>Best time for our call</legend>
-        <div className="flex flex-wrap gap-2 lg:gap-[9px]">
-          {bestTimes.map((time) => {
-            const selected = form.bestTime === time;
-            return (
-              <label key={time} className={chipClass(selected)}>
-                <input
-                  type="radio"
-                  name="bestTime"
-                  value={time}
-                  checked={selected}
-                  onChange={handleChange}
-                  className="sr-only"
-                />
-                {time}
               </label>
             );
           })}
@@ -256,7 +248,7 @@ export default function AppointmentForm() {
       </label>
 
       {status === "error" && (
-        <div className="flex items-center gap-2.5 p-4 rounded-xl bg-[#fdf3f3] border border-closed/20 text-closed text-sm">
+        <div className="flex items-center gap-2.5 p-4 rounded-xl bg-closed-soft border border-closed/20 text-closed text-sm">
           <AlertCircle size={16} className="shrink-0" />
           <span>
             Something went wrong. Please try again or call us at{" "}
@@ -271,7 +263,7 @@ export default function AppointmentForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full flex items-center justify-center gap-2.5 bg-accent hover:bg-accent-hover disabled:opacity-60 text-white font-bold text-[15.5px] lg:text-base py-4 rounded-xl transition-colors"
+        className="w-full flex items-center justify-center gap-2.5 bg-accent hover:bg-accent-hover disabled:opacity-60 text-white font-bold text-md lg:text-base py-4 rounded-xl transition-colors"
       >
         {status === "loading" ? (
           <>
@@ -283,7 +275,7 @@ export default function AppointmentForm() {
         )}
       </button>
 
-      <p className="hidden lg:block text-[13px] text-[#8a9293] text-center">
+      <p className="hidden lg:block text-sm text-faint text-center">
         We&apos;ll only use your number to confirm this visit.
       </p>
     </form>

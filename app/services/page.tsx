@@ -83,11 +83,11 @@ const services: Service[] = [
 export default function ServicesPage() {
   return (
     <>
-      <section className="max-w-[1180px] mx-auto px-5 pt-7 lg:px-10 lg:pt-14">
-        <h1 className="font-display text-[30px] lg:text-5xl font-extrabold text-ink tracking-[-0.02em] lg:tracking-[-0.03em] mb-2 lg:mb-2.5">
+      <section className="max-w-295 mx-auto px-5 pt-7 lg:px-10 lg:pt-14">
+        <h1 className="text-3xl lg:text-5xl font-extrabold text-ink tracking-tight mb-2 lg:mb-2.5">
           Services
         </h1>
-        <p className="text-[15.5px] lg:text-lg leading-[1.55] text-body mb-[18px] lg:mb-7 lg:max-w-[620px]">
+        <p className="text-md lg:text-lg leading-normal text-body mb-4.5 lg:mb-7 lg:max-w-155">
           Exams, glasses, contacts and repairs, all at one shop in Rochester
           Hills.
         </p>
@@ -96,12 +96,12 @@ export default function ServicesPage() {
           {stats.map(({ value, label, labelWide }) => (
             <div
               key={value}
-              className="flex-1 rounded-xl lg:rounded-[14px] bg-surface px-2.5 py-[13px] lg:p-5 text-center"
+              className="flex-1 rounded-xl lg:rounded-2xl bg-surface px-2.5 py-3.25 lg:p-5 text-center"
             >
-              <div className="font-display text-[19px] lg:text-[26px] font-extrabold text-accent">
+              <div className="font-display text-lg lg:text-2xl font-extrabold text-accent">
                 {value}
               </div>
-              <div className="text-[11.5px] lg:text-[13.5px] text-body mt-0.5 lg:mt-[3px]">
+              <div className="text-xs lg:text-sm text-body mt-0.5 lg:mt-0.75">
                 <span className="lg:hidden">{label}</span>
                 <span className="hidden lg:inline">{labelWide}</span>
               </div>
@@ -110,21 +110,21 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="max-w-[1180px] mx-auto lg:px-10">
+      <section className="max-w-295 mx-auto lg:px-10">
         <div className="flex gap-3.5 overflow-x-auto snap-x snap-mandatory px-5 pt-1 pb-2.5 lg:grid lg:grid-cols-2 lg:gap-5 lg:p-0 lg:overflow-visible">
           {services.map(
             ({ id, title, badge, description, image, alt, chips, inverted }) => (
               <article
                 key={id}
                 id={id}
-                className={`scroll-mt-24 flex flex-col shrink-0 w-[290px] lg:w-auto snap-start rounded-[18px] lg:rounded-[20px] overflow-hidden ${
+                className={`scroll-mt-24 flex flex-col shrink-0 w-72.5 lg:w-auto snap-start rounded-2.5xl lg:rounded-2.5xl overflow-hidden ${
                   inverted
-                    ? "bg-accent text-white shadow-[0_2px_10px_rgba(20,24,26,0.06)] lg:justify-center"
-                    : "bg-white border border-hairline shadow-[0_2px_10px_rgba(20,24,26,0.04)]"
+                    ? "bg-accent text-white shadow-card lg:justify-center"
+                    : "bg-white border border-hairline shadow-card"
                 }`}
               >
                 {!inverted && image && (
-                  <div className="relative h-[152px] lg:h-[200px]">
+                  <div className="relative h-38 lg:h-50">
                     <Image
                       src={image}
                       alt={alt ?? ""}
@@ -132,33 +132,33 @@ export default function ServicesPage() {
                       className="object-cover duotone"
                       sizes="(max-width: 1024px) 290px, 50vw"
                     />
-                    <span className="absolute left-3.5 top-3.5 lg:left-4 lg:top-4 rounded-full bg-white/[0.94] backdrop-blur-sm px-[11px] py-1.5 lg:px-3 text-[11px] font-bold uppercase tracking-[0.1em] text-accent-hover">
+                    <span className="absolute left-3.5 top-3.5 lg:left-4 lg:top-4 rounded-full bg-white/94 backdrop-blur-sm px-2.75 py-1.5 lg:px-3 text-xs font-bold uppercase tracking-widest text-accent-hover">
                       {badge}
                     </span>
                   </div>
                 )}
-                <div className={inverted ? "px-5 py-[22px] lg:px-6 lg:py-7" : "p-5 lg:p-6"}>
+                <div className={inverted ? "px-5 py-5.5 lg:px-6 lg:py-7" : "p-5 lg:p-6"}>
                   {inverted && (
-                    <div className="text-[11px] font-bold uppercase tracking-[0.1em] text-accent-ondark mb-2 lg:mb-2.5">
+                    <div className="text-xs font-bold uppercase tracking-widest text-accent-ondark mb-2 lg:mb-2.5">
                       {badge}
                     </div>
                   )}
-                  <h2 className="font-display text-xl lg:text-[22px] font-extrabold mb-[7px] lg:mb-2">
+                  <h2 className="text-xl font-extrabold mb-1.75 lg:mb-2">
                     {title}
                   </h2>
                   <p
-                    className={`text-[14.5px] lg:text-[15px] leading-relaxed mb-3.5 lg:mb-4 ${
+                    className={`text-sm lg:text-md leading-relaxed mb-3.5 lg:mb-4 ${
                       inverted ? "text-white/90" : "text-body"
                     }`}
                   >
                     {description}
                   </p>
-                  <ul className="flex flex-wrap gap-[7px] lg:gap-2">
+                  <ul className="flex flex-wrap gap-1.75 lg:gap-2">
                     {chips.map((chip) => (
                       <li
                         key={chip}
-                        className={`inline-flex items-center gap-[5px] rounded-full px-[11px] py-1.5 lg:px-3 lg:py-[7px] text-[12.5px] lg:text-[13px] font-semibold ${
-                          inverted ? "bg-white/[0.16]" : "bg-surface-alt text-secondary"
+                        className={`inline-flex items-center gap-1.25 rounded-full px-2.75 py-1.5 lg:px-3 lg:py-1.75 text-xs lg:text-sm font-semibold ${
+                          inverted ? "bg-white/16" : "bg-surface-alt text-secondary"
                         }`}
                       >
                         <span aria-hidden className={inverted ? "" : "text-accent"}>
@@ -174,16 +174,16 @@ export default function ServicesPage() {
           )}
         </div>
 
-        <div className="mx-5 lg:mx-0 mt-[22px] lg:mt-5 flex items-start lg:items-center gap-[13px] lg:gap-3.5 rounded-[14px] lg:rounded-2xl bg-surface px-5 py-[18px] lg:px-6 lg:py-[22px]">
+        <div className="mx-5 lg:mx-0 mt-5.5 lg:mt-5 flex items-start lg:items-center gap-3.25 lg:gap-3.5 rounded-2xl bg-surface px-5 py-4.5 lg:px-6 lg:py-5.5">
           <span
             aria-hidden
-            className="flex h-9 w-9 lg:h-[42px] lg:w-[42px] shrink-0 items-center justify-center rounded-[10px] lg:rounded-xl bg-white border border-card-border text-accent text-lg lg:text-xl"
+            className="flex h-9 w-9 lg:h-10.5 lg:w-10.5 shrink-0 items-center justify-center rounded-xl bg-white border border-card-border text-accent text-lg lg:text-xl"
           >
             ☑
           </span>
           <div>
-            <p className="font-bold text-ink text-[15px] lg:text-base mb-[3px]">Insurance</p>
-            <p className="text-[13.5px] lg:text-[14.5px] text-body leading-normal">
+            <p className="font-bold text-ink text-md lg:text-base mb-0.75">Insurance</p>
+            <p className="text-sm text-body leading-normal">
               Have a vision plan? Bring it in and we&apos;ll help you use it.{" "}
               <a
                 href={BUSINESS.phoneHref}

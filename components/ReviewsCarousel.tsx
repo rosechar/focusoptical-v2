@@ -10,6 +10,7 @@ export default function ReviewsCarousel() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const id = setInterval(
       () => setIndex((i) => (i + 1) % REVIEWS.length),
       ROTATE_MS,
@@ -22,25 +23,25 @@ export default function ReviewsCarousel() {
   return (
     <section
       aria-label="Patient reviews"
-      className="bg-accent-soft px-[26px] py-10 lg:px-10 lg:py-16 text-center"
+      className="bg-accent-soft px-6.5 py-10 lg:px-10 lg:py-16 text-center"
     >
-      <p className="hidden lg:block text-accent font-bold text-xs tracking-[0.18em] uppercase mb-[30px]">
+      <p className="hidden lg:block text-accent font-bold text-xs tracking-eyebrow uppercase mb-7.5">
         What our patients say
       </p>
 
-      <div className="min-h-[150px] max-w-[760px] mx-auto flex items-center justify-center">
+      <div className="min-h-37.5 max-w-190 mx-auto flex items-center justify-center">
         {/* key remounts the quote so the fadeUp animation replays on change */}
         <blockquote key={index} className="animate-fade-up" aria-live="polite">
           <div
             aria-hidden
-            className="text-gold text-base lg:text-lg tracking-[3px] mb-4 lg:mb-[18px]"
+            className="text-gold text-base lg:text-lg tracking-eyebrow mb-4 lg:mb-4.5"
           >
             ★★★★★
           </div>
-          <p className="font-display text-xl leading-[1.45] lg:text-[27px] lg:leading-[1.42] lg:tracking-[-0.01em] font-semibold text-[#1f2a2b] mb-4 lg:mb-[18px]">
+          <p className="font-display text-xl leading-snug lg:text-2xl lg:tracking-normal font-semibold text-ink mb-4 lg:mb-4.5">
             &ldquo;{review.quote}&rdquo;
           </p>
-          <footer className="text-sm lg:text-[15px] font-bold text-accent">
+          <footer className="text-sm lg:text-md font-bold text-accent">
             <a
               href={review.href}
               target="_blank"
@@ -53,18 +54,18 @@ export default function ReviewsCarousel() {
         </blockquote>
       </div>
 
-      <div className="flex justify-center gap-[7px] lg:gap-2 mt-[22px] lg:mt-[26px]">
+      <div className="flex justify-center gap-1.75 lg:gap-2 mt-5.5 lg:mt-6.5">
         {REVIEWS.map((r, i) => (
           <button
             key={r.name}
             type="button"
             onClick={() => setIndex(i)}
             aria-label={`Show review from ${r.name}`}
-            aria-current={i === index}
-            className={`h-[7px] lg:h-2 rounded-full transition-all duration-300 ${
+            aria-current={i === index ? "true" : undefined}
+            className={`h-1.75 lg:h-2 rounded-full transition-all duration-300 ${
               i === index
                 ? "w-5 lg:w-6 bg-accent"
-                : "w-[7px] lg:w-2 bg-[#c2cdcd] hover:bg-accent/50"
+                : "w-1.75 lg:w-2 bg-field-border hover:bg-accent/50"
             }`}
           />
         ))}

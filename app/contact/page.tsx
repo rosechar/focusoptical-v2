@@ -28,10 +28,10 @@ export const metadata: Metadata = {
 function Hours() {
   return (
     <>
-      <h2 className="text-[13px] font-extrabold uppercase tracking-[0.1em] text-ink mb-3 lg:mb-3.5">
+      <h2 className="text-sm font-extrabold uppercase tracking-widest text-ink mb-3 lg:mb-3.5">
         Hours
       </h2>
-      <ul className="flex flex-col gap-2 lg:gap-[9px] text-[15px] lg:text-[15.5px]">
+      <ul className="flex flex-col gap-2 lg:gap-2.25 text-md">
         {HOURS.map(({ day, display, opens }) => (
           <li key={day} className="flex justify-between gap-3">
             <span className="text-body">{day}</span>
@@ -46,15 +46,15 @@ function Hours() {
 export default function ContactPage() {
   return (
     <>
-      <MapEmbed className="h-[210px] lg:h-80" />
+      <MapEmbed className="h-52.5 lg:h-80" />
 
-      <section className="max-w-[1180px] mx-auto px-5 pt-[26px] pb-10 lg:px-10 lg:pt-14 lg:pb-20">
-        <div className="lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:items-start">
+      <section className="max-w-295 mx-auto px-5 pt-6.5 pb-10 lg:px-10 lg:pt-14 lg:pb-20">
+        <div className="lg:grid lg:grid-cols-2 lg:gap-14 lg:items-start">
           <div>
-            <h1 className="font-display text-[30px] lg:text-[44px] font-extrabold text-ink tracking-[-0.02em] lg:tracking-[-0.03em] mb-1.5 lg:mb-2">
+            <h1 className="text-3xl lg:text-5xl font-extrabold text-ink tracking-tight mb-1.5 lg:mb-2">
               Book a visit
             </h1>
-            <p className="text-[15.5px] lg:text-lg leading-[1.55] text-body mb-[22px] lg:mb-[26px]">
+            <p className="text-md lg:text-lg leading-normal text-body mb-5.5 lg:mb-6.5">
               Send a request and we&apos;ll call to confirm, usually the same day.
               <span className="hidden lg:inline"> Walk-ins are always welcome too.</span>
             </p>
@@ -63,26 +63,26 @@ export default function ContactPage() {
 
             <a
               href={BUSINESS.phoneHref}
-              className="lg:hidden mt-3.5 flex items-center justify-center gap-[9px] border-[1.5px] border-field-border text-ink font-bold text-[15.5px] py-3.5 rounded-[11px] hover:border-accent hover:text-accent transition-colors"
+              className="lg:hidden mt-3.5 flex items-center justify-center gap-2.25 border-1.5 border-field-border text-ink font-bold text-md py-3.5 rounded-xl hover:border-accent hover:text-accent transition-colors"
             >
               Call {BUSINESS.phoneDisplay}
             </a>
 
-            <div className="lg:hidden mt-7 border-t border-hairline-soft pt-[22px]">
+            <div className="lg:hidden mt-7 border-t border-hairline-soft pt-5.5">
               <Hours />
             </div>
           </div>
 
-          <div className="hidden lg:block rounded-[20px] bg-surface p-7">
-            <h2 className="text-[13px] font-extrabold uppercase tracking-[0.1em] text-ink mb-[18px]">
+          <div className="hidden lg:block rounded-2.5xl bg-surface p-7">
+            <h2 className="text-sm font-extrabold uppercase tracking-widest text-ink mb-4.5">
               Visit &amp; call
             </h2>
             <a href={BUSINESS.phoneHref} className="group flex items-center gap-3.5 mb-4">
-              <span className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent">
+              <span className="flex h-11.5 w-11.5 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent">
                 <Phone size={20} />
               </span>
               <span>
-                <span className="block text-[13px] text-body">Call us</span>
+                <span className="block text-sm text-body">Call us</span>
                 <span className="text-lg font-bold text-ink group-hover:text-accent transition-colors">
                   {BUSINESS.phoneDisplay}
                 </span>
@@ -96,19 +96,19 @@ export default function ContactPage() {
             >
               <span
                 aria-hidden
-                className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent text-xl"
+                className="flex h-11.5 w-11.5 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent text-xl"
               >
                 ◎
               </span>
               <span>
-                <span className="block text-[13px] text-body">Visit us</span>
+                <span className="block text-sm text-body">Visit us</span>
                 <span className="text-base font-bold text-ink group-hover:text-accent transition-colors">
                   {BUSINESS.address.street}, {BUSINESS.address.city}
                 </span>
               </span>
             </a>
 
-            <div className="mt-6 border-t border-[#e6e9e9] pt-[22px]">
+            <div className="mt-6 border-t border-hairline pt-5.5">
               <Hours />
             </div>
           </div>

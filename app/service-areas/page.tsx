@@ -56,11 +56,11 @@ export default function ServiceAreasPage() {
     <>
       {/* Page header */}
       <section className="pt-12 sm:pt-16 pb-10">
-        <div className="max-w-[1180px] mx-auto px-5 sm:px-10">
-          <p className="text-accent font-semibold text-xs tracking-[0.16em] uppercase mb-3">
+        <div className="max-w-295 mx-auto px-5 sm:px-10">
+          <p className="text-accent font-semibold text-xs tracking-eyebrow uppercase mb-3">
             Oakland County &amp; surrounding communities
           </p>
-          <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-ink tracking-[-0.03em] leading-tight">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-ink tracking-tight leading-tight">
             Serving Rochester Hills &amp; all of Oakland County
           </h1>
           <p className="text-body mt-4 text-lg max-w-2xl leading-relaxed">
@@ -77,7 +77,7 @@ export default function ServiceAreasPage() {
             </Link>
             <a
               href={BUSINESS.phoneHref}
-              className="inline-flex items-center justify-center gap-2 border border-[#dcdfdf] text-ink hover:border-accent hover:text-accent font-semibold px-6 py-3 rounded-xl transition-colors"
+              className="inline-flex items-center justify-center gap-2 border border-field-border text-ink hover:border-accent hover:text-accent font-semibold px-6 py-3 rounded-xl transition-colors"
             >
               <Phone size={16} />
               {BUSINESS.phoneDisplay}
@@ -88,8 +88,8 @@ export default function ServiceAreasPage() {
 
       {/* Services available */}
       <section className="py-10 sm:py-12 bg-surface">
-        <div className="max-w-[1180px] mx-auto px-5 sm:px-10">
-          <h2 className="font-display text-2xl font-extrabold text-ink tracking-[-0.02em] mb-6">
+        <div className="max-w-295 mx-auto px-5 sm:px-10">
+          <h2 className="text-2xl font-extrabold text-ink tracking-tight mb-6">
             Available to all Oakland County patients
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2.5">
@@ -105,8 +105,8 @@ export default function ServiceAreasPage() {
 
       {/* Cities grid */}
       <section className="py-12 sm:py-16">
-        <div className="max-w-[1180px] mx-auto px-5 sm:px-10">
-          <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-ink tracking-[-0.02em] mb-3">
+        <div className="max-w-295 mx-auto px-5 sm:px-10">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight mb-3">
             Cities &amp; communities we serve
           </h2>
           <p className="text-body mb-9 max-w-2xl">
@@ -118,7 +118,7 @@ export default function ServiceAreasPage() {
               <Link
                 key={slug}
                 href={`/service-areas/${slug}`}
-                className={`group rounded-2xl p-6 border transition-all hover:shadow-[0_2px_10px_rgba(20,24,26,0.06)] ${
+                className={`group rounded-2xl p-6 border transition-all hover:shadow-card ${
                   primary
                     ? "bg-accent border-accent text-white"
                     : "bg-white border-hairline hover:border-accent"
@@ -186,10 +186,10 @@ export default function ServiceAreasPage() {
 
       {/* Find us + map */}
       <section className="py-12 sm:py-16 bg-surface">
-        <div className="max-w-[1180px] mx-auto px-5 sm:px-10">
+        <div className="max-w-295 mx-auto px-5 sm:px-10">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-start">
             <div>
-              <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-ink tracking-[-0.02em] mb-4">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight mb-4">
                 Find us in Rochester Hills
               </h2>
               <p className="text-body leading-relaxed mb-6">
@@ -239,8 +239,8 @@ export default function ServiceAreasPage() {
 
       {/* SEO content block */}
       <section className="py-12 sm:py-14">
-        <div className="max-w-[1180px] mx-auto px-5 sm:px-10">
-          <h2 className="font-display text-2xl font-extrabold text-ink tracking-[-0.02em] mb-4">
+        <div className="max-w-295 mx-auto px-5 sm:px-10">
+          <h2 className="text-2xl font-extrabold text-ink tracking-tight mb-4">
             Your local Oakland County optician
           </h2>
           <div className="text-body leading-relaxed space-y-4 max-w-3xl">

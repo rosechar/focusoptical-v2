@@ -15,7 +15,7 @@ export default function Footer() {
   return (
     <footer>
       {/* Mobile: tiny centered line */}
-      <div className="md:hidden border-t border-hairline-soft px-5 py-[18px] text-center text-xs leading-[1.6] text-faint">
+      <div className="md:hidden border-t border-hairline-soft px-5 py-4.5 text-center text-xs leading-relaxed text-faint">
         Focus Optical ·{" "}
         <a href={BUSINESS.phoneHref} className="hover:text-body transition-colors">
           {BUSINESS.phoneDisplay}
@@ -24,25 +24,25 @@ export default function Footer() {
       </div>
 
       {/* Desktop: dark footer */}
-      <div className="hidden md:block bg-dark text-[#9aa6a8]">
-        <div className="max-w-[1180px] mx-auto px-10 py-12 flex flex-wrap justify-between items-start gap-10">
-          <div className="max-w-[320px]">
+      <div className="hidden md:block bg-dark text-dark-muted">
+        <div className="max-w-295 mx-auto px-10 py-12 flex flex-wrap justify-between items-start gap-10">
+          <div className="max-w-80">
             <div className="flex items-center gap-2.5 mb-3.5">
               <Logo />
               <span className="font-display text-lg font-extrabold text-white">
                 Focus Optical
               </span>
             </div>
-            <p className="text-sm leading-[1.6]">
+            <p className="text-sm leading-relaxed">
               Independent, family-run optician in Rochester Hills since 1984.
             </p>
           </div>
           <div className="flex flex-wrap gap-14">
             <div>
-              <h2 className="text-xs font-extrabold uppercase tracking-[0.1em] text-white mb-3.5">
+              <h2 className="text-xs font-extrabold uppercase tracking-widest text-white mb-3.5">
                 Explore
               </h2>
-              <ul className="flex flex-col gap-[9px] text-[14.5px]">
+              <ul className="flex flex-col gap-2.25 text-sm">
                 {exploreLinks.map(({ href, label }) => (
                   <li key={href}>
                     <Link href={href} className="hover:text-white transition-colors">
@@ -53,7 +53,7 @@ export default function Footer() {
               </ul>
             </div>
             <div>
-              <h2 className="text-xs font-extrabold uppercase tracking-[0.1em] text-white mb-3.5">
+              <h2 className="text-xs font-extrabold uppercase tracking-widest text-white mb-3.5">
                 Visit &amp; call
               </h2>
               <a
@@ -76,8 +76,8 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="border-t border-[#232a2c]">
-          <div className="max-w-[1180px] mx-auto px-10 py-[18px] flex flex-wrap justify-between gap-2 text-[12.5px] text-[#6f7c7e]">
+        <div className="border-t border-dark-border">
+          <div className="max-w-295 mx-auto px-10 py-4.5 flex flex-wrap justify-between gap-2 text-xs text-dark-faint">
             <span>© {year} Focus Optical. All rights reserved.</span>
             <span>Rochester Hills, MI · Optician since 1984</span>
           </div>

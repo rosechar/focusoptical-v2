@@ -10,7 +10,7 @@ export default function MapEmbed({
   showInfo?: boolean;
 }) {
   return (
-    <div className={`relative isolate bg-[#e8eced] ${className}`}>
+    <div className={`relative isolate bg-surface ${className}`}>
       <iframe
         src={BUSINESS.mapsEmbedUrl}
         className="absolute inset-0 h-full w-full border-0"
@@ -20,28 +20,28 @@ export default function MapEmbed({
       />
       {showInfo && (
         <div className="pointer-events-none absolute inset-0">
-          <div className="max-w-[1180px] h-full mx-auto px-3.5 lg:px-10 flex items-end">
+          <div className="max-w-295 h-full mx-auto px-3.5 lg:px-10 flex items-end">
             <a
               href={BUSINESS.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="pointer-events-auto mb-3.5 lg:mb-6 flex items-center gap-[9px] lg:gap-3 rounded-[11px] lg:rounded-[14px] bg-white/95 backdrop-blur-sm px-[13px] py-2.5 lg:px-[18px] lg:py-3.5 text-ink shadow-[0_4px_14px_rgba(0,0,0,0.14)] lg:shadow-[0_6px_20px_rgba(0,0,0,0.16)] hover:bg-white transition-colors"
+              className="pointer-events-auto mb-3.5 lg:mb-6 flex items-center gap-2.25 lg:gap-3 rounded-xl lg:rounded-2xl bg-white/95 backdrop-blur-sm px-3.25 py-2.5 lg:px-4.5 lg:py-3.5 text-ink shadow-float hover:bg-white transition-colors"
             >
               <span
                 aria-hidden
-                className="flex h-[30px] w-[30px] lg:h-[38px] lg:w-[38px] shrink-0 items-center justify-center rounded-lg lg:rounded-[10px] bg-accent-soft text-accent text-base lg:text-lg"
+                className="flex h-7.5 w-7.5 lg:h-9.5 lg:w-9.5 shrink-0 items-center justify-center rounded-lg lg:rounded-xl bg-accent-soft text-accent text-base lg:text-lg"
               >
                 ◎
               </span>
               <span>
-                <span className="block text-[13px] lg:text-[15px] font-bold leading-[1.2]">
+                <span className="block text-sm lg:text-md font-bold leading-tight">
                   <span className="lg:hidden">{BUSINESS.address.street}</span>
                   <span className="hidden lg:inline">
                     {BUSINESS.address.street}, {BUSINESS.address.city},{" "}
                     {BUSINESS.address.state}
                   </span>
                 </span>
-                <span className="block text-[11.5px] lg:text-[13px] text-body">
+                <span className="block text-xs lg:text-sm text-body">
                   <span className="lg:hidden">{BUSINESS.address.city} · </span>
                   Get directions →
                 </span>

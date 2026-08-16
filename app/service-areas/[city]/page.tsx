@@ -100,7 +100,7 @@ export default async function CityPage({ params }: Props) {
 
       {/* Breadcrumb + header */}
       <section className="pt-10 sm:pt-14 pb-10">
-        <div className="max-w-[1180px] mx-auto px-5 sm:px-10">
+        <div className="max-w-295 mx-auto px-5 sm:px-10">
           <nav aria-label="Breadcrumb" className="text-sm text-body mb-5">
             <Link href="/service-areas" className="hover:text-accent transition-colors">
               Service areas
@@ -108,10 +108,10 @@ export default async function CityPage({ params }: Props) {
             <span className="mx-2 text-hairline">/</span>
             <span className="text-ink">{area.city}</span>
           </nav>
-          <p className="text-accent font-semibold text-xs tracking-[0.16em] uppercase mb-3">
+          <p className="text-accent font-semibold text-xs tracking-eyebrow uppercase mb-3">
             Serving {area.city}, Michigan
           </p>
-          <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-ink tracking-[-0.03em] leading-tight">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-ink tracking-tight leading-tight">
             {area.primary
               ? `Your optician in ${area.city}`
               : `Optician & eye exams near ${area.city}`}
@@ -130,7 +130,7 @@ export default async function CityPage({ params }: Props) {
             </Link>
             <a
               href={BUSINESS.phoneHref}
-              className="inline-flex items-center justify-center gap-2 border border-[#dcdfdf] text-ink hover:border-accent hover:text-accent font-semibold px-6 py-3 rounded-xl transition-colors"
+              className="inline-flex items-center justify-center gap-2 border border-field-border text-ink hover:border-accent hover:text-accent font-semibold px-6 py-3 rounded-xl transition-colors"
             >
               <Phone size={16} />
               {BUSINESS.phoneDisplay}
@@ -141,7 +141,7 @@ export default async function CityPage({ params }: Props) {
 
       {/* Quick facts */}
       <section className="bg-surface py-5">
-        <div className="max-w-[1180px] mx-auto px-5 sm:px-10 grid sm:grid-cols-3 gap-4 text-sm">
+        <div className="max-w-295 mx-auto px-5 sm:px-10 grid sm:grid-cols-3 gap-4 text-sm">
           <div className="flex items-center gap-2.5 text-body">
             <Clock size={18} className="text-accent shrink-0" />
             {area.driveTime}
@@ -160,9 +160,9 @@ export default async function CityPage({ params }: Props) {
 
       {/* Main content */}
       <section className="py-12 sm:py-16">
-        <div className="max-w-[1180px] mx-auto px-5 sm:px-10 grid lg:grid-cols-3 gap-10">
+        <div className="max-w-295 mx-auto px-5 sm:px-10 grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-5">
-            <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-ink tracking-[-0.02em]">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
               {area.primary
                 ? `Quality optical care in ${area.city}`
                 : `Why ${area.city} chooses Focus Optical`}
@@ -184,7 +184,7 @@ export default async function CityPage({ params }: Props) {
           </div>
 
           <aside className="bg-surface rounded-2xl p-6 h-fit">
-            <h3 className="font-display font-bold text-ink text-lg mb-4">
+            <h3 className="font-bold text-ink text-lg mb-4">
               Services for {area.city} patients
             </h3>
             <ul className="space-y-2.5 mb-6">
@@ -207,8 +207,8 @@ export default async function CityPage({ params }: Props) {
 
       {/* FAQs */}
       <section className="py-12 sm:py-16 bg-surface">
-        <div className="max-w-[920px] mx-auto px-5 sm:px-10">
-          <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-ink tracking-[-0.02em] mb-8">
+        <div className="max-w-230 mx-auto px-5 sm:px-10">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight mb-8">
             Common questions from {area.city} patients
           </h2>
           <div className="space-y-4">
@@ -232,8 +232,8 @@ export default async function CityPage({ params }: Props) {
       />
 
       <section className="pb-14">
-        <div className="max-w-[1180px] mx-auto px-5 sm:px-10">
-          <h2 className="font-display text-lg font-bold text-ink tracking-[-0.01em] mb-4">
+        <div className="max-w-295 mx-auto px-5 sm:px-10">
+          <h2 className="text-lg font-bold text-ink tracking-normal mb-4">
             Other communities we serve
           </h2>
           <div className="flex flex-wrap gap-2">

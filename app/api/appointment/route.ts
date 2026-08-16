@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { getAppointmentLabel, isBestTime } from "@/lib/appointments";
+import { getAppointmentLabel } from "@/lib/appointments";
 import { emailRegex, isValidPhone } from "@/lib/validation";
 import {
   ownerNotificationEmail,
@@ -34,10 +34,13 @@ export async function POST(request: Request) {
   const phone = typeof payload.phone === "string" ? payload.phone.trim() : "";
   const appointment =
     typeof payload.appointment === "string" ? payload.appointment : "";
-  const bestTime = isBestTime(payload.bestTime) ? payload.bestTime : "";
-  const details =
-    typeof payload.details === "string" ? payload.details.trim() : "";
   const optIn = payload.optIn !== false;
+
+  // Honeypot: real visitors never see this field, so any value means a bot.
+  // Return the normal success shape so the bot has nothing to learn from.
+  if (typeof payload.website === "string" && payload.website.trim() !== "") {
+    return NextResponse.json({ ok: true });
+  }
 
   const appointmentLabel = getAppointmentLabel(appointment);
 
@@ -59,8 +62,6 @@ export async function POST(request: Request) {
     email,
     phone,
     appointmentLabel,
-    bestTime,
-    details,
   };
 
   const resend = new Resend(apiKey);

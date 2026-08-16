@@ -5,6 +5,16 @@
   --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
 
+  /* Body copy in the design sits at 15px, between Tailwind's sm and base. */
+  --text-md: 0.9375rem;
+  --text-md--line-height: 1.5;
+
+  /* Uppercase eyebrows use wider tracking than the default `widest` (0.1em). */
+  --tracking-eyebrow: 0.16em;
+
+  /* Hero card / large cards use a 20px radius, between 2xl (16px) and 3xl (24px). */
+  --radius-2\.5xl: 1.25rem;
+
   /* Brand accent — Slate Blue */
   --color-accent: #2f5286;
   --color-accent-hover: #21406c;
@@ -28,11 +38,65 @@
 
   /* Dark UI (utility bar, footer, toast) */
   --color-dark: #14181a;
-  --color-dark-sub: #1d2224;
+  --color-dark-border: #232a2c;
+  --color-dark-fg: #c2cccd;
+  --color-dark-muted: #9aa6a8;
+  --color-dark-faint: #6f7c7e;
 
   /* Accents */
   --color-closed: #a8383a;
+  --color-closed-soft: #fdf3f3;
   --color-gold: #d99a13;
+
+  /* Shadows */
+  --shadow-card: 0 2px 10px rgb(20 24 26 / 0.04);
+  --shadow-hero: 0 14px 38px rgb(16 22 24 / 0.16);
+  --shadow-float: 0 6px 20px rgb(0 0 0 / 0.16);
+  --shadow-toast: 0 16px 44px rgb(0 0 0 / 0.32);
+
+  /* Motion */
+  --animate-page-in: page-in 0.35s ease both;
+  --animate-fade-up: fade-up 0.5s ease both;
+  --animate-toast-in: toast-in 0.5s cubic-bezier(0.2, 0.85, 0.25, 1) both;
+
+  @keyframes page-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(26px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/* Soft duotone photo treatment. Applied to every photo; the map iframe stays unfiltered. */
+@utility duotone {
+  filter: sepia(0.32) saturate(1.15) contrast(0.98) hue-rotate(-8deg);
+}
+
+/* Outlined buttons and chips use a 1.5px stroke, which the integer border scale can't express. */
+@utility border-1.5 {
+  border-width: 1.5px;
 }
 
 @layer base {
@@ -44,70 +108,19 @@
   }
   h1,
   h2,
-  h3,
-  .font-display {
+  h3 {
     font-family: var(--font-display);
   }
-}
 
-/* Soft duotone photo treatment. Applied to every photo; the map iframe stays unfiltered. */
-.duotone {
-  filter: sepia(0.32) saturate(1.15) contrast(0.98) hue-rotate(-8deg);
-}
-
-@keyframes pageIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes toastIn {
-  from {
-    opacity: 0;
-    transform: translateY(26px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.animate-page-in {
-  animation: pageIn 0.35s ease;
-}
-.animate-fade-up {
-  animation: fadeUp 0.5s ease;
-}
-.animate-toast-in {
-  animation: toastIn 0.5s cubic-bezier(0.2, 0.85, 0.25, 1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  .animate-page-in,
-  .animate-fade-up,
-  .animate-toast-in {
-    animation: none;
-  }
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0.01ms !important;
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }

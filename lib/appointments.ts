@@ -16,9 +16,3 @@ export const appointmentTypes: AppointmentType[] = [
 export const getAppointmentLabel = (value: string): string | undefined =>
   appointmentTypes.find((t) => t.value === value)?.label;
 
-/** "Best time for our call" options. Stored and emailed as the label itself. */
-export const bestTimes = ["Mornings", "Afternoons", "Saturday"] as const;
-export type BestTime = (typeof bestTimes)[number];
-
-export const isBestTime = (value: unknown): value is BestTime =>
-  typeof value === "string" && (bestTimes as readonly string[]).includes(value);
