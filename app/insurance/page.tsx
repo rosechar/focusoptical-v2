@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Phone, ShieldCheck, HelpCircle } from "lucide-react";
+import Button from "@/components/Button";
 import CtaBand from "@/components/CtaBand";
 import { BUSINESS } from "@/lib/business";
 import { faqJsonLd } from "@/lib/schema";
+import Faq from "@/components/Faq";
 
 export const metadata: Metadata = {
   title: "Vision Insurance & Pricing",
@@ -43,80 +45,63 @@ export default function InsurancePage() {
       />
 
       {/* Page header */}
-      <section className="pt-12 sm:pt-16 pb-8">
-        <div className="max-w-295 mx-auto px-5 sm:px-10">
-          <p className="text-accent font-semibold text-xs tracking-eyebrow uppercase mb-3">
-            Coverage &amp; costs
-          </p>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-ink tracking-tight">
-            Insurance &amp; pricing at our Rochester Hills shop
-          </h1>
-          <p className="text-body mt-3 text-lg max-w-xl leading-relaxed">
-            We take most of the common vision plans. Give us a call and we&apos;ll
-            check yours.
-          </p>
-        </div>
+      <section className="max-w-295 mx-auto px-5 pt-7 pb-6 lg:px-10 lg:pt-14 lg:pb-8">
+        <p className="text-accent font-bold text-xs tracking-eyebrow uppercase mb-2.5 lg:mb-3">
+          Coverage &amp; costs
+        </p>
+        <h1 className="text-3xl lg:text-5xl font-extrabold text-ink tracking-tight text-balance">
+          Insurance &amp; pricing at our Rochester Hills shop
+        </h1>
+        <p className="text-md lg:text-lg leading-normal text-body mt-3 lg:mt-4 max-w-155">
+          We take most of the common vision plans. Give us a call and we&apos;ll
+          check yours.
+        </p>
       </section>
 
-      <section className="pb-12 sm:pb-16">
-        <div className="max-w-295 mx-auto px-5 sm:px-10">
-          <div className="grid sm:grid-cols-2 gap-5 sm:gap-6 mb-12">
-            <div className="rounded-2xl bg-accent-soft p-6 sm:p-8">
-              <ShieldCheck className="text-accent mb-4" size={28} />
-              <h2 className="text-xl font-bold text-ink mb-3">
-                Insurance accepted
-              </h2>
-              <p className="text-body leading-relaxed mb-5">
-                We take a lot of the common vision plans. Give us a call before
-                your visit and we&apos;ll make sure yours is covered.
-              </p>
-              <a
-                href={BUSINESS.phoneHref}
-                className="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors"
-              >
-                <Phone size={15} />
-                Call {BUSINESS.phoneDisplay}
-              </a>
-            </div>
-
-            <div className="rounded-2xl bg-surface p-6 sm:p-8">
-              <HelpCircle className="text-body mb-4" size={28} />
-              <h2 className="text-xl font-bold text-ink mb-3">
-                Pricing questions
-              </h2>
-              <p className="text-body leading-relaxed mb-5">
-                What you pay depends on the exam, the frames, and the lenses you
-                pick. We keep it fair and won&apos;t push you toward anything you
-                don&apos;t need.
-              </p>
-              <a
-                href={BUSINESS.phoneHref}
-                className="inline-flex items-center gap-2 border border-field-border text-ink hover:border-accent hover:text-accent font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors"
-              >
-                <Phone size={15} />
-                Call for details
-              </a>
-            </div>
+      <section className="max-w-295 mx-auto px-5 pb-8 lg:px-10 lg:pb-16">
+        <div className="grid sm:grid-cols-2 gap-3.5 lg:gap-5 mb-8 lg:mb-12">
+          <div className="rounded-2xl lg:rounded-2.5xl bg-accent-soft p-5 lg:p-8">
+            <ShieldCheck className="text-accent mb-3.5 lg:mb-4" size={28} aria-hidden />
+            <h2 className="text-lg lg:text-xl font-extrabold text-ink mb-2 lg:mb-3">
+              Insurance accepted
+            </h2>
+            <p className="text-md lg:text-base text-body leading-normal mb-4 lg:mb-5">
+              We take a lot of the common vision plans. Give us a call before
+              your visit and we&apos;ll make sure yours is covered.
+            </p>
+            <Button href={BUSINESS.phoneHref} size="sm">
+              <Phone size={15} aria-hidden />
+              Call {BUSINESS.phoneDisplay}
+            </Button>
           </div>
 
-          {/* FAQ */}
-          <h2 className="text-2xl font-extrabold text-ink tracking-tight mb-5">
-            Frequently asked questions
-          </h2>
-          <div className="space-y-3">
-            {faqs.map(({ q, a }) => (
-              <div key={q} className="rounded-2xl border border-hairline p-5 sm:p-6">
-                <h3 className="font-semibold text-ink mb-2">{q}</h3>
-                <p className="text-body leading-relaxed">{a}</p>
-              </div>
-            ))}
+          <div className="rounded-2xl lg:rounded-2.5xl bg-surface p-5 lg:p-8">
+            <HelpCircle className="text-body mb-3.5 lg:mb-4" size={28} aria-hidden />
+            <h2 className="text-lg lg:text-xl font-extrabold text-ink mb-2 lg:mb-3">
+              Pricing questions
+            </h2>
+            <p className="text-md lg:text-base text-body leading-normal mb-4 lg:mb-5">
+              What you pay depends on the exam, the frames, and the lenses you
+              pick. We keep it fair and won&apos;t push you toward anything you
+              don&apos;t need.
+            </p>
+            <Button href={BUSINESS.phoneHref} variant="outline" size="sm">
+              <Phone size={15} aria-hidden />
+              Call for details
+            </Button>
           </div>
         </div>
+
+        <h2 className="text-xl lg:text-3xl font-extrabold text-ink tracking-tight mb-4 lg:mb-6">
+          Frequently asked questions
+        </h2>
+        <Faq items={faqs} />
       </section>
 
       <CtaBand
         heading="Still have questions?"
         subtext="Book a visit and we'll walk through your plan and pricing in person."
+        className="pb-10 lg:pb-20"
       />
     </>
   );

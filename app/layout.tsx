@@ -70,8 +70,14 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased bg-white text-ink">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-100 focus:rounded-xl focus:bg-white focus:px-4 focus:py-2.5 focus:text-md focus:font-bold focus:text-accent focus:shadow-float"
+        >
+          Skip to content
+        </a>
         <Header />
-        <main>{children}</main>
+        <main id="main">{children}</main>
         <Footer />
         <PromoToast />
         <Analytics />

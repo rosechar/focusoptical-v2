@@ -3,7 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Phone } from "lucide-react";
 import { BUSINESS, GOOGLE_REVIEWS } from "@/lib/business";
+import { SERVICES } from "@/lib/services";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
+import Button from "@/components/Button";
 import CtaBand from "@/components/CtaBand";
 
 export const metadata: Metadata = {
@@ -14,37 +16,6 @@ export const metadata: Metadata = {
     canonical: "/",
   },
 };
-
-const whatWeDo = [
-  {
-    href: "/services#eye-exams",
-    title: "Eye exams",
-    description: "Comprehensive exams with Dr. Galper, OD.",
-    image: "/images/tool.jpeg",
-    alt: "Eye exam equipment",
-  },
-  {
-    href: "/services#contact-exams",
-    title: "Contact lens exams",
-    description: "A proper fitting with a full exam included.",
-    image: "/images/contact.jpg",
-    alt: "Contact lens fitting",
-  },
-  {
-    href: "/services#retail",
-    title: "Glasses & contacts",
-    description: "A wide selection, or re-lens your frames.",
-    image: "/images/contact1.jpg",
-    alt: "Eyeglass frame selection",
-  },
-  {
-    href: "/services#adjustments",
-    title: "Free adjustments",
-    description: "Any pair, anywhere. No charge, no appointment.",
-    image: "/images/glasses3.jpg",
-    alt: "Eyeglass adjustment",
-  },
-];
 
 const why = [
   { title: "Made by hand", description: "Tom makes every pair himself." },
@@ -91,20 +62,19 @@ export default function HomePage() {
               Stop by for your annual eye exam, new glasses, or contacts.
             </p>
             <div className="flex gap-2.5 lg:gap-3.25">
-              <Link
-                href="/contact"
-                className="flex-1 lg:flex-none text-center bg-accent hover:bg-accent-hover text-white font-bold text-md lg:text-base py-3.5 lg:px-7 lg:py-4 rounded-xl transition-colors"
-              >
+              <Button href="/contact" size="lg" className="flex-1 lg:flex-none">
                 Book a visit
-              </Link>
-              <a
+              </Button>
+              <Button
                 href={BUSINESS.phoneHref}
-                className="flex-1 lg:flex-none inline-flex items-center justify-center gap-2 border-1.5 border-field-border text-ink font-bold text-md lg:text-base py-3 lg:px-6.5 lg:py-3.5 rounded-xl hover:border-accent hover:text-accent transition-colors"
+                variant="outline"
+                size="lg"
+                className="flex-1 lg:flex-none"
               >
                 <Phone size={16} className="hidden lg:inline" />
                 <span className="lg:hidden">Call us</span>
                 <span className="hidden lg:inline">{BUSINESS.phoneDisplay}</span>
-              </a>
+              </Button>
             </div>
           </div>
 
@@ -159,10 +129,10 @@ export default function HomePage() {
           </Link>
         </div>
         <div className="flex gap-3.25 overflow-x-auto snap-x snap-mandatory scroll-pl-5 scrollbar-visible px-5 pt-4.5 pb-5.5 lg:grid lg:grid-cols-4 lg:gap-4.5 lg:px-10 lg:pt-0 lg:pb-0 lg:overflow-visible">
-          {whatWeDo.map(({ href, title, description, image, alt }) => (
+          {SERVICES.map(({ id, title, summary, image, alt }) => (
             <Link
-              key={title}
-              href={href}
+              key={id}
+              href={`/services#${id}`}
               className="shrink-0 w-43 lg:w-auto snap-start rounded-2xl border border-hairline bg-white overflow-hidden lg:shadow-card hover:border-accent transition-colors"
             >
               <div className="relative h-29 lg:h-37.5">
@@ -180,7 +150,7 @@ export default function HomePage() {
                   {title}
                 </h3>
                 <p className="text-sm text-body leading-snug lg:leading-normal">
-                  {description}
+                  {summary}
                 </p>
               </div>
             </Link>
@@ -223,7 +193,8 @@ export default function HomePage() {
 
       {/* Closing CTA + Owner: CTA first on mobile, owner first on desktop */}
       <div className="flex flex-col">
-        <section className="order-2 lg:order-1 max-w-295 w-full mx-auto px-5 pt-4.5 pb-10 lg:px-10 lg:py-18">
+        <section className="order-2 lg:order-1 bg-accent-soft lg:bg-transparent">
+          <div className="max-w-295 mx-auto px-5 py-8 lg:px-10 lg:py-18">
           {/* Mobile: avatar + short note */}
           <div className="lg:hidden flex gap-4 items-start">
             <div className="relative h-17 w-17 shrink-0 rounded-full overflow-hidden">
@@ -274,13 +245,11 @@ export default function HomePage() {
                 Getting the fit right is a bit of a lost art, and it&apos;s the
                 part I like most.
               </p>
-              <Link
-                href="/about"
-                className="inline-block border-1.5 border-accent text-accent hover:bg-accent-soft font-bold text-md px-6 py-3.25 rounded-xl transition-colors"
-              >
+              <Button href="/about" variant="accent-outline">
                 More about us →
-              </Link>
+              </Button>
             </div>
+          </div>
           </div>
         </section>
 

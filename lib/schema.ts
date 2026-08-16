@@ -1,33 +1,10 @@
 import { BUSINESS, HOURS, PEOPLE, SITE_URL, SOCIAL_PROFILES } from "@/lib/business";
 import { CITIES } from "@/lib/cities";
+import { SERVICES } from "@/lib/services";
 
 export const BUSINESS_ID = `${SITE_URL}/#business`;
 export const OWNER_ID = `${SITE_URL}/#tom-hamilton`;
 export const OPTOMETRIST_ID = `${SITE_URL}/#diane-galper`;
-
-/** Services offered, mirrored in the LocalBusiness offer catalog and the /services page anchors. */
-export const SERVICE_CATALOG = [
-  {
-    id: "eye-exams",
-    name: "Comprehensive Eye Exams",
-    description: "Annual vision assessments for all ages, performed by Dr. Diane Galper, OD.",
-  },
-  {
-    id: "contact-exams",
-    name: "Contact Lens Exams & Fittings",
-    description: "Fit and eye-health check with a full eye exam included in the same visit.",
-  },
-  {
-    id: "retail",
-    name: "Prescription Glasses & Contact Lenses",
-    description: "Frames for every budget, contact lens brands, and new lenses cut for frames you already own. Most prescriptions ready next day.",
-  },
-  {
-    id: "adjustments",
-    name: "Free Eyeglass Adjustments & Cleaning",
-    description: "Free for anyone, on glasses bought anywhere. No purchase or appointment needed.",
-  },
-] as const;
 
 const owner = {
   "@type": "Person",
@@ -98,12 +75,12 @@ export const businessJsonLd = {
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Optical services",
-        itemListElement: SERVICE_CATALOG.map(({ id, name, description }) => ({
+        itemListElement: SERVICES.map(({ id, title, description }) => ({
           "@type": "Offer",
           url: `${SITE_URL}/services#${id}`,
           itemOffered: {
             "@type": "Service",
-            name,
+            name: title,
             description,
             provider: { "@id": BUSINESS_ID },
           },

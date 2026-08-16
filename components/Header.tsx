@@ -5,7 +5,13 @@ import { usePathname } from "next/navigation";
 import { Phone, MapPin } from "lucide-react";
 import { BUSINESS } from "@/lib/business";
 import { NAV_TABS } from "@/lib/nav";
+import Button from "@/components/Button";
 import Logo from "@/components/Logo";
+
+const navLinkClass = (active: boolean) =>
+  `rounded-full text-md transition-colors ${
+    active ? "bg-accent-soft text-accent font-bold" : "text-body font-semibold hover:bg-surface"
+  }`;
 
 export default function Header() {
   const pathname = usePathname();
@@ -14,7 +20,7 @@ export default function Header() {
   return (
     <>
       {/* Desktop utility bar */}
-      <div className="hidden lg:block bg-dark text-dark-fg text-sm">
+      <section aria-label="Store address and phone" className="hidden lg:block bg-dark text-dark-fg text-sm">
         <div className="max-w-295 mx-auto px-10 py-2 flex items-center justify-between">
           <a
             href={BUSINESS.mapsUrl}
@@ -37,7 +43,7 @@ export default function Header() {
             </a>
           </div>
         </div>
-      </div>
+      </section>
 
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-hairline-soft">
         <div className="max-w-295 mx-auto px-4.5 lg:px-10">
@@ -56,37 +62,24 @@ export default function Header() {
                   key={href}
                   href={href}
                   aria-current={isActive(href) ? "page" : undefined}
-                  className={`px-4 py-2.25 rounded-full text-md transition-colors ${
-                    isActive(href)
-                      ? "bg-accent-soft text-accent font-bold"
-                      : "text-body font-semibold hover:bg-surface"
-                  }`}
+                  className={`px-4 py-2.25 ${navLinkClass(isActive(href))}`}
                 >
                   {label}
                 </Link>
               ))}
-              <a
-                href={BUSINESS.phoneHref}
-                className="ml-3.5 inline-flex items-center gap-1.75 rounded-full border-1.5 border-field-border px-4 py-2.25 text-sm font-bold text-ink hover:border-accent hover:text-accent transition-colors"
-              >
+              <Button href={BUSINESS.phoneHref} variant="outline" size="sm" pill className="ml-3.5 gap-1.75">
                 <Phone size={14} />
                 {BUSINESS.phoneDisplay}
-              </a>
-              <Link
-                href="/contact"
-                className="inline-flex items-center rounded-full bg-accent hover:bg-accent-hover px-5 py-2.75 text-sm font-bold text-white transition-colors"
-              >
+              </Button>
+              <Button href="/contact" size="sm" pill>
                 Book a visit
-              </Link>
+              </Button>
             </nav>
 
             {/* Mobile call pill */}
-            <a
-              href={BUSINESS.phoneHref}
-              className="lg:hidden inline-flex items-center whitespace-nowrap rounded-full bg-accent hover:bg-accent-hover px-4.5 py-2.5 text-sm font-bold text-white transition-colors"
-            >
+            <Button href={BUSINESS.phoneHref} size="sm" pill className="lg:hidden whitespace-nowrap">
               {BUSINESS.phoneDisplay}
-            </a>
+            </Button>
           </div>
         </div>
 
@@ -97,11 +90,7 @@ export default function Header() {
               key={href}
               href={href}
               aria-current={isActive(href) ? "page" : undefined}
-              className={`flex-1 text-center rounded-full px-3 py-2 text-sm transition-colors ${
-                isActive(href)
-                  ? "bg-accent-soft text-accent font-bold"
-                  : "text-body font-semibold hover:bg-surface"
-              }`}
+              className={`flex-1 text-center px-3 py-2 text-sm ${navLinkClass(isActive(href))}`}
             >
               {label}
             </Link>

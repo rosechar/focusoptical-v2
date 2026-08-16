@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ChevronDown } from "lucide-react";
 import CtaBand from "@/components/CtaBand";
 import { BUSINESS } from "@/lib/business";
 import { faqJsonLd } from "@/lib/schema";
+import { SERVICES, type Service } from "@/lib/services";
+import Faq from "@/components/Faq";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -18,59 +19,6 @@ const stats = [
   { value: "45+", label: "years", labelWide: "years of experience" },
   { value: "Next-day", label: "most Rx", labelWide: "on most prescriptions" },
   { value: "Free", label: "adjustments", labelWide: "adjustments for anyone" },
-];
-
-interface Service {
-  id: string;
-  title: string;
-  badge: string;
-  description: string;
-  image?: string;
-  alt?: string;
-  chips: string[];
-  inverted?: boolean;
-}
-
-const services: Service[] = [
-  {
-    id: "eye-exams",
-    title: "Eye exams",
-    badge: "Annual vision assessment",
-    description:
-      "Comprehensive exams with Dr. Diane Galper, OD. We recommend one every year, at any age.",
-    image: "/images/tool.jpeg",
-    alt: "Eye exam equipment at Focus Optical",
-    chips: ["Licensed optometrist", "Full vision check", "All ages"],
-  },
-  {
-    id: "contact-exams",
-    title: "Contact lens exams",
-    badge: "Specialized fitting",
-    description:
-      "A contact exam checks the fit and the health of your eyes. A full eye exam is included, so it's one visit.",
-    image: "/images/contact.jpg",
-    alt: "Contact lens fitting at Focus Optical",
-    chips: ["Proper fit & comfort", "Full exam included", "Trial lenses"],
-  },
-  {
-    id: "retail",
-    title: "Glasses & contacts",
-    badge: "Wide selection",
-    description:
-      "Frames for every budget and the contact brands you need. Keep your favorite frames if you like and we'll cut new lenses for them.",
-    image: "/images/contact1.jpg",
-    alt: "Eyeglass frame selection at Focus Optical",
-    chips: ["Every budget", "Re-lens your frames", "Next-day service"],
-  },
-  {
-    id: "adjustments",
-    title: "Free adjustments",
-    badge: "Free for everyone",
-    description:
-      "Bring in any pair, bought anywhere. We'll fix the fit and clean them, no charge and no appointment.",
-    chips: ["No purchase needed", "Cleaning included", "Just walk in"],
-    inverted: true,
-  },
 ];
 
 const faqs = [
@@ -121,11 +69,11 @@ function ServiceCard({
           : "bg-white border border-hairline shadow-card"
       }`}
     >
-      {!inverted && image && (
+      {!inverted && (
         <div className="relative h-38 lg:h-50">
           <Image
             src={image}
-            alt={alt ?? ""}
+            alt={alt}
             fill
             className="object-cover duotone"
             sizes="(max-width: 1024px) 290px, 50vw"
@@ -191,7 +139,7 @@ function Stats() {
 }
 
 export default function ServicesPage() {
-  const [firstPair, secondPair] = [services.slice(0, 2), services.slice(2)];
+  const [firstPair, secondPair] = [SERVICES.slice(0, 2), SERVICES.slice(2)];
 
   return (
     <>
@@ -204,8 +152,13 @@ export default function ServicesPage() {
       <section className="max-w-295 mx-auto pt-5 lg:px-10 lg:pt-14">
         {/* Mobile: one horizontal scroller, stats underneath */}
         <div className="lg:hidden">
-          <div className="flex gap-3.5 overflow-x-auto snap-x snap-mandatory scroll-pl-5 scrollbar-visible px-5 pt-1 pb-4">
-            {services.map((service) => (
+          <div
+            role="region"
+            aria-label="Services"
+            tabIndex={0}
+            className="flex gap-3.5 overflow-x-auto snap-x snap-mandatory scroll-pl-5 scrollbar-visible px-5 pt-1 pb-4 focus-visible:-outline-offset-2"
+          >
+            {SERVICES.map((service) => (
               <ServiceCard key={service.id} {...service} />
             ))}
           </div>
@@ -257,26 +210,7 @@ export default function ServicesPage() {
         <h2 className="text-xl lg:text-3xl font-extrabold text-ink tracking-tight mb-4 lg:mb-6">
           Common questions
         </h2>
-        <div className="flex flex-col gap-3 lg:grid lg:grid-cols-2 lg:gap-4 lg:items-start">
-          {faqs.map(({ q, a }) => (
-            <details
-              key={q}
-              className="group rounded-2xl border border-hairline open:border-accent transition-colors"
-            >
-              <summary className="flex items-center justify-between gap-4 cursor-pointer list-none p-5 lg:p-6 font-bold text-ink text-md lg:text-base [&::-webkit-details-marker]:hidden">
-                {q}
-                <ChevronDown
-                  size={18}
-                  className="shrink-0 text-accent transition-transform group-open:rotate-180"
-                  aria-hidden
-                />
-              </summary>
-              <p className="px-5 pb-5 lg:px-6 lg:pb-6 -mt-1 text-sm lg:text-md text-body leading-relaxed">
-                {a}
-              </p>
-            </details>
-          ))}
-        </div>
+        <Faq items={faqs} className="flex flex-col gap-3 lg:grid lg:grid-cols-2 lg:gap-4 lg:items-start" />
       </section>
 
       <CtaBand className="pt-6 pb-10 lg:pt-10 lg:pb-20" />

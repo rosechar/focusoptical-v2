@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, FormEvent } from "react";
 import { Loader2, AlertCircle } from "lucide-react";
 import { BUSINESS } from "@/lib/business";
+import Button from "@/components/Button";
 import { appointmentTypes } from "@/lib/appointments";
 import { emailRegex, isValidPhone } from "@/lib/validation";
 
@@ -23,7 +24,7 @@ interface FieldErrors {
 }
 
 const inputClass = (hasError?: string) =>
-  `w-full px-3.5 py-3.5 rounded-xl border text-md text-ink placeholder:text-black/35 bg-field transition-colors focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent ${
+  `w-full px-3.5 py-3.5 rounded-xl border text-md text-ink placeholder:text-black/55 bg-field transition-colors focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent ${
     hasError ? "border-closed bg-closed-soft" : "border-field-border"
   }`;
 
@@ -57,6 +58,7 @@ export default function AppointmentForm() {
   useEffect(() => {
     if (status === "success") {
       successRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      successRef.current?.focus({ preventScroll: true });
     }
   }, [status]);
 
@@ -97,19 +99,23 @@ export default function AppointmentForm() {
     }
   };
 
-  const fieldError = (message?: string) =>
-    message ? (
-      <p className="mt-1.5 text-xs text-closed flex items-center gap-1">
+  const fieldError = (field: keyof FieldErrors) => {
+    const message = errors[field];
+    return message ? (
+      <p id={`${field}-error`} className="mt-1.5 text-xs text-closed flex items-center gap-1">
         <AlertCircle size={12} />
         {message}
       </p>
     ) : null;
+  };
 
   if (status === "success") {
     return (
       <div
         ref={successRef}
-        className={`${cardClass} text-center px-4.5 py-9.5 lg:px-6 lg:py-12`}
+        role="status"
+        tabIndex={-1}
+        className={`${cardClass} text-center px-4.5 py-9.5 lg:px-6 lg:py-12 focus:outline-none`}
       >
         <div
           aria-hidden
@@ -124,12 +130,7 @@ export default function AppointmentForm() {
           We&apos;ll call shortly to confirm your time. Need us sooner, give us a
           ring.
         </p>
-        <a
-          href={BUSINESS.phoneHref}
-          className="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-white font-bold text-md lg:text-base px-5.5 py-3 lg:px-6 lg:py-3.25 rounded-xl transition-colors"
-        >
-          {BUSINESS.phoneDisplay}
-        </a>
+        <Button href={BUSINESS.phoneHref}>{BUSINESS.phoneDisplay}</Button>
       </div>
     );
   }
@@ -155,9 +156,10 @@ export default function AppointmentForm() {
             placeholder="Jane Smith"
             autoComplete="name"
             aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? "name-error" : undefined}
             className={inputClass(errors.name)}
           />
-          {fieldError(errors.name)}
+          {fieldError("name")}
         </div>
         <div>
           <label htmlFor="phone" className={`${labelClass} mb-1.75 lg:mb-2`}>
@@ -174,9 +176,10 @@ export default function AppointmentForm() {
             placeholder="(248) 555-0100"
             autoComplete="tel"
             aria-invalid={!!errors.phone}
+            aria-describedby={errors.phone ? "phone-error" : undefined}
             className={inputClass(errors.phone)}
           />
-          {fieldError(errors.phone)}
+          {fieldError("phone")}
         </div>
       </div>
 
@@ -193,9 +196,10 @@ export default function AppointmentForm() {
           placeholder="jane@example.com"
           autoComplete="email"
           aria-invalid={!!errors.email}
+          aria-describedby={errors.email ? "email-error" : undefined}
           className={inputClass(errors.email)}
         />
-        {fieldError(errors.email)}
+        {fieldError("email")}
       </div>
 
       <div className="hidden" aria-hidden>
@@ -263,6 +267,7 @@ export default function AppointmentForm() {
       <button
         type="submit"
         disabled={status === "loading"}
+        aria-busy={status === "loading"}
         className="w-full flex items-center justify-center gap-2.5 bg-accent hover:bg-accent-hover disabled:opacity-60 text-white font-bold text-md lg:text-base py-4 rounded-xl transition-colors"
       >
         {status === "loading" ? (

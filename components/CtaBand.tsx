@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Button from "@/components/Button";
 
 interface CtaBandProps {
   heading?: string;
@@ -27,12 +27,14 @@ export default function CtaBand({
             </p>
           )}
         </div>
-        <Link
+        <Button
           href="/contact"
-          className="block mt-4.5 lg:mt-0 lg:shrink-0 w-full lg:w-auto bg-white text-accent hover:bg-accent-soft font-bold text-md lg:text-base py-3.5 lg:px-7.5 lg:py-4 rounded-xl transition-colors"
+          variant="inverse"
+          size="lg"
+          className="mt-4.5 lg:mt-0 lg:shrink-0 w-full lg:w-auto"
         >
           Book a visit
-        </Link>
+        </Button>
       </div>
     </div>
   );

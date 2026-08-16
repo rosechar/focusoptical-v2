@@ -14,7 +14,7 @@ export async function POST(request: Request) {
   const fromEmail = process.env.RESEND_FROM_EMAIL;
   const segmentId = process.env.RESEND_SEGMENT_ID;
 
-  if (!apiKey || !ownerEmail || !fromEmail || !segmentId) {
+  if (!apiKey || !ownerEmail || !fromEmail) {
     console.error("Resend environment variables are not configured.");
     return NextResponse.json(
       { error: "Email service is not configured." },
@@ -103,8 +103,9 @@ export async function POST(request: Request) {
       }
     }
 
-    if (optIn && hasEmail) {
-      // A failed segment add shouldn't fail the appointment request.
+    // Marketing opt-in is best effort: skipped when no segment is configured, and a
+    // failed add shouldn't fail the appointment request.
+    if (optIn && hasEmail && segmentId) {
       try {
         const [firstName, ...rest] = name.split(/\s+/);
         const contactResult = await resend.contacts.create({

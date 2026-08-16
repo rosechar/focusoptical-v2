@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Button from "@/components/Button";
 import CtaBand from "@/components/CtaBand";
 
 export const metadata: Metadata = {
@@ -30,12 +30,9 @@ export default function NotFound() {
         <ul className="flex flex-wrap gap-2.5">
           {links.map(({ href, label }) => (
             <li key={href}>
-              <Link
-                href={href}
-                className="inline-block rounded-xl border-1.5 border-field-border px-4 py-2.5 text-md font-bold text-ink hover:border-accent hover:text-accent transition-colors"
-              >
+              <Button href={href} variant="outline" size="sm">
                 {label}
-              </Link>
+              </Button>
             </li>
           ))}
         </ul>
