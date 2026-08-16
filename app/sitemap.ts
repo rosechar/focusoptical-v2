@@ -2,24 +2,18 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/business";
 import { CITIES } from "@/lib/cities";
 
-const routes = [
-  { path: "", priority: 1 },
-  { path: "/services", priority: 0.9 },
-  { path: "/about", priority: 0.8 },
-  { path: "/contact", priority: 0.8 },
-  { path: "/service-areas", priority: 0.8 },
-  { path: "/insurance", priority: 0.7 },
-  ...CITIES.map(({ slug }) => ({
-    path: `/service-areas/${slug}`,
-    priority: 0.7,
-  })),
+// lastModified/changeFrequency/priority are intentionally omitted: Google ignores the
+// latter two, and a build-time lastModified on every URL trains crawlers to ignore it.
+const paths = [
+  "",
+  "/services",
+  "/about",
+  "/contact",
+  "/service-areas",
+  "/insurance",
+  ...CITIES.map(({ slug }) => `/service-areas/${slug}`),
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return routes.map(({ path, priority }) => ({
-    url: `${SITE_URL}${path}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority,
-  }));
+  return paths.map((path) => ({ url: `${SITE_URL}${path}` }));
 }

@@ -210,6 +210,102 @@ export const CITIES: CityArea[] = [
       },
     ],
   },
+  {
+    slug: "shelby-township",
+    city: "Shelby Township",
+    county: "Macomb County",
+    zips: ["48315", "48316", "48317"],
+    driveTime: "About 20 minutes",
+    summary:
+      "Shelby Township folks head straight west on Auburn Road for an optician who cuts every lens on site and never pushes a sale.",
+    paragraphs: [
+      "From Shelby Township we're about 20 minutes west: Auburn Road runs right through Utica and straight to our door at Crooks Road, or take M-59 to Crooks and come south. Plenty of Macomb County families make the trip because the work is done here, by hand.",
+      "Dr. Diane Galper does eye exams and contact lens exams, and Tom has been making glasses since 1977. Because lenses are cut and edged in our own lab, most prescriptions from Shelby Township customers are ready the next day.",
+      "We stock frames at every price and the contact brands you're used to, and we'll happily put new lenses in frames you already own. Adjustments and cleaning are free for anyone, whether or not you bought your glasses here.",
+    ],
+    faqs: [
+      {
+        q: "How do I get there from Shelby Township?",
+        a: "Take Auburn Road west through Utica, or M-59 west to Crooks Road and south to Auburn. We're at 2046 W Auburn Rd in Rochester Hills, about 20 minutes away.",
+      },
+      {
+        q: "Do you see patients from Macomb County?",
+        a: "Yes, folks from Shelby Township, Utica, and Sterling Heights come in all the time for exams, glasses, and contacts.",
+      },
+    ],
+  },
+  {
+    slug: "pontiac",
+    city: "Pontiac",
+    county: "Oakland County",
+    zips: ["48340", "48341", "48342"],
+    driveTime: "About 15 minutes",
+    summary:
+      "Pontiac folks come to us for honest prices, exams by a licensed optometrist, and glasses made by hand a few miles east.",
+    paragraphs: [
+      "We're about 15 minutes east of Pontiac. Take Auburn Road east through Auburn Hills, or M-59 to Crooks Road, and you're here. We've served Pontiac families since 1984 and we're one of the closest independent opticians to the city.",
+      "Dr. Diane Galper handles eye exams and contact lens fittings, and Tom cuts every lens in our own lab. That means most prescriptions are ready the next day, and someone who actually made your glasses checks the fit before you leave.",
+      "We carry frames for every budget, and if you're watching costs we're glad to re-lens frames you already have. Adjustments and cleaning are free for anyone who walks in.",
+    ],
+    faqs: [
+      {
+        q: "How far are you from Pontiac?",
+        a: "About 15 minutes east on Auburn Road or M-59 to 2046 W Auburn Rd in Rochester Hills, near Crooks Road.",
+      },
+      {
+        q: "Do you have affordable frames?",
+        a: "Yes, we keep frames at every price, and we can put new lenses in frames you already own to save you money.",
+      },
+    ],
+  },
+  {
+    slug: "clarkston",
+    city: "Clarkston",
+    county: "Oakland County",
+    zips: ["48346", "48348"],
+    driveTime: "About 25 minutes",
+    summary:
+      "Clarkston folks make the drive down I-75 for an independent optician with over 45 years of hand-made glasses behind him.",
+    paragraphs: [
+      "From Clarkston we're about 25 minutes southeast: I-75 south to M-59 east, then Crooks Road south to Auburn Road. It's a bit of a drive, and Clarkston customers tell us it's worth it for glasses that fit right the first time.",
+      "Dr. Diane Galper does eye exams and contact lens exams, and Tom has been making eyeglasses since 1977. Every lens is cut and edged in our own lab, so most prescriptions are ready the next day, often quicker than a chain that ships lenses out of state.",
+      "Spend time on the lakes or trails around Clarkston? We fit prescription sunglasses and specialty lenses, and adjustments are always free, so bent frames get straightened out at no charge.",
+    ],
+    faqs: [
+      {
+        q: "How do I get there from Clarkston?",
+        a: "Take I-75 south to M-59 east, then Crooks Road south to Auburn Road. We're at 2046 W Auburn Rd in Rochester Hills, about 25 minutes from Clarkston.",
+      },
+      {
+        q: "Can I get prescription sunglasses?",
+        a: "Yes, prescription and non-prescription sunglasses plus specialty lenses, all cut and fitted in our own lab.",
+      },
+    ],
+  },
+  {
+    slug: "waterford",
+    city: "Waterford",
+    county: "Oakland County",
+    zips: ["48327", "48328", "48329"],
+    driveTime: "About 25 minutes",
+    summary:
+      "Waterford folks come out M-59 for a family-owned optician who takes the time to fit glasses right.",
+    paragraphs: [
+      "We're about 25 minutes east of Waterford, straight out M-59 to Crooks Road, then south to Auburn Road. If you'd rather deal with the person who actually makes your glasses than a sales rep with a quota, the drive is worth it.",
+      "Dr. Diane Galper does eye exams and contact lens fittings here in the office. Tom cuts and edges every lens in our own lab, which is why most Waterford customers pick up new glasses the next day.",
+      "We keep a wide range of frames and contact brands, we'll re-lens frames you already like, and adjustments and cleaning are free for anyone, no purchase or appointment needed.",
+    ],
+    faqs: [
+      {
+        q: "How far are you from Waterford?",
+        a: "About 25 minutes east on M-59 to Crooks Road, then south to 2046 W Auburn Rd in Rochester Hills.",
+      },
+      {
+        q: "Do I need an appointment?",
+        a: "Only for eye exams with Dr. Galper. Walk in any time for frames, contacts, or a free adjustment.",
+      },
+    ],
+  },
 ];
 
 export function getCity(slug: string): CityArea | undefined {

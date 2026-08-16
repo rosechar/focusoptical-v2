@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Phone } from "lucide-react";
 import { BUSINESS } from "@/lib/business";
+import { CITIES } from "@/lib/cities";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
 import CtaBand from "@/components/CtaBand";
 
@@ -10,17 +11,6 @@ export const metadata: Metadata = {
   title: "Focus Optical | Optician & Eye Exams in Rochester Hills, MI",
   description:
     "Focus Optical in Rochester Hills, MI. Book an eye exam, prescription glasses, contact lenses, and free adjustments. Family owned since 1984. Serving Oakland County.",
-  keywords: [
-    "book eye exam Rochester Hills MI",
-    "schedule eye exam near me",
-    "eye appointment Rochester Hills",
-    "optometrist appointment Oakland County",
-    "eye exam near Rochester Hills",
-    "optician Rochester Hills",
-    "glasses shop Rochester Hills",
-    "contact lenses Rochester Hills",
-    "Focus Optical Rochester Hills",
-  ],
   alternates: {
     canonical: "/",
   },
@@ -28,24 +18,28 @@ export const metadata: Metadata = {
 
 const whatWeDo = [
   {
+    href: "/services#eye-exams",
     title: "Eye exams",
     description: "Comprehensive exams with Dr. Galper, OD.",
     image: "/images/tool.jpeg",
     alt: "Eye exam equipment",
   },
   {
+    href: "/services#contact-exams",
     title: "Contact lens exams",
     description: "A proper fitting with a full exam included.",
     image: "/images/contact.jpg",
     alt: "Contact lens fitting",
   },
   {
+    href: "/services#retail",
     title: "Glasses & contacts",
     description: "A wide selection, or re-lens your frames.",
     image: "/images/contact1.jpg",
     alt: "Eyeglass frame selection",
   },
   {
+    href: "/services#adjustments",
     title: "Free adjustments",
     description: "Any pair, anywhere. No charge, no appointment.",
     image: "/images/glasses3.jpg",
@@ -80,24 +74,14 @@ export default function HomePage() {
         <div className="relative -mt-14.5 mx-4 sm:mx-auto sm:max-w-140 bg-white rounded-2.5xl px-5.5 py-6 shadow-hero lg:mt-0 lg:w-full lg:max-w-295 lg:bg-transparent lg:rounded-none lg:shadow-none lg:px-10 lg:py-0">
           <div className="lg:max-w-145 lg:text-white">
             <p className="text-accent lg:text-white/80 font-bold lg:font-semibold text-xs lg:text-sm tracking-eyebrow uppercase mb-2.5 lg:mb-4.5">
-              Rochester Hills · since 1984
+              Independent optician · Rochester Hills · since 1984
             </p>
             <h1 className="text-3xl leading-none tracking-tight lg:text-6xl font-extrabold text-ink lg:text-white mb-2.5 lg:mb-4.5">
-              <span className="lg:hidden">Glasses made by hand in Rochester Hills.</span>
-              <span className="hidden lg:inline">
-                Glasses made by hand, the way they should be.
-              </span>
+              Glasses made by hand in Rochester Hills.
             </h1>
             <p className="text-md leading-normal text-body lg:text-lg lg:text-white/90 mb-4.5 lg:mb-7.5 lg:max-w-120">
-              <span className="lg:hidden">
-                Tom Hamilton has been making eyeglasses since 1977. Every lens is
-                cut in our own lab.
-              </span>
-              <span className="hidden lg:inline">
-                An independent optician making eyeglasses for Rochester Hills for
-                over 45 years, with free adjustments for anyone and next-day
-                service on most prescriptions.
-              </span>
+              Tom Hamilton has been making eyeglasses since 1977. Every lens is
+              cut in our own lab.
             </p>
             <div className="flex gap-2.5 lg:gap-3.25">
               <Link
@@ -126,6 +110,26 @@ export default function HomePage() {
         <span className="hidden lg:inline"> · exams by Dr. Diane Galper, OD</span>
       </p>
 
+      {/* Service area links */}
+      <p className="px-5 py-3 lg:px-10 text-center text-xs lg:text-sm text-body leading-relaxed border-b border-hairline-soft">
+        Serving{" "}
+        {CITIES.map(({ slug, city }, i) => (
+          <span key={slug}>
+            {i > 0 && (i === CITIES.length - 1 ? " and " : ", ")}
+            <Link
+              href={`/service-areas/${slug}`}
+              className="font-semibold text-secondary hover:text-accent transition-colors"
+            >
+              {city}
+            </Link>
+          </span>
+        ))}
+        {" · "}
+        <Link href="/service-areas" className="font-semibold text-accent hover:text-accent-hover transition-colors">
+          All service areas →
+        </Link>
+      </p>
+
       <ReviewsCarousel />
 
       {/* What we do */}
@@ -150,10 +154,10 @@ export default function HomePage() {
           Exams, glasses, contacts and repairs.
         </p>
         <div className="flex gap-3.25 overflow-x-auto snap-x snap-mandatory px-5 pt-4.5 pb-5.5 lg:grid lg:grid-cols-4 lg:gap-4.5 lg:px-10 lg:pt-0 lg:pb-0 lg:overflow-visible">
-          {whatWeDo.map(({ title, description, image, alt }) => (
+          {whatWeDo.map(({ href, title, description, image, alt }) => (
             <Link
               key={title}
-              href="/services"
+              href={href}
               className="shrink-0 w-43 lg:w-auto snap-start rounded-2xl border border-hairline bg-white overflow-hidden lg:shadow-card hover:border-accent transition-colors"
             >
               <div className="relative h-29 lg:h-37.5">
@@ -187,14 +191,8 @@ export default function HomePage() {
               Why Focus Optical
             </p>
             <h2 className="text-2xl leading-tight lg:text-4xl font-extrabold text-ink tracking-tight mb-1.5 lg:mb-3">
-              <span className="lg:hidden">
-                Tom cuts every lens{" "}
-                <span className="text-accent">himself, at the bench.</span>
-              </span>
-              <span className="hidden lg:inline">
-                Not a chain. Not a lab order.{" "}
-                <span className="text-accent">A real optician at the bench.</span>
-              </span>
+              Tom cuts every lens{" "}
+              <span className="text-accent">himself, at the bench.</span>
             </h2>
             <p className="text-sm lg:text-base leading-normal lg:leading-relaxed text-body mb-6 lg:mb-0">
               Forty-five years of practice, and it shows in the fit.

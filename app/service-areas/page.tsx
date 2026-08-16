@@ -9,35 +9,11 @@ import { CITIES } from "@/lib/cities";
 export const metadata: Metadata = {
   title: "Service Areas | Optician Near Rochester Hills, Troy & Oakland County",
   description:
-    "Focus Optical serves Rochester Hills, Rochester, Troy, Lake Orion, Royal Oak, Bloomfield Hills, Auburn Hills, and all of Oakland County, MI. Find your trusted local optician for eye exams, glasses, and contact lenses.",
-  keywords: [
-    "optician near me Rochester Hills",
-    "eye exam Oakland County Michigan",
-    "glasses near Troy MI",
-    "eyeglass shop near Rochester MI",
-    "optician near Lake Orion MI",
-    "contact lenses Royal Oak",
-    "optical store Bloomfield Hills",
-    "eyeglasses Auburn Hills MI",
-    "prescription glasses Sterling Heights",
-    "optician Shelby Township",
-    "vision care Pontiac MI",
-    "eyeglass shop near me Oakland County",
-    "Focus Optical service areas",
-    "eye doctor near Rochester Hills",
-    "local optician Michigan",
-  ],
+    "Focus Optical serves Rochester Hills, Rochester, Troy, Lake Orion, Royal Oak, Bloomfield Hills, Auburn Hills, Sterling Heights, Shelby Township, Pontiac, Clarkston, Waterford, and all of Oakland County, MI. Eye exams, glasses, and contact lenses from an independent optician.",
   alternates: {
     canonical: "/service-areas",
   },
 };
-
-const otherCommunities = [
-  { city: "Shelby Township", zip: "48315, 48316, 48317" },
-  { city: "Pontiac", zip: "48340, 48341, 48342" },
-  { city: "Clarkston", zip: "48346, 48348" },
-  { city: "Waterford", zip: "48327, 48328, 48329" },
-];
 
 const services = [
   "Eye Exams (Dr. Diane Galper, OD)",
@@ -168,18 +144,6 @@ export default function ServiceAreasPage() {
                 </span>
               </Link>
             ))}
-          </div>
-
-          <div className="mt-10">
-            <h3 className="font-semibold text-ink text-lg mb-3">Also serving</h3>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-              {otherCommunities.map(({ city, zip }) => (
-                <div key={city} className="rounded-xl px-4 py-3 border border-hairline">
-                  <p className="font-semibold text-ink text-sm">{city}</p>
-                  <p className="text-xs text-body mt-0.5">ZIP: {zip}</p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>

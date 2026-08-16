@@ -2,24 +2,12 @@ import type { Metadata } from "next";
 import { Phone } from "lucide-react";
 import AppointmentForm from "@/components/AppointmentForm";
 import MapEmbed from "@/components/MapEmbed";
-import { BUSINESS, HOURS } from "@/lib/business";
+import { BUSINESS, GOOGLE_REVIEWS, HOURS } from "@/lib/business";
 
 export const metadata: Metadata = {
   title: "Book a Visit",
   description:
     "Book an eye exam or appointment at Focus Optical in Rochester Hills, MI. Schedule online or call (248) 852-8830. Eye exams, contact lenses, glasses. Serving Oakland County since 1984.",
-  keywords: [
-    "schedule eye exam Rochester Hills",
-    "book eye exam near me",
-    "eye appointment Rochester Hills MI",
-    "book appointment optician Rochester Hills MI",
-    "eye exam appointment Oakland County",
-    "optometrist appointment near me",
-    "schedule eye appointment Michigan",
-    "contact Focus Optical Rochester Hills",
-    "optician appointment near me",
-    "request eye exam appointment",
-  ],
   alternates: {
     canonical: "/contact",
   },
@@ -54,9 +42,22 @@ export default function ContactPage() {
             <h1 className="text-3xl lg:text-5xl font-extrabold text-ink tracking-tight mb-1.5 lg:mb-2">
               Book a visit
             </h1>
-            <p className="text-md lg:text-lg leading-normal text-body mb-5.5 lg:mb-6.5">
+            <p className="text-md lg:text-lg leading-normal text-body mb-3">
               Send a request and we&apos;ll call to confirm, usually the same day.
               <span className="hidden lg:inline"> Walk-ins are always welcome too.</span>
+            </p>
+            <p className="text-sm text-secondary mb-5.5 lg:mb-6.5">
+              <span aria-hidden className="text-gold">★</span>{" "}
+              <span className="font-bold text-ink">{GOOGLE_REVIEWS.rating}</span> from{" "}
+              {GOOGLE_REVIEWS.count} Google reviews ·{" "}
+              <a
+                href={GOOGLE_REVIEWS.url}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                className="font-semibold text-accent hover:text-accent-hover transition-colors"
+              >
+                Read them
+              </a>
             </p>
 
             <AppointmentForm />

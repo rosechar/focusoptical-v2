@@ -2,20 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import CtaBand from "@/components/CtaBand";
 import { BUSINESS } from "@/lib/business";
+import { faqJsonLd } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Services",
   description:
     "Focus Optical in Rochester Hills, MI offers eye exams, contact lens exams, prescription glasses, contact lenses, and free eyeglass adjustments. Next day service available on most prescriptions.",
-  keywords: [
-    "eye exam Rochester Hills MI",
-    "contact lens exam Oakland County",
-    "prescription glasses Rochester Hills",
-    "free eyeglass adjustments",
-    "optician services Rochester Hills",
-    "contact lenses Michigan",
-    "eyeglass fitting Rochester Hills",
-  ],
   alternates: {
     canonical: "/services",
   },
@@ -80,9 +72,38 @@ const services: Service[] = [
   },
 ];
 
+const faqs = [
+  {
+    q: "Do you take walk-ins?",
+    a: "Yes. Walk in any time for frames, contacts, or a free adjustment. Eye exams with Dr. Galper are by appointment, so call or book online for those.",
+  },
+  {
+    q: "How long does it take to get new glasses?",
+    a: "Most prescriptions are ready the next day. Tom cuts and edges every lens in our own lab on site, so nothing gets shipped out.",
+  },
+  {
+    q: "Can you put new lenses in frames I already own?",
+    a: "Yes. Bring in the frames you like and we'll cut new lenses for them, so you don't have to buy new frames.",
+  },
+  {
+    q: "Are adjustments really free, even if I bought my glasses somewhere else?",
+    a: "Yes. Adjustments and cleaning are free for anyone, on any pair, no purchase or appointment needed.",
+  },
+  {
+    q: "Does a contact lens exam include a regular eye exam?",
+    a: "Yes. A contact lens exam checks the fit and the health of your eyes and includes a full eye exam, so it's one visit.",
+  },
+];
+
+const jsonLd = { "@context": "https://schema.org", ...faqJsonLd(faqs) };
+
 export default function ServicesPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <section className="max-w-295 mx-auto px-5 pt-7 lg:px-10 lg:pt-14">
         <h1 className="text-3xl lg:text-5xl font-extrabold text-ink tracking-tight mb-2 lg:mb-2.5">
           Services
@@ -193,6 +214,20 @@ export default function ServicesPage() {
               </a>
             </p>
           </div>
+        </div>
+      </section>
+
+      <section className="max-w-295 mx-auto px-5 lg:px-10 pt-8 lg:pt-14">
+        <h2 className="text-xl lg:text-3xl font-extrabold text-ink tracking-tight mb-4 lg:mb-6">
+          Common questions
+        </h2>
+        <div className="flex flex-col gap-3 lg:grid lg:grid-cols-2 lg:gap-4">
+          {faqs.map(({ q, a }) => (
+            <div key={q} className="rounded-2xl border border-hairline p-5 lg:p-6">
+              <h3 className="font-bold text-ink text-md lg:text-base mb-1.5">{q}</h3>
+              <p className="text-sm lg:text-md text-body leading-relaxed">{a}</p>
+            </div>
+          ))}
         </div>
       </section>
 

@@ -5,6 +5,7 @@ import { MapPin, Phone, Clock, Navigation, Check } from "lucide-react";
 import CtaBand from "@/components/CtaBand";
 import { BUSINESS, SITE_URL } from "@/lib/business";
 import { CITIES, getCity } from "@/lib/cities";
+import { faqJsonLd } from "@/lib/schema";
 
 interface Props {
   params: Promise<{ city: string }>;
@@ -39,15 +40,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ? "located in Rochester Hills"
         : `${area.driveTime.toLowerCase()} from ${area.city}`
     }. Call (248) 852-8830.`,
-    keywords: [
-      `optician ${area.city} MI`,
-      `eye exam ${area.city}`,
-      `eye exam near ${area.city} MI`,
-      `glasses ${area.city} Michigan`,
-      `contact lenses ${area.city} MI`,
-      `optometrist near ${area.city}`,
-      `eyeglass shop near ${area.city}`,
-    ],
     alternates: {
       canonical: `/service-areas/${area.slug}`,
     },
@@ -80,14 +72,7 @@ export default async function CityPage({ params }: Props) {
           },
         ],
       },
-      {
-        "@type": "FAQPage",
-        mainEntity: area.faqs.map(({ q, a }) => ({
-          "@type": "Question",
-          name: q,
-          acceptedAnswer: { "@type": "Answer", text: a },
-        })),
-      },
+      faqJsonLd(area.faqs),
     ],
   };
 

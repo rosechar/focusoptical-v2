@@ -2,18 +2,12 @@ import type { Metadata } from "next";
 import { Phone, ShieldCheck, HelpCircle } from "lucide-react";
 import CtaBand from "@/components/CtaBand";
 import { BUSINESS } from "@/lib/business";
+import { faqJsonLd } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Insurance & Pricing",
+  title: "Vision Insurance & Pricing",
   description:
     "Focus Optical in Rochester Hills, MI accepts various insurance plans. Contact us at (248) 852-8830 for details on pricing and insurance coverage for eye exams, glasses, and contact lenses.",
-  keywords: [
-    "optical insurance Rochester Hills MI",
-    "eye exam insurance Oakland County",
-    "glasses insurance Michigan",
-    "vision insurance Rochester Hills",
-    "Focus Optical insurance",
-  ],
   alternates: {
     canonical: "/insurance",
   },
@@ -38,22 +32,14 @@ const faqs = [
   },
 ];
 
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map(({ q, a }) => ({
-    "@type": "Question",
-    name: q,
-    acceptedAnswer: { "@type": "Answer", text: a },
-  })),
-};
+const jsonLd = { "@context": "https://schema.org", ...faqJsonLd(faqs) };
 
 export default function InsurancePage() {
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       {/* Page header */}
@@ -63,7 +49,7 @@ export default function InsurancePage() {
             Coverage &amp; costs
           </p>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-ink tracking-tight">
-            Insurance &amp; pricing
+            Insurance &amp; pricing at our Rochester Hills shop
           </h1>
           <p className="text-body mt-3 text-lg max-w-xl leading-relaxed">
             We take most of the common vision plans. Give us a call and we&apos;ll

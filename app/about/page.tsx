@@ -1,21 +1,27 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import CtaBand from "@/components/CtaBand";
+import { SITE_URL } from "@/lib/business";
+import { BUSINESS_ID, OPTOMETRIST_ID, OWNER_ID } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "About Us",
   description:
     "Meet Tom Hamilton, owner of Focus Optical in Rochester Hills, MI. An independent optician since 1984 with over 45 years of experience making eyeglasses. Eye exams performed by Dr. Diane Galper, Optometrist.",
-  keywords: [
-    "Focus Optical owner Tom Hamilton",
-    "Rochester Hills optician",
-    "independent optical store Rochester Hills",
-    "Dr Diane Galper optometrist",
-    "eye exam Rochester Hills",
-  ],
   alternates: {
     canonical: "/about",
   },
+};
+
+// The Person entities themselves live in the site-wide graph (lib/schema.ts); this
+// page just declares itself as the page about them.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "@id": `${SITE_URL}/about`,
+  name: "About Focus Optical",
+  about: { "@id": BUSINESS_ID },
+  mainEntity: [{ "@id": OWNER_ID }, { "@id": OPTOMETRIST_ID }],
 };
 
 const milestones = [
@@ -27,6 +33,10 @@ const milestones = [
 export default function AboutPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <section className="max-w-295 mx-auto lg:px-10 lg:pt-14 lg:pb-12">
         <div className="lg:grid lg:grid-cols-2 lg:gap-14 lg:items-center">
           <div className="relative h-75 lg:h-115 lg:rounded-2.5xl overflow-hidden">
