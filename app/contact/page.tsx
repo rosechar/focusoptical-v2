@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Phone } from "lucide-react";
 import AppointmentForm from "@/components/AppointmentForm";
 import MapEmbed from "@/components/MapEmbed";
-import { BUSINESS, GOOGLE_REVIEWS, HOURS } from "@/lib/business";
+import { BUSINESS, HOURS } from "@/lib/business";
 
 export const metadata: Metadata = {
   title: "Book a Visit",
@@ -42,32 +42,10 @@ export default function ContactPage() {
             <h1 className="text-3xl lg:text-5xl font-extrabold text-ink tracking-tight mb-1.5 lg:mb-2">
               Book a visit
             </h1>
-            <p className="text-md lg:text-lg leading-normal text-body mb-3">
+            <p className="text-md lg:text-lg leading-normal text-body mb-5.5 lg:mb-6.5">
               Send a request and we&apos;ll call to confirm, usually the same day.
-              <span className="hidden lg:inline"> Walk-ins are always welcome too.</span>
             </p>
-            <p className="text-sm text-secondary mb-5.5 lg:mb-6.5">
-              <span aria-hidden className="text-gold">★</span>{" "}
-              <span className="font-bold text-ink">{GOOGLE_REVIEWS.rating}</span> from{" "}
-              {GOOGLE_REVIEWS.count} Google reviews ·{" "}
-              <a
-                href={GOOGLE_REVIEWS.url}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                className="font-semibold text-accent hover:text-accent-hover transition-colors"
-              >
-                Read them
-              </a>
-            </p>
-
             <AppointmentForm />
-
-            <a
-              href={BUSINESS.phoneHref}
-              className="lg:hidden mt-3.5 flex items-center justify-center gap-2.25 border-1.5 border-field-border text-ink font-bold text-md py-3.5 rounded-xl hover:border-accent hover:text-accent transition-colors"
-            >
-              Call {BUSINESS.phoneDisplay}
-            </a>
 
             <div className="lg:hidden mt-7 border-t border-hairline-soft pt-5.5">
               <Hours />

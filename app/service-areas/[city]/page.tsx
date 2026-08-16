@@ -211,8 +211,8 @@ export default async function CityPage({ params }: Props) {
       <CtaBand
         subtext={
           area.primary
-            ? "Right here in Rochester Hills. Open Monday to Saturday, walk in anytime."
-            : `${area.driveTime} from ${area.city}. Open Monday to Saturday, walk in anytime.`
+            ? "Right here in Rochester Hills. Open Monday to Saturday."
+            : `${area.driveTime} from ${area.city}. Open Monday to Saturday.`
         }
       />
 

@@ -302,7 +302,7 @@ export const CITIES: CityArea[] = [
       },
       {
         q: "Do I need an appointment?",
-        a: "Only for eye exams with Dr. Galper. Walk in any time for frames, contacts, or a free adjustment.",
+        a: "Yes, for exams and for glasses or contacts. Book online or call ahead. Free adjustments and cleaning don't need one, just stop in.",
       },
     ],
   },

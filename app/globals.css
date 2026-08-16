@@ -94,6 +94,22 @@
   filter: sepia(0.32) saturate(1.15) contrast(0.98) hue-rotate(-8deg);
 }
 
+/* Horizontal card scrollers: keep the scrollbar visible (macOS hides overlay scrollbars) and slim. */
+@utility scrollbar-visible {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-field-border) transparent;
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-field-border);
+    border-radius: 9999px;
+  }
+}
+
 /* Outlined buttons and chips use a 1.5px stroke, which the integer border scale can't express. */
 @utility border-1.5 {
   border-width: 1.5px;

@@ -40,7 +40,8 @@ export const BUSINESS = {
 /** Google Business Profile rating, shown on the site. Update when the count grows. */
 export const GOOGLE_REVIEWS = {
   rating: "5.0",
-  count: 100,
+  /** Shown as-is, e.g. "100+". */
+  count: "100+",
   /** Opens the Maps listing directly on the Reviews tab. */
   url: "https://www.google.com/maps/place/Focus+Optical/data=!4m7!3m6!1s0x8824c18eb6e1bd0d:0xddd76cb4db1ee92!8m2!3d42.6354012!4d-83.1718076!9m1!1b1",
 } as const;

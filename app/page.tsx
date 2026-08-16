@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Phone } from "lucide-react";
-import { BUSINESS } from "@/lib/business";
-import { CITIES } from "@/lib/cities";
+import { BUSINESS, GOOGLE_REVIEWS } from "@/lib/business";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
 import CtaBand from "@/components/CtaBand";
 
@@ -49,17 +48,26 @@ const whatWeDo = [
 
 const why = [
   { title: "Made by hand", description: "Tom makes every pair himself." },
-  { title: "Our own lens lab", description: "Cut and edged on site, often next day." },
-  { title: "No sales pressure", description: "Keep your frames and we'll re-lens them." },
-  { title: "Always free adjustments", description: "Walk in anytime, customer or not." },
+  {
+    title: "Our own lens lab",
+    description: "Cut and edged on site, often next day.",
+  },
+  {
+    title: "No sales pressure",
+    description: "Keep your frames and we'll re-lens them.",
+  },
+  {
+    title: "Free adjustments",
+    description: "Walk in anytime, customer or not.",
+  },
 ];
 
 export default function HomePage() {
   return (
     <>
-      {/* Hero — mobile/tablet: split card over the photo; desktop: full-bleed photo overlay */}
-      <section className="relative pb-6.5 lg:pb-0 lg:h-150 lg:flex lg:items-center lg:bg-dark lg:overflow-hidden">
-        <div className="relative h-80 lg:absolute lg:inset-0 lg:h-auto">
+      {/* Hero — photo band with the white card overlapping its bottom edge, plus rating and turnaround tiles */}
+      <section className="pb-6.5 lg:pb-6">
+        <div className="relative h-80 lg:h-115 lg:bg-dark">
           <Image
             src="/images/glasses1.jpeg"
             alt="Eyeglass frames at Focus Optical in Rochester Hills"
@@ -69,19 +77,18 @@ export default function HomePage() {
             sizes="100vw"
             className="object-cover duotone"
           />
-          <div className="hidden lg:block absolute inset-0 bg-linear-100 from-dark/90 via-dark/60 via-40% to-dark/0" />
+          <div className="hidden lg:block absolute inset-0 bg-linear-to-b from-dark/0 via-dark/0 to-dark/30" />
         </div>
-        <div className="relative -mt-14.5 mx-4 sm:mx-auto sm:max-w-140 bg-white rounded-2.5xl px-5.5 py-6 shadow-hero lg:mt-0 lg:w-full lg:max-w-295 lg:bg-transparent lg:rounded-none lg:shadow-none lg:px-10 lg:py-0">
-          <div className="lg:max-w-145 lg:text-white">
-            <p className="text-accent lg:text-white/80 font-bold lg:font-semibold text-xs lg:text-sm tracking-eyebrow uppercase mb-2.5 lg:mb-4.5">
-              Independent optician · Rochester Hills · since 1984
+        <div className="lg:max-w-295 lg:mx-auto lg:px-10 lg:flex lg:items-stretch lg:gap-5 lg:-mt-44">
+          <div className="relative -mt-14.5 mx-4 sm:mx-auto sm:max-w-140 bg-white rounded-2.5xl px-5.5 py-6 shadow-hero lg:mt-0 lg:mx-0 lg:max-w-none lg:flex-1 lg:px-11 lg:py-10">
+            <p className="text-accent font-bold text-xs tracking-eyebrow uppercase mb-2.5 lg:mb-4">
+              Rochester Hills · since 1984
             </p>
-            <h1 className="text-3xl leading-none tracking-tight lg:text-6xl font-extrabold text-ink lg:text-white mb-2.5 lg:mb-4.5">
+            <h1 className="text-3xl leading-none tracking-tight lg:text-5xl font-extrabold text-ink mb-2.5 lg:mb-5 text-balance">
               Glasses made by hand in Rochester Hills.
             </h1>
-            <p className="text-md leading-normal text-body lg:text-lg lg:text-white/90 mb-4.5 lg:mb-7.5 lg:max-w-120">
-              Tom Hamilton has been making eyeglasses since 1977. Every lens is
-              cut in our own lab.
+            <p className="text-md leading-normal text-body lg:text-lg lg:leading-relaxed mb-4.5 lg:mb-8 lg:max-w-135">
+              Stop by for your annual eye exam, new glasses, or contacts.
             </p>
             <div className="flex gap-2.5 lg:gap-3.25">
               <Link
@@ -92,7 +99,7 @@ export default function HomePage() {
               </Link>
               <a
                 href={BUSINESS.phoneHref}
-                className="flex-1 lg:flex-none inline-flex items-center justify-center gap-2 border-1.5 border-field-border text-ink font-bold text-md lg:text-base py-3 lg:px-6.5 lg:py-3.5 rounded-xl hover:border-accent hover:text-accent lg:bg-white/16 lg:border-white/50 lg:text-white lg:backdrop-blur-sm lg:hover:bg-white/25 lg:hover:border-white/50 lg:hover:text-white transition-colors"
+                className="flex-1 lg:flex-none inline-flex items-center justify-center gap-2 border-1.5 border-field-border text-ink font-bold text-md lg:text-base py-3 lg:px-6.5 lg:py-3.5 rounded-xl hover:border-accent hover:text-accent transition-colors"
               >
                 <Phone size={16} className="hidden lg:inline" />
                 <span className="lg:hidden">Call us</span>
@@ -100,40 +107,41 @@ export default function HomePage() {
               </a>
             </div>
           </div>
+
+          {/* Fact tiles — stacked full-width under the card on mobile, a column beside it on desktop */}
+          <div className="relative mx-4 mt-3.5 flex flex-col gap-2.5 sm:mx-auto sm:max-w-140 lg:mt-0 lg:mx-0 lg:max-w-none lg:gap-5 lg:w-105 lg:shrink-0 lg:self-center">
+            <a
+              href={GOOGLE_REVIEWS.url}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="flex items-center justify-center gap-3 lg:flex-col lg:gap-1.5 rounded-2xl lg:rounded-2.5xl bg-white border border-hairline lg:border-0 shadow-card lg:shadow-hero px-4 py-3.5 lg:px-8 lg:py-6 text-center hover:border-accent lg:hover:bg-accent-soft transition-colors"
+              aria-label={`${GOOGLE_REVIEWS.rating} stars from ${GOOGLE_REVIEWS.count} Google reviews (opens Google Maps)`}
+            >
+              <span className="font-display text-xl lg:text-4xl font-extrabold text-ink leading-none">
+                {GOOGLE_REVIEWS.rating}
+              </span>
+              <span aria-hidden className="text-gold text-base lg:text-2xl tracking-eyebrow leading-none">
+                ★★★★★
+              </span>
+              <span className="text-xs lg:text-md text-body">{GOOGLE_REVIEWS.count} Google reviews</span>
+            </a>
+            <div className="flex items-center justify-center gap-5 lg:gap-6 rounded-2xl lg:rounded-2.5xl bg-accent text-white px-4 py-3.5 lg:px-7 lg:py-6 lg:shadow-hero whitespace-nowrap">
+              <div>
+                <div className="font-display text-md lg:text-xl font-extrabold leading-none">Next-day</div>
+                <div className="text-xs lg:text-sm text-accent-ondark mt-1 lg:mt-1.5">on most prescriptions</div>
+              </div>
+              <div className="h-8 lg:h-10 w-px bg-white/25" aria-hidden />
+              <div>
+                <div className="font-display text-md lg:text-xl font-extrabold leading-none">Free adjustments</div>
+                <div className="text-xs lg:text-sm text-accent-ondark mt-1 lg:mt-1.5">always</div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Trust line */}
-      <p className="px-5 py-4.5 lg:px-10 lg:py-5.5 text-center text-sm lg:text-md text-body leading-normal border-b border-hairline-soft">
-        Independent and family-run · free adjustments for anyone · next-day
-        service on most prescriptions
-        <span className="hidden lg:inline"> · exams by Dr. Diane Galper, OD</span>
-      </p>
-
-      {/* Service area links */}
-      <p className="px-5 py-3 lg:px-10 text-center text-xs lg:text-sm text-body leading-relaxed border-b border-hairline-soft">
-        Serving{" "}
-        {CITIES.map(({ slug, city }, i) => (
-          <span key={slug}>
-            {i > 0 && (i === CITIES.length - 1 ? " and " : ", ")}
-            <Link
-              href={`/service-areas/${slug}`}
-              className="font-semibold text-secondary hover:text-accent transition-colors"
-            >
-              {city}
-            </Link>
-          </span>
-        ))}
-        {" · "}
-        <Link href="/service-areas" className="font-semibold text-accent hover:text-accent-hover transition-colors">
-          All service areas →
-        </Link>
-      </p>
-
-      <ReviewsCarousel />
-
       {/* What we do */}
-      <section className="max-w-295 mx-auto pt-8 pb-3 lg:pt-18 lg:pb-2">
+      <section className="max-w-295 mx-auto pt-8 pb-8 lg:pt-18 lg:pb-16">
         <div className="px-5 lg:px-10 flex items-baseline lg:items-end justify-between lg:mb-7">
           <div>
             <h2 className="text-xl lg:text-4xl font-extrabold text-ink tracking-normal lg:tracking-tight lg:mb-1.5">
@@ -150,10 +158,7 @@ export default function HomePage() {
             See all<span className="hidden lg:inline"> services</span> →
           </Link>
         </div>
-        <p className="lg:hidden px-5 mt-1.25 text-sm text-body leading-normal">
-          Exams, glasses, contacts and repairs.
-        </p>
-        <div className="flex gap-3.25 overflow-x-auto snap-x snap-mandatory px-5 pt-4.5 pb-5.5 lg:grid lg:grid-cols-4 lg:gap-4.5 lg:px-10 lg:pt-0 lg:pb-0 lg:overflow-visible">
+        <div className="flex gap-3.25 overflow-x-auto snap-x snap-mandatory scroll-pl-5 scrollbar-visible px-5 pt-4.5 pb-5.5 lg:grid lg:grid-cols-4 lg:gap-4.5 lg:px-10 lg:pt-0 lg:pb-0 lg:overflow-visible">
           {whatWeDo.map(({ href, title, description, image, alt }) => (
             <Link
               key={title}
@@ -183,6 +188,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <ReviewsCarousel />
+
       {/* Why Focus Optical */}
       <section className="bg-surface lg:mt-18">
         <div className="max-w-295 mx-auto px-5 py-8.5 lg:px-10 lg:py-16 lg:grid lg:grid-cols-2 lg:gap-14 lg:items-center">
@@ -190,13 +197,10 @@ export default function HomePage() {
             <p className="text-accent font-bold text-xs tracking-eyebrow uppercase mb-2.5 lg:mb-3.5">
               Why Focus Optical
             </p>
-            <h2 className="text-2xl leading-tight lg:text-4xl font-extrabold text-ink tracking-tight mb-1.5 lg:mb-3">
-              Tom cuts every lens{" "}
-              <span className="text-accent">himself, at the bench.</span>
+            <h2 className="text-2xl leading-tight lg:text-4xl font-extrabold text-ink tracking-tight mb-2 lg:mb-3">
+              Forty-five years of practice,{" "}
+              <span className="text-accent">and it shows in the fit.</span>
             </h2>
-            <p className="text-sm lg:text-base leading-normal lg:leading-relaxed text-body mb-6 lg:mb-0">
-              Forty-five years of practice, and it shows in the fit.
-            </p>
           </div>
           <div className="grid grid-cols-2 gap-3 lg:gap-3.5">
             {why.map(({ title, description }) => (
@@ -234,8 +238,8 @@ export default function HomePage() {
             <div>
               <p className="text-md leading-normal text-secondary mb-2">
                 Hi, I&apos;m Tom. I&apos;ve made glasses by hand since 1977 and
-                opened Focus Optical in 1984. Getting the fit right is a bit of a
-                lost art, and it&apos;s the part I like most.
+                opened Focus Optical in 1984. Getting the fit right is a bit of
+                a lost art, and it&apos;s the part I like most.
               </p>
               <Link
                 href="/about"
@@ -265,10 +269,10 @@ export default function HomePage() {
                 Tom Hamilton has made glasses by hand since 1977.
               </h2>
               <p className="text-base leading-relaxed text-secondary mb-4">
-                I opened Focus Optical in 1984. I cut and edge every lens in-house
-                and treat each pair as if I were making it for myself. Getting the
-                fit right is a bit of a lost art, and it&apos;s the part I like
-                most.
+                I opened Focus Optical in 1984. I cut and edge every lens
+                in-house and treat each pair as if I were making it for myself.
+                Getting the fit right is a bit of a lost art, and it&apos;s the
+                part I like most.
               </p>
               <Link
                 href="/about"

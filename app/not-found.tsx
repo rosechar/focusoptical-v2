@@ -40,7 +40,7 @@ export default function NotFound() {
           ))}
         </ul>
       </section>
-      <CtaBand heading="Looking to book a visit?" subtext="Book online or give us a call." />
+      <CtaBand heading="Looking to book a visit?" subtext="Send a request online and we'll call to confirm." />
     </>
   );
 }

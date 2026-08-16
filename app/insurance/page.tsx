@@ -116,7 +116,7 @@ export default function InsurancePage() {
 
       <CtaBand
         heading="Still have questions?"
-        subtext="Give us a call and we'll sort it out."
+        subtext="Book a visit and we'll walk through your plan and pricing in person."
       />
     </>
   );

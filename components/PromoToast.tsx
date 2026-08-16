@@ -34,7 +34,7 @@ export default function PromoToast() {
     <div
       role="status"
       aria-label="Current promotion"
-      className="animate-toast-in fixed z-60 inset-x-3.5 bottom-4 sm:inset-x-auto sm:right-6 sm:bottom-6 sm:w-90 flex items-center gap-3 sm:gap-3.25 rounded-2xl bg-dark text-white px-3.5 py-3.25 sm:px-4 sm:py-3.75 shadow-toast"
+      className="animate-toast-in fixed z-60 inset-x-3.5 bottom-4 sm:inset-x-auto sm:right-6 sm:bottom-6 sm:w-105 flex items-center gap-3 sm:gap-3.25 rounded-2xl bg-dark text-white px-3.5 py-3.25 sm:px-4 sm:py-3.75 shadow-toast"
     >
       <span
         aria-hidden

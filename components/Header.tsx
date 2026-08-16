@@ -27,7 +27,7 @@ export default function Header() {
             {BUSINESS.address.state}
           </a>
           <div className="inline-flex items-center gap-5">
-            <span className="text-dark-muted">Mon–Sat · Walk-ins welcome</span>
+            <span className="text-dark-muted">Open Mon–Sat · Free adjustments for anyone</span>
             <a
               href={BUSINESS.phoneHref}
               className="inline-flex items-center gap-1.75 text-white font-bold hover:text-accent-ondark transition-colors"
@@ -90,17 +90,17 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile tab nav */}
-        <nav aria-label="Primary" className="lg:hidden flex border-t border-hairline-soft">
+        {/* Mobile chip nav */}
+        <nav aria-label="Primary" className="lg:hidden flex gap-2 px-4.5 pb-3">
           {NAV_TABS.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
               aria-current={isActive(href) ? "page" : undefined}
-              className={`flex-1 text-center text-sm pt-3.25 pb-2.75 px-1 border-b-2 transition-colors ${
+              className={`flex-1 text-center rounded-full px-3 py-2 text-sm transition-colors ${
                 isActive(href)
-                  ? "border-accent text-accent font-bold"
-                  : "border-transparent text-body font-semibold"
+                  ? "bg-accent-soft text-accent font-bold"
+                  : "text-body font-semibold hover:bg-surface"
               }`}
             >
               {label}
