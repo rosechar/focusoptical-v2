@@ -37,8 +37,7 @@ const chipClass = (selected: boolean) =>
       : "bg-white text-secondary border-field-border hover:border-accent"
   }`;
 
-const cardClass =
-  "bg-white border border-hairline rounded-2.5xl shadow-card";
+const cardClass = "bg-white border border-hairline rounded-2.5xl shadow-card";
 
 export default function AppointmentForm() {
   const [form, setForm] = useState<FormState>({
@@ -50,14 +49,17 @@ export default function AppointmentForm() {
     website: "",
   });
   const [errors, setErrors] = useState<FieldErrors>({});
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
-    "idle",
-  );
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const successRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (status === "success") {
-      successRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      successRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
       successRef.current?.focus({ preventScroll: true });
     }
   }, [status]);
@@ -65,7 +67,8 @@ export default function AppointmentForm() {
   const validate = (): boolean => {
     const next: FieldErrors = {};
     if (form.name.trim().length < 2) next.name = "Please enter your name";
-    if (!isValidPhone(form.phone)) next.phone = "Please enter a valid phone number";
+    if (!isValidPhone(form.phone))
+      next.phone = "Please enter a valid phone number";
     if (form.email.trim() && !emailRegex.test(form.email.trim()))
       next.email = "Please enter a valid email address";
     setErrors(next);
@@ -102,7 +105,10 @@ export default function AppointmentForm() {
   const fieldError = (field: keyof FieldErrors) => {
     const message = errors[field];
     return message ? (
-      <p id={`${field}-error`} className="mt-1.5 text-xs text-closed flex items-center gap-1">
+      <p
+        id={`${field}-error`}
+        className="mt-1.5 text-xs text-closed flex items-center gap-1"
+      >
         <AlertCircle size={12} />
         {message}
       </p>
@@ -127,8 +133,8 @@ export default function AppointmentForm() {
           Thanks, we&apos;ve got it.
         </h2>
         <p className="text-sm lg:text-md text-body leading-normal mb-4.5 lg:mb-5">
-          We&apos;ll call shortly to confirm your time. Need us sooner, give us a
-          ring.
+          We&apos;ll call shortly to confirm your time. Need us sooner, give us
+          a ring.
         </p>
         <Button href={BUSINESS.phoneHref}>{BUSINESS.phoneDisplay}</Button>
       </div>
@@ -216,7 +222,7 @@ export default function AppointmentForm() {
       </div>
 
       <fieldset>
-        <legend className={`${labelClass} mb-2.25 lg:mb-2.5`}>What do you need?</legend>
+        <legend className={`${labelClass} mb-2.25 lg:mb-2.5`}>Service</legend>
         <div className="flex flex-wrap gap-2 lg:gap-2.25">
           {appointmentTypes.map(({ value, short }) => {
             const selected = form.appointment === value;
@@ -243,7 +249,9 @@ export default function AppointmentForm() {
           name="optIn"
           type="checkbox"
           checked={form.optIn}
-          onChange={(e) => setForm((prev) => ({ ...prev, optIn: e.target.checked }))}
+          onChange={(e) =>
+            setForm((prev) => ({ ...prev, optIn: e.target.checked }))
+          }
           className="mt-0.5 h-4 w-4 shrink-0 rounded border-field-border accent-accent cursor-pointer"
         />
         <span className="text-sm text-body leading-relaxed">

@@ -9,6 +9,7 @@ import { CITIES, getCity } from "@/lib/cities";
 import { faqJsonLd } from "@/lib/schema";
 import { SERVICE_HIGHLIGHTS } from "@/lib/services";
 import Faq from "@/components/Faq";
+import OpenStatus from "@/components/OpenStatus";
 
 const communityChipClass =
   "inline-block text-sm font-semibold bg-surface text-body border border-hairline px-4 py-2 rounded-full hover:bg-accent-soft hover:text-accent transition-colors";
@@ -191,9 +192,10 @@ export default async function CityPage({ params }: Props) {
       {/* CTA + other areas */}
       <CtaBand
         subtext={
-          area.primary
-            ? "Right here in Rochester Hills. Open Monday to Saturday."
-            : `${area.driveTime} from ${area.city}. Open Monday to Saturday.`
+          <>
+            {area.primary ? "Right here in Rochester Hills" : `${area.driveTime} from ${area.city}`}.{" "}
+            <OpenStatus className="text-white" fallback="Open Monday to Saturday" />
+          </>
         }
       />
 

@@ -7,6 +7,7 @@ import { SERVICES } from "@/lib/services";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
 import Button from "@/components/Button";
 import CtaBand from "@/components/CtaBand";
+import OpenStatus from "@/components/OpenStatus";
 
 export const metadata: Metadata = {
   title: "Focus Optical | Optician & Eye Exams in Rochester Hills, MI",
@@ -106,6 +107,12 @@ export default function HomePage() {
                 <div className="text-xs lg:text-sm text-accent-ondark mt-1 lg:mt-1.5">always</div>
               </div>
             </div>
+            <p className="lg:hidden text-center text-xs text-body mt-1">
+              <OpenStatus className="text-secondary" /> ·{" "}
+              <Link href="/contact" className="font-semibold text-accent">
+                Hours &amp; directions
+              </Link>
+            </p>
           </div>
         </div>
       </section>

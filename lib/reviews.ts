@@ -1,11 +1,32 @@
+import { GOOGLE_REVIEWS } from "@/lib/business";
+
 export interface Review {
   name: string;
+  /** Verbatim excerpt from the Google review (whole sentences, nothing reworded). */
   quote: string;
-  /** Link to the original Google review. */
+  /** Link to the review on Google: the individual review where we have one, otherwise the reviews list. */
   href: string;
 }
 
 export const REVIEWS: Review[] = [
+  {
+    name: "Pam T.",
+    quote:
+      "I have a small face, and it's hard to find frames that I like, and that fit. Tom just keeps working with me until we find something that works. No high pressure, and quick turnaround time.",
+    href: GOOGLE_REVIEWS.url,
+  },
+  {
+    name: "Kelsey O.",
+    quote:
+      "This shop is a more intimate and calm experience than larger-scale ones. You aren't going to have salespeople standing behind you trying to upsell you on things you don't need.",
+    href: GOOGLE_REVIEWS.url,
+  },
+  {
+    name: "Carolyn K.",
+    quote:
+      "I have four different prescriptions, and he managed to get every single one exactly right. That takes real skill and attention to detail.",
+    href: GOOGLE_REVIEWS.url,
+  },
   {
     name: "Emily",
     quote:
@@ -13,14 +34,15 @@ export const REVIEWS: Review[] = [
     href: "https://g.co/kgs/yiVrZD",
   },
   {
-    name: "Erik",
+    name: "Nancy S.",
     quote:
-      "Tom really helped me out to get a great pair of glasses for a great price.",
-    href: "https://g.co/kgs/A64L4m",
+      "Prices are reasonable, choice is wide, ordering is easy, and timelines are short. Tom calls you as soon as your order arrives.",
+    href: GOOGLE_REVIEWS.url,
   },
   {
-    name: "Ed",
-    quote: "The owner was very helpful. I'll come here from now on.",
-    href: "https://g.co/kgs/k2vTVR",
+    name: "Erin P.",
+    quote:
+      "Every time I try some place different I always end up going back to Tom at Focus. Highly recommend!",
+    href: GOOGLE_REVIEWS.url,
   },
 ];

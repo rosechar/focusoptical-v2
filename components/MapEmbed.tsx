@@ -1,6 +1,6 @@
 import { BUSINESS } from "@/lib/business";
 
-// Google Maps embed with a floating "Get directions" card. The map is the one
+// Google Maps embed with our own floating "Get directions" card. The map is the one
 // image on the site that does not get the duotone treatment.
 export default function MapEmbed({
   className = "",
@@ -10,14 +10,18 @@ export default function MapEmbed({
   showInfo?: boolean;
 }) {
   return (
-    <div className={`relative isolate bg-surface ${className}`}>
-      <iframe
-        src={BUSINESS.mapsEmbedUrl}
-        className="absolute inset-0 h-full w-full border-0"
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-        title="Focus Optical location map"
-      />
+    <div className={`relative isolate overflow-hidden bg-surface ${className}`}>
+      {/* The embed draws its own place card in the top-left corner; shifting the frame up clips it out
+          while keeping the pin (it lands a little above center). The wide desktop embed draws a taller card. */}
+      <div className="absolute -top-22 lg:-top-36 inset-x-0 bottom-0">
+        <iframe
+          src={BUSINESS.mapsEmbedUrl}
+          className="h-full w-full border-0"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Focus Optical location map"
+        />
+      </div>
       {showInfo && (
         <div className="pointer-events-none absolute inset-0">
           <div className="max-w-295 h-full mx-auto px-3.5 lg:px-10 flex items-end">

@@ -7,6 +7,7 @@ import { BUSINESS } from "@/lib/business";
 import { NAV_TABS } from "@/lib/nav";
 import Button from "@/components/Button";
 import Logo from "@/components/Logo";
+import OpenStatus from "@/components/OpenStatus";
 
 const navLinkClass = (active: boolean) =>
   `rounded-full text-md transition-colors ${
@@ -20,7 +21,7 @@ export default function Header() {
   return (
     <>
       {/* Desktop utility bar */}
-      <section aria-label="Store address and phone" className="hidden lg:block bg-dark text-dark-fg text-sm">
+      <section aria-label="Store address and hours" className="hidden lg:block bg-dark text-dark-fg text-sm">
         <div className="max-w-295 mx-auto px-10 py-2 flex items-center justify-between">
           <a
             href={BUSINESS.mapsUrl}
@@ -32,16 +33,7 @@ export default function Header() {
             {BUSINESS.address.street} · {BUSINESS.address.city},{" "}
             {BUSINESS.address.state}
           </a>
-          <div className="inline-flex items-center gap-5">
-            <span className="text-dark-muted">Open Mon–Sat · Free adjustments for anyone</span>
-            <a
-              href={BUSINESS.phoneHref}
-              className="inline-flex items-center gap-1.75 text-white font-bold hover:text-accent-ondark transition-colors"
-            >
-              <Phone size={14} />
-              {BUSINESS.phoneDisplay}
-            </a>
-          </div>
+          <OpenStatus className="text-dark-muted" />
         </div>
       </section>
 

@@ -1,9 +1,10 @@
+import type { ReactNode } from "react";
 import Button from "@/components/Button";
 
 interface CtaBandProps {
   heading?: string;
   /** Optional supporting line under the heading. */
-  subtext?: string;
+  subtext?: ReactNode;
   /** Vertical padding around the band. */
   className?: string;
 }
