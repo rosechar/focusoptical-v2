@@ -1,5 +1,8 @@
 import type { NextConfig } from "next";
 
+// Origins permitted to embed the site in an iframe, alongside our own.
+const FRAME_ANCESTORS = ["https://charlesrose.vercel.app"];
+
 const nextConfig: NextConfig = {
   // Inline the page's CSS into the HTML so it no longer render-blocks LCP/FCP.
   experimental: {
@@ -20,7 +23,12 @@ const nextConfig: NextConfig = {
         source: "/(.*)",
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
-          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          // frame-ancestors supersedes X-Frame-Options and, unlike it, can allow-list
+          // an external origin (X-Frame-Options ALLOW-FROM is unsupported in modern browsers).
+          {
+            key: "Content-Security-Policy",
+            value: `frame-ancestors 'self' ${FRAME_ANCESTORS.join(" ")};`,
+          },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
         ],

@@ -31,10 +31,10 @@ export const BUSINESS = {
     state: "MI",
     zip: "48309",
   },
-  mapsUrl:
-    "https://maps.google.com/?q=2046+W+Auburn+Rd,+Rochester+Hills,+MI+48309",
+  /** Opens the Google Business Profile listing (stable ?cid= form), not just the street address. */
+  mapsUrl: "https://www.google.com/maps?cid=999085307900063378",
   mapsEmbedUrl:
-    "https://maps.google.com/maps?q=2046%20W%20Auburn%20Rd%2C%20Rochester%20Hills%2C%20MI%2048309&z=14&output=embed",
+    "https://maps.google.com/maps?q=Focus%20Optical%2C%202046%20W%20Auburn%20Rd%2C%20Rochester%20Hills%2C%20MI%2048309&z=14&output=embed",
 } as const;
 
 /** Google Business Profile rating, shown on the site. Update when the count grows. */
