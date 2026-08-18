@@ -44,7 +44,10 @@ export default function ReviewsCarousel() {
       </div>
 
       {/* Every quote occupies the same grid cell so the section keeps the height of the longest one. */}
-      <div className="max-w-190 mx-auto grid items-center" aria-live="polite">
+      <div
+        className="max-w-190 mx-auto grid items-center"
+        aria-live={paused || engaged ? "polite" : "off"}
+      >
         {REVIEWS.map((r, i) => (
           <blockquote
             key={r.name}
@@ -86,7 +89,7 @@ export default function ReviewsCarousel() {
                 className={`block h-1.75 lg:h-2 rounded-full transition-all duration-300 ${
                   i === index
                     ? "w-5 lg:w-6 bg-accent"
-                    : "w-1.75 lg:w-2 bg-field-border group-hover:bg-accent/50"
+                    : "w-1.75 lg:w-2 bg-faint group-hover:bg-accent"
                 }`}
               />
             </button>

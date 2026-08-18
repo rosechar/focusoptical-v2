@@ -77,7 +77,9 @@ export default function RootLayout({
           Skip to content
         </a>
         <Header />
-        <main id="main">{children}</main>
+        <main id="main" tabIndex={-1} className="scroll-mt-24 focus:outline-none">
+          {children}
+        </main>
         <Footer />
         <PromoToast />
         <Analytics />

@@ -24,20 +24,22 @@ interface FieldErrors {
 }
 
 const inputClass = (hasError?: string) =>
-  `w-full px-3.5 py-3.5 rounded-xl border text-md text-ink placeholder:text-black/55 bg-field transition-colors focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent ${
+  `w-full px-3.5 py-3.5 rounded-xl border text-md text-ink placeholder:text-black/55 bg-field transition-colors focus:border-accent ${
     hasError ? "border-closed bg-closed-soft" : "border-field-border"
   }`;
 
 const labelClass = "block text-xs lg:text-sm font-bold text-secondary";
 
 const chipClass = (selected: boolean) =>
-  `cursor-pointer select-none rounded-full px-3.5 py-2.25 lg:px-4 lg:py-2.5 text-sm font-semibold border-1.5 transition-colors has-focus-visible:ring-2 has-focus-visible:ring-accent/40 has-focus-visible:ring-offset-2 ${
+  `cursor-pointer select-none rounded-full px-3.5 py-2.25 lg:px-4 lg:py-2.5 text-sm font-semibold border-1.5 transition-colors has-focus-visible:ring-2 has-focus-visible:ring-accent has-focus-visible:ring-offset-2 ${
     selected
       ? "bg-accent text-white border-accent"
       : "bg-white text-secondary border-field-border hover:border-accent"
   }`;
 
 const cardClass = "bg-white border border-hairline rounded-2.5xl shadow-card";
+
+const fieldOrder = ["name", "phone", "email"] as const;
 
 export default function AppointmentForm() {
   const [form, setForm] = useState<FormState>({
@@ -64,7 +66,7 @@ export default function AppointmentForm() {
     }
   }, [status]);
 
-  const validate = (): boolean => {
+  const validate = (): FieldErrors => {
     const next: FieldErrors = {};
     if (form.name.trim().length < 2) next.name = "Please enter your name";
     if (!isValidPhone(form.phone))
@@ -72,7 +74,7 @@ export default function AppointmentForm() {
     if (form.email.trim() && !emailRegex.test(form.email.trim()))
       next.email = "Please enter a valid email address";
     setErrors(next);
-    return Object.keys(next).length === 0;
+    return next;
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +87,13 @@ export default function AppointmentForm() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!validate()) return;
+
+    const invalid = validate();
+    const firstInvalid = fieldOrder.find((field) => invalid[field]);
+    if (firstInvalid) {
+      document.getElementById(firstInvalid)?.focus();
+      return;
+    }
 
     setStatus("loading");
     try {
@@ -107,6 +115,7 @@ export default function AppointmentForm() {
     return message ? (
       <p
         id={`${field}-error`}
+        role="alert"
         className="mt-1.5 text-xs text-closed flex items-center gap-1"
       >
         <AlertCircle size={12} />
@@ -260,7 +269,10 @@ export default function AppointmentForm() {
       </label>
 
       {status === "error" && (
-        <div className="flex items-center gap-2.5 p-4 rounded-xl bg-closed-soft border border-closed/20 text-closed text-sm">
+        <div
+          role="alert"
+          className="flex items-center gap-2.5 p-4 rounded-xl bg-closed-soft border border-closed/20 text-closed text-sm"
+        >
           <AlertCircle size={16} className="shrink-0" />
           <span>
             Something went wrong. Please try again or call us at{" "}

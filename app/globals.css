@@ -124,8 +124,14 @@
   }
   /* One visible focus style for every interactive element; the outline sits outside the element. */
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--focus-ring, var(--color-accent));
     outline-offset: 2px;
+  }
+  /* The accent ring is invisible on filled dark and accent panels, so anything inside one
+     switches to a white ring. Only descendants: a bg-accent control on a white page keeps it. */
+  .bg-dark :focus-visible,
+  .bg-accent :focus-visible {
+    --focus-ring: var(--color-white);
   }
   h1,
   h2,

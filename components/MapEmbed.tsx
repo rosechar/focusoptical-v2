@@ -10,7 +10,7 @@ export default function MapEmbed({
   showInfo?: boolean;
 }) {
   return (
-    <div className={`relative isolate overflow-hidden bg-surface ${className}`}>
+    <div className={`relative isolate overflow-clip bg-surface ${className}`}>
       {/* The embed draws its own place card in the top-left corner; shifting the frame up clips it out
           while keeping the pin (it lands a little above center). The wide desktop embed draws a taller card. */}
       <div className="absolute -top-22 lg:-top-36 inset-x-0 bottom-0">

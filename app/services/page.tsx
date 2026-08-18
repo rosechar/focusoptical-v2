@@ -150,36 +150,27 @@ export default function ServicesPage() {
       <h1 className="sr-only">Services</h1>
 
       <section className="max-w-295 mx-auto pt-5 lg:px-10 lg:pt-14">
-        {/* Mobile: one horizontal scroller, stats underneath */}
-        <div className="lg:hidden">
-          <div
-            role="region"
-            aria-label="Services"
-            tabIndex={0}
-            className="flex gap-3.5 overflow-x-auto snap-x snap-mandatory scroll-pl-5 scrollbar-visible px-5 pt-1 pb-4 focus-visible:-outline-offset-2"
-          >
-            {SERVICES.map((service) => (
-              <ServiceCard key={service.id} {...service} />
-            ))}
-          </div>
-          <div className="px-5 mt-4">
+        {/* One card list at every width, so each service id stays unique and /services#eye-exams
+            lands on a visible card. Mobile: a horizontal scroller with the stats underneath.
+            Desktop: two rows of two with the stats spanning the gap between them. */}
+        <div
+          role="region"
+          aria-label="Services"
+          tabIndex={0}
+          className="flex gap-3.5 overflow-x-auto snap-x snap-mandatory scroll-pl-5 scrollbar-visible px-5 pt-1 pb-4 focus-visible:-outline-offset-2 lg:grid lg:grid-cols-2 lg:gap-5 lg:overflow-visible lg:p-0"
+        >
+          {firstPair.map((service) => (
+            <ServiceCard key={service.id} {...service} />
+          ))}
+          <div className="hidden lg:col-span-2 lg:block">
             <Stats />
           </div>
+          {secondPair.map((service) => (
+            <ServiceCard key={service.id} {...service} />
+          ))}
         </div>
-
-        {/* Desktop: two rows of cards with the stats between them */}
-        <div className="hidden lg:flex lg:flex-col lg:gap-5">
-          <div className="grid grid-cols-2 gap-5">
-            {firstPair.map((service) => (
-              <ServiceCard key={service.id} {...service} />
-            ))}
-          </div>
+        <div className="px-5 mt-4 lg:hidden">
           <Stats />
-          <div className="grid grid-cols-2 gap-5">
-            {secondPair.map((service) => (
-              <ServiceCard key={service.id} {...service} />
-            ))}
-          </div>
         </div>
 
         <div className="mx-5 lg:mx-0 mt-5.5 lg:mt-5 flex items-start lg:items-center gap-3.25 lg:gap-3.5 rounded-2xl bg-surface px-5 py-4.5 lg:px-6 lg:py-5.5">
