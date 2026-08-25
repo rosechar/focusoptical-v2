@@ -7,7 +7,7 @@ import { faqJsonLd } from "@/lib/schema";
 import Faq from "@/components/Faq";
 
 export const metadata: Metadata = {
-  title: "Vision Insurance & Pricing",
+  title: "Eye Exam Cost & Vision Insurance in Rochester Hills, MI",
   description:
     "Focus Optical in Rochester Hills, MI accepts various insurance plans. Contact us at (248) 852-8830 for details on pricing and insurance coverage for eye exams, glasses, and contact lenses.",
   alternates: {

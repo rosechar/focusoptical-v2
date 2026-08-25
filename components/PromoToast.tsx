@@ -5,36 +5,47 @@ import { useRouter } from "next/navigation";
 
 const STORAGE_KEY = "promoDismissed";
 const SHOW_DELAY_MS = 2600;
+const AUTO_HIDE_MS = 12000;
 
-// Appears once per session 2.6s after load. "Book" routes to the Visit page;
-// both actions mark it dismissed so it stays hidden for the rest of the session.
+type Phase = "hidden" | "in" | "out";
+
+// Appears once per session 2.6s after load and goes away on its own after 12s.
+// "Book" routes to the Visit page; any exit plays the out animation, then unmounts,
+// and marks it dismissed for the session.
 export default function PromoToast() {
-  const [visible, setVisible] = useState(false);
+  const [phase, setPhase] = useState<Phase>("hidden");
   const router = useRouter();
 
   useEffect(() => {
     if (sessionStorage.getItem(STORAGE_KEY)) return;
-    const id = setTimeout(() => setVisible(true), SHOW_DELAY_MS);
+    const id = setTimeout(() => setPhase("in"), SHOW_DELAY_MS);
     return () => clearTimeout(id);
   }, []);
 
   const dismiss = () => {
     sessionStorage.setItem(STORAGE_KEY, "1");
-    setVisible(false);
+    setPhase("out");
   };
+
+  useEffect(() => {
+    if (phase !== "in") return;
+    const id = setTimeout(dismiss, AUTO_HIDE_MS);
+    return () => clearTimeout(id);
+  }, [phase]);
 
   const book = () => {
     dismiss();
     router.push("/contact");
   };
 
-  if (!visible) return null;
+  if (phase === "hidden") return null;
 
   return (
     <div
       role="status"
       aria-label="Current promotion"
-      className="animate-toast-in fixed z-60 inset-x-3.5 bottom-4 sm:inset-x-auto sm:right-6 sm:bottom-6 sm:w-105 flex items-center gap-3 sm:gap-3.25 rounded-2xl bg-dark text-white px-3.5 py-3.25 sm:px-4 sm:py-3.75 shadow-toast"
+      onAnimationEnd={() => phase === "out" && setPhase("hidden")}
+      className={`${phase === "out" ? "animate-toast-out" : "animate-toast-in"} fixed z-60 inset-x-3.5 bottom-4 sm:inset-x-auto sm:right-6 sm:bottom-6 sm:w-105 flex items-center gap-3 sm:gap-3.25 rounded-2xl bg-dark text-white px-3.5 py-3.25 sm:px-4 sm:py-3.75 shadow-toast`}
     >
       <span
         aria-hidden

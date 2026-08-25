@@ -27,7 +27,7 @@ const sans = Hanken_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    template: "%s | Focus Optical, Rochester Hills MI",
+    template: "%s | Focus Optical",
     default:
       "Focus Optical | Optician & Eye Exams in Rochester Hills, MI",
   },

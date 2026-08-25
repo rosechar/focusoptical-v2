@@ -7,7 +7,7 @@ import { SERVICES, type Service } from "@/lib/services";
 import Faq from "@/components/Faq";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "Eye Exams, Glasses & Contacts in Rochester Hills, MI",
   description:
     "Focus Optical in Rochester Hills, MI offers eye exams, contact lens exams, prescription glasses, contact lenses, and free eyeglass adjustments. Next day service available on most prescriptions.",
   alternates: {

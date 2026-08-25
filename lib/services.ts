@@ -1,6 +1,8 @@
 export interface Service {
   /** Anchor id on /services and the offer id in structured data. */
   id: string;
+  /** Dedicated page, when one exists; otherwise links go to /services#id. */
+  href?: string;
   title: string;
   /** Short badge shown on the service card image. */
   badge: string;
@@ -18,6 +20,7 @@ export interface Service {
 export const SERVICES: Service[] = [
   {
     id: "eye-exams",
+    href: "/eye-exams",
     title: "Eye exams",
     badge: "Annual vision assessment",
     description:

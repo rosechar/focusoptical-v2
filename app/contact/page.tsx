@@ -6,7 +6,7 @@ import OpenStatus from "@/components/OpenStatus";
 import { BUSINESS, HOURS } from "@/lib/business";
 
 export const metadata: Metadata = {
-  title: "Book a Visit",
+  title: "Book an Eye Exam in Rochester Hills, MI",
   description:
     "Book an eye exam or appointment at Focus Optical in Rochester Hills, MI. Schedule online or call (248) 852-8830. Eye exams, contact lenses, glasses. Serving Oakland County since 1984.",
   alternates: {

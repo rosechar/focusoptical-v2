@@ -7,6 +7,7 @@ import { CITIES } from "@/lib/cities";
 const paths = [
   "",
   "/services",
+  "/eye-exams",
   "/about",
   "/contact",
   "/service-areas",

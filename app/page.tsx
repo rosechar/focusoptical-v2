@@ -136,10 +136,10 @@ export default function HomePage() {
           </Link>
         </div>
         <div className="flex gap-3.25 overflow-x-auto snap-x snap-mandatory scroll-pl-5 scrollbar-visible px-5 pt-4.5 pb-5.5 lg:grid lg:grid-cols-4 lg:gap-4.5 lg:px-10 lg:pt-0 lg:pb-0 lg:overflow-visible">
-          {SERVICES.map(({ id, title, summary, image, alt }) => (
+          {SERVICES.map(({ id, href, title, summary, image, alt }) => (
             <Link
               key={id}
-              href={`/services#${id}`}
+              href={href ?? `/services#${id}`}
               className="shrink-0 w-43 lg:w-auto snap-start rounded-2xl border border-hairline bg-white overflow-hidden lg:shadow-card hover:border-accent transition-colors"
             >
               <div className="relative h-29 lg:h-37.5">

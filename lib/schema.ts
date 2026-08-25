@@ -75,9 +75,9 @@ export const businessJsonLd = {
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Optical services",
-        itemListElement: SERVICES.map(({ id, title, description }) => ({
+        itemListElement: SERVICES.map(({ id, href, title, description }) => ({
           "@type": "Offer",
-          url: `${SITE_URL}/services#${id}`,
+          url: href ? `${SITE_URL}${href}` : `${SITE_URL}/services#${id}`,
           itemOffered: {
             "@type": "Service",
             name: title,

@@ -6,6 +6,7 @@ import Logo from "@/components/Logo";
 
 const exploreLinks = [
   ...NAV_TABS,
+  { href: "/eye-exams", label: "Eye exams" },
   { href: "/insurance", label: "Insurance" },
   { href: "/service-areas", label: "Service areas" },
 ];

@@ -5,7 +5,7 @@ import { SITE_URL } from "@/lib/business";
 import { BUSINESS_ID, OPTOMETRIST_ID, OWNER_ID } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "About Us",
+  title: "About Our Rochester Hills Optician & Optometrist",
   description:
     "Meet Tom Hamilton, owner of Focus Optical in Rochester Hills, MI. An independent optician since 1984 with over 45 years of experience making eyeglasses. Eye exams performed by Dr. Diane Galper, Optometrist.",
   alternates: {
