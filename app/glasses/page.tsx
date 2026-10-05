@@ -10,7 +10,7 @@ import { BUSINESS, PEOPLE, SITE_URL } from "@/lib/business";
 import { BUSINESS_ID, faqJsonLd } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Next-Day Prescription Glasses in Rochester Hills, MI",
+  title: "Next-Day Glasses | Prescription Eyeglasses in Rochester Hills, MI",
   description:
     "Prescription glasses cut and edged in our own lab in Rochester Hills, MI, with most ready the next day. Frames for every budget, new lenses in your frames, progressives, and free adjustments. Serving Oakland County.",
   alternates: {

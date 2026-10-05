@@ -5,6 +5,7 @@ import { SERVICES } from "@/lib/services";
 export const BUSINESS_ID = `${SITE_URL}/#business`;
 export const OWNER_ID = `${SITE_URL}/#tom-hamilton`;
 export const OPTOMETRIST_ID = `${SITE_URL}/#diane-galper`;
+const WEBSITE_ID = `${SITE_URL}/#website`;
 
 const owner = {
   "@type": "Person",
@@ -89,6 +90,15 @@ export const businessJsonLd = {
           },
         })),
       },
+    },
+    // Lets Google show "Focus Optical" as the site name in results instead of the bare domain.
+    {
+      "@type": "WebSite",
+      "@id": WEBSITE_ID,
+      name: BUSINESS.name,
+      alternateName: `${BUSINESS.name} Rochester Hills`,
+      url: `${SITE_URL}/`,
+      publisher: { "@id": BUSINESS_ID },
     },
     owner,
     optometrist,

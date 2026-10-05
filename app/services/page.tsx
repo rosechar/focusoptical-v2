@@ -8,7 +8,7 @@ import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Eye Exams, Glasses & Contacts in Rochester Hills, MI",
+  title: "Services | Eye Exams, Glasses & Contacts in Rochester Hills, MI",
   description:
     "Focus Optical in Rochester Hills, MI offers eye exams, contact lens exams, prescription glasses, contact lenses, and free eyeglass adjustments. Next day service available on most prescriptions.",
   alternates: {

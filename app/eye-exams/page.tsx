@@ -10,7 +10,7 @@ import { BUSINESS, PEOPLE, SITE_URL } from "@/lib/business";
 import { BUSINESS_ID, OPTOMETRIST_ID, faqJsonLd } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Eye Doctor & Eye Exams in Rochester Hills, MI",
+  title: "Eye Exams | Eye Doctor in Rochester Hills, MI",
   description:
     `Eye exams and contact lens exams in Rochester Hills, MI with our eye doctor, Dr. Diane Galper, OD, every Tuesday. Glasses made in our own lab, most ready next day. Most vision insurance accepted. Call ${BUSINESS.phoneDisplay}.`,
   alternates: {
