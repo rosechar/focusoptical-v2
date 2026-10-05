@@ -16,3 +16,13 @@ export const appointmentTypes: AppointmentType[] = [
 export const getAppointmentLabel = (value: string): string | undefined =>
   appointmentTypes.find((t) => t.value === value)?.label;
 
+/** When the visitor would like to come in. The first entry is the form's default. */
+export const preferredTimes: AppointmentType[] = [
+  { value: "any", label: "Anytime", short: "Anytime" },
+  { value: "morning", label: "Weekday mornings", short: "Mornings" },
+  { value: "afternoon", label: "Weekday afternoons", short: "Afternoons" },
+];
+
+export const getPreferredTimeLabel = (value: string): string | undefined =>
+  preferredTimes.find((t) => t.value === value)?.label;
+

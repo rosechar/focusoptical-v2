@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { getAppointmentLabel } from "@/lib/appointments";
+import { getAppointmentLabel, getPreferredTimeLabel, preferredTimes } from "@/lib/appointments";
 import { MAX_LENGTH, emailRegex, isValidPhone } from "@/lib/validation";
 import {
   ownerNotificationEmail,
@@ -64,6 +64,9 @@ export async function POST(request: Request) {
   const phone = typeof payload.phone === "string" ? payload.phone.trim() : "";
   const appointment =
     typeof payload.appointment === "string" ? payload.appointment : "";
+  // Missing falls back to the default so a page loaded before this field shipped still submits.
+  const preferredTime =
+    typeof payload.preferredTime === "string" ? payload.preferredTime : preferredTimes[0].value;
   const optIn = payload.optIn !== false;
 
   // Honeypot: real visitors never see this field, so any value means a bot.
@@ -73,6 +76,7 @@ export async function POST(request: Request) {
   }
 
   const appointmentLabel = getAppointmentLabel(appointment);
+  const preferredTimeLabel = getPreferredTimeLabel(preferredTime);
 
   // Email is optional — a visitor can request a call with just a phone number.
   // Only validate it when one is supplied.
@@ -85,7 +89,8 @@ export async function POST(request: Request) {
     phone.length > MAX_LENGTH.phone ||
     (hasEmail && !emailRegex.test(email)) ||
     !isValidPhone(phone) ||
-    !appointmentLabel
+    !appointmentLabel ||
+    !preferredTimeLabel
   ) {
     return NextResponse.json({ error: "Invalid form data." }, { status: 400 });
   }
@@ -95,6 +100,7 @@ export async function POST(request: Request) {
     email,
     phone,
     appointmentLabel,
+    preferredTimeLabel,
   };
 
   const resend = new Resend(apiKey);

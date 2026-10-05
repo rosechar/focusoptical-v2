@@ -20,7 +20,7 @@ export default function Faq({ items, className = "flex flex-col gap-3" }: FaqPro
           key={q}
           className="group rounded-2xl border border-hairline bg-white open:border-accent transition-colors"
         >
-          <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+          <summary className="cursor-pointer list-none rounded-2xl [&::-webkit-details-marker]:hidden">
             <h3 className="flex items-center justify-between gap-4 p-5 lg:p-6 font-sans font-bold text-ink text-md lg:text-base">
               {q}
               <ChevronDown

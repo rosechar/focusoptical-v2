@@ -62,7 +62,7 @@ function ServiceCard({
   return (
     <article
       id={id}
-      className={`scroll-mt-24 flex flex-col shrink-0 w-72.5 lg:w-auto snap-start rounded-2.5xl overflow-hidden ${
+      className={`scroll-mt-24 flex flex-col rounded-2.5xl overflow-hidden ${
         inverted
           ? "bg-accent text-white shadow-card lg:justify-center"
           : "bg-white border border-hairline shadow-card"
@@ -75,7 +75,7 @@ function ServiceCard({
             alt={alt}
             fill
             className="object-cover duotone"
-            sizes="(max-width: 1024px) 290px, 50vw"
+            sizes="(max-width: 1024px) 100vw, 50vw"
           />
           <span className="absolute left-3.5 top-3.5 lg:left-4 lg:top-4 rounded-full bg-white/94 backdrop-blur-sm px-2.75 py-1.5 lg:px-3 text-xs font-bold uppercase tracking-widest text-accent-hover">
             {badge}
@@ -143,30 +143,28 @@ export default function ServicesPage() {
   return (
     <>
       <JsonLd data={faqJsonLd(faqs)} />
-      <h1 className="sr-only">Services</h1>
+      <section className="page-container pt-7 pb-4 lg:pt-14 lg:pb-8">
+        <h1 className="text-3xl lg:text-5xl font-extrabold text-ink tracking-tight">
+          Services
+        </h1>
+        <p className="text-md lg:text-lg leading-normal text-body mt-2 lg:mt-3 max-w-155">
+          Exams, glasses, contacts and repairs, all at one shop in Rochester Hills.
+        </p>
+      </section>
 
-      <section className="max-w-295 mx-auto pt-5 lg:px-10 lg:pt-14">
-        {/* One card list at every width, so each service id stays unique and /services#eye-exams
-            lands on a visible card. Mobile: a horizontal scroller with the stats underneath.
-            Desktop: two rows of two with the stats spanning the gap between them. */}
-        <div
-          role="region"
-          aria-label="Services"
-          tabIndex={0}
-          className="flex gap-3.5 overflow-x-auto snap-x snap-mandatory scroll-pl-5 scrollbar-visible px-5 pt-1 pb-4 focus-visible:-outline-offset-2 lg:grid lg:grid-cols-2 lg:gap-5 lg:overflow-visible lg:p-0"
-        >
+      <section className="max-w-295 mx-auto lg:px-10">
+        {/* Mobile: one card per row. Desktop: two rows of two. The stats sit between the
+            first and second pair at both widths. */}
+        <div className="grid gap-3.5 px-5 lg:grid-cols-2 lg:gap-5 lg:px-0">
           {firstPair.map((service) => (
             <ServiceCard key={service.id} {...service} />
           ))}
-          <div className="hidden lg:col-span-2 lg:block">
+          <div className="lg:col-span-2">
             <Stats />
           </div>
           {secondPair.map((service) => (
             <ServiceCard key={service.id} {...service} />
           ))}
-        </div>
-        <div className="px-5 mt-4 lg:hidden">
-          <Stats />
         </div>
 
         <div className="mx-5 lg:mx-0 mt-5.5 lg:mt-5 flex items-start lg:items-center gap-3.25 lg:gap-3.5 rounded-2xl bg-surface px-5 py-4.5 lg:px-6 lg:py-5.5">

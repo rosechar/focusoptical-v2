@@ -1,10 +1,16 @@
 "use client";
 
-import { useState, useEffect, useRef, FormEvent } from "react";
+import { Suspense, useState, useEffect, useRef, FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
 import { Loader2, AlertCircle } from "lucide-react";
 import { BUSINESS } from "@/lib/business";
 import Button from "@/components/Button";
-import { appointmentTypes } from "@/lib/appointments";
+import {
+  appointmentTypes,
+  getAppointmentLabel,
+  preferredTimes,
+  type AppointmentType,
+} from "@/lib/appointments";
 import { MAX_LENGTH, emailRegex, isValidPhone } from "@/lib/validation";
 
 interface FormState {
@@ -12,6 +18,7 @@ interface FormState {
   phone: string;
   email: string;
   appointment: string;
+  preferredTime: string;
   optIn: boolean;
   /** Honeypot: hidden from people, filled by bots. Must stay empty. */
   website: string;
@@ -41,12 +48,72 @@ const cardClass = "bg-white border border-hairline rounded-2.5xl shadow-card";
 
 const fieldOrder = ["name", "phone", "email"] as const;
 
+const DEFAULT_SERVICE = appointmentTypes[0].value;
+
+// Single-choice chip row backed by visually hidden radios.
+function ChipGroup({
+  legend,
+  name,
+  options,
+  value,
+  onChange,
+}: {
+  legend: string;
+  name: keyof FormState;
+  options: AppointmentType[];
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}) {
+  return (
+    <fieldset>
+      <legend className={`${labelClass} mb-2.25 lg:mb-2.5`}>{legend}</legend>
+      <div className="flex flex-wrap gap-2 lg:gap-2.25">
+        {options.map((option) => {
+          const selected = value === option.value;
+          return (
+            <label key={option.value} className={chipClass(selected)}>
+              <input
+                type="radio"
+                name={name}
+                value={option.value}
+                checked={selected}
+                onChange={onChange}
+                className="sr-only"
+              />
+              {option.short}
+            </label>
+          );
+        })}
+      </div>
+    </fieldset>
+  );
+}
+
+// CTAs link to /contact?service=<value> to pre-select a service. useSearchParams makes a
+// static page prerender its nearest Suspense fallback, so the fallback is the same form with
+// the default service and the client swaps in the pre-selected one after hydration.
 export default function AppointmentForm() {
+  return (
+    <Suspense fallback={<RequestForm initialService={DEFAULT_SERVICE} />}>
+      <RequestFormFromQuery />
+    </Suspense>
+  );
+}
+
+function RequestFormFromQuery() {
+  const requested = useSearchParams().get("service");
+  const initialService =
+    requested && getAppointmentLabel(requested) ? requested : DEFAULT_SERVICE;
+  return <RequestForm initialService={initialService} />;
+}
+
+function RequestForm({ initialService }: { initialService: string }) {
   const [form, setForm] = useState<FormState>({
     name: "",
     phone: "",
     email: "",
-    appointment: "eye",
+    appointment: initialService,
+    preferredTime: preferredTimes[0].value,
     optIn: true,
     website: "",
   });
@@ -233,27 +300,21 @@ export default function AppointmentForm() {
         />
       </div>
 
-      <fieldset>
-        <legend className={`${labelClass} mb-2.25 lg:mb-2.5`}>Service</legend>
-        <div className="flex flex-wrap gap-2 lg:gap-2.25">
-          {appointmentTypes.map(({ value, short }) => {
-            const selected = form.appointment === value;
-            return (
-              <label key={value} className={chipClass(selected)}>
-                <input
-                  type="radio"
-                  name="appointment"
-                  value={value}
-                  checked={selected}
-                  onChange={handleChange}
-                  className="sr-only"
-                />
-                {short}
-              </label>
-            );
-          })}
-        </div>
-      </fieldset>
+      <ChipGroup
+        legend="Service"
+        name="appointment"
+        options={appointmentTypes}
+        value={form.appointment}
+        onChange={handleChange}
+      />
+
+      <ChipGroup
+        legend="Best time to come in"
+        name="preferredTime"
+        options={preferredTimes}
+        value={form.preferredTime}
+        onChange={handleChange}
+      />
 
       <label htmlFor="optIn" className="flex items-start gap-3 cursor-pointer">
         <input

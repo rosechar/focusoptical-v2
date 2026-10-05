@@ -6,6 +6,7 @@ export interface AppointmentRequest {
   email: string;
   phone: string;
   appointmentLabel: string;
+  preferredTimeLabel: string;
 }
 
 interface EmailContent {
@@ -61,6 +62,7 @@ export function ownerNotificationEmail(req: AppointmentRequest): EmailContent {
   const email = escapeHtml(req.email);
   const phone = escapeHtml(req.phone);
   const appointment = escapeHtml(req.appointmentLabel);
+  const preferredTime = escapeHtml(req.preferredTimeLabel);
 
   const emailValue = email
     ? `<a href="mailto:${email}" style="color:#2f5286;text-decoration:none;">${email}</a>`
@@ -75,6 +77,7 @@ export function ownerNotificationEmail(req: AppointmentRequest): EmailContent {
       ${detailRow("Phone", `<a href="tel:${phone}" style="color:#2f5286;text-decoration:none;">${phone}</a>`)}
       ${detailRow("Email", emailValue)}
       ${detailRow("Appointment", appointment)}
+      ${detailRow("Best time", preferredTime)}
     </table>
   `;
 
@@ -85,6 +88,7 @@ export function ownerNotificationEmail(req: AppointmentRequest): EmailContent {
     `Phone: ${req.phone}`,
     `Email: ${req.email || "Not provided"}`,
     `Appointment: ${req.appointmentLabel}`,
+    `Best time: ${req.preferredTimeLabel}`,
   ].join("\n");
 
   return {
@@ -97,6 +101,7 @@ export function ownerNotificationEmail(req: AppointmentRequest): EmailContent {
 export function customerConfirmationEmail(req: AppointmentRequest): EmailContent {
   const name = escapeHtml(req.name);
   const appointment = escapeHtml(req.appointmentLabel);
+  const preferredTime = escapeHtml(req.preferredTimeLabel);
 
   const body = `
     <p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#334155;">
@@ -108,6 +113,7 @@ export function customerConfirmationEmail(req: AppointmentRequest): EmailContent
     </p>
     <table style="width:100%;border-collapse:collapse;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;">
       ${detailRow("Appointment", appointment)}
+      ${detailRow("Best time", preferredTime)}
     </table>
     <p style="margin:20px 0 0;font-size:15px;line-height:1.6;color:#334155;">
       Need to reach us sooner? Call
@@ -121,6 +127,7 @@ export function customerConfirmationEmail(req: AppointmentRequest): EmailContent
     `Thanks for reaching out to ${BUSINESS.name}. We got your request, and we'll give you a call within one business day to set up a time.`,
     "",
     `Appointment: ${req.appointmentLabel}`,
+    `Best time: ${req.preferredTimeLabel}`,
     "",
     `Need to reach us sooner? Call ${BUSINESS.phoneDisplay}.`,
     "",

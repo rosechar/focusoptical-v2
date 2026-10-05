@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Phone } from "lucide-react";
 import AppointmentForm from "@/components/AppointmentForm";
+import HoursList from "@/components/HoursList";
 import MapEmbed from "@/components/MapEmbed";
 import OpenStatus from "@/components/OpenStatus";
-import { BUSINESS, HOURS } from "@/lib/business";
+import { BUSINESS } from "@/lib/business";
 
 export const metadata: Metadata = {
   title: "Book a Visit | Eye Exams & Glasses in Rochester Hills, MI",
@@ -23,14 +24,7 @@ function Hours() {
       <p className="text-md text-body mb-3 lg:mb-3.5">
         <OpenStatus className="text-secondary" />
       </p>
-      <ul className="flex flex-col gap-2 lg:gap-2.25 text-md">
-        {HOURS.map(({ day, display, opens }) => (
-          <li key={day} className="flex justify-between gap-3">
-            <span className="text-body">{day}</span>
-            <span className={`font-semibold ${opens ? "" : "text-closed"}`}>{display}</span>
-          </li>
-        ))}
-      </ul>
+      <HoursList />
     </>
   );
 }

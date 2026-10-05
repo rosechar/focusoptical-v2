@@ -168,21 +168,21 @@ export default function HomePage() {
             See all<span className="hidden lg:inline"> services</span> →
           </Link>
         </div>
-        <div className="flex gap-3.25 overflow-x-auto snap-x snap-mandatory scroll-pl-5 scrollbar-visible px-5 pt-4.5 pb-5.5 lg:grid lg:grid-cols-4 lg:gap-4.5 lg:px-10 lg:pt-0 lg:pb-0 lg:overflow-visible">
+        <div className="grid grid-cols-2 gap-3 px-5 pt-4.5 lg:grid-cols-4 lg:gap-4.5 lg:px-10 lg:pt-0">
           {SERVICES.map(({ id, href, title, summary, image, alt }) => (
             <Link
               key={id}
               href={href ?? `/services#${id}`}
-              className="shrink-0 w-43 lg:w-auto snap-start rounded-2xl border border-hairline bg-white overflow-hidden lg:shadow-card hover:border-accent transition-colors"
+              className="rounded-2xl border border-hairline bg-white overflow-hidden lg:shadow-card hover:border-accent transition-colors"
             >
-              <div className="relative h-29 lg:h-37.5">
+              <div className="relative h-24 lg:h-37.5">
                 <Image
                   src={image}
                   alt={alt}
                   fill
                   quality={70}
                   className="object-cover duotone"
-                  sizes="(max-width: 1024px) 172px, 25vw"
+                  sizes="(max-width: 1024px) 50vw, 25vw"
                 />
               </div>
               <div className="px-3.5 pt-3.25 pb-4 lg:px-4.5 lg:pt-4.5 lg:pb-5.5">
@@ -201,7 +201,7 @@ export default function HomePage() {
       <ReviewsCarousel />
 
       {/* Why Focus Optical */}
-      <section className="bg-surface lg:mt-18">
+      <section className="bg-surface">
         <div className="page-container py-8.5 lg:py-16 lg:grid lg:grid-cols-2 lg:gap-14 lg:items-center">
           <div>
             <p className="eyebrow mb-2.5 lg:mb-3.5">
@@ -239,6 +239,15 @@ export default function HomePage() {
           items={faqs}
           className="flex flex-col gap-3 lg:grid lg:grid-cols-2 lg:gap-4 lg:items-start"
         />
+        <p className="mt-4 lg:mt-6 text-sm lg:text-md text-body">
+          Using vision insurance? We take most common plans.{" "}
+          <Link
+            href="/insurance"
+            className="font-bold text-accent hover:text-accent-hover transition-colors"
+          >
+            Insurance &amp; pricing →
+          </Link>
+        </p>
       </section>
 
       {/* Closing CTA + Owner: CTA first on mobile, owner first on desktop */}

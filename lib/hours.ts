@@ -24,6 +24,10 @@ export const formatTime = (hhmm: string) => {
   return `${hour12}:${String(m).padStart(2, "0")} ${suffix}`;
 };
 
+/** Today's weekday name ("Monday") in the store's time zone. */
+export const getStoreWeekday = (now: Date = new Date()) =>
+  new Intl.DateTimeFormat("en-US", { timeZone: STORE_TIME_ZONE, weekday: "long" }).format(now);
+
 export function getOpenStatus(now: Date = new Date()): OpenStatus {
   const parts = new Intl.DateTimeFormat("en-US", {
     timeZone: STORE_TIME_ZONE,

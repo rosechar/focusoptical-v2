@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Phone, MapPin } from "lucide-react";
 import { BUSINESS } from "@/lib/business";
-import { NAV_TABS } from "@/lib/nav";
+import { NAV_TABS, type NavTab } from "@/lib/nav";
 import Button from "@/components/Button";
 import Logo from "@/components/Logo";
 import OpenStatus from "@/components/OpenStatus";
@@ -16,7 +16,9 @@ const navLinkClass = (active: boolean) =>
 
 export default function Header() {
   const pathname = usePathname();
-  const isActive = (href: string) => pathname === href;
+  // "page" on the tab's own page, "true" on a page inside its section (e.g. Services on /glasses).
+  const currentFor = ({ href, sections }: NavTab) =>
+    pathname === href ? "page" : sections?.includes(pathname) ? "true" : undefined;
 
   return (
     <>
@@ -49,14 +51,14 @@ export default function Header() {
 
             {/* Desktop nav */}
             <nav aria-label="Primary" className="hidden lg:flex items-center gap-2">
-              {NAV_TABS.map(({ href, label }) => (
+              {NAV_TABS.map((tab) => (
                 <Link
-                  key={href}
-                  href={href}
-                  aria-current={isActive(href) ? "page" : undefined}
-                  className={`px-4 py-2.25 ${navLinkClass(isActive(href))}`}
+                  key={tab.href}
+                  href={tab.href}
+                  aria-current={currentFor(tab)}
+                  className={`px-4 py-2.25 ${navLinkClass(!!currentFor(tab))}`}
                 >
-                  {label}
+                  {tab.label}
                 </Link>
               ))}
               <Button href={BUSINESS.phoneHref} variant="outline" size="sm" pill className="ml-3.5 gap-1.75">
@@ -77,14 +79,14 @@ export default function Header() {
 
         {/* Mobile chip nav */}
         <nav aria-label="Primary" className="lg:hidden flex gap-2 px-4.5 pb-3">
-          {NAV_TABS.map(({ href, label }) => (
+          {NAV_TABS.map((tab) => (
             <Link
-              key={href}
-              href={href}
-              aria-current={isActive(href) ? "page" : undefined}
-              className={`flex-1 text-center px-3 py-2 text-sm ${navLinkClass(isActive(href))}`}
+              key={tab.href}
+              href={tab.href}
+              aria-current={currentFor(tab)}
+              className={`flex-1 text-center px-3 py-2 text-sm ${navLinkClass(!!currentFor(tab))}`}
             >
-              {label}
+              {tab.label}
             </Link>
           ))}
         </nav>

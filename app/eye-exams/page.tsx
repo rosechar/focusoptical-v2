@@ -164,7 +164,7 @@ export default function EyeExamsPage() {
               accepted.
             </p>
             <div className="flex gap-2.5 lg:gap-3.25">
-              <Button href="/contact" size="lg" className="flex-1 lg:flex-none">
+              <Button href="/contact?service=eye" size="lg" className="flex-1 lg:flex-none">
                 Book an eye exam
               </Button>
               <Button
@@ -299,7 +299,7 @@ export default function EyeExamsPage() {
         />
       </section>
 
-      <CtaBand className="pt-6 pb-10 lg:pt-10 lg:pb-20" />
+      <CtaBand href="/contact?service=eye" className="pt-6 pb-10 lg:pt-10 lg:pb-20" />
     </>
   );
 }

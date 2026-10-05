@@ -156,7 +156,7 @@ export default function GlassesPage() {
               lens brands you need, for Oakland County since 1984.
             </p>
             <div className="flex gap-2.5 lg:gap-3.25">
-              <Button href="/contact" size="lg" className="flex-1 lg:flex-none">
+              <Button href="/contact?service=retail" size="lg" className="flex-1 lg:flex-none">
                 Book a visit
               </Button>
               <Button
@@ -256,7 +256,7 @@ export default function GlassesPage() {
         />
       </section>
 
-      <CtaBand className="pt-6 pb-10 lg:pt-10 lg:pb-20" />
+      <CtaBand href="/contact?service=retail" className="pt-6 pb-10 lg:pt-10 lg:pb-20" />
     </>
   );
 }

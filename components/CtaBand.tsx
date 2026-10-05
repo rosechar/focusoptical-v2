@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
+import { Phone } from "lucide-react";
 import Button from "@/components/Button";
+import { BUSINESS } from "@/lib/business";
 
 interface CtaBandProps {
   heading?: string;
@@ -7,13 +9,19 @@ interface CtaBandProps {
   subtext?: ReactNode;
   /** Vertical padding around the band. */
   className?: string;
+  /** Booking link; pass /contact?service=<value> to pre-select a service. */
+  href?: string;
+  /** Adds a call button above "Book a visit". */
+  showCall?: boolean;
 }
 
-// Accent-filled closing CTA. Mobile: centered stack; desktop: heading left, "Book a visit" right.
+// Accent-filled closing CTA. Mobile: centered stack; desktop: heading left, buttons right.
 export default function CtaBand({
   heading = "Ready to see clearly?",
   subtext,
   className = "py-8 lg:py-14",
+  href = "/contact",
+  showCall = false,
 }: CtaBandProps) {
   return (
     <div className={`w-full page-container ${className}`}>
@@ -28,14 +36,17 @@ export default function CtaBand({
             </p>
           )}
         </div>
-        <Button
-          href="/contact"
-          variant="inverse"
-          size="lg"
-          className="mt-4.5 lg:mt-0 lg:shrink-0 w-full lg:w-auto"
-        >
-          Book a visit
-        </Button>
+        <div className="mt-4.5 lg:mt-0 lg:shrink-0 flex flex-col gap-2.5">
+          {showCall && (
+            <Button href={BUSINESS.phoneHref} variant="inverse-outline" size="lg" className="w-full">
+              <Phone size={16} aria-hidden />
+              Call {BUSINESS.phoneDisplay}
+            </Button>
+          )}
+          <Button href={href} variant="inverse" size="lg" className="w-full">
+            Book a visit
+          </Button>
+        </div>
       </div>
     </div>
   );

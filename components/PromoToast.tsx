@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const STORAGE_KEY = "promoDismissed";
 const SHOW_DELAY_MS = 2600;
@@ -26,18 +26,29 @@ function rememberDismissed() {
   }
 }
 
-// Appears once per session 2.6s after load and goes away on its own after 12s.
-// "Book" routes to the Visit page; any exit plays the out animation, then unmounts,
-// and marks it dismissed for the session.
+// Appears once per session 2.6s after load and goes away on its own after 12s; hovering or
+// focusing it holds it open, and the countdown restarts once both leave. "Book" routes to
+// the Visit page; any exit plays the out animation, then unmounts, and marks it dismissed
+// for the session. Reaching the Visit page by any route also counts as dismissing it.
 export default function PromoToast() {
   const [phase, setPhase] = useState<Phase>("hidden");
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
   const router = useRouter();
+  const onBookingPage = usePathname() === "/contact";
+
+  // Adjusting state during render (not in an effect) so it never flashes on the booking page.
+  if (onBookingPage && phase !== "hidden") setPhase("hidden");
 
   useEffect(() => {
+    if (onBookingPage) {
+      rememberDismissed();
+      return;
+    }
     if (wasDismissed()) return;
     const id = setTimeout(() => setPhase("in"), SHOW_DELAY_MS);
     return () => clearTimeout(id);
-  }, []);
+  }, [onBookingPage]);
 
   const dismiss = () => {
     rememberDismissed();
@@ -46,15 +57,17 @@ export default function PromoToast() {
     setPhase(reducedMotion ? "hidden" : "out");
   };
 
+  const held = hovered || focused;
+
   useEffect(() => {
-    if (phase !== "in") return;
+    if (phase !== "in" || held) return;
     const id = setTimeout(dismiss, AUTO_HIDE_MS);
     return () => clearTimeout(id);
-  }, [phase]);
+  }, [phase, held]);
 
   const book = () => {
     dismiss();
-    router.push("/contact");
+    router.push("/contact?service=retail");
   };
 
   if (phase === "hidden") return null;
@@ -64,6 +77,12 @@ export default function PromoToast() {
       role="status"
       aria-label="Current promotion"
       onAnimationEnd={() => phase === "out" && setPhase("hidden")}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setFocused(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) setFocused(false);
+      }}
       className={`${phase === "out" ? "animate-toast-out" : "animate-toast-in"} fixed z-60 inset-x-3.5 bottom-4 sm:inset-x-auto sm:right-6 sm:bottom-6 sm:w-105 flex items-center gap-3 sm:gap-3.25 rounded-2xl bg-dark text-white px-3.5 py-3.25 sm:px-4 sm:py-3.75 shadow-toast`}
     >
       <span
