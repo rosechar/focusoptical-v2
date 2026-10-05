@@ -8,6 +8,7 @@ const paths = [
   "",
   "/services",
   "/eye-exams",
+  "/glasses",
   "/about",
   "/contact",
   "/service-areas",

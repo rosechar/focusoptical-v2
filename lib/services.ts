@@ -43,10 +43,11 @@ export const SERVICES: Service[] = [
   },
   {
     id: "retail",
+    href: "/glasses",
     title: "Glasses & contacts",
     badge: "Wide selection",
     description:
-      "Frames for every budget and the contact brands you need. Keep your favorite frames if you like and we'll cut new lenses for them.",
+      "Frames for every budget and the contact brands you need. Lenses are cut in our own lab, so most glasses are ready the next day, and we can re-lens frames you already own.",
     summary: "A wide selection, or re-lens your frames.",
     image: "/images/contact1.jpg",
     alt: "Eyeglass frame selection at Focus Optical",
@@ -68,9 +69,9 @@ export const SERVICES: Service[] = [
 
 /** Checklist bullets used on the service-area pages. */
 export const SERVICE_HIGHLIGHTS = [
-  "Comprehensive eye exams (Dr. Diane Galper, OD)",
+  "Eye exams with our eye doctor, Dr. Diane Galper, OD",
   "Contact lens exams & fittings",
-  "Prescription eyeglasses & sunglasses",
+  "Prescription glasses & sunglasses, most ready next day",
   "New lenses for existing frames",
   "On-site lens cutting & edging",
   "Free eyeglass adjustments & cleaning",

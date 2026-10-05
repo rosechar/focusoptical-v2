@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title,
-    description: `Focus Optical serves ${area.city}, MI with eye exams, prescription glasses, contact lenses, and free adjustments. Independent optician since 1984, ${
+    description: `Focus Optical serves ${area.city}, MI with eye exams by our eye doctor, next-day prescription glasses, contact lenses, and free adjustments. Independent optician since 1984, ${
       area.primary
         ? "located in Rochester Hills"
         : `${area.driveTime.toLowerCase()} from ${area.city}`
@@ -100,7 +100,8 @@ export default async function CityPage({ params }: Props) {
         </h1>
         <p className="text-md lg:text-lg leading-normal text-body mt-3 lg:mt-4 max-w-155">
           We&apos;ve taken care of {area.city} and {area.county} since 1984. Eye
-          exams, glasses, contacts, and free adjustments, from a shop that&apos;s
+          exams with our eye doctor, glasses ready the next day on most
+          prescriptions, contacts, and free adjustments, from a shop that&apos;s
           family owned.
         </p>
         <div className="flex gap-2.5 lg:gap-3.25 mt-5 lg:mt-7">

@@ -9,9 +9,9 @@ import { BUSINESS, PEOPLE, SITE_URL } from "@/lib/business";
 import { BUSINESS_ID, OPTOMETRIST_ID, faqJsonLd } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Eye Exams in Rochester Hills, MI | Dr. Diane Galper, OD",
+  title: "Eye Doctor & Eye Exams in Rochester Hills, MI",
   description:
-    "Comprehensive eye exams and contact lens exams in Rochester Hills, MI with Dr. Diane Galper, OD. Most vision insurance accepted. Book online or call (248) 852-8830.",
+    "Eye exams and contact lens exams in Rochester Hills, MI with our eye doctor, Dr. Diane Galper, OD, every Tuesday. Glasses made in our own lab, most ready next day. Most vision insurance accepted. Call (248) 852-8830.",
   alternates: {
     canonical: "/eye-exams",
   },
@@ -43,7 +43,7 @@ const steps = [
   {
     step: "1",
     title: "Book online or call",
-    description: `Pick a time that works or call ${BUSINESS.phoneDisplay}.`,
+    description: `Dr. Galper sees patients on Tuesdays. Pick a time or call ${BUSINESS.phoneDisplay}.`,
   },
   {
     step: "2",
@@ -88,6 +88,10 @@ const faqs = [
     q: "Do I need an appointment?",
     a: "Yes, for eye exams and contact lens exams. Book online or call ahead. Free adjustments and cleaning don't need one.",
   },
+  {
+    q: "What days does the eye doctor see patients?",
+    a: `Dr. Galper sees patients on Tuesdays. Book online or call ${BUSINESS.phoneDisplay} to get on her schedule. The shop is open Monday through Saturday for glasses, contacts, and adjustments.`,
+  },
 ];
 
 const jsonLd = {
@@ -107,7 +111,7 @@ const jsonLd = {
       procedureType: "https://schema.org/NoninvasiveProcedure",
       bodyLocation: "Eye",
       description:
-        "Annual comprehensive eye exam including refraction, eye health evaluation, and glaucoma screening, performed by Dr. Diane Galper, OD at Focus Optical in Rochester Hills, MI.",
+        "Annual comprehensive eye exam including refraction, eye health evaluation, and glaucoma screening, performed on Tuesdays by eye doctor Dr. Diane Galper, OD at Focus Optical in Rochester Hills, MI.",
       url: `${SITE_URL}/eye-exams`,
       provider: { "@id": BUSINESS_ID },
       performer: { "@id": OPTOMETRIST_ID },
@@ -157,9 +161,10 @@ export default function EyeExamsPage() {
               Eye exams in Rochester Hills, MI
             </h1>
             <p className="text-md lg:text-lg leading-normal text-body mb-4.5 lg:mb-8 lg:max-w-135">
-              Comprehensive eye exams and contact lens exams with an experienced
-              optometrist, and your glasses made on site the same visit. Most
-              vision insurance accepted.
+              Comprehensive eye exams and contact lens exams with our eye
+              doctor, Dr. Diane Galper, every Tuesday. Pick your glasses the
+              same visit, and most are ready the next day. Most vision insurance
+              accepted.
             </p>
             <div className="flex gap-2.5 lg:gap-3.25">
               <Button href="/contact" size="lg" className="flex-1 lg:flex-none">
@@ -204,15 +209,16 @@ export default function EyeExamsPage() {
         <div className="rounded-2xl lg:rounded-2.5xl bg-accent-soft p-5 lg:p-8 lg:flex lg:items-center lg:gap-10">
           <div className="lg:flex-1">
             <p className="text-accent font-bold text-xs tracking-eyebrow uppercase mb-2 lg:mb-3">
-              Your optometrist
+              Your eye doctor
             </p>
             <h2 className="text-xl lg:text-2xl font-extrabold text-ink mb-2 lg:mb-3">
               {PEOPLE.optometrist.name}
             </h2>
             <p className="text-sm lg:text-base leading-relaxed text-body">
-              Dr. Galper performs every eye exam and contact lens exam at Focus
-              Optical. She sees patients of all ages, takes the time to explain
-              what she finds, and won&apos;t push anything you don&apos;t need.{" "}
+              Dr. Galper is the optometrist who performs every eye exam and
+              contact lens exam at Focus Optical, on Tuesdays. She sees patients
+              of all ages, takes the time to explain what she finds, and
+              won&apos;t push anything you don&apos;t need.{" "}
               <Link
                 href="/about"
                 className="font-semibold text-accent hover:text-accent-hover transition-colors"

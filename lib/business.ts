@@ -16,7 +16,7 @@ export const PEOPLE = {
   optometrist: {
     name: "Dr. Diane Galper, OD",
     jobTitle: "Optometrist",
-    description: "Performs comprehensive eye exams and contact lens exams at Focus Optical.",
+    description: "Optometrist (eye doctor) who performs comprehensive eye exams and contact lens exams at Focus Optical on Tuesdays.",
   },
 } as const;
 

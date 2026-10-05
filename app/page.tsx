@@ -3,11 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Phone } from "lucide-react";
 import { BUSINESS, GOOGLE_REVIEWS } from "@/lib/business";
+import { faqJsonLd } from "@/lib/schema";
 import { SERVICES } from "@/lib/services";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
 import Button from "@/components/Button";
 import CtaBand from "@/components/CtaBand";
 import OpenStatus from "@/components/OpenStatus";
+import Faq from "@/components/Faq";
 
 export const metadata: Metadata = {
   title: "Focus Optical | Optician & Eye Exams in Rochester Hills, MI",
@@ -34,9 +36,43 @@ const why = [
   },
 ];
 
+const faqs = [
+  {
+    q: "Can I get prescription glasses the next day in Oakland County?",
+    a: "Yes. Focus Optical in Rochester Hills cuts and edges lenses in our own lab instead of sending them out, so most prescription glasses are ready the next day. We're at 2046 W Auburn Rd near Crooks Road, an easy drive from Troy, Rochester, Auburn Hills, Bloomfield Hills, and the rest of Oakland County.",
+  },
+  {
+    q: "Is every prescription ready the next day?",
+    a: "Most are. Some lens types and coatings have to be ordered and take a little longer. We'll tell you exactly when your glasses will be ready before you leave.",
+  },
+  {
+    q: "Do you have an eye doctor on site?",
+    a: "Yes. Dr. Diane Galper, OD, does eye exams and contact lens exams in our office on Tuesdays. You can pick out frames right after your exam, and most glasses are ready the next day.",
+  },
+  {
+    q: "Can you put new lenses in my current frames?",
+    a: "Yes. Bring in the frames you like and we'll cut new lenses for them in our lab, so you don't have to buy new frames.",
+  },
+  {
+    q: "Do you take vision insurance?",
+    a: `We accept most common vision plans, and you don't need insurance to be seen. Call ${BUSINESS.phoneDisplay} with your plan name and we'll confirm your coverage before your visit.`,
+  },
+  {
+    q: "Are adjustments free if I bought my glasses somewhere else?",
+    a: "Yes. Adjustments and cleaning are free for anyone, on any pair, no purchase or appointment needed.",
+  },
+];
+
+const jsonLd = { "@context": "https://schema.org", ...faqJsonLd(faqs) };
+
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Hero — photo band with the white card overlapping its bottom edge, plus rating and turnaround tiles */}
       <section className="pb-6.5 lg:pb-6">
         <div className="relative h-80 lg:h-115 lg:bg-dark">
@@ -60,7 +96,8 @@ export default function HomePage() {
               Glasses made by hand in Rochester Hills.
             </h1>
             <p className="text-md leading-normal text-body lg:text-lg lg:leading-relaxed mb-4.5 lg:mb-8 lg:max-w-135">
-              Stop by for your annual eye exam, new glasses, or contacts.
+              Eye exams, glasses, and contacts for Oakland County since 1984,
+              with most prescriptions ready the next day.
             </p>
             <div className="flex gap-2.5 lg:gap-3.25">
               <Button href="/contact" size="lg" className="flex-1 lg:flex-none">
@@ -196,6 +233,16 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="max-w-295 mx-auto px-5 pt-8 lg:px-10 lg:pt-18">
+        <h2 className="text-xl lg:text-4xl font-extrabold text-ink tracking-normal lg:tracking-tight mb-4 lg:mb-7">
+          Next-day glasses &amp; eye exam questions
+        </h2>
+        <Faq
+          items={faqs}
+          className="flex flex-col gap-3 lg:grid lg:grid-cols-2 lg:gap-4 lg:items-start"
+        />
       </section>
 
       {/* Closing CTA + Owner: CTA first on mobile, owner first on desktop */}

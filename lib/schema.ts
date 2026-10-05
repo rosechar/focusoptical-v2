@@ -34,6 +34,7 @@ export const businessJsonLd = {
       "@type": "Optician",
       "@id": BUSINESS_ID,
       name: BUSINESS.name,
+      medicalSpecialty: "https://schema.org/Optometric",
       foundingDate: "1984",
       founder: { "@id": OWNER_ID },
       employee: [{ "@id": OWNER_ID }, { "@id": OPTOMETRIST_ID }],
@@ -66,12 +67,15 @@ export const businessJsonLd = {
       ...(SOCIAL_PROFILES.length && { sameAs: SOCIAL_PROFILES }),
       priceRange: "$$",
       description:
-        "Focus Optical is a full-service, independently owned optical store in Rochester Hills, MI. We offer eye exams by Dr. Diane Galper, a wide selection of frames and contact lenses, and free eyeglass adjustments. Serving Oakland County since 1984.",
-      areaServed: CITIES.map(({ city, county }) => ({
-        "@type": "City",
-        name: `${city}, MI`,
-        containedInPlace: { "@type": "AdministrativeArea", name: `${county}, MI` },
-      })),
+        "Focus Optical is a full-service, independently owned optical store in Rochester Hills, MI. Eye exams by optometrist Dr. Diane Galper, OD, prescription eyeglasses cut and edged in our on-site lab with most ready the next day, contact lenses, and free eyeglass adjustments. Serving Oakland County since 1984.",
+      areaServed: [
+        { "@type": "AdministrativeArea", name: "Oakland County, MI" },
+        ...CITIES.map(({ city, county }) => ({
+          "@type": "City",
+          name: `${city}, MI`,
+          containedInPlace: { "@type": "AdministrativeArea", name: `${county}, MI` },
+        })),
+      ],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Optical services",

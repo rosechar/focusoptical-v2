@@ -106,7 +106,8 @@ export default function AboutPage() {
             </h2>
             <p className="text-sm lg:text-base leading-relaxed text-body">
               Eye exams at Focus Optical are performed by Dr. Galper, an
-              experienced optometrist. She also handles contact lens fittings.
+              experienced optometrist who sees patients on Tuesdays. She also
+              handles contact lens fittings.
             </p>
           </div>
         </div>
