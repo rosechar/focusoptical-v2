@@ -8,7 +8,7 @@ import { BUSINESS, HOURS } from "@/lib/business";
 export const metadata: Metadata = {
   title: "Book an Eye Exam in Rochester Hills, MI",
   description:
-    "Book an eye exam or appointment at Focus Optical in Rochester Hills, MI. Schedule online or call (248) 852-8830. Eye exams, contact lenses, glasses. Serving Oakland County since 1984.",
+    `Book an eye exam or appointment at Focus Optical in Rochester Hills, MI. Schedule online or call ${BUSINESS.phoneDisplay}. Eye exams, contact lenses, glasses. Serving Oakland County since 1984.`,
   alternates: {
     canonical: "/contact",
   },
@@ -40,7 +40,7 @@ export default function ContactPage() {
     <>
       <MapEmbed className="h-52.5 lg:h-80" />
 
-      <section className="max-w-295 mx-auto px-5 pt-6.5 pb-10 lg:px-10 lg:pt-14 lg:pb-20">
+      <section className="page-container pt-6.5 pb-10 lg:pt-14 lg:pb-20">
         <div className="lg:grid lg:grid-cols-2 lg:gap-14 lg:items-start">
           <div>
             <h1 className="text-3xl lg:text-5xl font-extrabold text-ink tracking-tight mb-1.5 lg:mb-2">

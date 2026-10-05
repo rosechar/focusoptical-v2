@@ -28,7 +28,6 @@ const optometrist = {
 };
 
 export const businessJsonLd = {
-  "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Optician",

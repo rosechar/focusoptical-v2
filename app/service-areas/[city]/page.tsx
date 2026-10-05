@@ -10,6 +10,7 @@ import { faqJsonLd } from "@/lib/schema";
 import { SERVICE_HIGHLIGHTS } from "@/lib/services";
 import Faq from "@/components/Faq";
 import OpenStatus from "@/components/OpenStatus";
+import JsonLd from "@/components/JsonLd";
 
 const communityChipClass =
   "inline-block text-sm font-semibold bg-surface text-body border border-hairline px-4 py-2 rounded-full hover:bg-accent-soft hover:text-accent transition-colors";
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       area.primary
         ? "located in Rochester Hills"
         : `${area.driveTime.toLowerCase()} from ${area.city}`
-    }. Call (248) 852-8830.`,
+    }. Call ${BUSINESS.phoneDisplay}.`,
     alternates: {
       canonical: `/service-areas/${area.slug}`,
     },
@@ -50,7 +51,6 @@ export default async function CityPage({ params }: Props) {
   if (!area) notFound();
 
   const jsonLd = {
-    "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "BreadcrumbList",
@@ -76,13 +76,10 @@ export default async function CityPage({ params }: Props) {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
 
       {/* Breadcrumb + header */}
-      <section className="max-w-295 mx-auto px-5 pt-6 pb-8 lg:px-10 lg:pt-12 lg:pb-12">
+      <section className="page-container pt-6 pb-8 lg:pt-12 lg:pb-12">
         <nav aria-label="Breadcrumb" className="text-sm text-body mb-4 lg:mb-5">
           <Link href="/service-areas" className="hover:text-accent transition-colors">
             Service areas
@@ -90,7 +87,7 @@ export default async function CityPage({ params }: Props) {
           <span className="mx-2 text-faint" aria-hidden>/</span>
           <span className="text-ink font-semibold">{area.city}</span>
         </nav>
-        <p className="text-accent font-bold text-xs tracking-eyebrow uppercase mb-2.5 lg:mb-3">
+        <p className="eyebrow mb-2.5 lg:mb-3">
           Serving {area.city}, Michigan
         </p>
         <h1 className="text-3xl lg:text-5xl font-extrabold text-ink tracking-tight text-balance">
@@ -118,7 +115,7 @@ export default async function CityPage({ params }: Props) {
 
       {/* Quick facts */}
       <section className="bg-surface py-4 lg:py-5">
-        <ul className="max-w-295 mx-auto px-5 lg:px-10 grid sm:grid-cols-3 gap-2.5 lg:gap-4 text-sm text-body">
+        <ul className="page-container grid sm:grid-cols-3 gap-2.5 lg:gap-4 text-sm text-body">
           <li className="flex items-center gap-2.5">
             <Clock size={18} className="text-accent shrink-0" aria-hidden />
             {area.driveTime}
@@ -136,7 +133,7 @@ export default async function CityPage({ params }: Props) {
       </section>
 
       {/* Main content */}
-      <section className="max-w-295 mx-auto px-5 py-8 lg:px-10 lg:py-16 grid lg:grid-cols-3 gap-6 lg:gap-10">
+      <section className="page-container py-8 lg:py-16 grid lg:grid-cols-3 gap-6 lg:gap-10">
         <div className="lg:col-span-2 flex flex-col gap-4 lg:gap-5">
           <h2 className="text-xl lg:text-3xl font-extrabold text-ink tracking-tight">
             {area.primary
@@ -200,7 +197,7 @@ export default async function CityPage({ params }: Props) {
         }
       />
 
-      <section className="max-w-295 mx-auto px-5 pb-10 lg:px-10 lg:pb-14">
+      <section className="page-container pb-10 lg:pb-14">
         <h2 className="text-base lg:text-lg font-bold text-ink mb-3 lg:mb-4">
           Other communities we serve
         </h2>

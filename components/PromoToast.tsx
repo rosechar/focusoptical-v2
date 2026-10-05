@@ -9,6 +9,23 @@ const AUTO_HIDE_MS = 12000;
 
 type Phase = "hidden" | "in" | "out";
 
+// sessionStorage throws when the browser blocks site data; treat that as never dismissed.
+function wasDismissed() {
+  try {
+    return sessionStorage.getItem(STORAGE_KEY) !== null;
+  } catch {
+    return false;
+  }
+}
+
+function rememberDismissed() {
+  try {
+    sessionStorage.setItem(STORAGE_KEY, "1");
+  } catch {
+    // Without storage the toast may show again on the next page load, which is acceptable.
+  }
+}
+
 // Appears once per session 2.6s after load and goes away on its own after 12s.
 // "Book" routes to the Visit page; any exit plays the out animation, then unmounts,
 // and marks it dismissed for the session.
@@ -17,14 +34,16 @@ export default function PromoToast() {
   const router = useRouter();
 
   useEffect(() => {
-    if (sessionStorage.getItem(STORAGE_KEY)) return;
+    if (wasDismissed()) return;
     const id = setTimeout(() => setPhase("in"), SHOW_DELAY_MS);
     return () => clearTimeout(id);
   }, []);
 
   const dismiss = () => {
-    sessionStorage.setItem(STORAGE_KEY, "1");
-    setPhase("out");
+    rememberDismissed();
+    // Reduced motion disables animations (globals.css), so animationend would never fire to unmount.
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setPhase(reducedMotion ? "hidden" : "out");
   };
 
   useEffect(() => {

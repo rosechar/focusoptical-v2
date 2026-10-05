@@ -8,26 +8,11 @@ export const contentType = "image/png";
 
 const fill = { position: "absolute", top: 0, left: 0, width: "100%", height: "100%" } as const;
 
-// Satori needs a real bold font file; fetch the site's display face at build time and
-// fall back to the default sans if the network is unavailable.
-async function loadDisplayFont(): Promise<ArrayBuffer | null> {
-  try {
-    const css = await fetch(
-      "https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@800&display=swap",
-      { headers: { "User-Agent": "Mozilla/5.0" } },
-    ).then((r) => r.text());
-    const url = css.match(/src: url\(([^)]+)\) format\('(?:truetype|opentype|woff)'\)/)?.[1];
-    if (!url) return null;
-    return await fetch(url).then((r) => r.arrayBuffer());
-  } catch {
-    return null;
-  }
-}
-
 export default async function OpenGraphImage() {
+  // Satori can't use next/font or woff2, so the display face is committed as a TTF.
   const [photo, font] = await Promise.all([
     readFile(join(process.cwd(), "public/images/glasses1.jpeg")),
-    loadDisplayFont(),
+    readFile(join(process.cwd(), "assets/fonts/SchibstedGrotesk-ExtraBold.ttf")),
   ]);
   const src = `data:image/jpeg;base64,${photo.toString("base64")}`;
 
@@ -74,7 +59,7 @@ export default async function OpenGraphImage() {
           </div>
           <div
             style={{
-              fontFamily: font ? "Schibsted Grotesk" : undefined,
+              fontFamily: "Schibsted Grotesk",
               fontSize: 92,
               fontWeight: 800,
               lineHeight: 1,
@@ -93,9 +78,7 @@ export default async function OpenGraphImage() {
     ),
     {
       ...size,
-      fonts: font
-        ? [{ name: "Schibsted Grotesk", data: font, weight: 800, style: "normal" }]
-        : undefined,
+      fonts: [{ name: "Schibsted Grotesk", data: font, weight: 800, style: "normal" }],
     },
   );
 }

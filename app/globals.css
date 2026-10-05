@@ -100,6 +100,16 @@
   }
 }
 
+/* Centered page column with the standard side gutter. */
+@utility page-container {
+  @apply mx-auto max-w-295 px-5 lg:px-10;
+}
+
+/* Small uppercase label above a heading; spacing is set where it's used. */
+@utility eyebrow {
+  @apply text-xs font-bold tracking-eyebrow text-accent uppercase;
+}
+
 /* Soft duotone photo treatment. Applied to every photo; the map iframe stays unfiltered. */
 @utility duotone {
   filter: sepia(0.32) saturate(1.15) contrast(0.98) hue-rotate(-8deg);

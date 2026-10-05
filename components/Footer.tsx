@@ -12,13 +12,34 @@ const exploreLinks = [
   { href: "/service-areas", label: "Service areas" },
 ];
 
+// Site-wide links, so pages outside the header tabs stay reachable at every width.
+function FooterNav({ listClassName, linkClassName }: { listClassName: string; linkClassName: string }) {
+  return (
+    <nav aria-label="Footer">
+      <ul className={listClassName}>
+        {exploreLinks.map(({ href, label }) => (
+          <li key={href}>
+            <Link href={href} className={linkClassName}>
+              {label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
     <footer>
-      {/* Mobile: tiny centered line */}
+      {/* Mobile: link list over a tiny centered line */}
       <div className="md:hidden border-t border-hairline-soft px-5 py-4.5 text-center text-xs leading-relaxed text-faint">
+        <FooterNav
+          listClassName="flex flex-wrap justify-center gap-x-4 mb-2.5 text-sm"
+          linkClassName="inline-block py-1 text-body hover:text-accent transition-colors"
+        />
         Focus Optical ·{" "}
         <a href={BUSINESS.phoneHref} className="hover:text-body transition-colors">
           {BUSINESS.phoneDisplay}
@@ -36,17 +57,10 @@ export default function Footer() {
                 Focus Optical
               </span>
             </div>
-            <nav aria-label="Footer">
-              <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
-                {exploreLinks.map(({ href, label }) => (
-                  <li key={href}>
-                    <Link href={href} className="hover:text-white transition-colors">
-                      {label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+            <FooterNav
+              listClassName="flex flex-wrap gap-x-5 gap-y-2 text-sm"
+              linkClassName="hover:text-white transition-colors"
+            />
           </div>
           <div className="lg:mx-auto">
             <h2 className="text-xs font-extrabold uppercase tracking-widest text-white mb-3.5">

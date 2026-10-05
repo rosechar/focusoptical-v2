@@ -5,13 +5,14 @@ import { Phone } from "lucide-react";
 import Button from "@/components/Button";
 import CtaBand from "@/components/CtaBand";
 import Faq from "@/components/Faq";
+import JsonLd from "@/components/JsonLd";
 import { BUSINESS, PEOPLE, SITE_URL } from "@/lib/business";
 import { BUSINESS_ID, OPTOMETRIST_ID, faqJsonLd } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Eye Doctor & Eye Exams in Rochester Hills, MI",
   description:
-    "Eye exams and contact lens exams in Rochester Hills, MI with our eye doctor, Dr. Diane Galper, OD, every Tuesday. Glasses made in our own lab, most ready next day. Most vision insurance accepted. Call (248) 852-8830.",
+    `Eye exams and contact lens exams in Rochester Hills, MI with our eye doctor, Dr. Diane Galper, OD, every Tuesday. Glasses made in our own lab, most ready next day. Most vision insurance accepted. Call ${BUSINESS.phoneDisplay}.`,
   alternates: {
     canonical: "/eye-exams",
   },
@@ -95,7 +96,6 @@ const faqs = [
 ];
 
 const jsonLd = {
-  "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebPage",
@@ -135,10 +135,7 @@ const jsonLd = {
 export default function EyeExamsPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
 
       <section className="max-w-295 mx-auto lg:px-10 lg:pt-14 lg:pb-12">
         <div className="lg:grid lg:grid-cols-2 lg:gap-14 lg:items-center">
@@ -147,14 +144,14 @@ export default function EyeExamsPage() {
               src="/images/tool.jpeg"
               alt="Eye exam equipment at Focus Optical in Rochester Hills"
               fill
-              priority
+              preload
               className="object-cover duotone"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
 
           <div className="px-5 pt-7 lg:p-0">
-            <p className="text-accent font-bold text-xs tracking-eyebrow uppercase mb-2.5 lg:mb-3">
+            <p className="eyebrow mb-2.5 lg:mb-3">
               Rochester Hills · Dr. Diane Galper, OD
             </p>
             <h1 className="text-3xl lg:text-5xl lg:leading-none font-extrabold text-ink tracking-tight mb-3 lg:mb-5 text-balance">
@@ -184,7 +181,7 @@ export default function EyeExamsPage() {
         </div>
       </section>
 
-      <section className="max-w-295 mx-auto px-5 pt-8 lg:px-10 lg:pt-4">
+      <section className="page-container pt-8 lg:pt-4">
         <h2 className="text-xl lg:text-3xl font-extrabold text-ink tracking-tight mb-4 lg:mb-6">
           What&apos;s included
         </h2>
@@ -205,10 +202,10 @@ export default function EyeExamsPage() {
         </ul>
       </section>
 
-      <section className="max-w-295 mx-auto px-5 pt-8 lg:px-10 lg:pt-14">
+      <section className="page-container pt-8 lg:pt-14">
         <div className="rounded-2xl lg:rounded-2.5xl bg-accent-soft p-5 lg:p-8 lg:flex lg:items-center lg:gap-10">
           <div className="lg:flex-1">
-            <p className="text-accent font-bold text-xs tracking-eyebrow uppercase mb-2 lg:mb-3">
+            <p className="eyebrow mb-2 lg:mb-3">
               Your eye doctor
             </p>
             <h2 className="text-xl lg:text-2xl font-extrabold text-ink mb-2 lg:mb-3">
@@ -230,7 +227,7 @@ export default function EyeExamsPage() {
         </div>
       </section>
 
-      <section className="max-w-295 mx-auto px-5 pt-8 lg:px-10 lg:pt-14">
+      <section className="page-container pt-8 lg:pt-14">
         <h2 className="text-xl lg:text-3xl font-extrabold text-ink tracking-tight mb-4 lg:mb-6">
           How it works
         </h2>
@@ -259,7 +256,7 @@ export default function EyeExamsPage() {
         </ol>
       </section>
 
-      <section className="max-w-295 mx-auto px-5 pt-8 lg:px-10 lg:pt-14">
+      <section className="page-container pt-8 lg:pt-14">
         <div className="flex items-start lg:items-center gap-3.25 lg:gap-3.5 rounded-2xl bg-surface px-5 py-4.5 lg:px-6 lg:py-5.5">
           <span
             aria-hidden
@@ -292,7 +289,7 @@ export default function EyeExamsPage() {
         </div>
       </section>
 
-      <section className="max-w-295 mx-auto px-5 lg:px-10 pt-8 lg:pt-14">
+      <section className="page-container pt-8 lg:pt-14">
         <h2 className="text-xl lg:text-3xl font-extrabold text-ink tracking-tight mb-4 lg:mb-6">
           Eye exam questions
         </h2>

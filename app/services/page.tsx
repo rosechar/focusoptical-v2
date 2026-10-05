@@ -5,6 +5,7 @@ import { BUSINESS } from "@/lib/business";
 import { faqJsonLd } from "@/lib/schema";
 import { SERVICES, type Service } from "@/lib/services";
 import Faq from "@/components/Faq";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Eye Exams, Glasses & Contacts in Rochester Hills, MI",
@@ -47,8 +48,6 @@ const faqs = [
     a: "Yes. A contact lens exam checks the fit and the health of your eyes and includes a full eye exam, so it's one visit.",
   },
 ];
-
-const jsonLd = { "@context": "https://schema.org", ...faqJsonLd(faqs) };
 
 function ServiceCard({
   id,
@@ -143,10 +142,7 @@ export default function ServicesPage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={faqJsonLd(faqs)} />
       <h1 className="sr-only">Services</h1>
 
       <section className="max-w-295 mx-auto pt-5 lg:px-10 lg:pt-14">
@@ -197,7 +193,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="max-w-295 mx-auto px-5 lg:px-10 pt-8 lg:pt-14">
+      <section className="page-container pt-8 lg:pt-14">
         <h2 className="text-xl lg:text-3xl font-extrabold text-ink tracking-tight mb-4 lg:mb-6">
           Common questions
         </h2>

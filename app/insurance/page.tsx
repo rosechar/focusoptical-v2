@@ -5,11 +5,12 @@ import CtaBand from "@/components/CtaBand";
 import { BUSINESS } from "@/lib/business";
 import { faqJsonLd } from "@/lib/schema";
 import Faq from "@/components/Faq";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Eye Exam Cost & Vision Insurance in Rochester Hills, MI",
   description:
-    "Focus Optical in Rochester Hills, MI accepts various insurance plans. Contact us at (248) 852-8830 for details on pricing and insurance coverage for eye exams, glasses, and contact lenses.",
+    `Focus Optical in Rochester Hills, MI accepts various insurance plans. Contact us at ${BUSINESS.phoneDisplay} for details on pricing and insurance coverage for eye exams, glasses, and contact lenses.`,
   alternates: {
     canonical: "/insurance",
   },
@@ -34,19 +35,14 @@ const faqs = [
   },
 ];
 
-const jsonLd = { "@context": "https://schema.org", ...faqJsonLd(faqs) };
-
 export default function InsurancePage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={faqJsonLd(faqs)} />
 
       {/* Page header */}
-      <section className="max-w-295 mx-auto px-5 pt-7 pb-6 lg:px-10 lg:pt-14 lg:pb-8">
-        <p className="text-accent font-bold text-xs tracking-eyebrow uppercase mb-2.5 lg:mb-3">
+      <section className="page-container pt-7 pb-6 lg:pt-14 lg:pb-8">
+        <p className="eyebrow mb-2.5 lg:mb-3">
           Coverage &amp; costs
         </p>
         <h1 className="text-3xl lg:text-5xl font-extrabold text-ink tracking-tight text-balance">
@@ -58,7 +54,7 @@ export default function InsurancePage() {
         </p>
       </section>
 
-      <section className="max-w-295 mx-auto px-5 pb-8 lg:px-10 lg:pb-16">
+      <section className="page-container pb-8 lg:pb-16">
         <div className="grid sm:grid-cols-2 gap-3.5 lg:gap-5 mb-8 lg:mb-12">
           <div className="rounded-2xl lg:rounded-2.5xl bg-accent-soft p-5 lg:p-8">
             <ShieldCheck className="text-accent mb-3.5 lg:mb-4" size={28} aria-hidden />

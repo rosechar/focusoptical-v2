@@ -10,6 +10,7 @@ import Button from "@/components/Button";
 import CtaBand from "@/components/CtaBand";
 import OpenStatus from "@/components/OpenStatus";
 import Faq from "@/components/Faq";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Focus Optical | Optician & Eye Exams in Rochester Hills, MI",
@@ -63,15 +64,10 @@ const faqs = [
   },
 ];
 
-const jsonLd = { "@context": "https://schema.org", ...faqJsonLd(faqs) };
-
 export default function HomePage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={faqJsonLd(faqs)} />
 
       {/* Hero — photo band with the white card overlapping its bottom edge, plus rating and turnaround tiles */}
       <section className="pb-6.5 lg:pb-6">
@@ -80,7 +76,7 @@ export default function HomePage() {
             src="/images/glasses1.jpeg"
             alt="Eyeglass frames at Focus Optical in Rochester Hills"
             fill
-            priority
+            preload
             fetchPriority="high"
             sizes="100vw"
             className="object-cover duotone"
@@ -89,7 +85,7 @@ export default function HomePage() {
         </div>
         <div className="lg:max-w-295 lg:mx-auto lg:px-10 lg:flex lg:items-stretch lg:gap-5 lg:-mt-44">
           <div className="relative -mt-14.5 mx-4 sm:mx-auto sm:max-w-140 bg-white rounded-2.5xl px-5.5 py-6 shadow-hero lg:mt-0 lg:mx-0 lg:max-w-none lg:flex-1 lg:px-11 lg:py-10">
-            <p className="text-accent font-bold text-xs tracking-eyebrow uppercase mb-2.5 lg:mb-4">
+            <p className="eyebrow mb-2.5 lg:mb-4">
               Rochester Hills · since 1984
             </p>
             <h1 className="text-3xl leading-none tracking-tight lg:text-5xl font-extrabold text-ink mb-2.5 lg:mb-5 text-balance">
@@ -206,9 +202,9 @@ export default function HomePage() {
 
       {/* Why Focus Optical */}
       <section className="bg-surface lg:mt-18">
-        <div className="max-w-295 mx-auto px-5 py-8.5 lg:px-10 lg:py-16 lg:grid lg:grid-cols-2 lg:gap-14 lg:items-center">
+        <div className="page-container py-8.5 lg:py-16 lg:grid lg:grid-cols-2 lg:gap-14 lg:items-center">
           <div>
-            <p className="text-accent font-bold text-xs tracking-eyebrow uppercase mb-2.5 lg:mb-3.5">
+            <p className="eyebrow mb-2.5 lg:mb-3.5">
               Why Focus Optical
             </p>
             <h2 className="text-2xl leading-tight lg:text-4xl font-extrabold text-ink tracking-tight mb-2 lg:mb-3">
@@ -235,7 +231,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="max-w-295 mx-auto px-5 pt-8 lg:px-10 lg:pt-18">
+      <section className="page-container pt-8 lg:pt-18">
         <h2 className="text-xl lg:text-4xl font-extrabold text-ink tracking-normal lg:tracking-tight mb-4 lg:mb-7">
           Next-day glasses &amp; eye exam questions
         </h2>
@@ -248,7 +244,7 @@ export default function HomePage() {
       {/* Closing CTA + Owner: CTA first on mobile, owner first on desktop */}
       <div className="flex flex-col">
         <section className="order-2 lg:order-1 bg-accent-soft lg:bg-transparent">
-          <div className="max-w-295 mx-auto px-5 py-8 lg:px-10 lg:py-18">
+          <div className="page-container py-8 lg:py-18">
           {/* Mobile: avatar + short note */}
           <div className="lg:hidden flex gap-4 items-start">
             <div className="relative h-17 w-17 shrink-0 rounded-full overflow-hidden">
@@ -287,7 +283,7 @@ export default function HomePage() {
               />
             </div>
             <div>
-              <p className="text-accent font-bold text-xs tracking-eyebrow uppercase mb-3.5">
+              <p className="eyebrow mb-3.5">
                 Meet your optician
               </p>
               <h2 className="text-4xl font-extrabold text-ink tracking-tight mb-4.5">

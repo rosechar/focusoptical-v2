@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import CtaBand from "@/components/CtaBand";
+import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/business";
 import { BUSINESS_ID, OPTOMETRIST_ID, OWNER_ID } from "@/lib/schema";
 
@@ -16,7 +17,6 @@ export const metadata: Metadata = {
 // The Person entities themselves live in the site-wide graph (lib/schema.ts); this
 // page just declares itself as the page about them.
 const jsonLd = {
-  "@context": "https://schema.org",
   "@type": "AboutPage",
   "@id": `${SITE_URL}/about`,
   name: "About Focus Optical",
@@ -33,10 +33,7 @@ const milestones = [
 export default function AboutPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       <section className="max-w-295 mx-auto lg:px-10 lg:pt-14 lg:pb-12">
         <div className="lg:grid lg:grid-cols-2 lg:gap-14 lg:items-center">
           <div className="relative h-75 lg:h-115 lg:rounded-2.5xl overflow-hidden">
@@ -44,7 +41,7 @@ export default function AboutPage() {
               src="/images/tom.jpg"
               alt="Tom Hamilton, owner of Focus Optical"
               fill
-              priority
+              preload
               className="object-cover duotone"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
@@ -59,7 +56,7 @@ export default function AboutPage() {
           </div>
 
           <div className="px-5 pt-7 lg:p-0">
-            <p className="text-accent font-bold text-xs tracking-eyebrow uppercase mb-2 lg:mb-3">
+            <p className="eyebrow mb-2 lg:mb-3">
               Our story
             </p>
             <h1 className="text-3xl lg:text-5xl lg:leading-none font-extrabold text-ink tracking-tight mb-4 lg:mb-5">
@@ -79,10 +76,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="max-w-295 mx-auto px-5 lg:px-10 lg:pb-14">
+      <section className="page-container lg:pb-14">
         <div className="lg:grid lg:grid-cols-2 lg:gap-14 lg:items-start lg:border-t lg:border-hairline-soft lg:pt-12">
           <div className="mt-6 border-t border-hairline-soft pt-5.5 lg:m-0 lg:border-0 lg:p-0">
-            <p className="hidden lg:block text-accent font-bold text-xs tracking-eyebrow uppercase mb-4.5">
+            <p className="hidden lg:block eyebrow mb-4.5">
               Our history
             </p>
             <dl className="flex flex-col gap-4 lg:gap-4.5">
@@ -98,7 +95,7 @@ export default function AboutPage() {
           </div>
 
           <div className="mt-6 border-t border-hairline-soft pt-5.5 lg:m-0 lg:border-0 lg:p-0">
-            <p className="text-accent font-bold text-xs tracking-eyebrow uppercase mb-2 lg:mb-3">
+            <p className="eyebrow mb-2 lg:mb-3">
               Our optometrist
             </p>
             <h2 className="text-xl lg:text-2xl font-extrabold text-ink mb-2.5 lg:mb-3">

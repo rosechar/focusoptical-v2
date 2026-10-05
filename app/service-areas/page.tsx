@@ -21,8 +21,8 @@ export default function ServiceAreasPage() {
   return (
     <>
       {/* Page header */}
-      <section className="max-w-295 mx-auto px-5 pt-7 pb-8 lg:px-10 lg:pt-14 lg:pb-12">
-        <p className="text-accent font-bold text-xs tracking-eyebrow uppercase mb-2.5 lg:mb-3">
+      <section className="page-container pt-7 pb-8 lg:pt-14 lg:pb-12">
+        <p className="eyebrow mb-2.5 lg:mb-3">
           Oakland County &amp; surrounding communities
         </p>
         <h1 className="text-3xl lg:text-5xl font-extrabold text-ink tracking-tight text-balance">
@@ -47,7 +47,7 @@ export default function ServiceAreasPage() {
 
       {/* Services available */}
       <section className="bg-surface py-8 lg:py-12">
-        <div className="max-w-295 mx-auto px-5 lg:px-10">
+        <div className="page-container">
           <h2 className="text-xl lg:text-2xl font-extrabold text-ink tracking-tight mb-4 lg:mb-6">
             Available to all Oakland County patients
           </h2>
@@ -63,7 +63,7 @@ export default function ServiceAreasPage() {
       </section>
 
       {/* Cities grid */}
-      <section className="max-w-295 mx-auto px-5 py-8 lg:px-10 lg:py-16">
+      <section className="page-container py-8 lg:py-16">
         <h2 className="text-xl lg:text-3xl font-extrabold text-ink tracking-tight mb-2 lg:mb-3">
           Cities &amp; communities we serve
         </h2>
@@ -116,7 +116,7 @@ export default function ServiceAreasPage() {
 
       {/* Find us + map */}
       <section className="bg-surface py-8 lg:py-16">
-        <div className="max-w-295 mx-auto px-5 lg:px-10 grid lg:grid-cols-2 gap-6 lg:gap-14 items-start">
+        <div className="page-container grid lg:grid-cols-2 gap-6 lg:gap-14 items-start">
           <div>
             <h2 className="text-xl lg:text-3xl font-extrabold text-ink tracking-tight mb-3 lg:mb-4">
               Find us in Rochester Hills
@@ -155,7 +155,7 @@ export default function ServiceAreasPage() {
       </section>
 
       {/* SEO content block */}
-      <section className="max-w-295 mx-auto px-5 py-8 lg:px-10 lg:py-14">
+      <section className="page-container py-8 lg:py-14">
         <h2 className="text-xl lg:text-2xl font-extrabold text-ink tracking-tight mb-3 lg:mb-4">
           Your local Oakland County optician
         </h2>

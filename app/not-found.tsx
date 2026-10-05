@@ -18,8 +18,8 @@ const links = [
 export default function NotFound() {
   return (
     <>
-      <section className="max-w-295 mx-auto px-5 pt-12 pb-8 lg:px-10 lg:pt-20 lg:pb-12">
-        <p className="text-accent font-bold text-xs tracking-eyebrow uppercase mb-2.5">
+      <section className="page-container pt-12 pb-8 lg:pt-20 lg:pb-12">
+        <p className="eyebrow mb-2.5">
           404
         </p>
         <h1 className="text-3xl lg:text-5xl font-extrabold text-ink tracking-tight mb-3">

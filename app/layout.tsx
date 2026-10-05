@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PromoToast from "@/components/PromoToast";
+import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/business";
 import { businessJsonLd } from "@/lib/schema";
 
@@ -64,10 +65,7 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
     >
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(businessJsonLd) }}
-        />
+        <JsonLd data={businessJsonLd} />
       </head>
       <body className="font-sans antialiased bg-white text-ink">
         <a

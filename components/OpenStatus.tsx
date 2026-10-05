@@ -23,11 +23,10 @@ export default function OpenStatus({ className = "", fallback = "Open Mon–Sat"
 
   if (!status) return <span className={className}>{fallback}</span>;
 
-  const [state, ...rest] = status.text.split(" · ");
   return (
     <span className={className}>
-      <strong className="font-bold">{state}</strong>
-      {rest.length > 0 && ` · ${rest.join(" · ")}`}
+      <strong className="font-bold">{status.label}</strong>
+      {status.detail && ` · ${status.detail}`}
     </span>
   );
 }

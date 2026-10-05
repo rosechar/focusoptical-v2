@@ -1,14 +1,44 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { getAppointmentLabel } from "@/lib/appointments";
-import { emailRegex, isValidPhone } from "@/lib/validation";
+import { MAX_LENGTH, emailRegex, isValidPhone } from "@/lib/validation";
 import {
   ownerNotificationEmail,
   customerConfirmationEmail,
   type AppointmentRequest,
 } from "@/lib/emails";
 
+const RATE_LIMIT = { max: 5, windowMs: 10 * 60_000 };
+const recentRequests = new Map<string, number[]>();
+
+// Best-effort per-IP limit. State lives in this server instance's memory, so it slows a
+// scripted sender but isn't a hard guarantee; a Vercel Firewall rate-limit rule is.
+function isRateLimited(ip: string, now = Date.now()): boolean {
+  const recent = (recentRequests.get(ip) ?? []).filter(
+    (time) => now - time < RATE_LIMIT.windowMs,
+  );
+  const limited = recent.length >= RATE_LIMIT.max;
+  if (!limited) recent.push(now);
+  recentRequests.set(ip, recent);
+
+  if (recentRequests.size > 1000) {
+    for (const [key, times] of recentRequests) {
+      if (now - times[times.length - 1] >= RATE_LIMIT.windowMs) recentRequests.delete(key);
+    }
+  }
+  return limited;
+}
+
 export async function POST(request: Request) {
+  // Vercel sets x-forwarded-for itself, so the first entry is the real client IP.
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Too many requests. Please call us instead." },
+      { status: 429 }
+    );
+  }
+
   const apiKey = process.env.RESEND_API_KEY;
   const ownerEmail = process.env.OWNER_EMAIL;
   const fromEmail = process.env.RESEND_FROM_EMAIL;
@@ -50,6 +80,9 @@ export async function POST(request: Request) {
 
   if (
     name.length < 2 ||
+    name.length > MAX_LENGTH.name ||
+    email.length > MAX_LENGTH.email ||
+    phone.length > MAX_LENGTH.phone ||
     (hasEmail && !emailRegex.test(email)) ||
     !isValidPhone(phone) ||
     !appointmentLabel

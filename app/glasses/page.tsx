@@ -5,6 +5,7 @@ import { Phone } from "lucide-react";
 import Button from "@/components/Button";
 import CtaBand from "@/components/CtaBand";
 import Faq from "@/components/Faq";
+import JsonLd from "@/components/JsonLd";
 import { BUSINESS, PEOPLE, SITE_URL } from "@/lib/business";
 import { BUSINESS_ID, faqJsonLd } from "@/lib/schema";
 
@@ -89,7 +90,6 @@ const faqs = [
 ];
 
 const jsonLd = {
-  "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebPage",
@@ -128,10 +128,7 @@ const jsonLd = {
 export default function GlassesPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
 
       <section className="max-w-295 mx-auto lg:px-10 lg:pt-14 lg:pb-12">
         <div className="lg:grid lg:grid-cols-2 lg:gap-14 lg:items-center">
@@ -140,14 +137,14 @@ export default function GlassesPage() {
               src="/images/glasses2.jpeg"
               alt="Eyeglass frames on display at Focus Optical in Rochester Hills"
               fill
-              priority
+              preload
               className="object-cover duotone"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
 
           <div className="px-5 pt-7 lg:p-0">
-            <p className="text-accent font-bold text-xs tracking-eyebrow uppercase mb-2.5 lg:mb-3">
+            <p className="eyebrow mb-2.5 lg:mb-3">
               Rochester Hills · On-site lens lab
             </p>
             <h1 className="text-3xl lg:text-5xl lg:leading-none font-extrabold text-ink tracking-tight mb-3 lg:mb-5 text-balance">
@@ -176,7 +173,7 @@ export default function GlassesPage() {
         </div>
       </section>
 
-      <section className="max-w-295 mx-auto px-5 pt-8 lg:px-10 lg:pt-4">
+      <section className="page-container pt-8 lg:pt-4">
         <h2 className="text-xl lg:text-3xl font-extrabold text-ink tracking-tight mb-4 lg:mb-6">
           What we make
         </h2>
@@ -197,9 +194,9 @@ export default function GlassesPage() {
         </ul>
       </section>
 
-      <section className="max-w-295 mx-auto px-5 pt-8 lg:px-10 lg:pt-14">
+      <section className="page-container pt-8 lg:pt-14">
         <div className="rounded-2xl lg:rounded-2.5xl bg-accent-soft p-5 lg:p-8">
-          <p className="text-accent font-bold text-xs tracking-eyebrow uppercase mb-2 lg:mb-3">
+          <p className="eyebrow mb-2 lg:mb-3">
             Why it&apos;s next day
           </p>
           <h2 className="text-xl lg:text-2xl font-extrabold text-ink mb-2 lg:mb-3">
@@ -220,7 +217,7 @@ export default function GlassesPage() {
         </div>
       </section>
 
-      <section className="max-w-295 mx-auto px-5 pt-8 lg:px-10 lg:pt-14">
+      <section className="page-container pt-8 lg:pt-14">
         <h2 className="text-xl lg:text-3xl font-extrabold text-ink tracking-tight mb-4 lg:mb-6">
           How it works
         </h2>
@@ -249,7 +246,7 @@ export default function GlassesPage() {
         </ol>
       </section>
 
-      <section className="max-w-295 mx-auto px-5 lg:px-10 pt-8 lg:pt-14">
+      <section className="page-container pt-8 lg:pt-14">
         <h2 className="text-xl lg:text-3xl font-extrabold text-ink tracking-tight mb-4 lg:mb-6">
           Glasses questions
         </h2>

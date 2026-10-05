@@ -5,8 +5,10 @@ export const STORE_TIME_ZONE = "America/Detroit";
 
 export interface OpenStatus {
   isOpen: boolean;
-  /** e.g. "Open now · closes 6:00 PM" or "Closed · opens 9:00 AM Monday" */
-  text: string;
+  /** "Open now" or "Closed" */
+  label: string;
+  /** e.g. "closes 6:00 PM" or "opens 9:00 AM Monday"; absent when there's nothing to add. */
+  detail?: string;
 }
 
 const toMinutes = (hhmm: string) => {
@@ -41,10 +43,10 @@ export function getOpenStatus(now: Date = new Date()): OpenStatus {
     const opens = toMinutes(today.opens);
     const closes = toMinutes(today.closes);
     if (nowMinutes >= opens && nowMinutes < closes) {
-      return { isOpen: true, text: `Open now · closes ${formatTime(today.closes)}` };
+      return { isOpen: true, label: "Open now", detail: `closes ${formatTime(today.closes)}` };
     }
     if (nowMinutes < opens) {
-      return { isOpen: false, text: `Closed · opens ${formatTime(today.opens)} today` };
+      return { isOpen: false, label: "Closed", detail: `opens ${formatTime(today.opens)} today` };
     }
   }
 
@@ -52,8 +54,8 @@ export function getOpenStatus(now: Date = new Date()): OpenStatus {
     const next = HOURS[(todayIndex + offset) % HOURS.length];
     if (next.opens) {
       const when = offset === 1 ? "tomorrow" : next.day;
-      return { isOpen: false, text: `Closed · opens ${formatTime(next.opens)} ${when}` };
+      return { isOpen: false, label: "Closed", detail: `opens ${formatTime(next.opens)} ${when}` };
     }
   }
-  return { isOpen: false, text: "Closed" };
+  return { isOpen: false, label: "Closed" };
 }

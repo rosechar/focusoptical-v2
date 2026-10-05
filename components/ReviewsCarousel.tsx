@@ -35,7 +35,7 @@ export default function ReviewsCarousel() {
       }}
       className="bg-accent-soft px-6.5 py-10 lg:px-10 lg:py-16 text-center"
     >
-      <p className="hidden lg:block text-accent font-bold text-xs tracking-eyebrow uppercase mb-7.5">
+      <p className="hidden lg:block eyebrow mb-7.5">
         What our patients say
       </p>
 

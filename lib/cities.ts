@@ -1,3 +1,5 @@
+import { BUSINESS } from "@/lib/business";
+
 export interface CityArea {
   slug: string;
   city: string;
@@ -62,7 +64,7 @@ export const CITIES: CityArea[] = [
       },
       {
         q: "Do you see patients from Rochester?",
-        a: "Plenty of our regulars come from Rochester. Call (248) 852-8830 or book online to set up an exam.",
+        a: `Plenty of our regulars come from Rochester. Call ${BUSINESS.phoneDisplay} or book online to set up an exam.`,
       },
     ],
   },

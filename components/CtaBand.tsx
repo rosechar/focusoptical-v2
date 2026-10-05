@@ -16,7 +16,7 @@ export default function CtaBand({
   className = "py-8 lg:py-14",
 }: CtaBandProps) {
   return (
-    <div className={`w-full max-w-295 mx-auto px-5 lg:px-10 ${className}`}>
+    <div className={`w-full page-container ${className}`}>
       <div className="bg-accent rounded-2xl lg:rounded-2.5xl px-6 py-7 lg:px-14 lg:py-12 text-white text-center lg:text-left lg:flex lg:items-center lg:justify-between lg:gap-10">
         <div>
           <h2 className="text-2xl lg:text-4xl font-extrabold tracking-normal lg:tracking-tight">

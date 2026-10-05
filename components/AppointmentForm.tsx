@@ -5,7 +5,7 @@ import { Loader2, AlertCircle } from "lucide-react";
 import { BUSINESS } from "@/lib/business";
 import Button from "@/components/Button";
 import { appointmentTypes } from "@/lib/appointments";
-import { emailRegex, isValidPhone } from "@/lib/validation";
+import { MAX_LENGTH, emailRegex, isValidPhone } from "@/lib/validation";
 
 interface FormState {
   name: string;
@@ -170,6 +170,7 @@ export default function AppointmentForm() {
             onChange={handleChange}
             placeholder="Jane Smith"
             autoComplete="name"
+            maxLength={MAX_LENGTH.name}
             aria-invalid={!!errors.name}
             aria-describedby={errors.name ? "name-error" : undefined}
             className={inputClass(errors.name)}
@@ -190,6 +191,7 @@ export default function AppointmentForm() {
             onChange={handleChange}
             placeholder="(248) 555-0100"
             autoComplete="tel"
+            maxLength={MAX_LENGTH.phone}
             aria-invalid={!!errors.phone}
             aria-describedby={errors.phone ? "phone-error" : undefined}
             className={inputClass(errors.phone)}
@@ -210,6 +212,7 @@ export default function AppointmentForm() {
           onChange={handleChange}
           placeholder="jane@example.com"
           autoComplete="email"
+          maxLength={MAX_LENGTH.email}
           aria-invalid={!!errors.email}
           aria-describedby={errors.email ? "email-error" : undefined}
           className={inputClass(errors.email)}
