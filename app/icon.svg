@@ -1,8 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-  <!-- Full-bleed square with no transparency: Google Search and launchers apply their own circle or rounded mask. -->
-  <rect width="48" height="48" fill="#2f5286"/>
-  <!-- Glasses mark from components/Logo.tsx, scaled to sit inside the circular safe area. -->
-  <g transform="translate(24 24) scale(1.25) translate(-15 -8.2)" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round">
+  <!-- Brand accent on a transparent ground; dark browser chrome gets the site's on-dark accent for contrast. -->
+  <style>
+    g { stroke: #2f5286; }
+    @media (prefers-color-scheme: dark) { g { stroke: #cdd9ec; } }
+  </style>
+  <!-- Glasses mark from components/Logo.tsx, scaled to fill the width. -->
+  <g transform="translate(24 24) scale(1.5) translate(-15 -8.2)" fill="none" stroke-width="1.9">
     <circle cx="6.6" cy="9" r="5.1"/>
     <circle cx="23.4" cy="9" r="5.1"/>
     <path d="M11.7 8.6c1-1.1 5.6-1.1 6.6 0"/>
