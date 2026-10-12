@@ -83,7 +83,7 @@ export default function PromoToast() {
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget)) setFocused(false);
       }}
-      className={`${phase === "out" ? "animate-toast-out" : "animate-toast-in"} fixed z-60 inset-x-3.5 bottom-4 sm:inset-x-auto sm:right-6 sm:bottom-6 sm:w-105 flex items-center gap-3 sm:gap-3.25 rounded-2xl bg-dark text-white px-3.5 py-3.25 sm:px-4 sm:py-3.75 shadow-toast`}
+      className={`${phase === "out" ? "animate-toast-out" : "animate-toast-in"} fixed z-60 inset-x-3.5 bottom-4 sm:inset-x-auto sm:right-6 sm:bottom-6 sm:w-105 flex items-center gap-3 sm:gap-3.25 rounded-2xl bg-neutral-900 text-white px-3.5 py-3.25 sm:px-4 sm:py-3.75 shadow-toast`}
     >
       <span
         aria-hidden
@@ -100,7 +100,7 @@ export default function PromoToast() {
       <button
         type="button"
         onClick={book}
-        className="shrink-0 rounded-xl bg-white px-3.5 py-2.25 sm:px-3.75 sm:py-2.5 text-sm font-bold text-dark hover:bg-accent-soft transition-colors"
+        className="shrink-0 rounded-xl bg-white px-3.5 py-2.25 sm:px-3.75 sm:py-2.5 text-sm font-bold text-neutral-900 hover:bg-accent-soft transition-colors"
       >
         Book
       </button>

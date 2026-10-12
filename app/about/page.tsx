@@ -77,8 +77,8 @@ export default function AboutPage() {
       </section>
 
       <section className="page-container lg:pb-14">
-        <div className="lg:grid lg:grid-cols-2 lg:gap-14 lg:items-start lg:border-t lg:border-hairline-soft lg:pt-12">
-          <div className="mt-6 border-t border-hairline-soft pt-5.5 lg:m-0 lg:border-0 lg:p-0">
+        <div className="lg:grid lg:grid-cols-2 lg:gap-14 lg:items-start lg:border-t lg:border-hairline lg:pt-12">
+          <div className="mt-6 border-t border-hairline pt-5.5 lg:m-0 lg:border-0 lg:p-0">
             <p className="hidden lg:block eyebrow mb-4.5">
               Our history
             </p>
@@ -94,7 +94,7 @@ export default function AboutPage() {
             </dl>
           </div>
 
-          <div className="mt-6 border-t border-hairline-soft pt-5.5 lg:m-0 lg:border-0 lg:p-0">
+          <div className="mt-6 border-t border-hairline pt-5.5 lg:m-0 lg:border-0 lg:p-0">
             <p className="eyebrow mb-2 lg:mb-3">
               Our optometrist
             </p>

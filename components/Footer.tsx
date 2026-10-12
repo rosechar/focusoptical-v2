@@ -36,7 +36,7 @@ export default function Footer() {
   return (
     <footer>
       {/* Mobile: link list over a tiny centered line */}
-      <div className="md:hidden border-t border-hairline-soft px-5 py-4.5 text-center text-xs leading-relaxed text-faint">
+      <div className="md:hidden border-t border-hairline px-5 py-4.5 text-center text-xs leading-relaxed text-faint">
         <FooterNav
           listClassName="flex flex-wrap justify-center gap-x-4 mb-2.5 text-sm"
           linkClassName="inline-block py-1 text-body hover:text-accent transition-colors"
@@ -49,7 +49,7 @@ export default function Footer() {
       </div>
 
       {/* Desktop: dark footer */}
-      <div className="hidden md:block bg-dark text-dark-muted">
+      <div className="hidden md:block bg-neutral-900 text-mist-400">
         <div className="max-w-295 mx-auto px-10 py-12 flex flex-wrap lg:flex-nowrap lg:justify-between gap-x-14 gap-y-10 items-start">
           <div className="w-full lg:w-auto">
             <div className="flex items-center gap-2.5 mb-4.5">
@@ -103,7 +103,7 @@ export default function Footer() {
             </a>
           </div>
         </div>
-        <div className="border-t border-dark-border">
+        <div className="border-t border-mist-800">
           <div className="max-w-295 mx-auto px-10 py-4.5 flex flex-wrap justify-between gap-2 text-xs text-dark-faint">
             <span>© {year} Focus Optical. All rights reserved.</span>
             <span>Rochester Hills, MI · Optician since 1984</span>

@@ -31,8 +31,8 @@ interface FieldErrors {
 }
 
 const inputClass = (hasError?: string) =>
-  `w-full px-3.5 py-3.5 rounded-xl border text-md text-ink placeholder:text-black/55 bg-field transition-colors focus:border-accent ${
-    hasError ? "border-closed bg-closed-soft" : "border-field-border"
+  `w-full px-3.5 py-3.5 rounded-xl border text-md text-ink placeholder:text-black/55 bg-mist-50 transition-colors focus:border-accent ${
+    hasError ? "border-closed bg-red-50" : "border-field-border"
   }`;
 
 const labelClass = "block text-xs lg:text-sm font-bold text-secondary";
@@ -335,7 +335,7 @@ function RequestForm({ initialService }: { initialService: string }) {
       {status === "error" && (
         <div
           role="alert"
-          className="flex items-center gap-2.5 p-4 rounded-xl bg-closed-soft border border-closed/20 text-closed text-sm"
+          className="flex items-center gap-2.5 p-4 rounded-xl bg-red-50 border border-closed/20 text-closed text-sm"
         >
           <AlertCircle size={16} className="shrink-0" />
           <span>

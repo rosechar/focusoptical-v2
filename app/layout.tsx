@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Schibsted_Grotesk, Hanken_Grotesk } from "next/font/google";
+import { Archivo, Schibsted_Grotesk, Hanken_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -22,6 +22,14 @@ const sans = Hanken_Grotesk({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-hanken",
+  display: "swap",
+});
+
+// Wide black face for the "5 STAR SERVICE" eye chart and "Rate us" link only.
+const chart = Archivo({
+  subsets: ["latin"],
+  weight: "900",
+  variable: "--font-archivo",
   display: "swap",
 });
 
@@ -61,7 +69,7 @@ export default function RootLayout({
     // despite the CSS scroll-behavior: smooth used for in-page anchors.
     <html
       lang="en"
-      className={`${display.variable} ${sans.variable}`}
+      className={`${display.variable} ${sans.variable} ${chart.variable}`}
       data-scroll-behavior="smooth"
     >
       <head>

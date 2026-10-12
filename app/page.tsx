@@ -6,6 +6,7 @@ import { BUSINESS, GOOGLE_REVIEWS, INSURANCE_PLANS_TEXT } from "@/lib/business";
 import { faqJsonLd } from "@/lib/schema";
 import { SERVICES } from "@/lib/services";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
+import StarChart from "@/components/StarChart";
 import Button from "@/components/Button";
 import CtaBand from "@/components/CtaBand";
 import OpenStatus from "@/components/OpenStatus";
@@ -33,7 +34,7 @@ const why = [
   },
   {
     title: "Free adjustments",
-    description: "Walk in anytime, customer or not.",
+    description: "Walk in anytime.",
   },
 ];
 
@@ -71,7 +72,7 @@ export default function HomePage() {
 
       {/* Hero — photo band with the white card overlapping its bottom edge, plus rating and turnaround tiles */}
       <section className="pb-6.5 lg:pb-6">
-        <div className="relative h-80 lg:h-115 lg:bg-dark">
+        <div className="relative h-80 lg:h-115 lg:bg-neutral-900">
           <Image
             src="/images/glasses1.jpeg"
             alt="Eyeglass frames at Focus Optical in Rochester Hills"
@@ -81,7 +82,7 @@ export default function HomePage() {
             sizes="100vw"
             className="object-cover duotone"
           />
-          <div className="hidden lg:block absolute inset-0 bg-linear-to-b from-dark/0 via-dark/0 to-dark/30" />
+          <div className="hidden lg:block absolute inset-0 bg-linear-to-b from-neutral-900/0 via-neutral-900/0 to-neutral-900/30" />
         </div>
         <div className="lg:max-w-295 lg:mx-auto lg:px-10 lg:flex lg:items-stretch lg:gap-5 lg:-mt-44">
           <div className="relative -mt-14.5 mx-4 sm:mx-auto sm:max-w-140 bg-white rounded-2.5xl px-5.5 py-6 shadow-hero lg:mt-0 lg:mx-0 lg:max-w-none lg:flex-1 lg:px-11 lg:py-10">
@@ -112,24 +113,24 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Fact tiles — stacked full-width under the card on mobile, a column beside it on desktop */}
+          {/* Fact tiles: a column beside the card on desktop. Mobile shows only the next-day tile, full-width under the card. */}
           <div className="relative mx-4 mt-3.5 flex flex-col gap-2.5 sm:mx-auto sm:max-w-140 lg:mt-0 lg:mx-0 lg:max-w-none lg:gap-5 lg:w-105 lg:shrink-0 lg:self-center">
             <a
               href={GOOGLE_REVIEWS.url}
               target="_blank"
               rel="noopener noreferrer nofollow"
-              className="flex items-center justify-center gap-3 lg:flex-col lg:gap-1.5 rounded-2xl lg:rounded-2.5xl bg-white border border-hairline lg:border-0 shadow-card lg:shadow-hero px-4 py-3.5 lg:px-8 lg:py-6 text-center hover:border-accent lg:hover:bg-accent-soft transition-colors"
+              className="hidden lg:flex items-center justify-center gap-7 rounded-2.5xl bg-white shadow-hero px-8 py-6 text-center hover:bg-accent-soft transition-colors"
               aria-label={`${GOOGLE_REVIEWS.rating} stars from ${GOOGLE_REVIEWS.count} Google reviews (opens Google Maps)`}
             >
-              <span className="font-display text-xl lg:text-4xl font-extrabold text-ink leading-none">
-                {GOOGLE_REVIEWS.rating}
+              <StarChart size="sm" stars={false} />
+              <span className="flex flex-col items-start gap-2">
+                <span aria-hidden className="text-gold text-2xl tracking-widest leading-none">
+                  ★★★★★
+                </span>
+                <span className="text-md text-body">{GOOGLE_REVIEWS.count} Google reviews</span>
               </span>
-              <span aria-hidden className="text-gold text-base lg:text-2xl tracking-eyebrow leading-none">
-                ★★★★★
-              </span>
-              <span className="text-xs lg:text-md text-body">{GOOGLE_REVIEWS.count} Google reviews</span>
             </a>
-            <div className="flex items-center justify-center gap-5 lg:gap-6 rounded-2xl lg:rounded-2.5xl bg-accent text-white px-4 py-3.5 lg:px-7 lg:py-6 lg:shadow-hero whitespace-nowrap">
+            <div className="flex items-center justify-evenly gap-5 lg:gap-6 rounded-2xl lg:rounded-2.5xl bg-accent text-white px-4 py-3.5 lg:px-7 lg:py-6 lg:shadow-hero whitespace-nowrap">
               <div>
                 <div className="font-display text-md lg:text-xl font-extrabold leading-none">Next-day</div>
                 <div className="text-xs lg:text-sm text-accent-ondark mt-1 lg:mt-1.5">on most prescriptions</div>
@@ -151,16 +152,11 @@ export default function HomePage() {
       </section>
 
       {/* What we do */}
-      <section className="max-w-295 mx-auto pt-8 pb-8 lg:pt-18 lg:pb-16">
-        <div className="px-5 lg:px-10 flex items-baseline lg:items-end justify-between lg:mb-7">
-          <div>
-            <h2 className="text-xl lg:text-4xl font-extrabold text-ink tracking-normal lg:tracking-tight lg:mb-1.5">
-              What we do
-            </h2>
-            <p className="hidden lg:block text-base text-body leading-normal">
-              Full-service optical care, all in one stop.
-            </p>
-          </div>
+      <section className="max-w-295 mx-auto pb-8 lg:pt-6 lg:pb-16">
+        <div className="px-5 lg:px-10 flex items-baseline justify-between lg:mb-7">
+          <h2 className="text-xl lg:text-4xl font-extrabold text-ink tracking-normal lg:tracking-tight">
+            What we do
+          </h2>
           <Link
             href="/services"
             className="text-sm lg:text-md font-bold text-accent hover:text-accent-hover transition-colors"
@@ -216,7 +212,7 @@ export default function HomePage() {
             {why.map(({ title, description }) => (
               <div
                 key={title}
-                className="rounded-2xl bg-white border border-card-border px-4 py-4.5 lg:px-5 lg:py-5.5"
+                className="rounded-2xl bg-white border border-hairline px-4 py-4.5 lg:px-5 lg:py-5.5"
               >
                 <div className="h-0.75 w-7.5 lg:w-8 rounded-lg bg-accent mb-3.25 lg:mb-3.5" />
                 <h3 className="text-md lg:text-base font-bold text-ink mb-1.25 lg:mb-1.5">

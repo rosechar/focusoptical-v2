@@ -22,6 +22,12 @@ export const REVIEWS: Review[] = [
     href: GOOGLE_REVIEWS.url,
   },
   {
+    name: "Anna O.",
+    quote:
+      "Tom cuts and places lenses with perfection. The edge is smooth and sits flush with the frame. His prices for progressive glasses are very reasonable.",
+    href: GOOGLE_REVIEWS.url,
+  },
+  {
     name: "Carolyn K.",
     quote:
       "I have four different prescriptions, and he managed to get every single one exactly right. That takes real skill and attention to detail.",
@@ -37,6 +43,12 @@ export const REVIEWS: Review[] = [
     name: "Nancy S.",
     quote:
       "Prices are reasonable, choice is wide, ordering is easy, and timelines are short. Tom calls you as soon as your order arrives.",
+    href: GOOGLE_REVIEWS.url,
+  },
+  {
+    name: "Thomas B.",
+    quote:
+      "If anything is not satisfactory, Tom will do everything possible to correct it. He will go the second mile to make things right.",
     href: GOOGLE_REVIEWS.url,
   },
   {

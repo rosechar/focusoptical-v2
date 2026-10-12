@@ -112,7 +112,7 @@ function ServiceCard({
             <li
               key={chip}
               className={`inline-flex items-center gap-1.25 rounded-full px-2.75 py-1.5 lg:px-3 lg:py-1.75 text-xs lg:text-sm font-semibold ${
-                inverted ? "bg-white/16" : "bg-surface-alt text-secondary"
+                inverted ? "bg-white/16" : "bg-surface text-secondary"
               }`}
             >
               <span aria-hidden className={inverted ? "" : "text-accent"}>
@@ -181,7 +181,7 @@ export default function ServicesPage() {
         <div className="mx-5 lg:mx-0 mt-5.5 lg:mt-5 flex items-start lg:items-center gap-3.25 lg:gap-3.5 rounded-2xl bg-surface px-5 py-4.5 lg:px-6 lg:py-5.5">
           <span
             aria-hidden
-            className="flex h-9 w-9 lg:h-10.5 lg:w-10.5 shrink-0 items-center justify-center rounded-xl bg-white border border-card-border text-accent text-lg lg:text-xl"
+            className="flex h-9 w-9 lg:h-10.5 lg:w-10.5 shrink-0 items-center justify-center rounded-xl bg-white border border-hairline text-accent text-lg lg:text-xl"
           >
             ☑
           </span>

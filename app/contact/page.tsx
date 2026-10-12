@@ -45,7 +45,7 @@ export default function ContactPage() {
             </p>
             <AppointmentForm />
 
-            <div className="lg:hidden mt-7 border-t border-hairline-soft pt-5.5">
+            <div className="lg:hidden mt-7 border-t border-hairline pt-5.5">
               <Hours />
             </div>
           </div>

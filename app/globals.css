@@ -4,6 +4,7 @@
   /* Type */
   --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  --font-chart: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
 
   /* Body copy in the design sits at 15px, between Tailwind's sm and base. */
   --text-md: 0.9375rem;
@@ -11,6 +12,11 @@
 
   /* Uppercase eyebrows use wider tracking than the default `widest` (0.1em). */
   --tracking-eyebrow: 0.16em;
+
+  /* Reviews "5 STAR SERVICE" eye chart: very wide caps, and a star row between 4xl and 5xl. */
+  --tracking-chart: 0.3em;
+  --text-stars: 2.5rem;
+  --text-stars--line-height: 1;
 
   /* Hero card / large cards use a 20px radius, between 2xl (16px) and 3xl (24px). */
   --radius-2\.5xl: 1.25rem;
@@ -27,25 +33,17 @@
   --color-secondary: #34403f;
   --color-faint: #687374; /* lightest text that still clears 4.5:1 on white and surface */
   --color-hairline: #ebedec;
-  --color-hairline-soft: #f0f1f0;
-  --color-card-border: #e7ebeb;
   --color-surface: #f6f7f7;
-  --color-surface-alt: #f4f6f6;
 
   /* Form fields */
-  --color-field: #fafbfb;
   --color-field-border: #d8dddd;
 
   /* Dark UI (utility bar, footer, toast) */
-  --color-dark: #14181a;
-  --color-dark-border: #232a2c;
   --color-dark-fg: #c2cccd;
-  --color-dark-muted: #9aa6a8;
-  --color-dark-faint: #818d8f; /* clears 4.5:1 on --color-dark */
+  --color-dark-faint: #818d8f; /* clears 4.5:1 on neutral-900 */
 
   /* Accents */
   --color-closed: #a8383a;
-  --color-closed-soft: #fdf3f3;
   --color-gold: #d99a13;
 
   /* Shadows */
@@ -56,7 +54,6 @@
 
   /* Motion */
   --animate-page-in: page-in 0.35s ease both;
-  --animate-fade-up: fade-up 0.5s ease both;
   --animate-toast-in: toast-in 0.5s cubic-bezier(0.2, 0.85, 0.25, 1) both;
   --animate-toast-out: toast-out 0.3s ease-in both;
 
@@ -66,16 +63,6 @@
     }
     to {
       opacity: 1;
-    }
-  }
-  @keyframes fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
     }
   }
   @keyframes toast-in {
@@ -115,6 +102,13 @@
   filter: sepia(0.32) saturate(1.15) contrast(0.98) hue-rotate(-8deg);
 }
 
+/* Letter-spacing plus an equal left pad, so widely tracked caps stay optically centered
+   (tracking otherwise leaves a trailing gap after the last letter). */
+@utility spaced-* {
+  letter-spacing: --value(--tracking-*);
+  padding-left: --value(--tracking-*);
+}
+
 /* Outlined buttons and chips use a 1.5px stroke, which the integer border scale can't express. */
 @utility border-1.5 {
   border-width: 1.5px;
@@ -134,7 +128,7 @@
   }
   /* The accent ring is invisible on filled dark and accent panels, so anything inside one
      switches to a white ring. Only descendants: a bg-accent control on a white page keeps it. */
-  .bg-dark :focus-visible,
+  .bg-neutral-900 :focus-visible,
   .bg-accent :focus-visible {
     --focus-ring: var(--color-white);
   }
