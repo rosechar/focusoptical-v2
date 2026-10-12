@@ -42,6 +42,7 @@ ${CITIES.map(({ slug, city, driveTime }) => `- [${city}, MI](${SITE_URL}/service
 - [Home](${SITE_URL}/)
 - [Next-day glasses](${SITE_URL}/glasses)
 - [Eye exams](${SITE_URL}/eye-exams)
+- [Contact lens exams](${SITE_URL}/contact-lenses)
 - [All services](${SITE_URL}/services)
 - [Insurance & pricing](${SITE_URL}/insurance)
 - [About Tom and Dr. Galper](${SITE_URL}/about)

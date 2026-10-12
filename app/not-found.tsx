@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 const links = [
   { href: "/services", label: "Services" },
   { href: "/eye-exams", label: "Eye exams" },
+  { href: "/contact-lenses", label: "Contact lenses" },
   { href: "/service-areas", label: "Service areas" },
   { href: "/insurance", label: "Insurance & pricing" },
   { href: "/about", label: "About us" },

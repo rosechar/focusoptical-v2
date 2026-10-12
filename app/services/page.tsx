@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
 import { BUSINESS } from "@/lib/business";
 import { faqJsonLd } from "@/lib/schema";
@@ -51,6 +52,8 @@ const faqs = [
 
 function ServiceCard({
   id,
+  href,
+  linkLabel,
   title,
   badge,
   description,
@@ -111,6 +114,14 @@ function ServiceCard({
             </li>
           ))}
         </ul>
+        {href && (
+          <Link
+            href={href}
+            className="inline-block mt-4 lg:mt-5 text-sm lg:text-md font-bold text-accent hover:text-accent-hover transition-colors"
+          >
+            More about {(linkLabel ?? title).toLowerCase()} →
+          </Link>
+        )}
       </div>
     </article>
   );
@@ -180,11 +191,18 @@ export default function ServicesPage() {
             </p>
             <p className="text-sm text-body leading-normal">
               Have a vision plan? Bring it in and we&apos;ll help you use it.{" "}
+              <Link
+                href="/insurance"
+                className="font-semibold text-accent hover:text-accent-hover transition-colors"
+              >
+                See accepted plans
+              </Link>{" "}
+              or{" "}
               <a
                 href={BUSINESS.phoneHref}
                 className="font-semibold text-accent hover:text-accent-hover transition-colors"
               >
-                Call to confirm coverage.
+                call to confirm coverage.
               </a>
             </p>
           </div>

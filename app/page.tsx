@@ -15,7 +15,7 @@ import JsonLd from "@/components/JsonLd";
 export const metadata: Metadata = {
   title: "Focus Optical | Optician & Eye Exams in Rochester Hills, MI",
   description:
-    "Focus Optical in Rochester Hills, MI: eye exams with our eye doctor, prescription glasses with most ready the next day, contacts, and free adjustments. Family owned since 1984.",
+    `Family-owned optician in Rochester Hills, MI since 1984. Eye exams, next-day glasses from our own lab, contacts, and free adjustments. Call ${BUSINESS.phoneDisplay}.`,
   alternates: {
     canonical: "/",
   },

@@ -7,7 +7,7 @@ export interface NavTab {
 
 export const NAV_TABS: readonly NavTab[] = [
   { href: "/", label: "Home" },
-  { href: "/services", label: "Services", sections: ["/eye-exams", "/glasses"] },
+  { href: "/services", label: "Services", sections: ["/eye-exams", "/contact-lenses", "/glasses"] },
   { href: "/insurance", label: "Insurance" },
   { href: "/about", label: "About" },
 ];
