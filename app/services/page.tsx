@@ -53,7 +53,6 @@ const faqs = [
 function ServiceCard({
   id,
   href,
-  linkLabel,
   title,
   badge,
   description,
@@ -65,11 +64,11 @@ function ServiceCard({
   return (
     <article
       id={id}
-      className={`scroll-mt-24 flex flex-col rounded-2.5xl overflow-hidden ${
+      className={`relative scroll-mt-24 flex flex-col rounded-2.5xl overflow-hidden ${
         inverted
           ? "bg-accent text-white shadow-card lg:justify-center"
           : "bg-white border border-hairline shadow-card"
-      }`}
+      } ${href ? "hover:border-accent transition-colors" : ""}`}
     >
       {!inverted && (
         <div className="relative h-38 lg:h-50">
@@ -91,7 +90,16 @@ function ServiceCard({
             {badge}
           </div>
         )}
-        <h2 className="text-xl font-extrabold mb-1.75 lg:mb-2">{title}</h2>
+        <h2 className="text-xl font-extrabold mb-1.75 lg:mb-2">
+          {href ? (
+            // Stretched link: the ::after overlay makes the whole card clickable.
+            <Link href={href} className="after:absolute after:inset-0">
+              {title}
+            </Link>
+          ) : (
+            title
+          )}
+        </h2>
         <p
           className={`text-sm lg:text-md leading-relaxed mb-3.5 lg:mb-4 ${
             inverted ? "text-white/90" : "text-body"
@@ -114,14 +122,6 @@ function ServiceCard({
             </li>
           ))}
         </ul>
-        {href && (
-          <Link
-            href={href}
-            className="inline-block mt-4 lg:mt-5 text-sm lg:text-md font-bold text-accent hover:text-accent-hover transition-colors"
-          >
-            More about {(linkLabel ?? title).toLowerCase()} →
-          </Link>
-        )}
       </div>
     </article>
   );

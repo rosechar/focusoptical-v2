@@ -3,8 +3,6 @@ export interface Service {
   id: string;
   /** Dedicated page, when one exists; otherwise links go to /services#id. */
   href?: string;
-  /** Names the dedicated page in the /services "More about …" link; defaults to the title. */
-  linkLabel?: string;
   title: string;
   /** Short badge shown on the service card image. */
   badge: string;
@@ -47,7 +45,6 @@ export const SERVICES: Service[] = [
   {
     id: "retail",
     href: "/glasses",
-    linkLabel: "Glasses",
     title: "Glasses & contacts",
     badge: "Wide selection",
     description:
