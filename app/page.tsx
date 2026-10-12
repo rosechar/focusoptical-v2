@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Phone } from "lucide-react";
-import { BUSINESS, GOOGLE_REVIEWS } from "@/lib/business";
+import { BUSINESS, GOOGLE_REVIEWS, INSURANCE_PLANS_TEXT } from "@/lib/business";
 import { faqJsonLd } from "@/lib/schema";
 import { SERVICES } from "@/lib/services";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
@@ -56,7 +56,7 @@ const faqs = [
   },
   {
     q: "Do you take vision insurance?",
-    a: `We accept most common vision plans, and you don't need insurance to be seen. Call ${BUSINESS.phoneDisplay} with your plan name and we'll confirm your coverage before your visit.`,
+    a: `We accept ${INSURANCE_PLANS_TEXT}, and you don't need insurance to be seen. Call ${BUSINESS.phoneDisplay} with your plan name and we'll confirm your coverage before your visit.`,
   },
   {
     q: "Are adjustments free if I bought my glasses somewhere else?",

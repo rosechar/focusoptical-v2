@@ -44,7 +44,24 @@ export const GOOGLE_REVIEWS = {
   count: "100+",
   /** Opens the Maps listing directly on the Reviews tab. */
   url: "https://www.google.com/maps/place/Focus+Optical/data=!4m7!3m6!1s0x8824c18eb6e1bd0d:0xddd76cb4db1ee92!8m2!3d42.6354012!4d-83.1718076!9m1!1b1",
+  /** Opens Google's "write a review" dialog for the listing (Place ID ChIJDb3hto7BJIgRku6xTct23Q0). */
+  writeReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJDb3hto7BJIgRku6xTct23Q0",
 } as const;
+
+/** Vision plans named on the site. The shop also takes most other plans, so copy should say so. */
+export const INSURANCE_PLANS = [
+  "EyeMed",
+  "VSP",
+  "NVA",
+  "Davis Vision",
+  "UnitedHealthcare",
+  "Aetna",
+  "Humana",
+  "Heritage Vision",
+] as const;
+
+/** e.g. "EyeMed, VSP, …, Humana, and most other vision plans" */
+export const INSURANCE_PLANS_TEXT = `${INSURANCE_PLANS.join(", ")}, and most other vision plans`;
 
 /** Single-line street address, e.g. "2046 W Auburn Rd, Rochester Hills, MI 48309". */
 export const FULL_ADDRESS = `${BUSINESS.address.street}, ${BUSINESS.address.city}, ${BUSINESS.address.state} ${BUSINESS.address.zip}`;

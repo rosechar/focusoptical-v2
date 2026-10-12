@@ -1,4 +1,4 @@
-import { BUSINESS, FULL_ADDRESS, HOURS, PEOPLE, SITE_URL } from "@/lib/business";
+import { BUSINESS, FULL_ADDRESS, HOURS, INSURANCE_PLANS_TEXT, PEOPLE, SITE_URL } from "@/lib/business";
 import { CITIES } from "@/lib/cities";
 import { SERVICES } from "@/lib/services";
 
@@ -20,7 +20,7 @@ export function GET() {
 - Optician: ${PEOPLE.owner.name}, owner, has made eyeglasses since 1977 and opened ${BUSINESS.name} in 1984.
 - New lenses can be cut for frames customers already own.
 - Adjustments and cleaning are free for anyone, no purchase or appointment needed.
-- Most common vision insurance plans accepted; customers without insurance are welcome.
+- Vision insurance accepted: ${INSURANCE_PLANS_TEXT}. Customers without insurance are welcome.
 - Appointments are required for eye exams and for glasses or contacts.
 
 ## Hours

@@ -8,8 +8,8 @@ const exploreLinks = [
   ...NAV_TABS,
   { href: "/eye-exams", label: "Eye exams" },
   { href: "/glasses", label: "Glasses" },
-  { href: "/insurance", label: "Insurance" },
   { href: "/service-areas", label: "Service areas" },
+  { href: "/contact", label: "Visit" },
 ];
 
 // Site-wide links, so pages outside the header tabs stay reachable at every width.

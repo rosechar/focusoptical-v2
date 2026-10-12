@@ -66,25 +66,36 @@ export default function Header() {
                 {BUSINESS.phoneDisplay}
               </Button>
               <Button href="/contact" size="sm" pill>
-                Book a visit
+                Book now
               </Button>
             </nav>
 
-            {/* Mobile call pill */}
-            <Button href={BUSINESS.phoneHref} size="sm" pill className="lg:hidden whitespace-nowrap">
-              {BUSINESS.phoneDisplay}
-            </Button>
+            {/* Mobile call + book */}
+            <div className="lg:hidden flex items-center gap-2">
+              <Button
+                href={BUSINESS.phoneHref}
+                variant="outline"
+                size="icon"
+                pill
+                aria-label={`Call ${BUSINESS.phoneDisplay}`}
+              >
+                <Phone size={16} aria-hidden />
+              </Button>
+              <Button href="/contact" size="sm" pill>
+                Book now
+              </Button>
+            </div>
           </div>
         </div>
 
         {/* Mobile chip nav */}
-        <nav aria-label="Primary" className="lg:hidden flex gap-2 px-4.5 pb-3">
+        <nav aria-label="Primary" className="lg:hidden flex gap-1 px-4.5 pb-3">
           {NAV_TABS.map((tab) => (
             <Link
               key={tab.href}
               href={tab.href}
               aria-current={currentFor(tab)}
-              className={`flex-1 text-center px-3 py-2 text-sm ${navLinkClass(!!currentFor(tab))}`}
+              className={`flex-auto text-center px-1.5 py-2 text-sm whitespace-nowrap ${navLinkClass(!!currentFor(tab))}`}
             >
               {tab.label}
             </Link>

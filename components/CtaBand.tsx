@@ -11,7 +11,7 @@ interface CtaBandProps {
   className?: string;
   /** Booking link; pass /contact?service=<value> to pre-select a service. */
   href?: string;
-  /** Adds a call button above "Book a visit". */
+  /** Adds a call button beside "Book a visit". */
   showCall?: boolean;
 }
 
@@ -36,16 +36,18 @@ export default function CtaBand({
             </p>
           )}
         </div>
-        <div className="mt-4.5 lg:mt-0 lg:shrink-0 flex flex-col gap-2.5">
-          {showCall && (
-            <Button href={BUSINESS.phoneHref} variant="inverse-outline" size="lg" className="w-full">
-              <Phone size={16} aria-hidden />
-              Call {BUSINESS.phoneDisplay}
-            </Button>
-          )}
-          <Button href={href} variant="inverse" size="lg" className="w-full">
+        {/* Same layout as the home hero: book first, call beside it, "Call us" on mobile. */}
+        <div className="mt-4.5 lg:mt-0 lg:shrink-0 flex gap-2.5 lg:gap-3.25">
+          <Button href={href} variant="inverse" size="lg" className="flex-1 lg:flex-none">
             Book a visit
           </Button>
+          {showCall && (
+            <Button href={BUSINESS.phoneHref} variant="inverse-outline" size="lg" className="flex-1 lg:flex-none">
+              <Phone size={16} className="hidden lg:inline" aria-hidden />
+              <span className="lg:hidden">Call us</span>
+              <span className="hidden lg:inline">{BUSINESS.phoneDisplay}</span>
+            </Button>
+          )}
         </div>
       </div>
     </div>

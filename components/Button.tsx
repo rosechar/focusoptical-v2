@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 type Variant = "primary" | "outline" | "accent-outline" | "inverse" | "inverse-outline";
-type Size = "sm" | "md" | "lg";
+type Size = "sm" | "md" | "lg" | "icon";
 
 const VARIANT: Record<Variant, string> = {
   primary: "bg-accent text-white border-accent hover:bg-accent-hover hover:border-accent-hover",
@@ -18,6 +18,8 @@ const SIZE: Record<Size, string> = {
   sm: "px-4 py-2.25 text-sm",
   md: "px-5.5 py-3 text-md lg:px-6.5 lg:py-3.25 lg:text-base",
   lg: "px-6 py-3.5 text-md lg:px-7 lg:py-3.75 lg:text-base",
+  /** Square icon-only button, same height as `sm`. Pass an aria-label. */
+  icon: "p-2.75",
 };
 
 interface BaseProps {

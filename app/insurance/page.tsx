@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { ShieldCheck, HelpCircle } from "lucide-react";
 import CtaBand from "@/components/CtaBand";
-import { BUSINESS } from "@/lib/business";
+import { BUSINESS, INSURANCE_PLANS, INSURANCE_PLANS_TEXT } from "@/lib/business";
 import { faqJsonLd } from "@/lib/schema";
 import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Insurance & Pricing | Eye Exam Cost in Rochester Hills, MI",
+  title: "EyeMed, VSP & Vision Insurance Accepted | Rochester Hills, MI",
   description:
-    `Focus Optical in Rochester Hills, MI accepts various insurance plans. Contact us at ${BUSINESS.phoneDisplay} for details on pricing and insurance coverage for eye exams, glasses, and contact lenses.`,
+    `Focus Optical in Rochester Hills, MI accepts ${INSURANCE_PLANS_TEXT}. Call ${BUSINESS.phoneDisplay}.`,
   alternates: {
     canonical: "/insurance",
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: "Do you take vision insurance?",
-    a: `We take a lot of the common plans. Call us at ${BUSINESS.phoneDisplay} and we'll check yours before you come in.`,
+    a: `Yes. We accept ${INSURANCE_PLANS_TEXT}. Call us at ${BUSINESS.phoneDisplay} and we'll check yours before you come in.`,
   },
   {
     q: "How do I know what my insurance covers?",
@@ -51,32 +51,40 @@ export default function InsurancePage() {
 
       <section className="page-container grid sm:grid-cols-2 gap-3.5 lg:gap-5">
         <div className="rounded-2xl lg:rounded-2.5xl bg-accent-soft p-5 lg:p-8">
-          <ShieldCheck className="text-accent mb-3.5 lg:mb-4" size={28} aria-hidden />
-          <h2 className="text-lg lg:text-xl font-extrabold text-ink mb-2 lg:mb-3">
+          <h2 className="flex items-center gap-2.5 text-lg lg:text-xl font-extrabold text-ink mb-3 lg:mb-4">
+            <ShieldCheck className="text-accent shrink-0" size={24} aria-hidden />
             Insurance accepted
           </h2>
+          <ul className="flex flex-wrap gap-2 mb-3 lg:mb-4">
+            {INSURANCE_PLANS.map((plan) => (
+              <li
+                key={plan}
+                className="rounded-full bg-white px-3 py-1 text-sm lg:text-md font-bold text-ink"
+              >
+                {plan}
+              </li>
+            ))}
+          </ul>
           <p className="text-md lg:text-base text-body leading-normal">
-            We take a lot of the common vision plans. Give us a call before
-            your visit and we&apos;ll make sure yours is covered.
+            Plus most other vision plans. Don&apos;t see yours? Give us a call
+            before your visit and we&apos;ll make sure it&apos;s covered.
           </p>
         </div>
 
         <div className="rounded-2xl lg:rounded-2.5xl bg-surface p-5 lg:p-8">
-          <HelpCircle className="text-body mb-3.5 lg:mb-4" size={28} aria-hidden />
-          <h2 className="text-lg lg:text-xl font-extrabold text-ink mb-2 lg:mb-3">
+          <h2 className="flex items-center gap-2.5 text-lg lg:text-xl font-extrabold text-ink mb-3 lg:mb-4">
+            <HelpCircle className="text-body shrink-0" size={24} aria-hidden />
             Pricing questions
           </h2>
           <p className="text-md lg:text-base text-body leading-normal">
-            What you pay depends on the exam, the frames, and the lenses you
-            pick. We keep it fair and won&apos;t push you toward anything you
-            don&apos;t need.
+            Cost depends on the exam, frames, and lenses you choose. Fair
+            prices, no pressure.
           </p>
         </div>
       </section>
 
       <CtaBand
         heading="Still have questions?"
-        subtext="Book a visit and we'll walk through your plan and pricing in person."
         showCall
         className="py-8 lg:py-12"
       />

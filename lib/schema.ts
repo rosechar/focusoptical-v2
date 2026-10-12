@@ -1,4 +1,4 @@
-import { BUSINESS, HOURS, PEOPLE, SITE_URL, SOCIAL_PROFILES } from "@/lib/business";
+import { BUSINESS, HOURS, INSURANCE_PLANS_TEXT, PEOPLE, SITE_URL, SOCIAL_PROFILES } from "@/lib/business";
 import { CITIES } from "@/lib/cities";
 import { SERVICES } from "@/lib/services";
 
@@ -66,6 +66,7 @@ export const businessJsonLd = {
       url: SITE_URL,
       ...(SOCIAL_PROFILES.length && { sameAs: SOCIAL_PROFILES }),
       priceRange: "$$",
+      paymentAccepted: `Vision insurance: ${INSURANCE_PLANS_TEXT}`,
       description:
         "Focus Optical is a full-service, independently owned optical store in Rochester Hills, MI. Eye exams by optometrist Dr. Diane Galper, OD, prescription eyeglasses cut and edged in our on-site lab with most ready the next day, contact lenses, and free eyeglass adjustments. Serving Oakland County since 1984.",
       areaServed: [

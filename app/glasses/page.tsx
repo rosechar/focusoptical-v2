@@ -6,7 +6,7 @@ import Button from "@/components/Button";
 import CtaBand from "@/components/CtaBand";
 import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
-import { BUSINESS, PEOPLE, SITE_URL } from "@/lib/business";
+import { BUSINESS, INSURANCE_PLANS_TEXT, PEOPLE, SITE_URL } from "@/lib/business";
 import { BUSINESS_ID, faqJsonLd } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -81,7 +81,7 @@ const faqs = [
   },
   {
     q: "Can I use vision insurance for glasses?",
-    a: `We accept most common vision plans. Call ${BUSINESS.phoneDisplay} with your plan name and we'll confirm what's covered before your visit.`,
+    a: `We accept ${INSURANCE_PLANS_TEXT}. Call ${BUSINESS.phoneDisplay} with your plan name and we'll confirm what's covered before your visit.`,
   },
   {
     q: "Are adjustments free?",

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Pause, Play } from "lucide-react";
+import { GOOGLE_REVIEWS } from "@/lib/business";
 import { REVIEWS } from "@/lib/reviews";
 
 const ROTATE_MS = 5500;
@@ -105,6 +106,15 @@ export default function ReviewsCarousel() {
           {paused ? <Play size={12} aria-hidden /> : <Pause size={12} aria-hidden />}
         </button>
       </div>
+
+      <a
+        href={GOOGLE_REVIEWS.writeReviewUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block mt-4 lg:mt-5 text-sm lg:text-md font-bold text-accent hover:text-accent-hover transition-colors"
+      >
+        Been in? Leave us a Google review →
+      </a>
     </section>
   );
 }
