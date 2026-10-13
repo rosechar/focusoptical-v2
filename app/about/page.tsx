@@ -8,7 +8,7 @@ import { BUSINESS_ID, OPTOMETRIST_ID, OWNER_ID } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "About Us | Rochester Hills Optician & Eye Doctor",
   description:
-    "Meet Tom Hamilton, owner of Focus Optical in Rochester Hills, MI. An independent optician since 1984 with over 45 years of experience making eyeglasses. Eye exams performed by Dr. Diane Galper, Optometrist.",
+    "Meet Tom Hamilton, owner of Focus Optical in Rochester Hills, MI. An independent optician since 1984 with over 40 years of experience making eyeglasses. Eye exams performed by Dr. Diane Galper, Optometrist.",
   alternates: {
     canonical: "/about",
   },
@@ -42,12 +42,13 @@ export default function AboutPage() {
               alt="Tom Hamilton, owner of Focus Optical"
               fill
               preload
+              fetchPriority="high"
               className="object-cover duotone"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
             <div className="absolute left-4 bottom-4 lg:left-5 lg:bottom-5 rounded-xl lg:rounded-2xl bg-accent px-4 py-3 lg:px-5 lg:py-4 text-white">
               <div className="font-display text-2xl lg:text-4xl font-extrabold leading-none">
-                45+
+                40+
               </div>
               <div className="text-xs lg:text-sm text-accent-ondark">
                 years of experience
@@ -56,9 +57,6 @@ export default function AboutPage() {
           </div>
 
           <div className="px-5 pt-7 lg:p-0">
-            <p className="eyebrow mb-2 lg:mb-3">
-              Our story
-            </p>
             <h1 className="text-3xl lg:text-5xl lg:leading-none font-extrabold text-ink tracking-tight mb-4 lg:mb-5">
               Tom Hamilton, your optician
             </h1>

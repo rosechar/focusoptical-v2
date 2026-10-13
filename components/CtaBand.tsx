@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
-import { Phone } from "lucide-react";
+import ActionPanel from "@/components/ActionPanel";
 import Button from "@/components/Button";
-import { BUSINESS } from "@/lib/business";
+import CallButton from "@/components/CallButton";
 
 interface CtaBandProps {
   heading?: string;
@@ -9,13 +9,14 @@ interface CtaBandProps {
   subtext?: ReactNode;
   /** Vertical padding around the band. */
   className?: string;
-  /** Booking link; pass /contact?service=<value> to pre-select a service. */
+  /** Booking link; pass bookingHref(<value>) to pre-select a service. */
   href?: string;
   /** Adds a call button beside "Book a visit". */
   showCall?: boolean;
 }
 
-// Accent-filled closing CTA. Mobile: centered stack; desktop: heading left, buttons right.
+// Closing CTA, styled to match the offer card. Mobile: buttons under the text; desktop:
+// heading left, buttons right.
 export default function CtaBand({
   heading = "Ready to see clearly?",
   subtext,
@@ -25,31 +26,19 @@ export default function CtaBand({
 }: CtaBandProps) {
   return (
     <div className={`w-full page-container ${className}`}>
-      <div className="bg-accent rounded-2xl lg:rounded-2.5xl px-6 py-7 lg:px-14 lg:py-12 text-white text-center lg:text-left lg:flex lg:items-center lg:justify-between lg:gap-10">
-        <div>
-          <h2 className="text-2xl lg:text-4xl font-extrabold tracking-normal lg:tracking-tight">
-            {heading}
-          </h2>
-          {subtext && (
-            <p className="mt-1.5 text-md lg:text-base text-accent-ondark leading-normal">
-              {subtext}
-            </p>
-          )}
-        </div>
-        {/* Same layout as the home hero: book first, call beside it, "Call us" on mobile. */}
-        <div className="mt-4.5 lg:mt-0 lg:shrink-0 flex gap-2.5 lg:gap-3.25">
-          <Button href={href} variant="inverse" size="lg" className="flex-1 lg:flex-none">
-            Book a visit
-          </Button>
-          {showCall && (
-            <Button href={BUSINESS.phoneHref} variant="inverse-outline" size="lg" className="flex-1 lg:flex-none">
-              <Phone size={16} className="hidden lg:inline" aria-hidden />
-              <span className="lg:hidden">Call us</span>
-              <span className="hidden lg:inline">{BUSINESS.phoneDisplay}</span>
+      <ActionPanel
+        heading={heading}
+        text={subtext}
+        actions={
+          <>
+            <Button href={href} size="lg" className="flex-1 lg:flex-none">
+              Book a visit
             </Button>
-          )}
-        </div>
-      </div>
+            {/* Solid fill so the panel watermark doesn't show through the outline button. */}
+            {showCall && <CallButton className="flex-1 lg:flex-none bg-white" />}
+          </>
+        }
+      />
     </div>
   );
 }

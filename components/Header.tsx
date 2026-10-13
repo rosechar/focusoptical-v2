@@ -23,7 +23,7 @@ export default function Header() {
   return (
     <>
       {/* Desktop utility bar */}
-      <section aria-label="Store address and hours" className="hidden lg:block bg-neutral-900 text-dark-fg text-sm">
+      <section aria-label="Store address and hours" className="hidden lg:block bg-neutral-900 text-neutral-100 text-sm">
         <div className="max-w-295 mx-auto px-10 py-2 flex items-center justify-between">
           <a
             href={BUSINESS.mapsUrl}
@@ -35,7 +35,7 @@ export default function Header() {
             {BUSINESS.address.street} · {BUSINESS.address.city},{" "}
             {BUSINESS.address.state}
           </a>
-          <OpenStatus className="text-mist-400" />
+          <OpenStatus />
         </div>
       </section>
 

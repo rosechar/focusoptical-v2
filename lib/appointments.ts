@@ -6,12 +6,18 @@ export interface AppointmentType {
   short: string;
 }
 
-export const appointmentTypes: AppointmentType[] = [
+export const appointmentTypes = [
   { value: "eye", label: "Eye exam", short: "Eye exam" },
   { value: "contact", label: "Contact lens exam", short: "Contact exam" },
   { value: "retail", label: "Glasses & contacts", short: "New glasses" },
   { value: "adjustment", label: "Glasses adjustment", short: "Adjustment" },
-];
+] as const satisfies readonly AppointmentType[];
+
+export type AppointmentValue = (typeof appointmentTypes)[number]["value"];
+
+/** Booking page link, optionally with a service pre-selected on the form. */
+export const bookingHref = (service?: AppointmentValue) =>
+  service ? `/contact?service=${service}` : "/contact";
 
 export const getAppointmentLabel = (value: string): string | undefined =>
   appointmentTypes.find((t) => t.value === value)?.label;

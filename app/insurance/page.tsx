@@ -41,9 +41,6 @@ export default function InsurancePage() {
 
       {/* Page header */}
       <section className="page-container pt-7 pb-6 lg:pt-14 lg:pb-8">
-        <p className="eyebrow mb-2.5 lg:mb-3">
-          Rochester Hills · Coverage &amp; costs
-        </p>
         <h1 className="text-3xl lg:text-5xl font-extrabold text-ink tracking-tight text-balance">
           Insurance &amp; pricing
         </h1>

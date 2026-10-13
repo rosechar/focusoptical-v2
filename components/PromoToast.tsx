@@ -1,7 +1,11 @@
 "use client";
 
+// Not mounted: replaced by the inline OfferCard (lib/promo.ts). Kept so it can be re-enabled
+// by rendering <PromoToast /> in app/layout.tsx.
+
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { bookingHref } from "@/lib/appointments";
 
 const STORAGE_KEY = "promoDismissed";
 const SHOW_DELAY_MS = 2600;
@@ -67,7 +71,7 @@ export default function PromoToast() {
 
   const book = () => {
     dismiss();
-    router.push("/contact?service=retail");
+    router.push(bookingHref("retail"));
   };
 
   if (phase === "hidden") return null;

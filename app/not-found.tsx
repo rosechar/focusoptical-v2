@@ -20,9 +20,6 @@ export default function NotFound() {
   return (
     <>
       <section className="page-container pt-12 pb-8 lg:pt-20 lg:pb-12">
-        <p className="eyebrow mb-2.5">
-          404
-        </p>
         <h1 className="text-3xl lg:text-5xl font-extrabold text-ink tracking-tight mb-3">
           We couldn&apos;t find that page.
         </h1>

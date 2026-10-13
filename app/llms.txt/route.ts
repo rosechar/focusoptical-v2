@@ -1,4 +1,4 @@
-import { BUSINESS, FULL_ADDRESS, HOURS, INSURANCE_PLANS_TEXT, PEOPLE, SITE_URL } from "@/lib/business";
+import { BUSINESS, CAREER_START_YEAR, FOUNDED_YEAR, FULL_ADDRESS, HOURS, INSURANCE_PLANS_TEXT, PEOPLE, SITE_URL } from "@/lib/business";
 import { CITIES } from "@/lib/cities";
 import { SERVICES } from "@/lib/services";
 
@@ -9,7 +9,7 @@ export const dynamic = "force-static";
 export function GET() {
   const body = `# ${BUSINESS.name}
 
-> Independent, family-owned optician in Rochester Hills, Michigan (Oakland County), open since 1984. Eye exams with an on-site eye doctor, prescription glasses cut and edged in our own lab with most ready the next day, contact lenses, and free eyeglass adjustments for anyone.
+> Independent, family-owned optician in Rochester Hills, Michigan (Oakland County), open since ${FOUNDED_YEAR}. Eye exams with an on-site eye doctor, prescription glasses cut and edged in our own lab with most ready the next day, contact lenses, and free eyeglass adjustments for anyone.
 
 ## Key facts
 
@@ -17,7 +17,7 @@ export function GET() {
 - Phone: ${BUSINESS.phoneDisplay}
 - Next-day glasses: lenses are cut and edged in the shop's own lab, so most prescriptions are ready the next day. Some lens types and coatings take longer.
 - Eye doctor: ${PEOPLE.optometrist.name}, performs eye exams and contact lens exams on Tuesdays.
-- Optician: ${PEOPLE.owner.name}, owner, has made eyeglasses since 1977 and opened ${BUSINESS.name} in 1984.
+- Optician: ${PEOPLE.owner.name}, owner, has made eyeglasses since ${CAREER_START_YEAR} and opened ${BUSINESS.name} in ${FOUNDED_YEAR}.
 - New lenses can be cut for frames customers already own.
 - Adjustments and cleaning are free for anyone, no purchase or appointment needed.
 - Vision insurance accepted: ${INSURANCE_PLANS_TEXT}. Customers without insurance are welcome.

@@ -7,11 +7,18 @@ export const SOCIAL_PROFILES: string[] = [
   "https://www.google.com/maps?cid=999085307900063378",
 ];
 
+/** Year Focus Optical opened. */
+export const FOUNDED_YEAR = 1984;
+/** Year Tom started making eyeglasses. */
+export const CAREER_START_YEAR = 1977;
+/** Tom's years of experience. Static pages compute this at build time, so it updates on each deploy. */
+export const YEARS_EXPERIENCE = new Date().getFullYear() - CAREER_START_YEAR;
+
 export const PEOPLE = {
   owner: {
     name: "Tom Hamilton",
     jobTitle: "Owner & Optician",
-    description: "Making eyeglasses by hand since 1977. Opened Focus Optical in 1984 and cuts and edges every lens in the shop's own lab.",
+    description: `Making eyeglasses by hand since ${CAREER_START_YEAR}. Opened Focus Optical in ${FOUNDED_YEAR} and cuts and edges every lens in the shop's own lab.`,
   },
   optometrist: {
     name: "Dr. Diane Galper, OD",

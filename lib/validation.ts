@@ -12,3 +12,6 @@ export const isValidPhone = (phone: string) => {
   const digits = phone.replace(/\D/g, "");
   return digits.length === 10 || (digits.length === 11 && digits.startsWith("1"));
 };
+
+/** tel: link for a number that passed isValidPhone, e.g. "(248) 555-0100" → "tel:+12485550100". */
+export const toTelHref = (phone: string) => `tel:+1${phone.replace(/\D/g, "").slice(-10)}`;

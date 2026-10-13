@@ -1,4 +1,4 @@
-import { BUSINESS, HOURS, INSURANCE_PLANS_TEXT, PEOPLE, SITE_URL, SOCIAL_PROFILES } from "@/lib/business";
+import { BUSINESS, FOUNDED_YEAR, HOURS, INSURANCE_PLANS_TEXT, PEOPLE, SITE_URL, SOCIAL_PROFILES } from "@/lib/business";
 import { CITIES } from "@/lib/cities";
 import { SERVICES } from "@/lib/services";
 
@@ -35,7 +35,7 @@ export const businessJsonLd = {
       "@id": BUSINESS_ID,
       name: BUSINESS.name,
       medicalSpecialty: "https://schema.org/Optometric",
-      foundingDate: "1984",
+      foundingDate: String(FOUNDED_YEAR),
       founder: { "@id": OWNER_ID },
       employee: [{ "@id": OWNER_ID }, { "@id": OPTOMETRIST_ID }],
       hasMap: BUSINESS.mapsUrl,

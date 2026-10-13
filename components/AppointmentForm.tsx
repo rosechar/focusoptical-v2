@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState, useEffect, useRef, FormEvent } from "react";
+import { Suspense, useCallback, useState, useEffect, useRef, FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import { Loader2, AlertCircle } from "lucide-react";
 import { BUSINESS } from "@/lib/business";
@@ -60,7 +60,7 @@ function ChipGroup({
 }: {
   legend: string;
   name: keyof FormState;
-  options: AppointmentType[];
+  options: readonly AppointmentType[];
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
@@ -89,30 +89,23 @@ function ChipGroup({
   );
 }
 
-// CTAs link to /contact?service=<value> to pre-select a service. useSearchParams makes a
-// static page prerender its nearest Suspense fallback, so the fallback is the same form with
-// the default service and the client swaps in the pre-selected one after hydration.
-export default function AppointmentForm() {
-  return (
-    <Suspense fallback={<RequestForm initialService={DEFAULT_SERVICE} />}>
-      <RequestFormFromQuery />
-    </Suspense>
-  );
-}
-
-function RequestFormFromQuery() {
+// CTAs link to bookingHref(<value>) to pre-select a service. useSearchParams makes a static
+// page client-render everything up to its nearest Suspense boundary, so only this renderless
+// child sits inside one: the form itself stays in the static HTML and isn't replaced on load.
+function ServiceFromQuery({ onService }: { onService: (value: string) => void }) {
   const requested = useSearchParams().get("service");
-  const initialService =
-    requested && getAppointmentLabel(requested) ? requested : DEFAULT_SERVICE;
-  return <RequestForm initialService={initialService} />;
+  useEffect(() => {
+    if (requested && getAppointmentLabel(requested)) onService(requested);
+  }, [requested, onService]);
+  return null;
 }
 
-function RequestForm({ initialService }: { initialService: string }) {
+export default function AppointmentForm() {
   const [form, setForm] = useState<FormState>({
     name: "",
     phone: "",
     email: "",
-    appointment: initialService,
+    appointment: DEFAULT_SERVICE,
     preferredTime: preferredTimes[0].value,
     optIn: true,
     website: "",
@@ -122,6 +115,10 @@ function RequestForm({ initialService }: { initialService: string }) {
     "idle" | "loading" | "success" | "error"
   >("idle");
   const successRef = useRef<HTMLDivElement>(null);
+  const selectService = useCallback(
+    (appointment: string) => setForm((prev) => ({ ...prev, appointment })),
+    [],
+  );
 
   useEffect(() => {
     if (status === "success") {
@@ -223,6 +220,9 @@ function RequestForm({ initialService }: { initialService: string }) {
       noValidate
       className={`${cardClass} px-5 py-5.5 lg:p-7 flex flex-col gap-4.5 lg:gap-5`}
     >
+      <Suspense fallback={null}>
+        <ServiceFromQuery onService={selectService} />
+      </Suspense>
       <div className="grid gap-4.5 lg:grid-cols-2 lg:gap-4">
         <div>
           <label htmlFor="name" className={`${labelClass} mb-1.75 lg:mb-2`}>

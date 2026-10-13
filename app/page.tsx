@@ -1,22 +1,27 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Phone } from "lucide-react";
-import { BUSINESS, GOOGLE_REVIEWS, INSURANCE_PLANS_TEXT } from "@/lib/business";
+import {
+  BUSINESS,
+  GOOGLE_REVIEWS,
+  INSURANCE_PLANS_TEXT,
+  YEARS_EXPERIENCE,
+} from "@/lib/business";
 import { faqJsonLd } from "@/lib/schema";
 import { SERVICES } from "@/lib/services";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
 import StarChart from "@/components/StarChart";
 import Button from "@/components/Button";
+import CallButton from "@/components/CallButton";
 import CtaBand from "@/components/CtaBand";
+import OfferCard from "@/components/OfferCard";
 import OpenStatus from "@/components/OpenStatus";
 import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Focus Optical | Optician & Eye Exams in Rochester Hills, MI",
-  description:
-    `Family-owned optician in Rochester Hills, MI since 1984. Eye exams, next-day glasses from our own lab, contacts, and free adjustments. Call ${BUSINESS.phoneDisplay}.`,
+  description: `Family-owned optician in Rochester Hills, MI since 1984. Eye exams, next-day glasses from our own lab, contacts, and free adjustments. Call ${BUSINESS.phoneDisplay}.`,
   alternates: {
     canonical: "/",
   },
@@ -86,11 +91,8 @@ export default function HomePage() {
         </div>
         <div className="lg:max-w-295 lg:mx-auto lg:px-10 lg:flex lg:items-stretch lg:gap-5 lg:-mt-44">
           <div className="relative -mt-14.5 mx-4 sm:mx-auto sm:max-w-140 bg-white rounded-2.5xl px-5.5 py-6 shadow-hero lg:mt-0 lg:mx-0 lg:max-w-none lg:flex-1 lg:px-11 lg:py-10">
-            <p className="eyebrow mb-2.5 lg:mb-4">
-              Rochester Hills · since 1984
-            </p>
             <h1 className="text-3xl leading-none tracking-tight lg:text-5xl font-extrabold text-ink mb-2.5 lg:mb-5 text-balance">
-              Glasses made by hand in Rochester Hills.
+              Glasses that fit, made here in Rochester Hills.
             </h1>
             <p className="text-md leading-normal text-body lg:text-lg lg:leading-relaxed mb-4.5 lg:mb-8 lg:max-w-135">
               Eye exams, glasses, and contacts for Oakland County since 1984,
@@ -100,16 +102,7 @@ export default function HomePage() {
               <Button href="/contact" size="lg" className="flex-1 lg:flex-none">
                 Book a visit
               </Button>
-              <Button
-                href={BUSINESS.phoneHref}
-                variant="outline"
-                size="lg"
-                className="flex-1 lg:flex-none"
-              >
-                <Phone size={16} className="hidden lg:inline" />
-                <span className="lg:hidden">Call us</span>
-                <span className="hidden lg:inline">{BUSINESS.phoneDisplay}</span>
-              </Button>
+              <CallButton className="flex-1 lg:flex-none" />
             </div>
           </div>
 
@@ -120,28 +113,38 @@ export default function HomePage() {
               target="_blank"
               rel="noopener noreferrer nofollow"
               className="hidden lg:flex items-center justify-center gap-7 rounded-2.5xl bg-white shadow-hero px-8 py-6 text-center hover:bg-accent-soft transition-colors"
-              aria-label={`${GOOGLE_REVIEWS.rating} stars from ${GOOGLE_REVIEWS.count} Google reviews (opens Google Maps)`}
             >
               <StarChart size="sm" stars={false} />
               <span className="flex flex-col items-start gap-2">
-                <span aria-hidden className="text-gold text-2xl tracking-widest leading-none">
+                <span
+                  aria-hidden
+                  className="text-gold text-2xl tracking-widest leading-none"
+                >
                   ★★★★★
                 </span>
-                <span className="text-md text-body">{GOOGLE_REVIEWS.count} Google reviews</span>
+                <span className="text-md text-body">
+                  {GOOGLE_REVIEWS.count} Google reviews
+                  <span className="sr-only"> (opens Google Maps)</span>
+                </span>
               </span>
             </a>
             <div className="flex items-center justify-evenly gap-5 lg:gap-6 rounded-2xl lg:rounded-2.5xl bg-accent text-white px-4 py-3.5 lg:px-7 lg:py-6 lg:shadow-hero whitespace-nowrap">
               <div>
-                <div className="font-display text-md lg:text-xl font-extrabold leading-none">Next-day</div>
-                <div className="text-xs lg:text-sm text-accent-ondark mt-1 lg:mt-1.5">on most prescriptions</div>
+                <div className="font-display text-md lg:text-xl font-extrabold leading-none">
+                  Next-day
+                </div>
+                <div className="text-xs lg:text-sm text-accent-ondark mt-1 lg:mt-1.5">
+                  on most prescriptions
+                </div>
               </div>
               <div className="h-8 lg:h-10 w-px bg-white/25" aria-hidden />
               <div>
-                <div className="font-display text-md lg:text-xl font-extrabold leading-none">Free adjustments</div>
-                <div className="text-xs lg:text-sm text-accent-ondark mt-1 lg:mt-1.5">always</div>
+                <div className="font-display text-md lg:text-xl font-extrabold leading-none">
+                  Free adjustments
+                </div>
               </div>
             </div>
-            <p className="lg:hidden text-center text-xs text-body mt-1">
+            <p className="lg:hidden text-center text-sm text-body mt-1">
               <OpenStatus className="text-secondary" /> ·{" "}
               <Link href="/contact" className="font-semibold text-accent">
                 Hours &amp; directions
@@ -196,15 +199,14 @@ export default function HomePage() {
 
       <ReviewsCarousel />
 
+      <OfferCard className="page-container pb-8 lg:pb-16" />
+
       {/* Why Focus Optical */}
       <section className="bg-surface">
         <div className="page-container py-8.5 lg:py-16 lg:grid lg:grid-cols-2 lg:gap-14 lg:items-center">
           <div>
-            <p className="eyebrow mb-2.5 lg:mb-3.5">
-              Why Focus Optical
-            </p>
             <h2 className="text-2xl leading-tight lg:text-4xl font-extrabold text-ink tracking-tight mb-2 lg:mb-3">
-              Forty-five years of practice,{" "}
+              {YEARS_EXPERIENCE} years of practice,{" "}
               <span className="text-accent">and it shows in the fit.</span>
             </h2>
           </div>
@@ -235,80 +237,68 @@ export default function HomePage() {
           items={faqs}
           className="flex flex-col gap-3 lg:grid lg:grid-cols-2 lg:gap-4 lg:items-start"
         />
-        <p className="mt-4 lg:mt-6 text-sm lg:text-md text-body">
-          Using vision insurance? We take most common plans.{" "}
-          <Link
-            href="/insurance"
-            className="font-bold text-accent hover:text-accent-hover transition-colors"
-          >
-            Insurance &amp; pricing →
-          </Link>
-        </p>
       </section>
 
       {/* Closing CTA + Owner: CTA first on mobile, owner first on desktop */}
       <div className="flex flex-col">
-        <section className="order-2 lg:order-1 bg-accent-soft lg:bg-transparent">
+        <section className="order-2 lg:order-1 bg-surface lg:bg-transparent">
           <div className="page-container py-8 lg:py-18">
-          {/* Mobile: avatar + short note */}
-          <div className="lg:hidden flex gap-4 items-start">
-            <div className="relative h-17 w-17 shrink-0 rounded-full overflow-hidden">
-              <Image
-                src="/images/tom.jpg"
-                alt="Tom Hamilton"
-                fill
-                className="object-cover duotone"
-                sizes="68px"
-              />
+            {/* Mobile: avatar + short note */}
+            <div className="lg:hidden flex gap-4 items-start">
+              <div className="relative h-17 w-17 shrink-0 rounded-full overflow-hidden">
+                <Image
+                  src="/images/tom.jpg"
+                  alt="Tom Hamilton"
+                  fill
+                  className="object-cover duotone"
+                  sizes="68px"
+                />
+              </div>
+              <div>
+                <p className="text-md leading-normal text-secondary mb-2">
+                  Hi, I&apos;m Tom. I&apos;ve made glasses by hand since 1977
+                  and opened Focus Optical in 1984. Getting the fit right is a
+                  bit of a lost art, and it&apos;s the part I like most.
+                </p>
+                <Link
+                  href="/about"
+                  className="text-sm font-bold text-accent hover:text-accent-hover transition-colors"
+                >
+                  More about us →
+                </Link>
+              </div>
             </div>
-            <div>
-              <p className="text-md leading-normal text-secondary mb-2">
-                Hi, I&apos;m Tom. I&apos;ve made glasses by hand since 1977 and
-                opened Focus Optical in 1984. Getting the fit right is a bit of
-                a lost art, and it&apos;s the part I like most.
-              </p>
-              <Link
-                href="/about"
-                className="text-sm font-bold text-accent hover:text-accent-hover transition-colors"
-              >
-                More about us →
-              </Link>
-            </div>
-          </div>
 
-          {/* Desktop: portrait + heading */}
-          <div className="hidden lg:grid grid-cols-2 gap-14 items-center">
-            <div className="relative h-105 rounded-2.5xl overflow-hidden">
-              <Image
-                src="/images/tom.jpg"
-                alt="Tom Hamilton, owner of Focus Optical"
-                fill
-                className="object-cover duotone"
-                sizes="(max-width: 1180px) 40vw, 470px"
-              />
+            {/* Desktop: portrait + heading */}
+            <div className="hidden lg:grid grid-cols-2 gap-14 items-center">
+              <div className="relative h-105 rounded-2.5xl overflow-hidden">
+                <Image
+                  src="/images/tom.jpg"
+                  alt="Tom Hamilton, owner of Focus Optical"
+                  fill
+                  className="object-cover duotone"
+                  sizes="(max-width: 1180px) 40vw, 470px"
+                />
+              </div>
+              <div>
+                <h2 className="text-4xl font-extrabold text-ink tracking-tight mb-4.5">
+                  Tom Hamilton has made glasses by hand since 1977.
+                </h2>
+                <p className="text-base leading-relaxed text-secondary mb-4">
+                  I opened Focus Optical in 1984. I cut and edge every lens
+                  in-house and treat each pair as if I were making it for
+                  myself. Getting the fit right is a bit of a lost art, and
+                  it&apos;s the part I like most.
+                </p>
+                <Button href="/about" variant="accent-outline">
+                  More about us →
+                </Button>
+              </div>
             </div>
-            <div>
-              <p className="eyebrow mb-3.5">
-                Meet your optician
-              </p>
-              <h2 className="text-4xl font-extrabold text-ink tracking-tight mb-4.5">
-                Tom Hamilton has made glasses by hand since 1977.
-              </h2>
-              <p className="text-base leading-relaxed text-secondary mb-4">
-                I opened Focus Optical in 1984. I cut and edge every lens
-                in-house and treat each pair as if I were making it for myself.
-                Getting the fit right is a bit of a lost art, and it&apos;s the
-                part I like most.
-              </p>
-              <Button href="/about" variant="accent-outline">
-                More about us →
-              </Button>
-            </div>
-          </div>
           </div>
         </section>
 
-        <CtaBand className="order-1 lg:order-2 pt-7.5 pb-3 lg:pt-0 lg:pb-20" />
+        <CtaBand className="order-1 lg:order-2 pt-7.5 pb-8 lg:pt-0 lg:pb-20" />
       </div>
     </>
   );

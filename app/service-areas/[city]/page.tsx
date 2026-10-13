@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MapPin, Phone, Clock, Navigation, Check } from "lucide-react";
+import { MapPin, Clock, Navigation, Check } from "lucide-react";
 import Button from "@/components/Button";
+import CallButton from "@/components/CallButton";
 import CtaBand from "@/components/CtaBand";
 import { BUSINESS, SITE_URL } from "@/lib/business";
 import { CITIES, getCity } from "@/lib/cities";
+import { OPEN_DAYS } from "@/lib/hours";
 import { faqJsonLd } from "@/lib/schema";
 import { SERVICE_HIGHLIGHTS } from "@/lib/services";
 import Faq from "@/components/Faq";
@@ -87,9 +89,6 @@ export default async function CityPage({ params }: Props) {
           <span className="mx-2 text-faint" aria-hidden>/</span>
           <span className="text-ink font-semibold">{area.city}</span>
         </nav>
-        <p className="eyebrow mb-2.5 lg:mb-3">
-          Serving {area.city}, Michigan
-        </p>
         <h1 className="text-3xl lg:text-5xl font-extrabold text-ink tracking-tight text-balance">
           {area.primary
             ? `Your optician in ${area.city}`
@@ -105,11 +104,7 @@ export default async function CityPage({ params }: Props) {
           <Button href="/contact" size="lg" className="flex-1 sm:flex-none">
             Book a visit
           </Button>
-          <Button href={BUSINESS.phoneHref} variant="outline" size="lg" className="flex-1 sm:flex-none">
-            <Phone size={16} className="hidden sm:inline" aria-hidden />
-            <span className="sm:hidden">Call us</span>
-            <span className="hidden sm:inline">{BUSINESS.phoneDisplay}</span>
-          </Button>
+          <CallButton breakpoint="sm" className="flex-1 sm:flex-none" />
         </div>
       </section>
 
@@ -192,7 +187,7 @@ export default async function CityPage({ params }: Props) {
         subtext={
           <>
             {area.primary ? "Right here in Rochester Hills" : `${area.driveTime} from ${area.city}`}.{" "}
-            <OpenStatus className="text-white" fallback="Open Monday to Saturday" />
+            <OpenStatus className="text-secondary" fallback={`Open ${OPEN_DAYS.first} to ${OPEN_DAYS.last}`} />
           </>
         }
       />

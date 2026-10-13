@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MapPin, Phone, Navigation, ArrowRight, Check } from "lucide-react";
 import MapEmbed from "@/components/MapEmbed";
 import Button from "@/components/Button";
+import CallButton from "@/components/CallButton";
 import CtaBand from "@/components/CtaBand";
 import { BUSINESS, FULL_ADDRESS } from "@/lib/business";
 import { CITIES } from "@/lib/cities";
@@ -22,9 +23,6 @@ export default function ServiceAreasPage() {
     <>
       {/* Page header */}
       <section className="page-container pt-7 pb-8 lg:pt-14 lg:pb-12">
-        <p className="eyebrow mb-2.5 lg:mb-3">
-          Oakland County &amp; surrounding communities
-        </p>
         <h1 className="text-3xl lg:text-5xl font-extrabold text-ink tracking-tight text-balance">
           Serving Rochester Hills &amp; all of Oakland County
         </h1>
@@ -37,11 +35,7 @@ export default function ServiceAreasPage() {
           <Button href="/contact" size="lg" className="flex-1 sm:flex-none">
             Book a visit
           </Button>
-          <Button href={BUSINESS.phoneHref} variant="outline" size="lg" className="flex-1 sm:flex-none">
-            <Phone size={16} className="hidden sm:inline" aria-hidden />
-            <span className="sm:hidden">Call us</span>
-            <span className="hidden sm:inline">{BUSINESS.phoneDisplay}</span>
-          </Button>
+          <CallButton breakpoint="sm" className="flex-1 sm:flex-none" />
         </div>
       </section>
 
@@ -72,43 +66,39 @@ export default function ServiceAreasPage() {
           are the towns we see folks from most:
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3.5 lg:gap-5">
-          {CITIES.map(({ slug, city, zips, summary, primary }) => (
+          {CITIES.map(({ slug, city, zips, driveTime, primary }) => (
             <Link
               key={slug}
               href={`/service-areas/${slug}`}
-              className={`group rounded-2xl p-5 lg:p-6 border transition-colors ${
+              className={`group flex items-start justify-between gap-3 rounded-2xl p-5 lg:p-6 border transition-colors ${
                 primary
                   ? "bg-accent border-accent text-white"
                   : "bg-white border-hairline lg:shadow-card hover:border-accent"
               }`}
             >
-              <div className="flex items-start justify-between gap-3 mb-2.5 lg:mb-3">
-                <div>
-                  <h3 className={`font-bold text-base lg:text-lg ${primary ? "text-white" : "text-ink"}`}>
-                    {city}
-                    {primary && (
-                      <span className="ml-2 align-middle text-xs font-semibold bg-white/20 text-white px-2 py-0.5 rounded-full">
-                        Our location
-                      </span>
-                    )}
-                  </h3>
-                  <p className={`text-xs mt-0.5 ${primary ? "text-white/70" : "text-body"}`}>
-                    ZIP: {zips.join(", ")}
-                  </p>
-                </div>
-                <MapPin size={18} className={primary ? "text-white/80" : "text-accent"} aria-hidden />
+              <div>
+                <h3 className={`font-bold text-base lg:text-lg ${primary ? "text-white" : "text-ink"}`}>
+                  {city}
+                  {primary && (
+                    <span className="ml-2 align-middle text-xs font-semibold bg-white/20 text-white px-2 py-0.5 rounded-full">
+                      Our location
+                    </span>
+                  )}
+                </h3>
+                <p className={`text-sm mt-1 ${primary ? "text-white/85" : "text-body"}`}>
+                  {primary ? BUSINESS.address.street : `${driveTime} away`}
+                </p>
+                <p className={`text-xs mt-0.5 ${primary ? "text-white/70" : "text-body"}`}>
+                  ZIP: {zips.join(", ")}
+                </p>
               </div>
-              <p className={`text-sm leading-normal mb-3.5 lg:mb-4 ${primary ? "text-white/85" : "text-body"}`}>
-                {summary}
-              </p>
-              <span
-                className={`inline-flex items-center gap-1.5 text-sm font-bold ${
-                  primary ? "text-white" : "text-accent group-hover:text-accent-hover"
+              <ArrowRight
+                size={18}
+                className={`mt-1 shrink-0 transition-transform group-hover:translate-x-0.5 ${
+                  primary ? "text-white" : "text-accent"
                 }`}
-              >
-                {city} eye care
-                <ArrowRight size={14} aria-hidden />
-              </span>
+                aria-hidden
+              />
             </Link>
           ))}
         </div>

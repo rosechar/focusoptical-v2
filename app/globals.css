@@ -132,6 +132,10 @@
   .bg-accent :focus-visible {
     --focus-ring: var(--color-white);
   }
+  /* Safari ignores list-style on <summary>; this hides its disclosure triangle. */
+  summary::-webkit-details-marker {
+    display: none;
+  }
   h1,
   h2,
   h3 {

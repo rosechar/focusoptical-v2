@@ -58,6 +58,10 @@ export async function POST(request: Request) {
   } catch {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
+  // Valid JSON can still be null, an array, or a primitive.
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+  }
 
   const name = typeof payload.name === "string" ? payload.name.trim() : "";
   const email = typeof payload.email === "string" ? payload.email.trim() : "";

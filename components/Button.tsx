@@ -1,17 +1,13 @@
 import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
-type Variant = "primary" | "outline" | "accent-outline" | "inverse" | "inverse-outline";
+type Variant = "primary" | "outline" | "accent-outline";
 type Size = "sm" | "md" | "lg" | "icon";
 
 const VARIANT: Record<Variant, string> = {
   primary: "bg-accent text-white border-accent hover:bg-accent-hover hover:border-accent-hover",
   outline: "border-field-border text-ink hover:border-accent hover:text-accent",
   "accent-outline": "border-accent text-accent hover:bg-accent-soft",
-  /** White button for use on an accent background (CTA band). */
-  inverse: "bg-white text-accent border-white hover:bg-accent-soft hover:border-accent-soft",
-  /** Translucent secondary button for use on an accent background. */
-  "inverse-outline": "bg-white/15 text-white border-white/50 hover:bg-white/25",
 };
 
 const SIZE: Record<Size, string> = {

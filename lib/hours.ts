@@ -16,6 +16,11 @@ const toMinutes = (hhmm: string) => {
   return h * 60 + m;
 };
 
+const openDays = HOURS.filter((h) => h.opens).map((h) => h.day);
+
+/** First and last open days ("Monday", "Saturday"). Assumes the open days are consecutive. */
+export const OPEN_DAYS = { first: openDays[0], last: openDays[openDays.length - 1] };
+
 /** "18:00" → "6:00 PM", "09:00" → "9:00 AM" */
 export const formatTime = (hhmm: string) => {
   const [h, m] = hhmm.split(":").map(Number);

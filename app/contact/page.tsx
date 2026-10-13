@@ -41,7 +41,7 @@ export default function ContactPage() {
               Book a visit
             </h1>
             <p className="text-md lg:text-lg leading-normal text-body mb-5.5 lg:mb-6.5">
-              Send a request and we&apos;ll call to confirm, usually the same day.
+              Send a request and we&apos;ll call to confirm.
             </p>
             <AppointmentForm />
 

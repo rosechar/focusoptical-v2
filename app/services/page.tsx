@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
-import { BUSINESS } from "@/lib/business";
+import { BUSINESS, YEARS_EXPERIENCE } from "@/lib/business";
 import { faqJsonLd } from "@/lib/schema";
 import { SERVICES, type Service } from "@/lib/services";
 import Faq from "@/components/Faq";
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 const stats = [
-  { value: "45+", label: "years", labelWide: "years of experience" },
+  { value: String(YEARS_EXPERIENCE), label: "years", labelWide: "years of experience" },
   { value: "Next-day", label: "most Rx", labelWide: "on most prescriptions" },
   { value: "Free", label: "adjustments", labelWide: "adjustments for anyone" },
 ];
@@ -60,7 +60,8 @@ function ServiceCard({
   alt,
   chips,
   inverted,
-}: Service) {
+  preload = false,
+}: Service & { preload?: boolean }) {
   return (
     <article
       id={id}
@@ -76,6 +77,8 @@ function ServiceCard({
             src={image}
             alt={alt}
             fill
+            preload={preload}
+            fetchPriority={preload ? "high" : undefined}
             className="object-cover duotone"
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
@@ -85,11 +88,6 @@ function ServiceCard({
         </div>
       )}
       <div className={inverted ? "px-5 py-5.5 lg:px-6 lg:py-7" : "p-5 lg:p-6"}>
-        {inverted && (
-          <div className="text-xs font-bold uppercase tracking-widest text-accent-ondark mb-2 lg:mb-2.5">
-            {badge}
-          </div>
-        )}
         <h2 className="text-xl font-extrabold mb-1.75 lg:mb-2">
           {href ? (
             // Stretched link: the ::after overlay makes the whole card clickable.
@@ -167,8 +165,9 @@ export default function ServicesPage() {
         {/* Mobile: one card per row. Desktop: two rows of two. The stats sit between the
             first and second pair at both widths. */}
         <div className="grid gap-3.5 px-5 lg:grid-cols-2 lg:gap-5 lg:px-0">
-          {firstPair.map((service) => (
-            <ServiceCard key={service.id} {...service} />
+          {/* The first card's image is the largest thing above the fold. */}
+          {firstPair.map((service, i) => (
+            <ServiceCard key={service.id} {...service} preload={i === 0} />
           ))}
           <div className="lg:col-span-2">
             <Stats />
@@ -211,7 +210,7 @@ export default function ServicesPage() {
 
       <section className="page-container pt-8 lg:pt-14">
         <h2 className="text-xl lg:text-3xl font-extrabold text-ink tracking-tight mb-4 lg:mb-6">
-          Common questions
+          Frequently asked questions
         </h2>
         <Faq items={faqs} className="flex flex-col gap-3 lg:grid lg:grid-cols-2 lg:gap-4 lg:items-start" />
       </section>

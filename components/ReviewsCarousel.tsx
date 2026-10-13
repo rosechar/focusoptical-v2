@@ -36,9 +36,9 @@ export default function ReviewsCarousel() {
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget)) setEngaged(false);
       }}
-      className="page-container pb-10 lg:pb-16"
+      className="page-container pb-8 lg:pb-16"
     >
-      <div className="mx-auto flex max-w-lg flex-col items-center gap-5 rounded-2xl border border-hairline bg-white px-5 py-7 text-center shadow-card lg:max-w-none lg:flex-row lg:gap-12 lg:rounded-2.5xl lg:px-12 lg:py-10 lg:text-left">
+      <div className="mx-auto flex max-w-lg flex-col items-center gap-5 bg-white text-center lg:max-w-none lg:rounded-2.5xl lg:border lg:border-hairline lg:shadow-card lg:flex-row lg:gap-12 lg:px-12 lg:py-10 lg:text-left">
         <h2 className="flex flex-col justify-center lg:w-72 lg:shrink-0 lg:self-stretch lg:border-r lg:border-hairline lg:pr-12">
           <StarChart size="lg" />
         </h2>
@@ -88,7 +88,7 @@ export default function ReviewsCarousel() {
                     onClick={() => setIndex(i)}
                     aria-label={`Show review from ${r.name}`}
                     aria-current={i === index ? "true" : undefined}
-                    className="group flex h-6 items-center rounded-full px-1.75"
+                    className="group flex h-6 min-w-6 items-center justify-center rounded-full px-1.75"
                   >
                     <span
                       aria-hidden

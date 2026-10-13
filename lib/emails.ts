@@ -1,4 +1,5 @@
 import { BUSINESS, SITE_URL, FULL_ADDRESS } from "@/lib/business";
+import { toTelHref } from "@/lib/validation";
 
 export interface AppointmentRequest {
   name: string;
@@ -74,7 +75,7 @@ export function ownerNotificationEmail(req: AppointmentRequest): EmailContent {
     </p>
     <table style="width:100%;border-collapse:collapse;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;">
       ${detailRow("Name", name)}
-      ${detailRow("Phone", `<a href="tel:${phone}" style="color:#2f5286;text-decoration:none;">${phone}</a>`)}
+      ${detailRow("Phone", `<a href="${toTelHref(req.phone)}" style="color:#2f5286;text-decoration:none;">${phone}</a>`)}
       ${detailRow("Email", emailValue)}
       ${detailRow("Appointment", appointment)}
       ${detailRow("Best time", preferredTime)}

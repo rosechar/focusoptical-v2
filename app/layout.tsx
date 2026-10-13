@@ -4,7 +4,6 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import PromoToast from "@/components/PromoToast";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/business";
 import { businessJsonLd } from "@/lib/schema";
@@ -25,12 +24,14 @@ const sans = Hanken_Grotesk({
   display: "swap",
 });
 
-// Wide black face for the "5 STAR SERVICE" eye chart and "Rate us" link only.
+// Wide black face for the "5 STAR SERVICE" eye chart and "Rate us" link only. Both are on
+// the home page alone, so it isn't preloaded on every page.
 const chart = Archivo({
   subsets: ["latin"],
   weight: "900",
   variable: "--font-archivo",
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -42,13 +43,12 @@ export const metadata: Metadata = {
   },
   description:
     "Focus Optical in Rochester Hills, MI offers eye exams, contact lens fittings, and a wide selection of prescription glasses and frames. Independently owned and operated since 1984. Serving Oakland County.",
+  // No title/description here: Next fills them from each page's own title and
+  // description, which it can't do once a parent sets them.
   openGraph: {
     type: "website",
     locale: "en_US",
     siteName: "Focus Optical",
-    title: "Focus Optical | Rochester Hills, MI Optician Since 1984",
-    description:
-      "Full-service optical store in Rochester Hills, MI. Eye exams, glasses, contacts, and free adjustments. Over 45 years of experience.",
   },
   verification: {
     google: "v35JKAVDznB95Qku6g8b3ceWYkQFHhhnunO81U35wo8",
@@ -87,7 +87,6 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        <PromoToast />
         <Analytics />
       </body>
     </html>
